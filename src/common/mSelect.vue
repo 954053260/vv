@@ -36,15 +36,15 @@
 </script>
 <style scoped>
     .mSelect{
+        padding-left: 5px;
+        padding-right: 5px;
         position: relative;
         border: 1px solid #ddd;
         background: #fff;
     }
     .content{
-        padding: 10px 0;
         color: #999;
         font-size: 14px;
-        text-align: center;
     }
     .content > .icon{
         color: #333;
@@ -52,14 +52,16 @@
     .list-content{
         position: absolute;
         left: -1px;
-        top: 36px;
         width: 100%;
         color: #333;
         font-size: 14px;
         background: #fff;
         border: 1px solid #ddd;
+        max-height: 200px;
+        overflow: auto;
     }
     .list-content li{
         padding: 5px;
+
     }
 </style>

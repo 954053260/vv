@@ -49,7 +49,7 @@
       <li class="item">
         <label class="row lh30">
           <span class="dp-ib w70 tr">活动类型：</span>
-          <input class="col c-666" type="text" placeholder="请选择">
+          <m-select class="col" :list="typeList" v-model="type" style="border:none; padding: 0"></m-select>
         </label>
       </li>
       <li class="item mt10">
@@ -65,15 +65,18 @@
 </template>
 <script type="text/ecmascript-6">
   import datePicker from '../common/datePicker.vue'
+  import mSelect from '../common/mSelect.vue'
 
   export default {
     name: 'addActivity',
     created: function () {
 
     },
-    components: {datePicker},
+    components: {datePicker, mSelect},
     data: function () {
       return {
+        typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
+        type: '全部',
         startDate: '请选择',
         endDate: '请选择'
       }

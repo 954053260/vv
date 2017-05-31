@@ -21,8 +21,8 @@
       <div class="row">
         <transition name="fade">
           <div v-if="showFilter" class="pr row col z-2">
-            <m-select class="col mr10" :list="typeList" v-model="type"></m-select>
-            <m-select class="col" :list="dateList" v-model="date"></m-select>
+            <m-select class="col lh30 mr10" :list="typeList" v-model="type"></m-select>
+            <m-select class="col lh30" :list="dateList" v-model="date"></m-select>
           </div>
         </transition>
       </div>
