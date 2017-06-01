@@ -113,6 +113,7 @@
     }
     .login-input input{
         width: 100%;
+        height: 28px;
         border: none;
     }
     .code-btn{

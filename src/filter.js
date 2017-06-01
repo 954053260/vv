@@ -5,7 +5,7 @@ import Vue from 'vue'
 
 Vue.filter('date', function (value, format) {
 
-    if (Object.prototype.toString.call(value) != '[object Date]' && isNaN(Number(value))) {
+    if (!value || Object.prototype.toString.call(value) != '[object Date]') {
         return value;
     }
 

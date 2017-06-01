@@ -21,6 +21,9 @@ a:link{
     cursor: pointer;
 }
 input, textarea{
+    font-size: 14px;
+    font-weight: normal;
+    font-family: initial;
     outline: none;
     border-radius: 0;
     background: transparent;

@@ -62,10 +62,10 @@ export default {
                 map.gd.addControl(toolBar);
             });
 
+            AMapUI.setDomLibrary(Zepto);
 
-
-            AMapUI.loadUI(['overlay/SimpleMarker', 'control/BasicControl'],
-                function(SimpleMarker, BasicControl) {
+            AMapUI.loadUI(['overlay/SimpleMarker', 'control/BasicControl', 'misc/MobiCityPicker'],
+                function(SimpleMarker, BasicControl, MobiCityPicker) {
                     map.gd.addControl(new BasicControl.Zoom({
                         position: 'rm', //left top，左上角
                         theme: 'm'
@@ -91,6 +91,8 @@ export default {
                         });
 
                     };
+
+
 
                     isLoadMap = true;
                     mapFns.forEach(function (fn) {
