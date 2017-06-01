@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{ height: height + 'px' }">
+  <div id="app">
     <router-view></router-view>
   </div>
 </template>
@@ -7,7 +7,7 @@
   export default {
     name:'app',
     created: function () {
-      this.height = document.documentElement.clientHeight || document.body.clientHeight;
+
     },
     mounted: function () {
 
@@ -17,7 +17,6 @@
     },
     data: function () {
       return {
-        height: 0
       }
     },
     methods: {

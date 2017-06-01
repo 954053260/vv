@@ -21,6 +21,7 @@
       <div class="row">
         <transition name="fade">
           <div v-if="showFilter" class="pr row col z-2">
+            <m-select class="col lh30 mr10" :list="userTypeList" v-model="userType"></m-select>
             <m-select class="col lh30 mr10" :list="typeList" v-model="type"></m-select>
             <m-select class="col lh30" :list="dateList" v-model="date"></m-select>
           </div>
@@ -161,6 +162,9 @@
     data: function () {
       return {
         markers: [],
+        userTypeList: [ '好友', '个人','群体'],
+        userType: '好友',
+        type: '全部',
         typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
         type: '全部',
         dateList: ['全部', '当天', '一周内', '一月内'],
@@ -298,7 +302,14 @@
 </script>
 <style scoped>
   #home{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    overflow: auto;
   }
   .header{
     position: fixed;
