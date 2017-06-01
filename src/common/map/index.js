@@ -92,8 +92,6 @@ export default {
 
                     };
 
-
-
                     isLoadMap = true;
                     mapFns.forEach(function (fn) {
                         fn(map);
