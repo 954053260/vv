@@ -85,7 +85,7 @@
     }
     .login-title{
         font-size: 16px;
-        color: #00B8E6;
+        color: #2bd3b2;
         text-align: center;
     }
     .login-input-content{
@@ -98,7 +98,7 @@
         width: 39px;
         height: 38px;
         font-size: 20px;
-        color: #00B8E6;
+        color: #2bd3b2;
         border: 1px solid #ddd;
         border-right: none;
         line-height: 38px;
@@ -122,7 +122,7 @@
         border: none;
         color: #fff;
         font-size: 13px;
-        background: #00B8E6;
+        background: #2bd3b2;
         width: 80px;
     }
     .login-btn{

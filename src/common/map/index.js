@@ -33,7 +33,6 @@ export default {
 
                 toolBar.hide();
 
-
                 map.doLocation = function (fn, timeout = 10000) {
 
                     var time = setTimeout(function () {
@@ -62,10 +61,8 @@ export default {
                 map.gd.addControl(toolBar);
             });
 
-            AMapUI.setDomLibrary(Zepto);
-
-            AMapUI.loadUI(['overlay/SimpleMarker', 'control/BasicControl', 'misc/MobiCityPicker'],
-                function(SimpleMarker, BasicControl, MobiCityPicker) {
+            AMapUI.loadUI(['overlay/SimpleMarker', 'control/BasicControl'],
+                function(SimpleMarker, BasicControl) {
                     map.gd.addControl(new BasicControl.Zoom({
                         position: 'rm', //left top，左上角
                         theme: 'm'
@@ -97,8 +94,6 @@ export default {
                         fn(map);
                     });
                 });
-
-
         });
     }
 }

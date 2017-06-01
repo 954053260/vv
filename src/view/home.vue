@@ -302,12 +302,6 @@
 </script>
 <style scoped>
   #home{
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
     overflow: auto;
   }
@@ -349,7 +343,7 @@
   .location-btn i,
   .filter-btn i{
     font-size: 20px;
-    color: #00B8E6;
+    color: #2bd3b2;
   }
   .filter-btn{
     left: 15px;
@@ -357,7 +351,7 @@
     line-height: 35px;
   }
   .refresh-btn{
-    right: 15px;
+    left: 15px;
     bottom: 40px;
     line-height: 36px;
   }
@@ -367,7 +361,7 @@
     line-height: 35px;
   }
   .location-btn{
-    left: 15px;
+    right: 15px;
     bottom: 40px;
     line-height: 35px;
   }
