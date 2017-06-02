@@ -28,7 +28,7 @@
           <date-picker ref="end" v-model="endDate"></date-picker>
         </label>
       </li>
-      <li class="item mt10">
+      <li class="item mt10 bt1-ddd">
         <label class="row lh30">
           <span class="dp-ib w70">活动地区</span>
           <input class="col c-666" type="number">
@@ -40,7 +40,7 @@
           <input class="col c-666" type="number">
         </label>
       </li>
-      <li class="item mt10">
+      <li class="item mt10 bt1-ddd">
         <label class="row lh30">
           <span class="dp-ib w70">活动人数</span>
           <input class="col c-666" type="number">
@@ -61,7 +61,7 @@
           <picker ref="type" :list="typeList" v-model="type" ></picker>
         </label>
       </li>
-      <li class="item mt10">
+      <li class="item mt10 bt1-ddd">
         <label class="row lh30">
           <textarea class="col c-666" placeholder="填写活动说明（可以插入图片）"></textarea>
         </label>
@@ -86,7 +86,7 @@
     data: function () {
       return {
         typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
-        type: '运动',
+        type: '全部',
         startDate: '',
         endDate: ''
       }
@@ -113,7 +113,7 @@
 </script>
 <style scoped>
   .header img{
-    max-height: 150px
+    height: 150px
   }
   .item{
     padding: 5px 10px;

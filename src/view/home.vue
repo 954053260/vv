@@ -6,16 +6,16 @@
       <a @click="toggleChat(true)" class="bl1-ddd"><i class="icon ion-chatbubbles c-main"></i></a>
     </header>
     <a class="refresh-btn" @click="refresh()">
-      <i class="icon ion-android-refresh"></i>
+      <i class="icon ion-ios-refresh-empty"></i>
     </a>
     <router-link class="plus-btn" to="/app/addActivity">
-      <i class="icon ion-paper-airplane"></i>
+      <i class="icon ion-android-add"></i>
     </router-link>
     <a class="location-btn" @click="location()">
-      <i class="icon ion-pinpoint"></i>
+      <i class="icon ion-ios-location-outline"></i>
     </a>
     <a class="filter-btn" @click="toggleFilter()">
-      <i class="icon " :class="{'ion-arrow-left-a': showFilter, 'ion-arrow-right-a': !showFilter}"></i>
+      <i class="icon ion-ios-settings-strong"></i>
     </a>
     <div class="select-content">
       <div class="row">
@@ -333,8 +333,9 @@
     z-index: 1000;
     text-align: center;
     background: #fff;
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
     border-radius: 50%;
     box-shadow: 0 0 5px #aaa;
   }
@@ -342,37 +343,24 @@
   .plus-btn i,
   .location-btn i,
   .filter-btn i{
-    font-size: 20px;
+    font-size: 22px;
     color: #2bd3b2;
   }
   .filter-btn{
     left: 15px;
     top: 65px;
-    line-height: 35px;
   }
   .refresh-btn{
     left: 15px;
     bottom: 40px;
-    line-height: 36px;
   }
   .plus-btn{
     right: 15px;
     top: 65px;
-    line-height: 35px;
   }
   .location-btn{
     right: 15px;
     bottom: 40px;
-    line-height: 35px;
-  }
-  .filter-btn{
-    text-align: center;
-    background: #fff;
-    width: 35px;
-    height: 35px;
-    line-height: 37px;
-    border-radius: 50%;
-    box-shadow: 0 0 5px #aaa;
   }
   .select-content{
     position: fixed;
