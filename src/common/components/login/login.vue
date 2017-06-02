@@ -118,12 +118,13 @@
     }
     .code-btn{
         float: right;
-        line-height: 38px;
+        width: 80px;
+        height: 40px;
+        line-height: 40px;
         border: none;
         color: #fff;
         font-size: 13px;
         background: #2bd3b2;
-        width: 80px;
     }
     .login-btn{
         margin-top: 10px;

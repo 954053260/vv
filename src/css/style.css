@@ -2,8 +2,9 @@
 html, body{
     height: 100%;
 }
-body, h1, h2, h3, h4, h5, h6, p, ul, ol, form{
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, form, button, input, textarea{
     margin:0;
+    padding: 0;
 }
 p{
     word-break: break-all;
@@ -21,8 +22,6 @@ a:link{
     cursor: pointer;
 }
 input, textarea{
-    margin: 0;
-    padding: 0;
     color: inherit;
     font: inherit;
     outline: none;
@@ -33,22 +32,22 @@ input, textarea{
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder{
     color: #bbb;
-    font-size: 13px;
+    font-size: 14px;
 }
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder{
     color: #bbb;
-    font-size: 13px;
+    font-size: 14px;
 }
 input:-moz-placeholder,
 textarea:-moz-placeholder{
     color: #bbb;
-    font-size: 13px;
+    font-size: 14px;
 }
 input::-moz-placeholder,
 textarea::-moz-placeholder{
     color: #bbb;
-    font-size: 13px;
+    font-size: 14px;
 }
 .container{
     position: absolute;
@@ -60,6 +59,7 @@ textarea::-moz-placeholder{
     height: 100%;
     overflow: auto;
     z-index: 10000;
+    background: #fff;
 }
 /* ---------------------single CSS----------------------- */
 .c-main{color: #2bd3b2;}
@@ -463,4 +463,32 @@ textarea::-moz-placeholder{
     line-height: 30px !important;
     border-bottom: 1px solid #ddd;
 }
+.amap-ui-mobi-city-picker .item{
+    font-size: 14px;
+    background: inherit;
+    border-bottom: none;
+}
+/**
+* 列表容器背景/前景配色
+*/
+.amap-ui-mobi-city-picker.vv {
+    background: #f7fafc;
+}
 
+/**
+ * 分组标题栏背景
+ */
+.amap-ui-mobi-city-picker.vv .listgroup .title,
+.amap-ui-mobi-city-picker.vv .city_fixed_title {
+    margin-right: 20px;
+    background-color: #eee;
+    color: #2bd3b2;
+}
+.amap-ui-mobi-city-picker .city_item_box .item{
+    background: #2bd3b2;
+    color: #fff;
+}
+
+.amap-sug-result{
+    z-index: 10000;
+}

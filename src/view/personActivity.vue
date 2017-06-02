@@ -72,18 +72,18 @@
     display: block;
     position: relative;
     padding: 0 10px;
-    line-height: 30px;
     background: #fff;
     border-radius: 13px;
   }
   .input-search input{
-    line-height: 25px;
+    height: 30px;
+    line-height: 30px;
     width: 100%;
     border: none;
   }
   .input-search .ion-search{
     position: absolute;
-    top: 1px;
+    top: 5px;
     right: 15px;
     font-size: 20px;
     color: #999;

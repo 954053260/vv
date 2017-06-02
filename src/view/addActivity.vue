@@ -10,7 +10,7 @@
           <input class="col c-666" type="text">
         </label>
       </li>
-      <li class="item mt10">
+      <li class="item mt10 bt1-ddd">
         <label class="row lh30">
           <span class="dp-ib w70">开始时间</span>
           <p class="col c-666" @click="selectDate($event, 'start')">
@@ -30,14 +30,16 @@
       </li>
       <li class="item mt10 bt1-ddd">
         <label class="row lh30">
-          <span class="dp-ib w70">活动地区</span>
-          <input class="col c-666" type="number">
+          <span class="dp-ib w70">活动城市</span>
+          <p class="col c-666"  @click="selectCity()">
+            {{city.name}}
+          </p>
         </label>
       </li>
       <li class="item">
         <label class="row lh30">
           <span class="dp-ib w70">详细地址</span>
-          <input class="col c-666" type="number">
+          <input id="activity-address-input" name="keyword" class="col c-666" type="text">
         </label>
       </li>
       <li class="item mt10 bt1-ddd">
@@ -82,13 +84,17 @@
     created: function () {
 
     },
+    mounted: function () {
+      this.autoComplete();
+    },
     components: {datePicker, picker, mSelect},
     data: function () {
       return {
         typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
         type: '全部',
         startDate: '',
-        endDate: ''
+        endDate: '',
+        city: {name: ''}
       }
     },
     computed: {},
@@ -104,6 +110,19 @@
       selectType: function (e) {
         e.preventDefault();
         this.$refs.type.toggle(true);
+      },
+      selectCity: function () {
+        this.$map.loadMap((map) => {
+          map.selectCity((data) => {
+            this.city = data;
+            this.autoComplete();
+          });
+        });
+      },
+      autoComplete: function () {
+        this.$map.loadMap((map) => {
+          map.autoComplete('activity-address-input', this.city.areaCode);
+        });
       },
       saveActivity: function () {
         this.$router.back();
