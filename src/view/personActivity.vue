@@ -1,7 +1,7 @@
 <template>
   <div id="personActivity" class="container bc-page">
     <header class="p10 bc-main">
-      <label class="input-search">
+      <label class="pa-input-search">
         <input placeholder="请输入关键字搜索">
         <i class="icon ion-search"></i>
       </label>
@@ -67,25 +67,4 @@
     }
   }
 </script>
-<style scoped>
-  .input-search{
-    display: block;
-    position: relative;
-    padding: 0 10px;
-    background: #fff;
-    border-radius: 13px;
-  }
-  .input-search input{
-    height: 30px;
-    line-height: 30px;
-    width: 100%;
-    border: none;
-  }
-  .input-search .ion-search{
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    font-size: 20px;
-    color: #999;
-  }
-</style>
+

@@ -1,16 +1,16 @@
 <template>
   <div id="addActivity" class="container bc-page">
-    <header class="header">
+    <header class="aa-header">
       <img src="../assets/test3.jpg" class="dp-b w">
     </header>
     <ul class="list">
-      <li class="item mt10">
+      <li class="aa-item item mt10">
         <label class="row lh30">
           <span class="dp-ib w70">活动标题</span>
           <input class="col c-666" type="text">
         </label>
       </li>
-      <li class="item mt10 bt1-ddd">
+      <li class="aa-item item mt10 bt1-ddd">
         <label class="row lh30">
           <span class="dp-ib w70">开始时间</span>
           <p class="col c-666" @click="selectDate($event, 'start')">
@@ -19,7 +19,7 @@
           <date-picker ref="start" v-model="startDate"></date-picker>
         </label>
       </li>
-      <li class="item">
+      <li class="aa-item item">
         <label class="row lh30">
           <span class="dp-ib w70">结束时间</span>
           <p class="col c-666"  @click="selectDate($event, 'end')">
@@ -28,7 +28,7 @@
           <date-picker ref="end" v-model="endDate"></date-picker>
         </label>
       </li>
-      <li class="item mt10 bt1-ddd">
+      <li class="aa-item item mt10 bt1-ddd">
         <label class="row lh30">
           <span class="dp-ib w70">活动城市</span>
           <p class="col c-666"  @click="selectCity()">
@@ -36,25 +36,25 @@
           </p>
         </label>
       </li>
-      <li class="item">
+      <li class="aa-item item">
         <label class="row lh30">
           <span class="dp-ib w70">详细地址</span>
           <input id="activity-address-input" name="keyword" class="col c-666" type="text">
         </label>
       </li>
-      <li class="item mt10 bt1-ddd">
+      <li class="aa-item item mt10 bt1-ddd">
         <label class="row lh30">
           <span class="dp-ib w70">活动人数</span>
           <input class="col c-666" type="number">
         </label>
       </li>
-      <li class="item">
+      <li class="aa-item item">
         <label class="row lh30">
           <span class="dp-ib w70">活动费用</span>
           <input class="col c-666" type="number">
         </label>
       </li>
-      <li class="item">
+      <li class="aa-item item">
         <label class="row lh30">
           <span class="dp-ib w70">活动类型</span>
           <p class="col c-666"  @click="selectType($event)">
@@ -63,7 +63,7 @@
           <picker ref="type" :list="typeList" v-model="type" ></picker>
         </label>
       </li>
-      <li class="item mt10 bt1-ddd">
+      <li class="aa-item item mt10 bt1-ddd">
         <label class="row lh30">
           <textarea class="col c-666" placeholder="填写活动说明（可以插入图片）"></textarea>
         </label>
@@ -130,22 +130,4 @@
     }
   }
 </script>
-<style scoped>
-  .header img{
-    height: 150px
-  }
-  .item{
-    padding: 5px 10px;
-  }
-  .item input{
-    line-height: 30px;
-    height: 30px;
-    border: none;
-  }
-  .item textarea{
-    resize: none;
-    min-height: 50px;
-    padding: 7px 0;
-    border: none;
-  }
-</style>
+

@@ -4,31 +4,31 @@
       <img src="../assets/user.jpg" class="db-ib vm w100 h100 brp50">
     </header>
     <ul class="list">
-      <li class="item mt10">
+      <li class="pi-item item mt10">
         <label class="row lh30">
           <span class="dp-ib w70 tr">昵称：</span>
           <input class="col c-666" type="text" placeholder="请输入昵称" v-model="user.name">
         </label>
       </li>
-      <li class="item">
+      <li class="pi-item item">
         <label class="row lh30">
           <span class="dp-ib w70 tr">性别：</span>
           <input class="col c-666" type="text" placeholder="请选择性别" v-model="user.sex">
         </label>
       </li>
-      <li class="item">
+      <li class="pi-item item">
         <label class="row lh30">
           <span class="dp-ib w70 tr">手机号：</span>
           <input class="col c-666" type="text" placeholder="请输入手机号" v-model="user.phone">
         </label>
       </li>
-      <li class="item mt10">
+      <li class="pi-item item mt10">
         <label class="row lh30">
           <span class="dp-ib w70 tr">个性签名：</span>
           <input class="col c-666" type="text" placeholder="添加个性签名" v-model="user.introduce">
         </label>
       </li>
-      <li class="item">
+      <li class="pi-item item">
         <label class="row lh30">
           <span class="dp-ib w70 tr">兴趣爱好：</span>
           <input class="col c-666" type="text" placeholder="添加兴趣爱好，逗号隔开" v-model="user.hobby">
@@ -65,12 +65,4 @@
     }
   }
 </script>
-<style scoped>
-  .item{
-    padding: 5px 10px;
-  }
-  .item input{
-    border: none;
-    line-height: 30px;
-  }
-</style>
+
