@@ -131,7 +131,7 @@
               <p class="col c-999">{{info.endDate | date('yyyy年MM月dd日 HH时mm分')}}</p>
             </label>
           </li>
-          <li class="aa-item item">
+          <li class="aa-item item" style="border-bottom: none">
             <label class="row lh30">
               <span class="dp-ib pr10 w60 tr">简介</span>
               <p class="col c-999">{{info.desc}}</p>
@@ -140,7 +140,9 @@
         </ul>
         <div class="home-info-window-buttons row">
           <a class="col br1-ddd">收藏</a>
-          <a class="col">参与</a>
+          <router-link class="col" to="/app/activityDetail">
+            参与
+          </router-link>
         </div>
       </div>
     </transition>
