@@ -4,6 +4,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import user from './user.js'
+import map from './map.js'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
@@ -13,13 +14,15 @@ const store = new Vuex.Store({
 
     },
     mutations:{
-
+        setRouterTransition: (state, name) => {
+            state.routerTransition = name;
+        }
     },
     actions:{
 
     },
     modules:{
-        user
+        user, map
     }
 });
 export default store

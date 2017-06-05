@@ -51,7 +51,7 @@
         </label>
       </li>
     </ul>
-    <div class="home-info-window-buttons row">
+    <div class="app-info-window-buttons row">
       <a class="col br1-ddd">收藏</a>
       <a class="col" @click="doActivity()">参与</a>
     </div>

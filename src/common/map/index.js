@@ -5,42 +5,16 @@ export default {
     install: function (Vue, option) {
 
         var isLoadMap = false,
+            idLoadUI = false,
             mapFns = [];
 
-        var map = Vue.map = Vue.prototype.$map = {
-            /**
-             * 地图操作都在load进行
-             * @param fn function 回调函数
-             */
-            loadMap: function (fn) {
-                if (typeof fn === 'function') {
-
-                    if (isLoadMap) {
-                        fn(map);
-                    } else {
-                        mapFns.push(fn);
-                    }
-                }
-            },
-            // 定位
-            doLocation: function () {},
-            /**
-             * 创建地图标记
-             * @param data object 标记对象
-             */
-            createMarker: function (data) {},
-            /**
-             * 选择城市
-             * @param fn function 回调函数
-             */
-            selectCity: function (fn) {}
-        };
+        var map = Vue.map = Vue.prototype.$map = {};
 
         /*地图操作都在load进行*/
         map.loadMap = function (fn) {
             if (typeof fn === 'function') {
 
-                if (isLoadMap) {
+                if (isLoadMap && idLoadUI) {
                     fn(map);
                 } else {
                     mapFns.push(fn);
@@ -56,31 +30,39 @@ export default {
             AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.Geolocation', 'AMap.Autocomplete'], function(){
 
                 var scale = new AMap.Scale(),
-                    toolBar = new AMap.ToolBar();
+                    toolBar = new AMap.ToolBar(),
+                    geolocation;
 
                 toolBar.hide();
 
-                map.doLocation = function (fn, timeout = 10000) {
+                geolocation = new AMap.Geolocation({
+                    showCircle: false,
+                    timeout: 10000,
+                    zoomToAccuracy: false,
+                    showButton: false
+                });
 
-                    var time = setTimeout(function () {
-                        callback();
-                    }, timeout);
+                map.gd.addControl(geolocation);
 
-                    var locationEvent = AMap.event.addListener(toolBar, 'location', callback);
 
-                    function callback (data) {
+                map.doLocation = function (complete, error) {
 
-                        if (typeof fn === 'function') {
-                            fn(data ? {msg: '定位成功！'} : {msg: '定位超时！'});
-                        }
-
-                        AMap.event.removeListener(locationEvent);
-
-                        clearTimeout(time);
-
+                    function onComplete (data) {
+                        complete && complete(data);
+                        AMap.event.removeListener(geolocation, 'complete', onComplete);
+                        AMap.event.removeListener(geolocation, 'error', onError);
                     }
 
-                    toolBar.doLocation();
+                    function onError (data) {
+                        error && error(data);
+                        AMap.event.removeListener(geolocation, 'complete', onComplete);
+                        AMap.event.removeListener(geolocation, 'error', onError);
+                    }
+
+                    AMap.event.addListener(geolocation, 'complete', onComplete);
+                    AMap.event.addListener(geolocation, 'error', onError);
+
+                    geolocation.getCurrentPosition();
                 };
 
                 map.autoComplete = function (id, city) {
@@ -98,21 +80,38 @@ export default {
                 //创建并添加工具条控件
                 map.gd.addControl(scale);
                 map.gd.addControl(toolBar);
+
+                isLoadMap = true;
+
+                if (idLoadUI) {
+                    mapFns.forEach(function (fn) {
+                        fn(map);
+                    });
+                }
+
             });
 
-            AMapUI.setDomLibrary(Zepto);
+            //AMapUI.setDomLibrary(Zepto);
 
-            AMapUI.loadUI(['overlay/SimpleMarker', 'control/BasicControl', 'misc/MobiCityPicker'],
-                function(SimpleMarker, BasicControl, MobiCityPicker) {
-                    map.gd.addControl(new BasicControl.Zoom({
-                        position: 'rm', //left top，左上角
-                        theme: 'm'
-                    }));
+            AMapUI.loadUI(['overlay/SimpleMarker', 'control/BasicControl', 'misc/PositionPicker'],
+                function(SimpleMarker, BasicControl, PositionPicker) {
+                    var casicControl = new BasicControl.Zoom({
+                            position: 'rm', //left top，左上角
+                            theme: 'm'
+                        }),
+                        positionPicker = new PositionPicker({
+                            mode:'dragMap',
+                            map: map.gd
+                        });
+
+
+                    map.gd.addControl(casicControl);
 
                     map.createMarker = function (data) {
 
                         return new SimpleMarker({
                             map: map.gd,
+                            animation: 'AMAP_ANIMATION_DROP',
                             iconStyle: data.iconColor || 'blue',
                             iconLabel: {
                                 innerHTML: data.no || '',
@@ -130,29 +129,38 @@ export default {
 
                     };
 
-                    map.selectCity = function (fn) {
-                        var cityPicker = new MobiCityPicker({
-                            theme: 'vv'
-                            //topGroups: ..., // 顶部城市列表
-                        });
+                    map.positionPicker = function (success, error) {
 
-                        //监听城市选中事件
-                        cityPicker.on('citySelected', function(cityInfo) {
-                            //隐藏城市列表
-                            cityPicker.hide();
-                            fn && fn(cityInfo);
-                            //选中的城市信息
-                            console.log(cityInfo);
-                        });
+                        function complete (data) {
+                            success && success(data);
+                        }
 
-                        //显示城市列表，可以用某个click事件触发
-                        cityPicker.show();
+                        function fail (data) {
+                            error && error(data);
+                        }
+
+                        positionPicker.on('success', complete);
+                        positionPicker.on('fail', fail);
+
+                        return {
+                            show: function () {
+                                positionPicker.start();
+                            },
+                            remove: function () {
+                                positionPicker.off('success', complete);
+                                positionPicker.off('fail', fail);
+                                positionPicker.stop();
+                            }
+                        };
                     };
 
-                    isLoadMap = true;
-                    mapFns.forEach(function (fn) {
-                        fn(map);
-                    });
+                    idLoadUI = true;
+
+                    if (isLoadMap) {
+                        mapFns.forEach(function (fn) {
+                            fn(map);
+                        });
+                    }
                 });
         });
     }

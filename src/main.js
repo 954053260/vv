@@ -19,8 +19,7 @@ Vue.use(smoothPicker);
 Vue.use(map, {
   id: 'map-container',
   resizeEnable: true,
-  zoom: 10,
-  center: [113.2759952545166, 23.117055306224895]
+  zoom: 13
 });
 
 //Vue.use(socket);

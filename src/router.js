@@ -3,6 +3,7 @@
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from './store'
 import app from './view/app.vue'
 import home from './view/home.vue'
 import personInfo from './view/personInfo.vue'

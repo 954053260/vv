@@ -68,6 +68,8 @@ textarea::-moz-placeholder{
 .c-999{color: #999;}
 .c-bbb{color: #bbb;}
 .c-fff{color: #fff;}
+.c-ff9800{color: #ff9800}
+.c-red{color: red;}
 .bc-main{background: #2bd3b2;}
 .bc-page{background: #f7fafc;}
 .bc-fff{background: #fff}
@@ -93,6 +95,7 @@ textarea::-moz-placeholder{
 .fr{float: right;}
 .h40{height: 40px}
 .h100{height: 100px}
+.lh25{line-height: 25px}
 .lh30{line-height: 30px}
 .lh40{line-height: 40px}
 .m20{margin: 20px;}
@@ -613,15 +616,17 @@ textarea::-moz-placeholder{
     border: none;
     background: #fff;
 }
-.home-info-window{
-    position: relative;
-    z-index: 10000;
+.app-info-window{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
     overflow: auto;
     width: 100%;
-    height: 60%;
+    height: 327px;
     background: #fff;
 }
-.home-info-window h2{
+.app-info-window h2{
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -630,14 +635,14 @@ textarea::-moz-placeholder{
     color: #fff;
     background: #2bd3b2;
 }
-.home-info-window-content{
+.app-info-window-content{
     position: absolute;
     width: 100%;
     top: 40px;
     bottom: 40px;
     overflow: auto;
 }
-.home-info-window-buttons{
+.app-info-window-buttons{
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -665,6 +670,16 @@ textarea::-moz-placeholder{
     min-height: 50px;
     padding: 7px 0;
     border: none;
+}
+.aa-address-page{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 10px;
+    width: 100%;
+    font-size: 14px;
+    background: #fff;
+    z-index: 10000;
 }
 /*personActivity css*/
 .pa-input-search{
