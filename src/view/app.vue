@@ -63,12 +63,46 @@
       this.$map.loadMap((map) => {
         map.doLocation();
 
-        this.markers.forEach((item) => {
-          var marker = map.createMarker(item);
-          AMap.event.addListener(marker, 'click', () => {
-            this.showInfo(item.info);
+        var markers = [];
+
+        this.positionPicker = map.positionPicker((data) => {
+          var lat = data.position.lat;
+          var lng = data.position.lng;
+
+          this.$store.commit('setPositionResult', data);
+
+          markers.forEach((item) => {
+            this.$map.gd.remove(item);
           });
+
+          this.markers.forEach((item, i) => {
+
+            var random = Math.random()*0.02;
+
+            if (i % 2) {
+              item.center = (lng + random) + ',' + (lat + random);
+            } else
+            if (i % 3){
+              item.center = (lng + random) + ',' + (lat - random);
+            } else
+            if (i % 4) {
+              item.center = (lng - random) + ',' + (lat - random);
+            } else {
+              item.center = (lng - random) + ',' + (lat + random);
+            }
+
+            var marker = map.createMarker(item);
+            AMap.event.addListener(marker, 'click', () => {
+              this.showInfo(item.info);
+            });
+            markers.push(marker);
+          });
+
+        }, (error) => {
+          this.$toast.info('地址获取失败');
         });
+
+        this.positionPicker.show();
 
       });
     },
@@ -88,6 +122,9 @@
     computed: {
       markers: function () {
         return this.$store.state.map.markers;
+      },
+      positionResult: function () {
+        return this.$store.state.map.positionResult;
       }
     },
     methods: {

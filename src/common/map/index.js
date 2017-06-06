@@ -146,10 +146,12 @@ export default {
                             show: function () {
                                 positionPicker.start();
                             },
+                            stop: function () {
+                                positionPicker.stop();
+                            },
                             remove: function () {
                                 positionPicker.off('success', complete);
                                 positionPicker.off('fail', fail);
-                                positionPicker.stop();
                             }
                         };
                     };

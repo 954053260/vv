@@ -51,7 +51,7 @@ export default {
                     user: {
                         name: '赵子龙'
                     },
-                    address: '湖北省宜昌市县级市当阳市中心城区的长坂坡',
+                    address: '湖北省宜昌市县级市当阳市长坂坡',
                     startDate: new Date(),
                     endDate: new Date(),
                     typeText: '文化',
@@ -113,11 +113,19 @@ export default {
                     desc: '操以手指玄德，然后自指曰：“天下英雄，唯使君与操耳。”煮酒论英雄煮酒论英雄玄德闻言，吃了一惊，手中所执匙箸，不觉落于地下。时正值天雨将至，雷声大作。玄德乃从容拾箸曰：“一震之威，乃至于此！”电视《三国演义》这一集也煞是好看，青梅煮酒，天外龙挂，气象森森。可是，不管小说也好，电视也好，过去几年的“三国热”中，评点三国的人，大都舍却此篇，不知何故'
                 }
             }
-        ]
+        ],
+        positionResult: {}
     },
     getters: {},
     mutations: {
-
+        setPositionResult: (state, data) => {
+            state.positionResult.lat = data.position.lat;
+            state.positionResult.lng = data.position.lng;
+            state.positionResult.address = data.address;
+            state.positionResult.nearestJunction = data.nearestJunction;
+            state.positionResult.nearestRoad = data.nearestRoad;
+            state.positionResult.nearestPOI = data.nearestPOI;
+        }
     },
     actions: {
 

@@ -2,12 +2,15 @@
   <div id="addActivity">
     <div v-show="show" class="container bc-page">
       <header class="aa-header bb1-ddd">
-        <swiper :options="swiperOption">
+        <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
           <swiper-slide v-for="slide in swiperSlides">
             <img src="../assets/test3.jpg" class="dp-b w">
           </swiper-slide>
-          <div v-show="swiperSlides.length > 1" class="swiper-pagination" slot="pagination"></div>
+          <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
+        <div v-if="swiperSlides.length == 1">
+          <img src="../assets/test3.jpg" class="dp-b w">
+        </div>
         <a class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
           <i class="icon ion-android-add"></i>
         </a>
@@ -85,7 +88,7 @@
         <ul class="p10 lh25">
           <li class="mb10">
             <b>经纬度:</b>
-            <p>{{positionResult.position && positionResult.position.lat}},{{positionResult.position && positionResult.position.lng}}</p>
+            <p>{{positionResult.lat}},{{positionResult.lng}}</p>
           </li>
           <li class="mb10">
             <b>地址:</b>
@@ -139,11 +142,14 @@
         type: '全部',
         startDate: '',
         endDate: '',
-        address: {},
-        positionResult: {}
+        address: {}
       }
     },
-    computed: {},
+    computed: {
+      positionResult: function () {
+        return this.$store.state.map.positionResult;
+      }
+    },
     methods: {
       addImg: function () {
         this.swiperSlides.push(1);
@@ -162,11 +168,10 @@
         this.show = false;
         this.$map.loadMap((map) => {
           this.positionPicker = map.positionPicker((data) => {
-            this.positionResult = data;
+            this.$store.commit('setPositionResult', data);
           }, (error) => {
             this.$toast.info('地址获取失败');
           });
-          this.positionPicker.show();
         });
       },
       confirmAddress: function () {
