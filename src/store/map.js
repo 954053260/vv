@@ -118,7 +118,7 @@ export default {
     },
     getters: {},
     mutations: {
-        setPositionResult: (state, data) => {
+        SET_POSITION_RESULT: (state, data) => {
             state.positionResult.lat = data.position.lat;
             state.positionResult.lng = data.position.lng;
             state.positionResult.address = data.address;
@@ -128,6 +128,8 @@ export default {
         }
     },
     actions: {
-
+        setPositionResult({commit}, data){
+            commit("SET_POSITION_RESULT",  data);
+        }
     }
 }

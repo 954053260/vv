@@ -166,22 +166,22 @@
       },
       selectAddress: function () {
         this.show = false;
-        this.$map.loadMap((map) => {
-          this.positionPicker = map.positionPicker((data) => {
-            this.$store.commit('setPositionResult', data);
-          }, (error) => {
-            this.$toast.info('地址获取失败');
-          });
-        });
+//        this.$map.loadMap((map) => {
+//          this.positionPicker = map.positionPicker((data) => {
+//            this.$store.commit('setPositionResult', data);
+//          }, (error) => {
+//            this.$toast.info('地址获取失败');
+//          });
+//        });
       },
       confirmAddress: function () {
         this.address = this.positionResult;
         this.show = true;
-        this.positionPicker.remove();
+//        this.positionPicker.remove();
       },
       cancelAddress: function () {
         this.show = true;
-        this.positionPicker.remove();
+//        this.positionPicker.remove();
       },
       saveActivity: function () {
         this.$router.back();
