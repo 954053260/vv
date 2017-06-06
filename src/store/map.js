@@ -114,7 +114,14 @@ export default {
                 }
             }
         ],
-        positionResult: {}
+        positionResult: {
+            lat: 0,
+            lng: 0,
+            address: '',
+            nearestJunction: '',
+            nearestRoad: '',
+            nearestPOI:''
+        }
     },
     getters: {},
     mutations: {

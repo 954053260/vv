@@ -14,9 +14,7 @@ const store = new Vuex.Store({
 
     },
     mutations:{
-        setRouterTransition: (state, name) => {
-            state.routerTransition = name;
-        }
+
     },
     actions:{
 

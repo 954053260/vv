@@ -116,7 +116,7 @@
       return {
         height: 0,
         isInfo: false,
-        info: {},
+        info: {}
       }
     },
     computed: {
