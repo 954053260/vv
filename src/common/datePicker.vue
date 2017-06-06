@@ -68,8 +68,6 @@
 
                 }
             });
-
-            console.log('data', this.data);
         },
         props: ['value'],
         data: function () {
@@ -165,7 +163,6 @@
                 this.$emit('input', this.getDate());
             },
             toggle: function (bool) {
-                console.log(bool)
                 if (typeof bool === 'boolean') {
                     this.show = bool;
                 } else {

@@ -1,8 +1,16 @@
 <template>
   <div id="addActivity">
     <div v-show="show" class="container bc-page">
-      <header class="aa-header">
-        <img src="../assets/test3.jpg" class="dp-b w">
+      <header class="aa-header bb1-ddd">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="slide in swiperSlides">
+            <img src="../assets/test3.jpg" class="dp-b w">
+          </swiper-slide>
+          <div v-show="swiperSlides.length > 1" class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+        <a class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
+          <i class="icon ion-android-add"></i>
+        </a>
       </header>
       <ul class="list">
         <li class="aa-item item mt10">
@@ -12,13 +20,13 @@
           </label>
         </li>
         <li class="aa-item item mt10 bt1-ddd">
-          <label class="row lh30">
+          <div class="row lh30">
             <span class="dp-ib w70">开始时间</span>
-            <p class="col c-666" @click="selectDate($event, 'start')">
+            <p class="col c-666" @click="selectDate('start')">
               {{startDate | date('yyyy-MM-dd HH:mm')}}
             </p>
             <date-picker ref="start" v-model="startDate"></date-picker>
-          </label>
+          </div>
         </li>
         <li class="aa-item item">
           <div class="row lh30">
@@ -60,7 +68,7 @@
         </li>
         <li class="aa-item item mt10 bt1-ddd">
           <label class="row lh30">
-            <textarea class="col c-666" placeholder="填写活动说明（可以插入图片）"></textarea>
+            <textarea class="col c-666" placeholder="填写活动说明"></textarea>
           </label>
         </li>
       </ul>
@@ -83,24 +91,25 @@
             <b>地址:</b>
             <p class="c-main">{{positionResult.address}}</p>
           </li>
-          <li v-show="positionResult.nearestJunction" class="mb10">
-            <b>最近的路口:</b>
-            <p>{{positionResult.nearestJunction}}</p>
-          </li>
-          <li v-show="positionResult.nearestRoad" class="mb10">
-            <b>最近的路:</b>
-            <p>{{positionResult.nearestRoad}}</p>
-          </li>
-          <li v-show="positionResult.nearestPOI" class="mb10">
-            <b>最近的标注点:</b>
-            <p>{{positionResult.nearestPOI}}</p>
-          </li>
+          <!--<li v-show="positionResult.nearestJunction" class="mb10">-->
+            <!--<b>最近的路口:</b>-->
+            <!--<p>{{positionResult.nearestJunction}}</p>-->
+          <!--</li>-->
+          <!--<li v-show="positionResult.nearestRoad" class="mb10">-->
+            <!--<b>最近的路:</b>-->
+            <!--<p>{{positionResult.nearestRoad}}</p>-->
+          <!--</li>-->
+          <!--<li v-show="positionResult.nearestPOI" class="mb10">-->
+            <!--<b>最近的标注点:</b>-->
+            <!--<p>{{positionResult.nearestPOI}}</p>-->
+          <!--</li>-->
         </ul>
       </div>
     </transition>
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import datePicker from '../common/datePicker.vue'
   import picker from '../common/picker.vue'
   import mSelect from '../common/mSelect.vue'
@@ -113,9 +122,18 @@
     mounted: function () {
 
     },
-    components: {datePicker, picker, mSelect},
+    components: {datePicker, picker, mSelect, swiper, swiperSlide},
     data: function () {
       return {
+        swiperOption: {
+          autoplay: 3000,
+          setWrapperSize :true,
+          pagination : '.swiper-pagination',
+          paginationClickable :true,
+          mousewheelControl : true,
+          observeParents:true,
+        },
+        swiperSlides: [],
         show: true,
         typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
         type: '全部',
@@ -127,6 +145,9 @@
     },
     computed: {},
     methods: {
+      addImg: function () {
+        this.swiperSlides.push(1);
+      },
       selectDate: function (type) {
         if (type == 'start') {
           this.$refs.start.toggle(true);

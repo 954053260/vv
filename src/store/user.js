@@ -14,7 +14,7 @@ export default {
     },
     actions: {
         login ({commit}, user) {
-            return Vue.http.post('user/login', {data:user})
+            return Vue.http.post('login', {data: user})
                 .then(data => {
 
                     if (data.status == 0) {
