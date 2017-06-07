@@ -181,7 +181,7 @@
       }
     },
     computed: mapState({
-      user:  state => state.user.user,
+      user:  state => state.user.info,
     }),
     methods: {
       refresh: function () {
@@ -211,7 +211,7 @@
       },
       toggleUserMenu: function (bool) {
 
-        if (this.$store.state.user.user.phone) {
+        if (this.user.token) {
 
           if (typeof bool === 'boolean') {
             this.isUserMenu = bool;
@@ -220,12 +220,9 @@
           }
 
         } else {
-          this.$login.show((data) => {
-            this.$store.state.user.user = {
-              phone: '18675823512',
-              name: 'Tony'
-            };
-          });
+
+          this.$router.push('/app/login');
+
         }
 
       },

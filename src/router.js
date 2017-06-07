@@ -5,6 +5,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from './store'
 import app from './view/app.vue'
+import login from './view/login.vue'
 import home from './view/home.vue'
 import personInfo from './view/personInfo.vue'
 import personActivity from './view/personActivity.vue'
@@ -19,6 +20,7 @@ const router = new VueRouter({
         { path: '/', redirect: '/app/home'},
         { path: '/app/', component: app,
             children: [
+                { path: 'login', component: login, name: '登录'},
                 { path: 'home', component: home, name: '主页'},
                 { path: 'personInfo', component: personInfo, name: '个人中心'},
                 { path: 'personActivity', component: personActivity, name: '活动'},

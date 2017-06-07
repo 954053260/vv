@@ -135,8 +135,6 @@ export default {
         }
     },
     actions: {
-        setPositionResult({commit}, data){
-            commit("SET_POSITION_RESULT",  data);
-        }
+
     }
 }

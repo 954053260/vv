@@ -4,26 +4,27 @@
 import Vue from 'vue'
 export default {
     state: {
-        user:{}
+        info: {
+            token: '',
+            user: {}
+        }
     },
     getters: {},
     mutations: {
-        SET_USER: (state, user) => {
-            state.user = user;
+        SET_USER_TOKEN: (state, token) => {
+            state.info.token = token;
         }
     },
     actions: {
-        login ({commit}, user) {
-            return Vue.http.post('login', {data: user})
+        login ({commit}, data) {
+            return Vue.http.post('login', {data: data})
                 .then(data => {
-
-                    if (data.status == 0) {
-                        commit('SET_USER', user);
+                    if (data.code == 0) {
+                        commit('SET_USER_TOKEN', data.datas.token);
                         return data;
                     } else {
                         return Promise.reject(data.msg);
                     }
-
                 });
         }
     }

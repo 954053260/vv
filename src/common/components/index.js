@@ -5,8 +5,8 @@ import Vue from 'vue'
 import toast from './toast'
 import dialog from './dialog'
 import loading from './loading'
-import login from './login'
+//import login from './login'
 Vue.use(toast);
 Vue.use(dialog);
 Vue.use(loading);
-Vue.use(login);
+//Vue.use(login);

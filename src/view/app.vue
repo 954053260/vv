@@ -69,7 +69,7 @@
           var lat = data.position.lat;
           var lng = data.position.lng;
 
-          this.$store.dispatch('setPositionResult', data);
+          this.$store.commit('SET_POSITION_RESULT', data);
 
           markers.forEach((item) => {
             this.$map.gd.remove(item);

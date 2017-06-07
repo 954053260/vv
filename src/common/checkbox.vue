@@ -1,9 +1,8 @@
 <template>
-    <div id="checkbox" class="checkbox">
+    <div class="checkbox">
         <label class="checkbox-content">
             <i class="icon" :class="{'ion-android-checkbox': checked, 'ion-android-checkbox-outline-blank': !checked}"></i>
             <input type="checkbox"  style="display: none"
-                   :disabled="disabled"
                    :checked="checked"
                    :name="name"
                    @change="change">
@@ -17,7 +16,7 @@
         created: function () {
 
         },
-        props: ['name','disabled'],
+        props: ['name', 'value'],
         data: function () {
             return {
                 checked: this.value
@@ -25,13 +24,8 @@
         },
         methods: {
             change: function (event) {
-
-                if (this.disabled) {
-                    return false;
-                }
-
                 this.checked = event.target.checked;
-                this.$emit('input', this.checked);
+                this.$emit('input', event.target.checked);
             }
         }
     }
@@ -40,17 +34,23 @@
     .checkbox{
         display: inline-block;
     }
+    .checkbox-content{
+        display: block;
+        height: 20px;
+        line-height: 20px;
+    }
     .checkbox-content > i,
     .checkbox-content > span{
         display: inline-block;
         vertical-align: middle;
     }
     .checkbox-content > i{
-        color: #39f;
-        font-size: 18px;
+        position: relative;
+        top: 1px;
+        color: #2bd3b2;
+        font-size: 20px;
     }
     .checkbox-content > span{
-        margin-top: -2px;
         font-size: 14px;
         color: #666;
     }
