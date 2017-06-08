@@ -466,7 +466,7 @@ textarea::-moz-placeholder{
     position: absolute;
     width: 100%;
     top: 40px;
-    bottom: 40px;
+    bottom: 41px;
     overflow: auto;
 }
 .app-info-window-buttons{
@@ -478,7 +478,9 @@ textarea::-moz-placeholder{
     text-align: center;
     font-size: 14px;
     color: #2bd3b2;
+    background: #fff;
     border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 /*login css*/
 .login-logo{
@@ -828,6 +830,14 @@ textarea::-moz-placeholder{
 .pi-item input{
     border: none;
     line-height: 30px;
+}
+/*activityDetail css*/
+.ad-content{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 41px;
+    overflow: auto;
 }
 /*---------------------map CSS-----------------------*/
 .amap-logo{

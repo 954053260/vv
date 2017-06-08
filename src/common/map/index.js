@@ -112,17 +112,17 @@ export default {
                         return new SimpleMarker({
                             map: map.gd,
                             animation: 'AMAP_ANIMATION_DROP',
-                            iconStyle: data.iconColor || 'blue',
-                            iconLabel: {
-                                innerHTML: data.no || '',
+                            iconStyle: {
+                                src: 'static/img/marker-icon.png',
                                 style: {
-                                    color:'white'
+                                    width:'35px',
+                                    height:'35px'
                                 }
                             },
-                            label: {
-                                content: data.title,
-                                offset: new AMap.Pixel(27, 25)
-                            },
+                            //label: {
+                            //    content: data.title,
+                            //    offset: new AMap.Pixel(27, 25)
+                            //},
                             position: data.center.split(','),
                             clickable: true
                         });

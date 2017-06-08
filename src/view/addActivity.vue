@@ -19,7 +19,7 @@
         <li class="aa-item item mt10">
           <label class="row lh30">
             <span class="dp-ib w70">活动标题</span>
-            <input class="col c-666" type="text">
+            <input class="col c-666" type="text" v-model="aTitle">
           </label>
         </li>
         <li class="aa-item item mt10 bt1-ddd">
@@ -51,13 +51,13 @@
         <li class="aa-item item mt10 bt1-ddd">
           <label class="row lh30">
             <span class="dp-ib w70">活动人数</span>
-            <input class="col c-666" type="number">
+            <input class="col c-666" type="number" v-model="limitCount">
           </label>
         </li>
         <li class="aa-item item">
           <label class="row lh30">
             <span class="dp-ib w70">活动费用</span>
-            <input class="col c-666" type="number">
+            <input class="col c-666" type="number" v-model="fee">
           </label>
         </li>
         <li class="aa-item item">
@@ -71,7 +71,7 @@
         </li>
         <li class="aa-item item mt10 bt1-ddd">
           <label class="row lh30">
-            <textarea class="col c-666" placeholder="填写活动说明"></textarea>
+            <textarea class="col c-666" placeholder="填写活动说明" v-model="content"></textarea>
           </label>
         </li>
       </ul>
@@ -140,6 +140,10 @@
         show: true,
         typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
         type: '全部',
+        aTitle: '',
+        content: '',
+        limitCount: '',
+        fee: '',
         startDate: '',
         endDate: '',
         address: {}
@@ -148,11 +152,22 @@
     computed: {
       positionResult: function () {
         return this.$store.state.map.positionResult;
+      },
+      user: function () {
+        return this.$store.state.user.info;
       }
     },
     methods: {
       addImg: function () {
-        this.swiperSlides.push(1);
+        this.$file.upload({
+          success: (data, type) => {
+            console.log('upload success', data, type);
+          },
+          fail: (err) => {
+            this.$toast.info(err.msg);
+          }
+        })
+//        this.swiperSlides.push(1);
       },
       selectDate: function (type) {
         if (type == 'start') {
@@ -166,25 +181,48 @@
       },
       selectAddress: function () {
         this.show = false;
-//        this.$map.loadMap((map) => {
-//          this.positionPicker = map.positionPicker((data) => {
-//            this.$store.commit('setPositionResult', data);
-//          }, (error) => {
-//            this.$toast.info('地址获取失败');
-//          });
-//        });
       },
       confirmAddress: function () {
         this.address = this.positionResult;
         this.show = true;
-//        this.positionPicker.remove();
       },
       cancelAddress: function () {
         this.show = true;
-//        this.positionPicker.remove();
       },
       saveActivity: function () {
-        this.$router.back();
+        this.$loading.show('提交活动...');
+        this.$http.post('user/activity/create', {
+          data: {
+            title: this.aTitle,
+            content: this.content,
+            image: 'static/img/test3.jpg',
+            beginTime: this.startDate,
+            endTime: this.endDate,
+            address: this.address.address,
+            latitude: this.address.lat,
+            longitude: this.address.lng,
+            limitCount: this.limitCount,
+            fee: this.fee,
+            activityType: this.type,
+            linkMan: '',
+            linkPhone: '',
+            userNo: '',
+            token: this.user.token
+          }
+        }).then((data) => {
+          this.$loading.hide();
+
+          if (data.code == 0) {
+            this.$toast.info('提交活动成功');
+            this.$router.back();
+          } else {
+            this.$toast.info('提交活动失败');
+          }
+
+        }, (err) => {
+          this.$toast.info('提交活动失败');
+          this.$loading.hide();
+        })
       }
     }
   }
