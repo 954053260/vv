@@ -4,12 +4,12 @@
       <header class="aa-header bb1-ddd">
         <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
           <swiper-slide v-for="slide in swiperSlides">
-            <img src="../assets/test3.jpg" class="dp-b w">
+            <div class="aa-slide row row-center"><img :src="slide"/></div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
-        <div v-if="swiperSlides.length == 1">
-          <img src="../assets/test3.jpg" class="dp-b w">
+        <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
+          <img :src="swiperSlides[0]"/>
         </div>
         <a class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
           <i class="icon ion-android-add"></i>
@@ -161,13 +161,17 @@
       addImg: function () {
         this.$file.upload({
           success: (data, type) => {
-            console.log('upload success', data, type);
+            this.$store.dispatch('fileUpload', data)
+                    .then(() => {
+                      this.swiperSlides.push(data);
+                    }, (err) => {
+                      this.$toast.info(err.msg);
+                    })
           },
           fail: (err) => {
             this.$toast.info(err.msg);
           }
         })
-//        this.swiperSlides.push(1);
       },
       selectDate: function (type) {
         if (type == 'start') {
@@ -204,9 +208,8 @@
             limitCount: this.limitCount,
             fee: this.fee,
             activityType: this.type,
-            linkMan: '',
-            linkPhone: '',
-            userNo: '',
+            linkMan: this.user.user.realname,
+            linkPhone: this.user.user.mobile,
             token: this.user.token
           }
         }).then((data) => {

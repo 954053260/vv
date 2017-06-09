@@ -7,6 +7,7 @@ import store from './store'
 import app from './view/app.vue'
 import login from './view/login.vue'
 import home from './view/home.vue'
+import chat from './view/chat.vue'
 import personInfo from './view/personInfo.vue'
 import personActivity from './view/personActivity.vue'
 import addActivity from './view/addActivity.vue'
@@ -22,6 +23,7 @@ const router = new VueRouter({
             children: [
                 { path: 'login', component: login, name: '登录'},
                 { path: 'home', component: home, name: '主页'},
+                { path: 'chat', component: chat, name: '聊天'},
                 { path: 'personInfo', component: personInfo, name: '个人中心'},
                 { path: 'personActivity', component: personActivity, name: '活动'},
                 { path: 'addActivity', component: addActivity, name: '发布活动'},

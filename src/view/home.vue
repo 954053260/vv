@@ -9,16 +9,15 @@
     <a class="home-refresh-btn" @click="refresh()">
       <i class="icon ion-ios-refresh-empty"></i>
     </a>
-    <router-link class="home-plus-btn" to="/app/addActivity">
+    <a class="home-plus-btn" @click="addActivity">
       <i class="icon ion-android-add"></i>
-    </router-link>
+    </a>
     <a class="home-location-btn" @click="location()">
       <i class="icon ion-ios-location-outline"></i>
     </a>
     <a class="home-filter-btn" @click="toggleFilter()">
       <i class="icon ion-ios-settings-strong"></i>
     </a>
-
     <div class="home-select-content">
       <div class="row">
         <transition name="fade">
@@ -30,14 +29,13 @@
         </transition>
       </div>
     </div>
-
     <div v-if="isUserMenu" class="mask" @click="toggleUserMenu(false)"></div>
     <transition name="slide-left">
       <div v-if="isUserMenu" class="home-user-menu">
         <div class="p20-10 bc-main">
           <router-link to="/app/personInfo">
-            <img src="../assets/user.jpg" class="dp-ib vm w40 h40 brp50">
-            <span class="dp-ib vm f20 c-fff">Tony</span>
+            <img src="static/img/user.jpg" class="dp-ib vm w40 h40 brp50">
+            <span class="dp-ib vm f20 c-fff">{{user.user.nickname}}</span>
           </router-link>
         </div>
         <ul class="list">
@@ -72,34 +70,37 @@
         </ul>
       </div>
     </transition>
-
     <div v-if="isChat" class="mask" @click="toggleChat(false)"></div>
     <transition name="slide-right">
-      <div v-if="isChat" class="home-chat">
-        <ul ref="chatList" class="home-chat-list">
-          <li v-for="item in chats" class="home-chat-item">
-            <div v-if="item.type == 1" class="row">
-              <img src="../assets/user.jpg" width="40" height="40">
-              <div class="col">
-                <p class="name">{{item.name}}</p>
-                <p class="text">{{item.text}}</p>
-              </div>
+      <ul v-if="isChat" class="home-chat bc-page home-chat-list">
+        <li class="home-chat-item">
+          <router-link class="row" to="/app/chat">
+            <img src="static/img/user.jpg" width="40" height="40">
+            <div class="home-chat-content col">
+              <p class="name">小唐<span class="time">6/9</span></p>
+              <p class="text">请大家按时到达活动地点</p>
             </div>
-            <div v-else class="row item-type">
-              <div class="col">
-                <p class="name tr">{{item.name}}</p>
-                <p class="text">{{item.text}}</p>
-              </div>
-              <img src="../assets/user.jpg" width="40" height="40">
+          </router-link>
+        </li>
+        <li class="home-chat-item">
+          <router-link class="row" to="/app/chat">
+            <img src="static/img/user.jpg" width="40" height="40">
+            <div class="home-chat-content col">
+              <p class="name">小唐<span class="time">6/9</span></p>
+              <p class="text">请大家按时到达活动地点</p>
             </div>
-          </li>
-        </ul>
-        <div class="home-chat-input">
-          <label>
-            <input @keydown="sendMsg($event)" v-model="msg">
-          </label>
-        </div>
-      </div>
+          </router-link>
+        </li>
+        <li class="home-chat-item">
+          <router-link class="row" to="/app/chat">
+            <img src="static/img/user.jpg" width="40" height="40">
+            <div class="home-chat-content col">
+              <p class="name">小唐<span class="time">6/9</span></p>
+              <p class="text">请大家按时到达活动地点</p>
+            </div>
+          </router-link>
+        </li>
+      </ul>
     </transition>
   </div>
 </template>
@@ -124,60 +125,7 @@
         date: '全部',
         isFilter: false,
         isUserMenu: false,
-        isChat: false,
-        chats: [
-          {
-            name: '老王',
-            text: 'Hello！',
-            type: 1
-          },
-          {
-            name: '老王',
-            text: '@all 出来水！',
-            type: 1
-          },
-          {
-            name: 'tony',
-            text: '你好！',
-            type: 2
-          },
-          {
-            name: '老赵',
-            text: '你是谁？',
-            type: 1
-          },
-          {
-            name: '老王',
-            text: 'Hello！',
-            type: 1
-          },
-          {
-            name: '老王',
-            text: '@all 出来水！',
-            type: 1
-          },
-          {
-            name: 'tony',
-            text: '大水比！',
-            type: 2
-          },
-          {
-            name: '老赵',
-            text: '大水比大水比大水比？',
-            type: 1
-          },
-          {
-            name: 'tony',
-            text: '大水比！',
-            type: 2
-          },
-          {
-            name: '老赵',
-            text: '大水比大水比大水比？',
-            type: 1
-          }
-        ],
-        msg: ''
+        isChat: false
       }
     },
     computed: mapState({
@@ -232,28 +180,14 @@
         } else {
           this.isChat = !this.isChat;
         }
-
-        if (this.isChat) {
-          this.scrollBottom();
+      },
+      addActivity: function () {
+        if (this.user.token) {
+          this.$router.push('/app/addActivity');
+        } else {
+          this.$router.push('/app/login');
         }
 
-      },
-      sendMsg: function (e) {
-        if (e.keyCode == 13 && this.msg) {
-          this.chats.push({
-            name: 'tony',
-            text: this.msg,
-            type: 2
-          });
-          this.msg = '';
-          this.scrollBottom();
-        }
-      },
-      scrollBottom: function () {
-        setTimeout(() => {
-          var $chatList = this.$refs.chatList;
-          $chatList.scrollTop = $chatList.scrollHeight;
-        }, 50);
       }
     }
   }

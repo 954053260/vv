@@ -1,7 +1,7 @@
 <template>
   <div id="personInfo" class="container bc-page">
     <header class="p20-10 tc bc-main">
-      <img src="../assets/user.jpg" class="db-ib vm w100 h100 brp50">
+      <img src="static/img/user.jpg" class="db-ib vm w100 h100 brp50">
     </header>
     <ul class="list">
       <li class="pi-item item mt10">

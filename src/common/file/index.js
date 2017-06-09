@@ -14,6 +14,7 @@ export default {
                 };
 
                 let input = document.createElement("input");
+                input.setAttribute('type', 'file');
                 input.className = 'upload-image-20170608';
                 input.style.display = 'none';
 
@@ -78,7 +79,6 @@ export default {
                     }
 
                 };
-
                 input.click();
             }
         };

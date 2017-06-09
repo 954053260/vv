@@ -63,7 +63,11 @@
             smsCode: this.code,
             openid: '404f4fe64b1b070c12e6f3b0058cd87e'
           }).then((data) => {
-            this.$router.back();
+            this.$store.dispatch('getUserInfo', this.user.token).then(() => {
+              this.$router.back();
+            }, () => {
+              this.$toast.info('获取用户信息失败！')
+            })
             }, () => {
             this.$toast.info('登录失败！')
           });

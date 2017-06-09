@@ -17,7 +17,17 @@ const store = new Vuex.Store({
 
     },
     actions:{
-
+        fileUpload ({commit}, file) {
+            return Vue.http.post('file/upload',
+                {data: {fileType: 'image', file: file}})
+                .then(data => {
+                    if (data.code == 0) {
+                        return data;
+                    } else {
+                        return Promise.reject(data);
+                    }
+                });
+        }
     },
     modules:{
         user, map
