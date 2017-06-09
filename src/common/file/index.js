@@ -2,7 +2,7 @@
  * Created by tz on 2017/6/8.
  */
 export default {
-    install: function (Vue, option) {
+    install: function (Vue) {
         Vue.file = Vue.prototype.$file = {
             upload: function (option) {
                 option = {
@@ -63,8 +63,8 @@ export default {
                                 }
 
                                 function callback() {
-                                    img = null;
                                     option.success(compress(img), file.type);
+                                    img = null;
                                 }
 
                             }
@@ -79,6 +79,7 @@ export default {
                     }
 
                 };
+
                 input.click();
             }
         };
