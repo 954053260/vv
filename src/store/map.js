@@ -121,10 +121,18 @@ export default {
             nearestJunction: '',
             nearestRoad: '',
             nearestPOI:''
-        }
+        },
+        activityTypes: [],
+        dateRange: []
     },
     getters: {},
     mutations: {
+        SET_ACTIVITY_TYPES: (state, data) => {
+            state.activityTypes = data;
+        },
+        SET_DATE_RANGE: (state, data) => {
+            state.dateRange = data;
+        },
         SET_POSITION_RESULT: (state, data) => {
             state.positionResult.lat = data.position.lat;
             state.positionResult.lng = data.position.lng;
@@ -135,6 +143,19 @@ export default {
         }
     },
     actions: {
-
+        refreshMarker ({commit}, option) {
+            return Vue.http.get('activity/nearby/centerPoint', {data: option})
+                .then(data => {
+                    if (data.code == 0) {
+                        data.datas.activityTypes.unshift({value: 0, desc: '全部'});
+                        data.datas.dateRange.unshift({value: 0, desc: '全部'});
+                        commit('SET_ACTIVITY_TYPES', data.datas.activityTypes);
+                        commit('SET_DATE_RANGE', data.datas.dateRange);
+                        return data;
+                    } else {
+                        return Promise.reject(data.msg);
+                    }
+                });
+        }
     }
 }

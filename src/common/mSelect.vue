@@ -1,12 +1,12 @@
 <template>
     <div id="mSelect" class="mSelect">
         <div class="content" @click="toggle">
-            {{value}}
+            {{text}}
             <i class="icon ion-arrow-down-b"></i>
         </div>
         <transition name="fade">
             <ul v-if="show" class="list-content">
-                <li v-for="item in list" @click="select(item)">{{item}}</li>
+                <li v-for="(item, index) in list" @click="select(index)">{{item[bindValue]}}</li>
             </ul>
         </transition>
     </div>
@@ -17,9 +17,10 @@
         created: function () {
 
         },
-        props: ['value', 'list'],
+        props: ['value', 'list', 'bindValue'],
         data: function () {
             return {
+                text: this.list[this.value][this.bindValue],
                 show: false
             }
         },
@@ -27,8 +28,9 @@
             toggle: function () {
                 this.show = !this.show;
             },
-            select: function (item) {
-                this.$emit('input', item);
+            select: function (index) {
+                this.text = this.list[index][this.bindValue];
+                this.$emit('input', index);
                 this.toggle();
             }
         }

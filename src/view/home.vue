@@ -22,9 +22,9 @@
       <div class="row">
         <transition name="fade">
           <div v-if="isFilter" class="pr row col z-2">
-            <m-select class="col lh30 mr10" :list="userTypeList" v-model="userType"></m-select>
-            <m-select class="col lh30 mr10" :list="typeList" v-model="type"></m-select>
-            <m-select class="col lh30" :list="dateList" v-model="date"></m-select>
+            <m-select class="col lh30 mr10" :list="userTypeList" bindValue="desc" v-model="userTypeIndex"></m-select>
+            <m-select class="col lh30 mr10" :list="activityTypes" bindValue="desc" v-model="typeIndex"></m-select>
+            <m-select class="col lh30" :list="dateRange" bindValue="desc" v-model="dateIndex"></m-select>
           </div>
         </transition>
       </div>
@@ -116,13 +116,14 @@
     components: {mSelect},
     data: function () {
       return {
-        userTypeList: [ '好友', '个人','群体'],
-        userType: '好友',
-        type: '全部',
-        typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
-        type: '全部',
-        dateList: ['全部', '当天', '一周内', '一月内'],
-        date: '全部',
+        userTypeList: [
+          {value: 0, desc: '全部'},
+          {value: 1, desc: '群体'},
+          {value: 2, desc: '个人'}],
+        userTypeIndex: 0,
+        typeIndex: 0,
+        activityType: '全部',
+        dateIndex: 0,
         isFilter: false,
         isUserMenu: false,
         isChat: false
@@ -130,6 +131,8 @@
     },
     computed: mapState({
       user:  state => state.user.info,
+      activityTypes:  state => state.map.activityTypes,
+      dateRange:  state => state.map.dateRange,
     }),
     methods: {
       refresh: function () {

@@ -71,6 +71,15 @@
 
           this.$store.commit('SET_POSITION_RESULT', data);
 
+          this.$store.dispatch('refreshMarker', {
+            centerLongitude:lng,
+            centerLatitude: lat
+          }).then(() => {
+
+          }, () => {
+
+          });
+
           markers.forEach((item) => {
             this.$map.gd.remove(item);
           });
@@ -134,6 +143,9 @@
       },
       hideInfo: function () {
         this.isInfo = false;
+      },
+      refresh: function () {
+
       }
     }
   }
