@@ -8,20 +8,20 @@
         <li class="aa-item item mt10">
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">活动标题</span>
-            <p class="col c-666">环绕大学城骑行</p>
+            <p class="col c-666">{{markers[markerIndex].info.title}}</p>
           </label>
         </li>
         <li class="aa-item item">
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">举办者</span>
-            <p class="col c-666">小名</p>
+            <p class="col c-666">{{markers[markerIndex].info.user.name}}</p>
           </label>
         </li>
         <li class="aa-item item">
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">开始时间</span>
             <p class="col c-666">
-              {{new Date() | date('yyyy-MM-dd HH:mm')}}
+              {{markers[markerIndex].info.startDate | date('yyyy-MM-dd HH:mm')}}
             </p>
           </label>
         </li>
@@ -29,14 +29,14 @@
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">结束时间</span>
             <p class="col c-666">
-              {{new Date() | date('yyyy-MM-dd HH:mm')}}
+              {{markers[markerIndex].info.endDate | date('yyyy-MM-dd HH:mm')}}
             </p>
           </label>
         </li>
         <li class="aa-item item">
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">活动地点</span>
-            <p class="col c-666">中心湖</p>
+            <p class="col c-666">{{markers[markerIndex].info.address}}</p>
           </label>
         </li>
         <li class="aa-item item">
@@ -67,15 +67,40 @@
 
     },
     mounted: function () {
+
     },
     data: function () {
       return {
         doActivity: function () {
-          this.$router.back();
+          this.$loading.show('参与...');
+          console.log('sss', this.markerIndex)
+          console.log('aaa', this.markers)
+          this.$http.post('user/activity/takePartIn', {data: {
+            token: this.$store.state.user.info.token,
+            activityNo: this.markers[this.markerIndex].activityNo
+          }}).then((data) => {
+            this.$loading.hide();
+            if (data.code == 0) {
+              this.$toast.info('参与成功');
+              this.$router.back();
+            } else {
+              this.$toast.info('参与失败');
+            }
+          }, () => {
+            this.$toast.info('参与失败');
+            this.$loading.hide();
+          });
         }
       }
     },
-    computed: {},
+    computed: {
+      markers: function () {
+        return this.$store.state.map.markers;
+      },
+      markerIndex: function () {
+        return this.$store.state.map.markerIndex;
+      }
+    },
     methods: {
 
     }

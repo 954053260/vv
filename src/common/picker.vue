@@ -17,15 +17,16 @@
     export default {
         name:'picker',
         created: function () {
-           this.data[0].list = this.list;
-
+           var list = [];
             this.list.forEach((item, i) =>{
-                if (item == this.value) {
+                list.push(item[this.bindValue]);
+                if (i == this.value) {
                     this.data[0].currentIndex = i;
                 }
             });
+            this.data[0].list = list;
         },
-        props: ['value', 'list'],
+        props: ['value', 'bindValue', 'list'],
         data: function () {
             return {
                 show: false,
@@ -41,7 +42,7 @@
         },
         methods: {
             change: function (gIndex, iIndex) {
-                this.current =  this.data[gIndex].list[iIndex];
+                this.data[0].currentIndex = this.current =  iIndex;
             },
             confirm: function () {
                 this.toggle(false);

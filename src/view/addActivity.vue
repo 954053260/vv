@@ -64,9 +64,9 @@
           <div class="row lh30">
             <span class="dp-ib w70">活动类型</span>
             <p class="col c-666"  @click="selectType()">
-              {{type}}
+              {{activityTypes[typeIndex].desc}}
             </p>
-            <picker ref="type" :list="typeList" v-model="type" ></picker>
+            <picker ref="type" :list="activityTypes" bindValue="desc" v-model="typeIndex" ></picker>
           </div>
         </li>
         <li class="aa-item item mt10 bt1-ddd">
@@ -138,8 +138,7 @@
         },
         swiperSlides: [],
         show: true,
-        typeList: ['全部', '运动', '文化', '学习', '娱乐', '工业', '旅行', '商业', '其他'],
-        type: '全部',
+        typeIndex: 0,
         aTitle: '',
         content: '',
         limitCount: '',
@@ -150,6 +149,9 @@
       }
     },
     computed: {
+      activityTypes:  function () {
+        return this.$store.state.map.activityTypes;
+      },
       positionResult: function () {
         return this.$store.state.map.positionResult;
       },
@@ -162,8 +164,8 @@
         this.$file.upload({
           success: (data, type) => {
             this.$store.dispatch('fileUpload', data)
-                    .then(() => {
-                      this.swiperSlides.push(data);
+                    .then((data) => {
+                      this.swiperSlides = this.swiperSlides.concat(data.datas.uris);
                     }, (err) => {
                       this.$toast.info(err.msg);
                     })
@@ -199,15 +201,15 @@
           data: {
             title: this.aTitle,
             content: this.content,
-            image: 'static/img/test3.jpg',
-            beginTime: '2017-06-01 14:00:0' || this.startDate.getTime(),
-            endTime: '2017-06-01 14:00:0' || this.endDate.getTime(),
+            image: this.swiperSlides.join(','),
+            beginTime: this.startDate.getTime(),
+            endTime: this.endDate.getTime(),
             address: this.address.address,
             latitude: this.address.lat,
             longitude: this.address.lng,
             limitCount: this.limitCount,
             fee: this.fee,
-            activityType: '1',
+            activityType: this.activityTypes[this.typeIndex].value,
             linkMan: this.user.user.realname || '赵先生',
             linkPhone: this.user.user.mobile,
             token: this.user.token

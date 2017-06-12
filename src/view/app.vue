@@ -39,15 +39,16 @@
           <li class="aa-item item" style="border-bottom: none">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">状态</span>
-              <p v-if="info.status == 1" class="col c-red">审核中</p>
-              <p v-if="info.status == 2" class="col c-main">报名中</p>
-              <p v-if="info.status == 3" class="col c-ff9800">进行中</p>
-              <p v-if="info.status == 4" class="col c-999">已截止</p>
+              <p class="col c-ff9800">{{info.status}}</p>
+              <!--<p v-if="info.status == 1" class="col c-red">审核中</p>-->
+              <!--<p v-if="info.status == 2" class="col c-main">报名中</p>-->
+              <!--<p v-if="info.status == 3" class="col c-ff9800">进行中</p>-->
+              <!--<p v-if="info.status == 4" class="col c-999">已截止</p>-->
             </div>
           </li>
         </ul>
         <div class="app-info-window-buttons row">
-          <a class="col br1-ddd">收藏</a>
+          <a class="col br1-ddd" @click="collect()">收藏</a>
           <router-link class="col" to="/app/activityDetail">详情</router-link>
         </div>
       </div>
@@ -75,38 +76,20 @@
             centerLongitude:lng,
             centerLatitude: lat
           }).then(() => {
-
+            markers.forEach((item) => {
+              this.$map.gd.remove(item);
+            });
+            this.markers.forEach((item, i) => {
+              var marker = map.createMarker(item);
+              AMap.event.addListener(marker, 'click', () => {
+                this.$store.commit('SET_MARKER_INDEX', i);
+                this.showInfo(item.info);
+              });
+              markers.push(marker);
+            });
           }, () => {
 
           });
-
-          markers.forEach((item) => {
-            this.$map.gd.remove(item);
-          });
-
-          this.markers.forEach((item, i) => {
-
-            var random = Math.random()*0.02;
-
-            if (i % 2) {
-              item.center = (lng + random) + ',' + (lat + random);
-            } else
-            if (i % 3){
-              item.center = (lng + random) + ',' + (lat - random);
-            } else
-            if (i % 4) {
-              item.center = (lng - random) + ',' + (lat - random);
-            } else {
-              item.center = (lng - random) + ',' + (lat + random);
-            }
-
-            var marker = map.createMarker(item);
-            AMap.event.addListener(marker, 'click', () => {
-              this.showInfo(item.info);
-            });
-            markers.push(marker);
-          });
-
         }, (error) => {
           this.$toast.info('地址获取失败');
         });
@@ -145,6 +128,9 @@
         this.isInfo = false;
       },
       refresh: function () {
+
+      },
+      collect: function () {
 
       }
     }
