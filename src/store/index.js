@@ -19,7 +19,7 @@ const store = new Vuex.Store({
     actions:{
         fileUpload ({commit}, file) {
             return Vue.http.post('file/base64/upload',
-                {data: {fileType: 'image', file: file}})
+                {data: {fileType: 'image', files: [file]}})
                 .then(data => {
                     if (data.code == 0) {
                         return data;
