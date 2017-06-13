@@ -71,7 +71,7 @@
         </li>
         <li class="aa-item item">
           <div class="row lh30">
-            <span class="dp-ib w70">活动类型</span>
+            <span class="dp-ib w70">团体类型</span>
             <p class="col c-666"  @click="selectOrganization()">
               {{activityOrganizationTypes[organizationTypesIndex].desc}}
             </p>
@@ -166,7 +166,7 @@
         return this.$store.state.map.activityOrganizationTypes.slice(1);
       },
       activityTypes:  function () {
-        return this.$store.state.map.activityTypes;
+        return this.$store.state.map.activityTypes.slice(1);
       },
       positionResult: function () {
         return this.$store.state.map.positionResult;
