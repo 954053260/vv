@@ -27,7 +27,7 @@ Vue.use(map, {
   zoom: 13
 });
 Vue.use(ajax, {
-  root: 'http://39.108.88.153:8080/',
+  root: store.state.host,
   timeout: 30000
 });
 

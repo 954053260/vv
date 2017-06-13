@@ -4,7 +4,7 @@
       <header class="aa-header bb1-ddd">
         <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
           <swiper-slide v-for="slide in swiperSlides">
-            <div class="aa-slide row row-center"><img :src="slide"/></div>
+            <div class="aa-slide row row-center"><img :src="host + slide"/></div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -159,6 +159,9 @@
       }
     },
     computed: {
+      host: function () {
+        return this.$store.state.host;
+      },
       activityOrganizationTypes:  function () {
         return this.$store.state.map.activityOrganizationTypes.slice(1);
       },

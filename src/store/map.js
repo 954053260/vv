@@ -33,7 +33,7 @@ export default {
             if (state.activityOrganizationTypes.length == 1) {
                 state.activityOrganizationTypes = state.activityOrganizationTypes.concat(data);
             }
-            
+
         },
         SET_ACTIVITY_TYPES: (state, data) => {
             if (state.activityTypes.length == 1) {
@@ -67,19 +67,7 @@ export default {
                                 activityNo: item.activityNo,
                                 title: item.title,
                                 center: item.longitude + ',' + item.latitude,
-                                info: {
-                                    title: item.title,
-                                    address: item.address,
-                                    startDate: item.beginTime,
-                                    endDate: item.endTime,
-                                    typeText: item.activityType,
-                                    user: {
-                                        name: item.linkMan,
-                                        phone: item.linkPhone
-                                    },
-                                    status: item.activityStatus,
-                                    desc: item.content
-                                }
+                                info: item
                             });
                         });
                         commit('SET_ORGANIZATION_TYPES', data.datas.activityOrganizationTypes);

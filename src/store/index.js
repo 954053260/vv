@@ -8,7 +8,7 @@ import map from './map.js'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
-
+        host: 'http://39.108.88.153:8080/'
     },
     getters:{
 
