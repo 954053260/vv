@@ -49,13 +49,15 @@
         </ul>
         <div class="app-info-window-buttons row">
           <a class="col br1-ddd" @click="collect()">收藏</a>
-          <router-link class="col" to="/app/activityDetail">详情</router-link>
+          <a class="col" @click="toDetail()">详情</a>
         </div>
       </div>
     </transition>
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import {mapState} from 'vuex'
+
   export default {
     name:'app',
     created: function () {
@@ -63,19 +65,25 @@
 
       this.$map.loadMap((map) => {
         map.doLocation();
-
         var markers = [];
 
         this.positionPicker = map.positionPicker((data) => {
-          var lat = data.position.lat;
-          var lng = data.position.lng;
+          var params = {
+            centerLongitude: data.position.lng,
+            centerLatitude: data.position.lat
+          };
+
+          var activityType = this.activityTypes[this.typeIndex].value;
+          var timeRange = this.dateRange[this.dateIndex].value;
+          var activityOrganizationType = this.activityOrganizationTypes[this.organizationTypesIndex].value;
+
+          if (activityType) {params.activityType = activityType};
+          if (timeRange) {params.timeRange = timeRange};
+          if (activityOrganizationType) {params.activityOrganizationType = activityOrganizationType};
 
           this.$store.commit('SET_POSITION_RESULT', data);
 
-          this.$store.dispatch('refreshMarker', {
-            centerLongitude:lng,
-            centerLatitude: lat
-          }).then(() => {
+          this.$store.dispatch('refreshMarker', params).then(() => {
             markers.forEach((item) => {
               this.$map.gd.remove(item);
             });
@@ -93,13 +101,14 @@
         }, (error) => {
           this.$toast.info('地址获取失败');
         });
-
         this.positionPicker.show();
-
       });
     },
     mounted: function () {
 
+    },
+    destoryed: function () {
+      this.positionPicker && this.positionPicker.remove();
     },
     components: {
 
@@ -111,14 +120,16 @@
         info: {}
       }
     },
-    computed: {
-      markers: function () {
-        return this.$store.state.map.markers;
-      },
-      positionResult: function () {
-        return this.$store.state.map.positionResult;
-      }
-    },
+    computed: mapState({
+      markers:  state => state.map.markers,
+      positionResult:  state => state.map.positionResult,
+      activityOrganizationTypes:  state => state.map.activityOrganizationTypes,
+      activityTypes:  state => state.map.activityTypes,
+      dateRange:  state => state.map.dateRange,
+      dateIndex:  state => state.map.dateIndex,
+      typeIndex:  state => state.map.typeIndex,
+      organizationTypesIndex:  state => state.map.organizationTypesIndex,
+    }),
     methods: {
       showInfo: function (data) {
         this.info = data;
@@ -127,8 +138,12 @@
       hideInfo: function () {
         this.isInfo = false;
       },
-      refresh: function () {
-
+      toDetail: function () {
+        if (this.$store.state.user.info.token) {
+          this.$router.push('/app/activityDetail');
+        } else {
+          this.$router.push('/app/login');
+        }
       },
       collect: function () {
 

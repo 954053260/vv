@@ -129,6 +129,10 @@ export default {
 
                     };
 
+                    map.getPositionPicker = function () {
+                        return positionPicker;
+                    };
+
                     map.positionPicker = function (success, error) {
 
                         function complete (data) {
@@ -145,13 +149,16 @@ export default {
                         return {
                             show: function () {
                                 positionPicker.start();
+                                return this;
                             },
                             stop: function () {
                                 positionPicker.stop();
+                                return this;
                             },
                             remove: function () {
                                 positionPicker.off('success', complete);
                                 positionPicker.off('fail', fail);
+                                return this;
                             }
                         };
                     };

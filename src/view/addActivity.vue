@@ -69,6 +69,15 @@
             <picker ref="type" :list="activityTypes" bindValue="desc" v-model="typeIndex" ></picker>
           </div>
         </li>
+        <li class="aa-item item">
+          <div class="row lh30">
+            <span class="dp-ib w70">活动类型</span>
+            <p class="col c-666"  @click="selectOrganization()">
+              {{activityOrganizationTypes[organizationTypesIndex].desc}}
+            </p>
+            <picker ref="organization" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex" ></picker>
+          </div>
+        </li>
         <li class="aa-item item mt10 bt1-ddd">
           <label class="row lh30">
             <textarea class="col c-666" placeholder="填写活动说明" v-model="content"></textarea>
@@ -139,6 +148,7 @@
         swiperSlides: [],
         show: true,
         typeIndex: 0,
+        organizationTypesIndex: 0,
         aTitle: '',
         content: '',
         limitCount: '',
@@ -149,6 +159,9 @@
       }
     },
     computed: {
+      activityOrganizationTypes:  function () {
+        return this.$store.state.map.activityOrganizationTypes.slice(1);
+      },
       activityTypes:  function () {
         return this.$store.state.map.activityTypes;
       },
@@ -163,11 +176,14 @@
       addImg: function () {
         this.$file.upload({
           success: (data, type) => {
+            this.$loading.show('上传图片');
             this.$store.dispatch('fileUpload', data)
                     .then((data) => {
+                      this.$loading.hide();
                       this.swiperSlides = this.swiperSlides.concat(data.datas.uris);
                     }, (err) => {
-                      this.$toast.info(err.msg);
+                      this.$loading.hide();
+                      this.$toast.info('上传失败');
                     })
           },
           fail: (err) => {
@@ -184,6 +200,9 @@
       },
       selectType: function () {
         this.$refs.type.toggle(true);
+      },
+      selectOrganization: function () {
+        this.$refs.organization.toggle(true);
       },
       selectAddress: function () {
         this.show = false;
@@ -210,6 +229,7 @@
             limitCount: this.limitCount,
             fee: this.fee,
             activityType: this.activityTypes[this.typeIndex].value,
+            activityOrganizationType: this.activityOrganizationTypes[this.organizationTypesIndex].value,
             linkMan: this.user.user.realname || '赵先生',
             linkPhone: this.user.user.mobile,
             token: this.user.token

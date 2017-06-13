@@ -14,8 +14,12 @@ export default {
             nearestRoad: '',
             nearestPOI:''
         },
-        activityTypes: [],
-        dateRange: []
+        organizationTypesIndex: 0,
+        typeIndex: 0,
+        dateIndex: 0,
+        activityOrganizationTypes: [{value: 0, desc: '全部'}],
+        activityTypes: [{value: 0, desc: '全部'}],
+        dateRange: [{value: 0, desc: '全部'}]
     },
     getters: {},
     mutations: {
@@ -25,11 +29,21 @@ export default {
         SET_MARKERS: (state, data) => {
             state.markers = data;
         },
+        SET_ORGANIZATION_TYPES: (state, data) => {
+            if (state.activityOrganizationTypes.length == 1) {
+                state.activityOrganizationTypes = state.activityOrganizationTypes.concat(data);
+            }
+            
+        },
         SET_ACTIVITY_TYPES: (state, data) => {
-            state.activityTypes = data;
+            if (state.activityTypes.length == 1) {
+                state.activityTypes = state.activityTypes.concat(data);
+            }
         },
         SET_DATE_RANGE: (state, data) => {
-            state.dateRange = data;
+            if (state.dateRange.length == 1) {
+                state.dateRange = state.dateRange.concat(data);
+            }
         },
         SET_POSITION_RESULT: (state, data) => {
             state.positionResult.lat = data.position.lat;
@@ -68,9 +82,7 @@ export default {
                                 }
                             });
                         });
-
-                        data.datas.activityTypes.unshift({value: 0, desc: '全部'});
-                        data.datas.dateRange.unshift({value: 0, desc: '全部'});
+                        commit('SET_ORGANIZATION_TYPES', data.datas.activityOrganizationTypes);
                         commit('SET_ACTIVITY_TYPES', data.datas.activityTypes);
                         commit('SET_DATE_RANGE', data.datas.dateRange);
                         commit('SET_MARKERS', markers);

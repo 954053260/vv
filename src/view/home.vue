@@ -22,9 +22,12 @@
       <div class="row">
         <transition name="fade">
           <div v-if="isFilter" class="pr row col z-2">
-            <m-select class="col lh30 mr10" :list="userTypeList" bindValue="desc" v-model="userTypeIndex"></m-select>
-            <m-select class="col lh30 mr10" :list="activityTypes" bindValue="desc" v-model="typeIndex"></m-select>
-            <m-select class="col lh30" :list="dateRange" bindValue="desc" v-model="dateIndex"></m-select>
+            <m-select class="col lh30 mr10" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
+                      @input="changeOrganization"></m-select>
+            <m-select class="col lh30 mr10" :list="activityTypes" bindValue="desc" v-model="typeIndex"
+                      @input="changeTypes"></m-select>
+            <m-select class="col lh30" :list="dateRange" bindValue="desc" v-model="dateIndex"
+                      @input="changeRange"></m-select>
           </div>
         </transition>
       </div>
@@ -116,14 +119,6 @@
     components: {mSelect},
     data: function () {
       return {
-        userTypeList: [
-          {value: 0, desc: '全部'},
-          {value: 1, desc: '群体'},
-          {value: 2, desc: '个人'}],
-        userTypeIndex: 0,
-        typeIndex: 0,
-        activityType: '全部',
-        dateIndex: 0,
         isFilter: false,
         isUserMenu: false,
         isChat: false
@@ -131,16 +126,14 @@
     },
     computed: mapState({
       user:  state => state.user.info,
+      activityOrganizationTypes:  state => state.map.activityOrganizationTypes,
       activityTypes:  state => state.map.activityTypes,
       dateRange:  state => state.map.dateRange,
+      dateIndex:  state => state.map.dateIndex,
+      typeIndex:  state => state.map.typeIndex,
+      organizationTypesIndex:  state => state.map.organizationTypesIndex,
     }),
     methods: {
-      refresh: function () {
-        this.$loading.show('刷新活动...');
-        setTimeout(() => {
-          this.$loading.hide();
-        }, 1000);
-      },
       location: function () {
         this.$loading.show('定位中...');
         this.$map.loadMap((map) => {
@@ -171,9 +164,7 @@
           }
 
         } else {
-
           this.$router.push('/app/login');
-
         }
 
       },
@@ -190,7 +181,23 @@
         } else {
           this.$router.push('/app/login');
         }
-
+      },
+      changeTypes: function (value) {
+        this.$store.state.map.typeIndex = value;
+        this.refresh();
+      },
+      changeRange: function (value) {
+        this.$store.state.map.dateIndex = value;
+        this.refresh();
+      },
+      changeOrganization: function (value) {
+        this.$store.state.map.organizationTypesIndex = value;
+        this.refresh();
+      },
+      refresh: function () {
+        this.$map.loadMap((map) => {
+          map.getPositionPicker().start();
+        });
       }
     }
   }
