@@ -9,7 +9,7 @@
           <li class="aa-item item">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">举办者</span>
-              <p class="col c-999">{{info.user.name}}</p>
+              <p class="col c-999">{{info.linkMan}}</p>
             </div>
           </li>
           <li class="aa-item item">
@@ -33,13 +33,13 @@
           <li class="aa-item item">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">类型</span>
-              <p class="col c-999">{{info.typeText}}</p>
+              <p class="col c-999">{{info.activityOrganizationType.desc}}</p>
             </div>
           </li>
           <li class="aa-item item" style="border-bottom: none">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">状态</span>
-              <p class="col c-ff9800">{{info.status}}</p>
+              <p class="col c-ff9800">{{info.activityStatus.desc}}</p>
               <!--<p v-if="info.status == 1" class="col c-red">审核中</p>-->
               <!--<p v-if="info.status == 2" class="col c-main">报名中</p>-->
               <!--<p v-if="info.status == 3" class="col c-ff9800">进行中</p>-->

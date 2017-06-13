@@ -14,7 +14,7 @@
         <li class="aa-item item">
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">举办者</span>
-            <p class="col c-666">{{markers[markerIndex].info.user.name}}</p>
+            <p class="col c-666">{{markers[markerIndex].info.linkMan}}</p>
           </label>
         </li>
         <li class="aa-item item">
@@ -42,13 +42,19 @@
         <li class="aa-item item">
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">已报名人数</span>
-            <p class="col c-666">30</p>
+            <p class="col c-666">{{markers[markerIndex].info.limitCount}}</p>
           </label>
         </li>
         <li class="aa-item item">
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">活动费用</span>
-            <p class="col c-666">免费</p>
+            <p class="col c-666">{{markers[markerIndex].info.fee}}</p>
+          </label>
+        </li>
+        <li class="aa-item item">
+          <label class="row lh30">
+            <span class="dp-ib mr10 w70 tr">活动详情</span>
+            <p class="col c-666">{{markers[markerIndex].info.content}}</p>
           </label>
         </li>
       </ul>
@@ -73,8 +79,6 @@
       return {
         doActivity: function () {
           this.$loading.show('参与...');
-          console.log('sss', this.markerIndex)
-          console.log('aaa', this.markers)
           this.$http.post('user/activity/takePartIn', {data: {
             token: this.$store.state.user.info.token,
             activityNo: this.markers[this.markerIndex].activityNo

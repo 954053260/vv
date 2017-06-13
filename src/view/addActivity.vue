@@ -9,7 +9,7 @@
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
         <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
-          <img :src="swiperSlides[0]"/>
+          <img :src="host + swiperSlides[0]"/>
         </div>
         <a class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
           <i class="icon ion-android-add"></i>
@@ -177,22 +177,26 @@
     },
     methods: {
       addImg: function () {
-        this.$file.upload({
-          success: (data, type) => {
-            this.$loading.show('上传图片');
-            this.$store.dispatch('fileUpload', data)
-                    .then((data) => {
-                      this.$loading.hide();
-                      this.swiperSlides = this.swiperSlides.concat(data.datas.uris);
-                    }, (err) => {
-                      this.$loading.hide();
-                      this.$toast.info('上传失败');
-                    })
-          },
-          fail: (err) => {
-            this.$toast.info(err.msg);
-          }
-        })
+        if (this.swiperSlides.length < 6) {
+          this.$file.upload({
+            success: (data, type) => {
+              this.$loading.show('上传图片');
+              this.$store.dispatch('fileUpload', data)
+                      .then((data) => {
+                        this.$loading.hide();
+                        this.swiperSlides = this.swiperSlides.concat(data.datas.uris);
+                      }, (err) => {
+                        this.$loading.hide();
+                        this.$toast.info('上传失败');
+                      })
+            },
+            fail: (err) => {
+              this.$toast.info(err.msg);
+            }
+          });
+        } else {
+          this.$toast.info('最多上传5张');
+        }
       },
       selectDate: function (type) {
         if (type == 'start') {
