@@ -5,11 +5,12 @@ import Vue from 'vue'
 
 Vue.filter('date', function (value, format) {
 
-    if (!value || Object.prototype.toString.call(value) != '[object Date]') {
+    var date = new Date(value);
+
+    if (date == 'Invalid Date') {
         return value;
     }
 
-    var date = new Date(value);
     var o = {
         "M+": date.getMonth() + 1, //月份
         "d+": date.getDate(), //日

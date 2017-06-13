@@ -1,8 +1,12 @@
 <template>
   <div id="activityDetail" class="container bc-page">
     <div class="ad-content">
-      <header class="aa-header">
-        <img src="../assets/test3.jpg" class="dp-b w">
+      <header class="aa-header bb1-ddd">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="slide in markers[markerIndex].info.images">
+            <div class="aa-slide row row-center"><img :src="host + slide"/></div>
+          </swiper-slide>
+        </swiper>
       </header>
       <ul class="list">
         <li class="aa-item item mt10">
@@ -77,27 +81,20 @@
     },
     data: function () {
       return {
-        doActivity: function () {
-          this.$loading.show('参与...');
-          this.$http.post('user/activity/takePartIn', {data: {
-            token: this.$store.state.user.info.token,
-            activityNo: this.markers[this.markerIndex].activityNo
-          }}).then((data) => {
-            this.$loading.hide();
-            if (data.code == 0) {
-              this.$toast.info('参与成功');
-              this.$router.back();
-            } else {
-              this.$toast.info('参与失败');
-            }
-          }, () => {
-            this.$toast.info('参与失败');
-            this.$loading.hide();
-          });
+        swiperOption: {
+          autoplay: 3000,
+          setWrapperSize :true,
+          pagination : '.swiper-pagination',
+          paginationClickable :true,
+          mousewheelControl : true,
+          observeParents:true,
         }
       }
     },
     computed: {
+      host: function () {
+        return this.$store.state.host;
+      },
       markers: function () {
         return this.$store.state.map.markers;
       },
@@ -106,7 +103,24 @@
       }
     },
     methods: {
-
+      doActivity: function () {
+        this.$loading.show('参与...');
+        this.$http.post('user/activity/takePartIn', {data: {
+          token: this.$store.state.user.info.token,
+          activityNo: this.markers[this.markerIndex].activityNo
+        }}).then((data) => {
+          this.$loading.hide();
+          if (data.code == 0) {
+            this.$toast.info('参与成功');
+            this.$router.back();
+          } else {
+            this.$toast.info('参与失败');
+          }
+        }, () => {
+          this.$toast.info('参与失败');
+          this.$loading.hide();
+        });
+      }
     }
   }
 </script>
