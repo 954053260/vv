@@ -25,7 +25,7 @@
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">开始时间</span>
             <p class="col c-666">
-              {{markers[markerIndex].info.startDate | date('yyyy-MM-dd HH:mm')}}
+              {{markers[markerIndex].info.beginTime | date('yyyy-MM-dd HH:mm')}}
             </p>
           </label>
         </li>
@@ -33,7 +33,7 @@
           <label class="row lh30">
             <span class="dp-ib mr10 w70 tr">结束时间</span>
             <p class="col c-666">
-              {{markers[markerIndex].info.endDate | date('yyyy-MM-dd HH:mm')}}
+              {{markers[markerIndex].info.endTime | date('yyyy-MM-dd HH:mm')}}
             </p>
           </label>
         </li>
@@ -70,7 +70,7 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
   export default {
     name: 'activityDetail',
     created: function () {
@@ -79,6 +79,7 @@
     mounted: function () {
 
     },
+    components: {swiper, swiperSlide},
     data: function () {
       return {
         swiperOption: {

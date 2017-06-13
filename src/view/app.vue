@@ -21,13 +21,13 @@
           <li class="aa-item item">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">开始时间</span>
-              <p class="col c-999">{{info.startDate | date('yyyy年MM月dd日 HH时mm分')}}</p>
+              <p class="col c-999">{{info.beginTime | date('yyyy年MM月dd日 HH时mm分')}}</p>
             </div>
           </li>
           <li class="aa-item item">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">结束时间</span>
-              <p class="col c-999">{{info.endDate | date('yyyy年MM月dd日 HH时mm分')}}</p>
+              <p class="col c-999">{{info.endTime | date('yyyy年MM月dd日 HH时mm分')}}</p>
             </div>
           </li>
           <li class="aa-item item">
