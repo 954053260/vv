@@ -61,6 +61,16 @@ textarea::-moz-placeholder{
     z-index: 10000;
     background: #fff;
 }
+.mask{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(55,55,55,.6);SSS
+    height: 100%;
+    z-index: 9999;
+}
 /* ---------------------single CSS----------------------- */
 .c-main{color: #2bd3b2;}
 .c-000{color: #000;}
@@ -255,16 +265,7 @@ textarea::-moz-placeholder{
     -ms-flex:1;
     flex:1;
 }
-.mask{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(55,55,55,.6);
-    height: 100%;
-    z-index: 10000;
-}
+
 .row{
     display:-webkit-box;
     display:-webkit-flex;
