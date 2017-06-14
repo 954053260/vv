@@ -68,9 +68,11 @@
         var markers = [];
 
         this.positionPicker = map.positionPicker((data) => {
+
           var params = {
             centerLongitude: data.position.lng,
-            centerLatitude: data.position.lat
+            centerLatitude: data.position.lat,
+            distance: map.mapScale[map.gd.getZoom()]*3
           };
 
           var activityType = this.activityTypes[this.typeIndex].value;

@@ -56,6 +56,7 @@ export default {
     },
     actions: {
         refreshMarker ({commit}, option) {
+
             return Vue.http.get('activity/nearby/centerPoint', {data: option})
                 .then(data => {
                     if (data.code == 0) {

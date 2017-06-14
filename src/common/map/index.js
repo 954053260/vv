@@ -8,7 +8,9 @@ export default {
             idLoadUI = false,
             mapFns = [];
 
-        var map = Vue.map = Vue.prototype.$map = {};
+        var map = Vue.map = Vue.prototype.$map = {
+            mapScale: {3: 1000000, 4: 500000, 5: 200000, 6: 100000, 7: 50000, 8: 30000, 9: 20000, 10: 10000, 11: 5000, 12: 2000, 13: 1000, 14: 500, 15: 200, 16: 100, 17: 50, 18: 25}
+        };
 
         /*地图操作都在load进行*/
         map.loadMap = function (fn) {
@@ -24,6 +26,10 @@ export default {
 
         window.addEventListener('load', function () {
             map.gd = new AMap.Map(option.id, option);
+
+            setInterval(function () {
+                console.log(map.gd.getZoom())
+            }, 1000);
 
             map.gd.setMapStyle('amap://styles/f121c6be8803515c5ca5faeb33cd5085');
 
