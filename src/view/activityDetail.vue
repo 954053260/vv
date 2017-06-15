@@ -1,11 +1,12 @@
 <template>
   <div id="activityDetail" class="container bc-page">
     <div class="ad-content">
-      <header class="aa-header bb1-ddd">
+      <header v-if="markers[markerIndex].info.images" class="aa-header bb1-ddd">
         <swiper :options="swiperOption">
           <swiper-slide v-for="slide in markers[markerIndex].info.images">
             <div class="aa-slide row row-center"><img :src="host + slide"/></div>
           </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </header>
       <ul class="list">

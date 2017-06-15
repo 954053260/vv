@@ -6,7 +6,7 @@ export default {
     install: function (Vue, option) {
         let dialog, div = document.createElement('div');
         div.innerHTML = `<div class="dialog-content">
-        <div v-if="dialogs.length" class="mask" @click="cancel()"></div>
+        <div v-if="dialogs.length" class="mask z-1000" @click="cancel()"></div>
         <dialog-component v-for="(dialog, index) in dialogs"
                 :title="dialog.title"
                 :content="dialog.content"

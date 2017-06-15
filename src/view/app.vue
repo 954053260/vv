@@ -1,7 +1,7 @@
 <template>
   <div id="app" :style="{ height: height + 'px' }">
     <router-view></router-view>
-    <div v-if="isInfo" class="mask" @click="hideInfo()"></div>
+    <div v-if="isInfo" class="mask z-999" @click="hideInfo()"></div>
     <transition name="slide-up">
       <div v-if="isInfo" class="app-info-window">
         <h2>{{info.title}}</h2>

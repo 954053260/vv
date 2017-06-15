@@ -237,7 +237,7 @@
             fee: this.fee,
             activityType: this.activityTypes[this.typeIndex].value,
             activityOrganizationType: this.activityOrganizationTypes[this.organizationTypesIndex].value,
-            linkMan: this.user.user.realname || '赵先生',
+            linkMan: this.user.user.realname || this.user.user.nickname,
             linkPhone: this.user.user.mobile,
             token: this.user.token
           }

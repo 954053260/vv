@@ -1,6 +1,6 @@
 <template>
     <div id="datePicker">
-        <div v-if="show" class="mask" @click="toggle(false)"></div>
+        <div v-if="show" class="mask z-1000" @click="toggle(false)"></div>
         <transition name="slide-bottom">
             <div v-if="show" class="datePicker">
                 <div class="bc-main clear-float">

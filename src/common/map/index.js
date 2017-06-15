@@ -27,10 +27,6 @@ export default {
         window.addEventListener('load', function () {
             map.gd = new AMap.Map(option.id, option);
 
-            setInterval(function () {
-                console.log(map.gd.getZoom())
-            }, 1000);
-
             map.gd.setMapStyle('amap://styles/f121c6be8803515c5ca5faeb33cd5085');
 
             AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.Geolocation', 'AMap.Autocomplete'], function(){
@@ -108,6 +104,11 @@ export default {
                         positionPicker = new PositionPicker({
                             mode:'dragMap',
                             map: map.gd
+                            //iconStyle: { //自定义外观
+                            //    url: 'static/img/position-picker.png',
+                            //    ancher: [20, 32],
+                            //    size: [40, 40]
+                            //}
                         });
 
 

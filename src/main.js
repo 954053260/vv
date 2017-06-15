@@ -24,7 +24,7 @@ Vue.use(file);
 Vue.use(map, {
   id: 'map-container',
   resizeEnable: true,
-  zoom: 13
+  zoom: 16
 });
 Vue.use(ajax, {
   root: store.state.host,

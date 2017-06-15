@@ -32,7 +32,7 @@
         </transition>
       </div>
     </div>
-    <div v-if="isUserMenu" class="mask" @click="toggleUserMenu(false)"></div>
+    <div v-if="isUserMenu" class="mask z-999" @click="toggleUserMenu(false)"></div>
     <transition name="slide-left">
       <div v-if="isUserMenu" class="home-user-menu">
         <div class="p20-10 bc-main">
@@ -73,7 +73,7 @@
         </ul>
       </div>
     </transition>
-    <div v-if="isChat" class="mask" @click="toggleChat(false)"></div>
+    <div v-if="isChat" class="mask z-999" @click="toggleChat(false)"></div>
     <transition name="slide-right">
       <ul v-if="isChat" class="home-chat bc-page home-chat-list">
         <li class="home-chat-item">

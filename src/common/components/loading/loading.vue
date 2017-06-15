@@ -1,7 +1,7 @@
 <template>
     <transition :name="transitionName">
         <div>
-            <div class="mask"></div>
+            <div class="mask z-1000"></div>
             <div class="loading">
                 <img src="../../../assets/hourglass.gif">
                 <span>{{text}}</span>

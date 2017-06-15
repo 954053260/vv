@@ -16,7 +16,7 @@ export default {
                     return;
                 }
 
-                loginNode.innerHTML = `<div class="mask" @click="remove()"></div><login @login="login"></login>`;
+                loginNode.innerHTML = `<div class="mask z-1000" @click="remove()"></div><login @login="login"></login>`;
                 document.body.appendChild(loginNode);
                 loginVue = new Vue({
                     el: loginNode,
