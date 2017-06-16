@@ -1,11 +1,11 @@
 <template>
   <div id="app" :style="{ height: height + 'px' }">
     <router-view></router-view>
-    <div v-if="isInfo" class="mask z-999" @click="hideInfo()"></div>
+    <div v-if="isInfo" class="mask-no z-999" @click="hideInfo()"></div>
     <transition name="slide-up">
       <div v-if="isInfo" class="app-info-window">
         <h2>{{info.title}}</h2>
-        <ul class="app-info-window-content list">
+        <ul class="list">
           <li class="aa-item item">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">举办者</span>
@@ -20,14 +20,10 @@
           </li>
           <li class="aa-item item">
             <div class="row lh30">
-              <span class="dp-ib pr10 w60 tr">开始时间</span>
-              <p class="col c-999">{{info.beginTime | date('yyyy年MM月dd日 HH时mm分')}}</p>
-            </div>
-          </li>
-          <li class="aa-item item">
-            <div class="row lh30">
-              <span class="dp-ib pr10 w60 tr">结束时间</span>
-              <p class="col c-999">{{info.endTime | date('yyyy年MM月dd日 HH时mm分')}}</p>
+              <span class="dp-ib pr10 w60 tr">活动时间</span>
+              <p class="col c-666">
+                {{markers[markerIndex].info.beginTime | date('MM月dd日 HH:mm')}} - {{markers[markerIndex].info.endTime | date('MM月dd日 HH:mm')}}
+              </p>
             </div>
           </li>
           <li class="aa-item item">
@@ -39,7 +35,7 @@
           <li class="aa-item item" style="border-bottom: none">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">状态</span>
-              <p class="col c-ff9800">{{info.activityStatus.desc}}</p>
+              <p class="col c-main">{{info.activityStatus.desc}}</p>
               <!--<p v-if="info.status == 1" class="col c-red">审核中</p>-->
               <!--<p v-if="info.status == 2" class="col c-main">报名中</p>-->
               <!--<p v-if="info.status == 3" class="col c-ff9800">进行中</p>-->
@@ -89,6 +85,7 @@
             markers.forEach((item) => {
               this.$map.gd.remove(item);
             });
+
             this.markers.forEach((item, i) => {
               var marker = map.createMarker(item);
               AMap.event.addListener(marker, 'click', () => {
@@ -97,6 +94,7 @@
               });
               markers.push(marker);
             });
+
           }, () => {
 
           });

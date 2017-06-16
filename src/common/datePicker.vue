@@ -2,18 +2,11 @@
     <div id="datePicker">
         <div v-if="show" class="mask z-1000" @click="toggle(false)"></div>
         <transition name="slide-bottom">
-            <div v-if="show" class="datePicker">
+            <div v-if="show" class="date-picker">
                 <div class="bc-main clear-float">
                     <button class="btn btn-clear c-fff fl" @click="toggle(false)">取消</button>
                     <button class="btn btn-clear c-fff fr" @click="confirm()">确定</button>
                 </div>
-                <ul class="row lh40 bc-fff c-main">
-                    <li class="col tc">年</li>
-                    <li class="col tc">月</li>
-                    <li class="col tc">日</li>
-                    <li class="col tc">时</li>
-                    <li class="col tc">分</li>
-                </ul>
                 <smooth-picker ref="smoothPicker" :data="data" :change="change" />
             </div>
         </transition>
@@ -42,7 +35,7 @@
                         break;
                     case 1:
                         for (i = 0; i < 12; i++) {
-                            months.push(i + 1);
+                            months.push(i + 1 + '月');
                         }
                         item.currentIndex = month;
                         item.list = months;
@@ -53,14 +46,14 @@
                         break;
                     case 3:
                         for (i = 0; i < 24; i++) {
-                            hours.push(i + 1);
+                            hours.push(i + 1 + '时');
                         }
                         item.currentIndex = hour - 1;
                         item.list = hours;
                         break;
                     case 4:
                         for (i = 0; i <= 60; i++) {
-                            minutes.push(i);
+                            minutes.push(i + '分');
                         }
                         item.currentIndex = minute - 1;
                         item.list = minutes;
@@ -108,7 +101,7 @@
                 year -= 10;
 
                 for (var i = 0; i < 21;i ++) {
-                    years.push(year + i);
+                    years.push(year + i + '年');
                 }
 
                 return years;
@@ -118,7 +111,7 @@
                 var l = new Date(year, month + 1, 0).getDate();
 
                 for (var i = 0; i < l; i++) {
-                    days.push(i + 1);
+                    days.push(i + 1 + '日');
                 }
 
                 return days;
@@ -130,7 +123,7 @@
                     date.push(item.list[item.currentIndex]);
                 });
 
-               return new Date(date[0], date[1] - 1,  date[2],  date[3],  date[4]);
+                return new Date(date[0].replace('年', ''), date[1].replace('月', '') - 1, date[2].replace('日', ''), date[3].replace('时', ''), date[4].replace('分', ''));
             },
             change: function (gIndex, iIndex) {
                 this.data[gIndex].currentIndex = iIndex;
@@ -173,7 +166,7 @@
     }
 </script>
 <style scoped>
-    .datePicker{
+    .date-picker{
         position: fixed;
         left: 0;
         bottom: 0;

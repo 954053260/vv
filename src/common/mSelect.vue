@@ -1,5 +1,5 @@
 <template>
-    <div id="mSelect" class="mSelect">
+    <div id="mSelect" class="m-select">
         <div class="content" @click="toggle">
             {{text}}
             <i class="icon ion-arrow-down-b"></i>
@@ -37,7 +37,7 @@
     }
 </script>
 <style scoped>
-    .mSelect{
+    .m-select{
         padding-left: 5px;
         padding-right: 5px;
         position: relative;

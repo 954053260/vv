@@ -24,17 +24,9 @@
         </li>
         <li class="aa-item item">
           <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">开始时间</span>
+            <span class="dp-ib mr10 w70 tr">活动时间</span>
             <p class="col c-666">
-              {{markers[markerIndex].info.beginTime | date('yyyy-MM-dd HH:mm')}}
-            </p>
-          </label>
-        </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">结束时间</span>
-            <p class="col c-666">
-              {{markers[markerIndex].info.endTime | date('yyyy-MM-dd HH:mm')}}
+              {{markers[markerIndex].info.beginTime | date('MM月dd日 HH:mm')}} - {{markers[markerIndex].info.endTime | date('MM月dd日 HH:mm')}}
             </p>
           </label>
         </li>
@@ -64,10 +56,7 @@
         </li>
       </ul>
     </div>
-    <div class="app-info-window-buttons row">
-      <a class="col br1-ddd">收藏</a>
-      <a class="col" @click="doActivity()">参与</a>
-    </div>
+    <a class="ad-confirm-btn" @click="doActivity()">我要参与</a>
   </div>
 </template>
 <script type="text/ecmascript-6">

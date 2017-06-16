@@ -128,14 +128,17 @@ textarea::-moz-placeholder{
 .z-999{z-index: 999}
 .z-1000{z-index: 1000}
 /* ---------------------common CSS----------------------- */
-.mask{
+.mask,
+.mask-no{
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(55,55,55,.6);
     height: 100%;
+}
+.mask{
+    background-color: rgba(55,55,55,.6);
 }
 .btn{
     display: inline-block;
@@ -477,29 +480,18 @@ textarea::-moz-placeholder{
     z-index: 999;
     overflow: auto;
     width: 100%;
-    height: 357px;
     background: #fff;
 }
 .app-info-window h2{
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
     text-align: center;
     font-size: 16px;
     font-weight: normal;
     color: #fff;
     background: #2bd3b2;
 }
-.app-info-window-content{
-    position: absolute;
-    width: 100%;
-    top: 40px;
-    bottom: 41px;
-    overflow: auto;
-}
 .app-info-window-buttons{
-    position: absolute;
-    width: 100%;
-    bottom: 0;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -903,6 +895,17 @@ textarea::-moz-placeholder{
     top: 0;
     bottom: 41px;
     overflow: auto;
+}
+.ad-confirm-btn{
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #2bd3b2;
 }
 /*---------------------map CSS-----------------------*/
 .amap-logo{
