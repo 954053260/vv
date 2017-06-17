@@ -6,57 +6,61 @@
           <swiper-slide v-for="slide in markers[markerIndex].info.images">
             <div class="aa-slide row row-center"><img :src="host + slide"/></div>
           </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </header>
-      <ul class="list">
-        <li class="aa-item item mt10">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">活动标题</span>
-            <p class="col c-666">{{markers[markerIndex].info.title}}</p>
-          </label>
+      <div class="ad-title bc-fff">
+        <div class="ad-title-tags">
+          <span>{{markers[markerIndex].info.activityType.desc}}</span>
+        </div>
+        <div class="row">
+          <div class="col ad-title-left">
+            {{markers[markerIndex].info.title}}
+          </div>
+          <a class="ad-title-right">
+            <i class="icon ion-ios-heart-outline"></i>
+            <p>我想去</p>
+          </a>
+        </div>
+      </div>
+      <ul class="ad-list">
+        <li class="ad-item">
+          <i class="icon ion-ios-clock-outline"></i>
+          <span>活动时间</span>
+          <span>{{markers[markerIndex].info.beginTime | date('MM月dd日 HH:mm')}} - {{markers[markerIndex].info.endTime | date('MM月dd日 HH:mm')}}</span>
         </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">举办者</span>
-            <p class="col c-666">{{markers[markerIndex].info.linkMan}}</p>
-          </label>
+        <!--<li class="ad-item">-->
+          <!--<i class="icon ion-ios-location-outline"></i>-->
+          <!--<span>活动地点</span>-->
+          <!--<span>{{markers[markerIndex].info.address}}</span>-->
+        <!--</li>-->
+        <li class="ad-item">
+          <i class="icon ion-ios-flag-outline"></i>
+          <span>主办方</span>
+          <span>{{markers[markerIndex].info.linkMan}}</span>
         </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">活动时间</span>
-            <p class="col c-666">
-              {{markers[markerIndex].info.beginTime | date('MM月dd日 HH:mm')}} - {{markers[markerIndex].info.endTime | date('MM月dd日 HH:mm')}}
-            </p>
-          </label>
+        <li class="ad-item">
+          <i class="icon ion-ios-pricetag-outline"></i>
+          <span>活动费用</span>
+          <span>{{markers[markerIndex].info.fee}}元</span>
         </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">活动地点</span>
-            <p class="col c-666">{{markers[markerIndex].info.address}}</p>
-          </label>
+        <li class="ad-item">
+          <i class="icon ion-ios-personadd-outline"></i>
+          <span>已报名人数</span>
+          <span>{{markers[markerIndex].info.limitCount}}人</span>
         </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">已报名人数</span>
-            <p class="col c-666">{{markers[markerIndex].info.limitCount}}</p>
-          </label>
+        <li class="mt10 ad-item">
+          <i class="icon ion-ios-location-outline"></i>
+          <span>活动地点</span>
+          <p>{{markers[markerIndex].info.address}}</p>
         </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">活动费用</span>
-            <p class="col c-666">{{markers[markerIndex].info.fee}}</p>
-          </label>
-        </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib mr10 w70 tr">活动详情</span>
-            <p class="col c-666">{{markers[markerIndex].info.content}}</p>
-          </label>
+        <li class="ad-item">
+          <i class="icon ion-ios-paper-outline"></i>
+          <span>活动介绍</span>
+          <p>{{markers[markerIndex].info.content}}</p>
         </li>
       </ul>
     </div>
-    <a class="ad-confirm-btn" @click="doActivity()">我要参与</a>
+    <a class="ad-confirm-btn" @click="doActivity()">我要参加</a>
   </div>
 </template>
 <script type="text/ecmascript-6">

@@ -109,7 +109,6 @@
             createDay: function (year, month) {
                 var days = [];
                 var l = new Date(year, month + 1, 0).getDate();
-
                 for (var i = 0; i < l; i++) {
                     days.push(i + 1 + '日');
                 }
@@ -133,8 +132,8 @@
                 var currentIndex;
 
                 if (gIndex == 0 || gIndex == 1) {
-                    year = this.data[0].list[this.data[0].currentIndex];
-                    month = this.data[1].list[this.data[1].currentIndex] - 1;
+                    year = this.data[0].list[this.data[0].currentIndex].replace('年', '');
+                    month = this.data[1].list[this.data[1].currentIndex].replace('月', '') - 1;
                     list = this.createDay(year, month, 0);
                     currentIndex = this.data[2].currentIndex;
 

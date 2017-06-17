@@ -21,8 +21,8 @@
           <li class="aa-item item">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">活动时间</span>
-              <p class="col c-666">
-                {{markers[markerIndex].info.beginTime | date('MM月dd日 HH:mm')}} - {{markers[markerIndex].info.endTime | date('MM月dd日 HH:mm')}}
+              <p class="col c-999">
+                {{info.beginTime | date('MM月dd日 HH:mm')}} - {{info.endTime | date('MM月dd日 HH:mm')}}
               </p>
             </div>
           </li>
@@ -139,11 +139,14 @@
         this.isInfo = false;
       },
       toDetail: function () {
+        this.isInfo = false;
+
         if (this.$store.state.user.info.token) {
           this.$router.push('/app/activityDetail');
         } else {
           this.$router.push('/app/login');
         }
+
       },
       collect: function () {
 

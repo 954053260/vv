@@ -1,92 +1,83 @@
 <template>
   <div id="addActivity">
     <div v-show="show" class="container bc-page">
-      <header class="aa-header bb1-ddd">
-        <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
-          <swiper-slide v-for="slide in swiperSlides">
-            <div class="aa-slide row row-center"><img :src="host + slide"/></div>
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-        <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
-          <img :src="host + swiperSlides[0]"/>
-        </div>
-        <a class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
-          <i class="icon ion-android-add"></i>
-        </a>
-      </header>
-      <ul class="list">
-        <li class="aa-item item mt10">
-          <label class="row lh30">
-            <span class="dp-ib w70">活动标题</span>
-            <input class="col c-666" type="text" v-model="aTitle">
-          </label>
-        </li>
-        <li class="aa-item item mt10 bt1-ddd">
-          <div class="row lh30">
-            <span class="dp-ib w70">开始时间</span>
-            <p class="col c-666" @click="selectDate('start')">
-              {{startDate | date('yyyy-MM-dd HH:mm')}}
-            </p>
-            <date-picker ref="start" v-model="startDate"></date-picker>
+      <div class="ad-content">
+        <header class="aa-header bb1-ddd">
+          <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
+            <swiper-slide v-for="slide in swiperSlides">
+              <div class="aa-slide row row-center"><img :src="host + slide"/></div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+          <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
+            <img :src="host + swiperSlides[0]"/>
           </div>
-        </li>
-        <li class="aa-item item">
-          <div class="row lh30">
-            <span class="dp-ib w70">结束时间</span>
-            <p class="col c-666"  @click="selectDate('end')">
-              {{endDate | date('yyyy-MM-dd HH:mm')}}
-            </p>
-            <date-picker ref="end" v-model="endDate"></date-picker>
-          </div>
-        </li>
-        <li class="aa-item item mt10 bt1-ddd">
-          <div class="row lh30">
-            <span class="dp-ib w70">活动地址</span>
-            <p class="col c-666"  @click="selectAddress()">
-              {{address.address}}
-            </p>
-          </div>
-        </li>
-        <li class="aa-item item mt10 bt1-ddd">
-          <label class="row lh30">
-            <span class="dp-ib w70">活动人数</span>
-            <input class="col c-666" type="number" v-model="limitCount">
-          </label>
-        </li>
-        <li class="aa-item item">
-          <label class="row lh30">
-            <span class="dp-ib w70">活动费用</span>
-            <input class="col c-666" type="number" v-model="fee">
-          </label>
-        </li>
-        <li class="aa-item item">
-          <div class="row lh30">
-            <span class="dp-ib w70">活动类型</span>
-            <p class="col c-666"  @click="selectType()">
-              {{activityTypes[typeIndex].desc}}
-            </p>
-            <picker ref="type" :list="activityTypes" bindValue="desc" v-model="typeIndex" ></picker>
-          </div>
-        </li>
-        <li class="aa-item item">
-          <div class="row lh30">
-            <span class="dp-ib w70">团体类型</span>
-            <p class="col c-666"  @click="selectOrganization()">
-              {{activityOrganizationTypes[organizationTypesIndex].desc}}
-            </p>
-            <picker ref="organization" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex" ></picker>
-          </div>
-        </li>
-        <li class="aa-item item mt10 bt1-ddd">
-          <label class="row lh30">
-            <textarea class="col c-666" placeholder="填写活动说明" v-model="content"></textarea>
-          </label>
-        </li>
-      </ul>
-      <div class="p20">
-        <button class="btn btn-full bc-main c-fff" @click="saveActivity">发布</button>
+          <a class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
+            <i class="icon ion-android-add"></i>
+          </a>
+        </header>
+        <ul class="list">
+          <li class="aa-item item mt10">
+            <label class="row lh30">
+              <span class="dp-ib w70">活动标题</span>
+              <input class="col c-666" type="text" v-model="aTitle">
+            </label>
+          </li>
+          <li class="aa-item item mt10 bt1-ddd">
+            <div class="row lh30">
+              <span class="dp-ib w70">开始时间</span>
+              <p class="col c-666" @click="selectDate('start')">
+                {{startDate | date('yyyy-MM-dd HH:mm')}}
+              </p>
+              <date-picker ref="start" v-model="startDate"></date-picker>
+            </div>
+          </li>
+          <li class="aa-item item">
+            <div class="row lh30">
+              <span class="dp-ib w70">结束时间</span>
+              <p class="col c-666"  @click="selectDate('end')">
+                {{endDate | date('yyyy-MM-dd HH:mm')}}
+              </p>
+              <date-picker ref="end" v-model="endDate"></date-picker>
+            </div>
+          </li>
+          <li class="aa-item item mt10 bt1-ddd">
+            <div class="row lh30">
+              <span class="dp-ib w70">活动地址</span>
+              <p class="col c-666"  @click="selectAddress()">
+                {{address.address}}
+              </p>
+            </div>
+          </li>
+          <li class="aa-item item mt10 bt1-ddd">
+            <label class="row lh30">
+              <span class="dp-ib w70">活动人数</span>
+              <input class="col c-666" type="number" v-model="limitCount">
+            </label>
+          </li>
+          <li class="aa-item item">
+            <label class="row lh30">
+              <span class="dp-ib w70">活动费用</span>
+              <input class="col c-666" type="number" v-model="fee">
+            </label>
+          </li>
+          <li class="aa-item item">
+            <div class="row lh30">
+              <span class="dp-ib w70">活动类型</span>
+              <p class="col c-666"  @click="selectType()">
+                {{activityTypes[typeIndex].desc}}
+              </p>
+              <picker ref="type" :list="activityTypes" bindValue="desc" v-model="typeIndex" ></picker>
+            </div>
+          </li>
+          <li class="aa-item item mt10 bt1-ddd">
+            <label class="row lh30">
+              <textarea class="col c-666" placeholder="填写活动说明" v-model="content"></textarea>
+            </label>
+          </li>
+        </ul>
       </div>
+      <a class="ad-confirm-btn" @click="saveActivity()">发布</a>
     </div>
     <transition name="slide-bottom">
       <div v-if="!show" class="aa-address-page">
@@ -96,25 +87,9 @@
         </div>
         <ul class="p10 lh25">
           <li class="mb10">
-            <b>经纬度:</b>
-            <p>{{positionResult.lat}},{{positionResult.lng}}</p>
-          </li>
-          <li class="mb10">
             <b>地址:</b>
             <p class="c-main">{{positionResult.address}}</p>
           </li>
-          <!--<li v-show="positionResult.nearestJunction" class="mb10">-->
-            <!--<b>最近的路口:</b>-->
-            <!--<p>{{positionResult.nearestJunction}}</p>-->
-          <!--</li>-->
-          <!--<li v-show="positionResult.nearestRoad" class="mb10">-->
-            <!--<b>最近的路:</b>-->
-            <!--<p>{{positionResult.nearestRoad}}</p>-->
-          <!--</li>-->
-          <!--<li v-show="positionResult.nearestPOI" class="mb10">-->
-            <!--<b>最近的标注点:</b>-->
-            <!--<p>{{positionResult.nearestPOI}}</p>-->
-          <!--</li>-->
         </ul>
       </div>
     </transition>
@@ -148,7 +123,6 @@
         swiperSlides: [],
         show: true,
         typeIndex: 0,
-        organizationTypesIndex: 0,
         aTitle: '',
         content: '',
         limitCount: '',
@@ -161,9 +135,6 @@
     computed: {
       host: function () {
         return this.$store.state.host;
-      },
-      activityOrganizationTypes:  function () {
-        return this.$store.state.map.activityOrganizationTypes.slice(1);
       },
       activityTypes:  function () {
         return this.$store.state.map.activityTypes.slice(1);
@@ -212,7 +183,10 @@
         this.$refs.organization.toggle(true);
       },
       selectAddress: function () {
-        this.show = false;
+        this.$map.loadMap((map) => {
+          map.gd.setZoom(17);
+          this.show = false;
+        });
       },
       confirmAddress: function () {
         this.address = this.positionResult;
@@ -236,7 +210,7 @@
             limitCount: this.limitCount,
             fee: this.fee,
             activityType: this.activityTypes[this.typeIndex].value,
-            activityOrganizationType: this.activityOrganizationTypes[this.organizationTypesIndex].value,
+            activityOrganizationType: '1',
             linkMan: this.user.user.realname || this.user.user.nickname,
             linkPhone: this.user.user.mobile,
             token: this.user.token
