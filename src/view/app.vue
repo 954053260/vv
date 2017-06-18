@@ -44,7 +44,7 @@
           </li>
         </ul>
         <div class="app-info-window-buttons row">
-          <a class="col br1-ddd" @click="collect()">收藏</a>
+          <a class="col br1-ddd" @click="collectActivity()">收藏</a>
           <a class="col" @click="toDetail()">详情</a>
         </div>
       </div>
@@ -89,7 +89,7 @@
             this.markers.forEach((item, i) => {
               var marker = map.createMarker(item);
               AMap.event.addListener(marker, 'click', () => {
-                this.$store.commit('SET_MARKER_INDEX', i);
+                this.$store.commit('SET_MARKER', item.info);
                 this.showInfo(item.info);
               });
               markers.push(marker);
@@ -129,6 +129,7 @@
       dateIndex:  state => state.map.dateIndex,
       typeIndex:  state => state.map.typeIndex,
       organizationTypesIndex:  state => state.map.organizationTypesIndex,
+      marker: state => state.map.marker
     }),
     methods: {
       showInfo: function (data) {
@@ -148,8 +149,22 @@
         }
 
       },
-      collect: function () {
-
+      collectActivity: function () {
+        this.$loading.show('收藏...');
+        this.$http.post('user/activity/collect', {data: {
+          token: this.$store.state.user.info.token,
+          activityNo: this.marker.activityNo
+        }}).then((data) => {
+          this.$loading.hide();
+          if (data.code == 0) {
+            this.$toast.info('收藏成功');
+          } else {
+            this.$toast.info('收藏失败');
+          }
+        }, () => {
+          this.$toast.info('收藏失败');
+          this.$loading.hide();
+        });
       }
     }
   }

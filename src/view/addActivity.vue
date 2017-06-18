@@ -197,38 +197,45 @@
       },
       saveActivity: function () {
         this.$loading.show('提交活动...');
-        this.$http.post('user/activity/create', {
-          data: {
-            title: this.aTitle,
-            content: this.content,
-            image: this.swiperSlides.join(','),
-            beginTime: this.startDate.getTime(),
-            endTime: this.endDate.getTime(),
-            address: this.address.address,
-            latitude: this.address.lat,
-            longitude: this.address.lng,
-            limitCount: this.limitCount,
-            fee: this.fee,
-            activityType: this.activityTypes[this.typeIndex].value,
-            activityOrganizationType: '1',
-            linkMan: this.user.user.realname || this.user.user.nickname,
-            linkPhone: this.user.user.mobile,
-            token: this.user.token
-          }
-        }).then((data) => {
-          this.$loading.hide();
+        this.$map.loadMap((map) => {
+          map.gd.getCity((data) => {
+            this.$http.post('user/activity/create', {
+              data: {
+                title: this.aTitle,
+                content: this.content,
+                image: this.swiperSlides.join(','),
+                beginTime: this.startDate.getTime(),
+                endTime: this.endDate.getTime(),
+                address: this.address.address,
+                latitude: this.address.lat,
+                longitude: this.address.lng,
+                limitCount: this.limitCount,
+                fee: this.fee,
+                cityCode: data.citycode,
+                cityName: data.city,
+                activityType: this.activityTypes[this.typeIndex].value,
+                activityOrganizationType: this.user.user.userType.value,
+                linkMan: this.user.user.realname || this.user.user.nickname,
+                linkPhone: this.user.user.mobile,
+                token: this.user.token
+              }
+            }).then((data) => {
+              this.$loading.hide();
 
-          if (data.code == 0) {
-            this.$toast.info('提交活动成功');
-            this.$router.back();
-          } else {
-            this.$toast.info('提交活动失败');
-          }
+              if (data.code == 0) {
+                this.$toast.info('提交活动成功');
+                this.$router.back();
+              } else {
+                this.$toast.info('提交活动失败');
+              }
 
-        }, (err) => {
-          this.$toast.info('提交活动失败');
-          this.$loading.hide();
-        })
+            }, () => {
+              this.$toast.info('提交活动失败');
+              this.$loading.hide();
+            });
+          });
+        });
+
       }
     }
   }

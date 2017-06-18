@@ -1,24 +1,24 @@
 <template>
   <div id="activityDetail" class="container bc-page">
     <div class="ad-content">
-      <header v-if="markers[markerIndex].info.images" class="aa-header bb1-ddd">
+      <header v-if="marker.images" class="aa-header bb1-ddd">
         <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in markers[markerIndex].info.images">
+          <swiper-slide v-for="slide in marker.images">
             <div class="aa-slide row row-center"><img :src="host + slide"/></div>
           </swiper-slide>
         </swiper>
       </header>
       <div class="ad-title bc-fff">
         <div class="ad-title-tags">
-          <span>{{markers[markerIndex].info.activityType.desc}}</span>
+          <span>{{marker.activityType.desc}}</span>
         </div>
         <div class="row">
           <div class="col ad-title-left">
-            {{markers[markerIndex].info.title}}
+            {{marker.title}}
           </div>
-          <a class="ad-title-right">
+          <a class="ad-title-right" @click="collectActivity">
             <i class="icon ion-ios-heart-outline"></i>
-            <p>我想去</p>
+            <p>收藏</p>
           </a>
         </div>
       </div>
@@ -26,37 +26,32 @@
         <li class="ad-item">
           <i class="icon ion-ios-clock-outline"></i>
           <span>活动时间</span>
-          <span>{{markers[markerIndex].info.beginTime | date('MM月dd日 HH:mm')}} - {{markers[markerIndex].info.endTime | date('MM月dd日 HH:mm')}}</span>
+          <span>{{marker.beginTime | date('MM月dd日 HH:mm')}} - {{marker.endTime | date('MM月dd日 HH:mm')}}</span>
         </li>
-        <!--<li class="ad-item">-->
-          <!--<i class="icon ion-ios-location-outline"></i>-->
-          <!--<span>活动地点</span>-->
-          <!--<span>{{markers[markerIndex].info.address}}</span>-->
-        <!--</li>-->
         <li class="ad-item">
           <i class="icon ion-ios-flag-outline"></i>
           <span>主办方</span>
-          <span>{{markers[markerIndex].info.linkMan}}</span>
+          <span>{{marker.linkMan}}</span>
         </li>
         <li class="ad-item">
           <i class="icon ion-ios-pricetag-outline"></i>
           <span>活动费用</span>
-          <span>{{markers[markerIndex].info.fee}}元</span>
+          <span>{{marker.fee}}元</span>
         </li>
         <li class="ad-item">
           <i class="icon ion-ios-personadd-outline"></i>
           <span>已报名人数</span>
-          <span>{{markers[markerIndex].info.limitCount}}人</span>
+          <span>{{marker.limitCount}}人</span>
         </li>
         <li class="mt10 ad-item">
           <i class="icon ion-ios-location-outline"></i>
           <span>活动地点</span>
-          <p>{{markers[markerIndex].info.address}}</p>
+          <p>{{marker.address}}</p>
         </li>
         <li class="ad-item">
           <i class="icon ion-ios-paper-outline"></i>
           <span>活动介绍</span>
-          <p>{{markers[markerIndex].info.content}}</p>
+          <p>{{marker.content}}</p>
         </li>
       </ul>
     </div>
@@ -90,19 +85,33 @@
       host: function () {
         return this.$store.state.host;
       },
-      markers: function () {
-        return this.$store.state.map.markers;
-      },
-      markerIndex: function () {
-        return this.$store.state.map.markerIndex;
+      marker: function () {
+        return this.$store.state.map.marker;
       }
     },
     methods: {
+      collectActivity: function () {
+        this.$loading.show('收藏...');
+        this.$http.post('user/activity/collect', {data: {
+          token: this.$store.state.user.info.token,
+          activityNo: this.marker.activityNo
+        }}).then((data) => {
+          this.$loading.hide();
+          if (data.code == 0) {
+            this.$toast.info('收藏成功');
+          } else {
+            this.$toast.info('收藏失败');
+          }
+        }, () => {
+          this.$toast.info('收藏失败');
+          this.$loading.hide();
+        });
+      },
       doActivity: function () {
         this.$loading.show('参与...');
         this.$http.post('user/activity/takePartIn', {data: {
           token: this.$store.state.user.info.token,
-          activityNo: this.markers[this.markerIndex].activityNo
+          activityNo: this.marker.activityNo
         }}).then((data) => {
           this.$loading.hide();
           if (data.code == 0) {

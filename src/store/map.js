@@ -5,7 +5,7 @@ import Vue from 'vue'
 export default {
     state: {
         markers: [],
-        markerIndex: 0,
+        marker: {},
         positionResult: {
             lat: 0,
             lng: 0,
@@ -23,8 +23,8 @@ export default {
     },
     getters: {},
     mutations: {
-        SET_MARKER_INDEX: (state, index) => {
-            state.markerIndex = index;
+        SET_MARKER: (state, marker) => {
+            state.marker = marker;
         },
         SET_MARKERS: (state, data) => {
             state.markers = data;

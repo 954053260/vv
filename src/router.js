@@ -55,6 +55,8 @@ router.beforeEach((to, from, next) => {
     switch (to.path) {
         case '/app/addActivity':
         case '/app/activityDetail':
+        case '/app/personActivity':
+        case '/app/personInfo':
             if (!store.state.user.info.token) {
                 router.push('/app/login');
             }

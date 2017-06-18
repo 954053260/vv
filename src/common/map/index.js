@@ -26,7 +26,6 @@ export default {
 
         window.addEventListener('load', function () {
             map.gd = new AMap.Map(option.id, option);
-
             map.gd.setMapStyle('amap://styles/f121c6be8803515c5ca5faeb33cd5085');
 
             AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.Geolocation', 'AMap.Autocomplete'], function(){
