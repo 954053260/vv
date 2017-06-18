@@ -29,7 +29,7 @@
           <li class="aa-item item">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">类型</span>
-              <p class="col c-999">{{info.activityOrganizationType.desc}}</p>
+              <p class="col c-999">{{info.activityType.desc}}</p>
             </div>
           </li>
           <li class="aa-item item" style="border-bottom: none">
