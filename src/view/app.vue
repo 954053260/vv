@@ -150,21 +150,25 @@
 
       },
       collectActivity: function () {
-        this.$loading.show('收藏...');
-        this.$http.post('user/activity/collect', {data: {
-          token: this.$store.state.user.info.token,
-          activityNo: this.marker.activityNo
-        }}).then((data) => {
-          this.$loading.hide();
-          if (data.code == 0) {
-            this.$toast.info('收藏成功');
-          } else {
+        if (this.$store.state.user.info.token) {
+          this.$loading.show('收藏...');
+          this.$http.post('user/activity/collect', {data: {
+            token: this.$store.state.user.info.token,
+            activityNo: this.marker.activityNo
+          }}).then((data) => {
+            this.$loading.hide();
+            if (data.code == 0) {
+              this.$toast.info('收藏成功');
+            } else {
+              this.$toast.info('收藏失败');
+            }
+          }, () => {
             this.$toast.info('收藏失败');
-          }
-        }, () => {
-          this.$toast.info('收藏失败');
-          this.$loading.hide();
-        });
+            this.$loading.hide();
+          });
+        } else {
+          this.$router.push('/app/login');
+        }
       }
     }
   }
