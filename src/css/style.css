@@ -497,7 +497,7 @@ textarea::-moz-placeholder{
     height: 40px;
     line-height: 40px;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     color: #2bd3b2;
     background: #fff;
     border-top: 1px solid #ddd;
@@ -837,6 +837,7 @@ textarea::-moz-placeholder{
 }
 .aa-item{
     padding: 5px 10px;
+    font-size: 15px;
 }
 .aa-item input{
     line-height: 30px;
@@ -848,6 +849,13 @@ textarea::-moz-placeholder{
     min-height: 50px;
     padding: 7px 0;
     border: none;
+}
+.aa-tag{
+    display: inline-block;
+    padding: 5px 15px;
+    background: #ddd;
+    margin-right: 10px;
+    font-size: 14px;
 }
 .aa-address-page{
     position: absolute;
@@ -934,7 +942,7 @@ textarea::-moz-placeholder{
 .ad-item{
     padding: 15px 10px;
     line-height: 20px;
-    font-size: 14px;
+    font-size: 15px;
     border-top: 1px solid #ddd;
     background: #fff;
 }
@@ -949,6 +957,7 @@ textarea::-moz-placeholder{
     color: #999;
 }
 .ad-item > p{
+    padding-top: 5px;
     padding-left: 24px;
     color: #999;
 }

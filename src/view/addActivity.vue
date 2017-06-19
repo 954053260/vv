@@ -61,14 +61,16 @@
               <input class="col c-666" type="number" v-model="fee">
             </label>
           </li>
-          <li class="aa-item item">
+          <li class="aa-item item" style="border-bottom: none">
             <div class="row lh30">
-              <span class="dp-ib w70">活动类型</span>
-              <p class="col c-666"  @click="selectType()">
+              <span class="dp-ib w70">活动类别</span>
+              <p class="col c-666">
                 {{activityTypes[typeIndex].desc}}
               </p>
-              <picker ref="type" :list="activityTypes" bindValue="desc" v-model="typeIndex" ></picker>
             </div>
+          </li>
+          <li class="aa-item item">
+              <span v-for="(type, index) in activityTypes" class="aa-tag" @click="selectType(index)">{{type.desc}}</span>
           </li>
           <li class="aa-item item mt10 bt1-ddd">
             <label class="row lh30">
@@ -176,8 +178,8 @@
           this.$refs.end.toggle(true);
         }
       },
-      selectType: function () {
-        this.$refs.type.toggle(true);
+      selectType: function (index) {
+        this.typeIndex = index;
       },
       selectOrganization: function () {
         this.$refs.organization.toggle(true);
