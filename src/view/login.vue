@@ -88,7 +88,7 @@
             }
           }, 1000);
 
-          this.$http.post('common/smsCode', {data: {mobile: this.phone}})
+          this.$http.post('/common/smsCode', {data: {mobile: this.phone}})
                   .then((data) => {
                     if (data.code == 0) {
                       this.code = data.msg.replace('短信验证码：', '');

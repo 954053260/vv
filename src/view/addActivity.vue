@@ -61,7 +61,7 @@
               <input class="col c-666" type="number" v-model="fee">
             </label>
           </li>
-          <li class="aa-item item" style="border-bottom: none">
+          <li class="aa-item item" style="border-bottom: none;">
             <div class="row lh30">
               <span class="dp-ib w70">活动类别</span>
               <p class="col c-666">
@@ -69,7 +69,7 @@
               </p>
             </div>
           </li>
-          <li class="aa-item item">
+          <li class="aa-item item" style="padding: 0 10px;">
               <span v-for="(type, index) in activityTypes" class="aa-tag" @click="selectType(index)">{{type.desc}}</span>
           </li>
           <li class="aa-item item mt10 bt1-ddd">
@@ -198,10 +198,31 @@
         this.show = true;
       },
       saveActivity: function () {
+
+        if (this.aTitle == '') {
+          return this.$toast.info('活动标题不能为空！');
+        }
+
+        if (this.content == '') {
+          return this.$toast.info('活动简介不能为空！');
+        }
+
+        if (this.startDate == '') {
+          return this.$toast.info('活动开始时间不能为空！');
+        }
+
+        if (this.endDate == '') {
+          return this.$toast.info('活动结束时间不能为空！');
+        }
+
+        if (!this.address.address) {
+          return this.$toast.info('活动地址不能为空！');
+        }
+
         this.$loading.show('提交活动...');
         this.$map.loadMap((map) => {
           map.gd.getCity((data) => {
-            this.$http.post('user/activity/create', {
+            this.$http.post('/user/activity/create', {
               data: {
                 title: this.aTitle,
                 content: this.content,

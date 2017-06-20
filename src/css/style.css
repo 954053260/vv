@@ -852,9 +852,10 @@ textarea::-moz-placeholder{
 }
 .aa-tag{
     display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 10px;
     padding: 5px 15px;
     background: #ddd;
-    margin-right: 10px;
     font-size: 14px;
 }
 .aa-address-page{

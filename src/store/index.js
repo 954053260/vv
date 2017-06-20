@@ -8,7 +8,7 @@ import map from './map.js'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
-        host: 'http://39.108.88.153:8080/'
+        host: 'http://39.108.88.153:8080'
     },
     getters:{
 
@@ -18,7 +18,7 @@ const store = new Vuex.Store({
     },
     actions:{
         fileUpload ({commit}, file) {
-            return Vue.http.post('file/base64/upload',
+            return Vue.http.post('/file/base64/upload',
                 {data: {fileType: 'image', files: [file]}})
                 .then(data => {
                     if (data.code == 0) {

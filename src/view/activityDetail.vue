@@ -92,7 +92,7 @@
     methods: {
       collectActivity: function () {
         this.$loading.show('收藏...');
-        this.$http.post('user/activity/collect', {data: {
+        this.$http.post('/user/activity/collect', {data: {
           token: this.$store.state.user.info.token,
           activityNo: this.marker.activityNo
         }}).then((data) => {
@@ -109,7 +109,7 @@
       },
       doActivity: function () {
         this.$loading.show('参与...');
-        this.$http.post('user/activity/takePartIn', {data: {
+        this.$http.post('/user/activity/takePartIn', {data: {
           token: this.$store.state.user.info.token,
           activityNo: this.marker.activityNo
         }}).then((data) => {

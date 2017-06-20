@@ -39,7 +39,7 @@
     methods: {
       getActivity: function () {
 
-        var url = 'user/activity/';
+        var url = '/user/activity/';
 
         switch (parseInt(this.type)) {
           case 1:

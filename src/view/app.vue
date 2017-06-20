@@ -35,7 +35,7 @@
           <li class="aa-item item" style="border-bottom: none">
             <div class="row lh30">
               <span class="dp-ib pr10 w60 tr">状态</span>
-              <p class="col c-main">{{info.activityStatus.desc}}</p>
+              <p class="col c-999">{{info.activityStatus.desc}}</p>
               <!--<p v-if="info.status == 1" class="col c-red">审核中</p>-->
               <!--<p v-if="info.status == 2" class="col c-main">报名中</p>-->
               <!--<p v-if="info.status == 3" class="col c-ff9800">进行中</p>-->
@@ -152,7 +152,7 @@
       collectActivity: function () {
         if (this.$store.state.user.info.token) {
           this.$loading.show('收藏...');
-          this.$http.post('user/activity/collect', {data: {
+          this.$http.post('/user/activity/collect', {data: {
             token: this.$store.state.user.info.token,
             activityNo: this.marker.activityNo
           }}).then((data) => {

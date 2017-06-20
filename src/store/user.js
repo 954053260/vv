@@ -20,7 +20,7 @@ export default {
     },
     actions: {
         login ({commit}, data) {
-            return Vue.http.post('login', {data: data})
+            return Vue.http.post('/login', {data: data})
                 .then(data => {
                     if (data.code == 0) {
                         commit('SET_USER_TOKEN', data.datas.token);
@@ -32,7 +32,7 @@ export default {
         },
         getUserInfo ({commit}, token) {
 
-            return Vue.http.get('user/center', {data: {token: token}})
+            return Vue.http.get('/user/center', {data: {token: token}})
                 .then(data => {
                     if (data.code == 0) {
                         commit('SET_USER', data.datas.user);
