@@ -62,65 +62,67 @@ textarea::-moz-placeholder{
     background: #fff;
 }
 /* ---------------------single CSS----------------------- */
-.c-main{color: #2bd3b2;}
-.c-000{color: #000;}
-.c-666{color: #666;}
-.c-999{color: #999;}
-.c-bbb{color: #bbb;}
-.c-fff{color: #fff;}
-.c-ff9800{color: #ff9800}
-.c-red{color: red;}
-.bc-main{background: #2bd3b2;}
-.bc-page{background: #f7fafc;}
-.bc-fff{background: #fff}
-.b1-ddd{border: 1px solid #ddd}
-.bt1-ddd{border-top: 1px solid #ddd}
-.br1-ddd{border-right: 1px solid #ddd}
-.bb1-ddd{border-bottom: 1px solid #ddd}
-.bl1-ddd{border-left: 1px solid #ddd}
-.b-none{border: none}
-.bt-none{border-top: none}
-.br-none{border-right: none}
-.bb-none{border-bottom: none}
-.bl-none{border-left: none}
-.dp-n{display: none;}
-.dp-ib{display: inline-block}
-.brp50{border-radius: 50%}
-.f12{font-size: 12px}
-.f13{font-size: 13px}
-.f14{font-size: 14px}
-.f16{font-size: 16px}
-.f20{font-size: 20px}
-.fl{float: left;}
-.fr{float: right;}
-.h40{height: 40px}
-.h100{height: 100px}
-.lh20{line-height: 20px}
-.lh25{line-height: 25px}
-.lh30{line-height: 30px}
-.lh40{line-height: 40px}
-.m20{margin: 20px;}
-.mt0{margin-top: 0;}
-.mt5{margin-top: 5px;}
-.mr10{margin-right: 10px;}
-.mt10{margin-top: 10px;}
+.c-main {color: #2bd3b2;}
+.c-000 {color: #000;}
+.c-333 {color: #333;}
+.c-666 {color: #666;}
+.c-999 {color: #999;}
+.c-bbb {color: #bbb;}
+.c-fff {color: #fff;}
+.c-ff9800 {color: #ff9800}
+.c-red {color: red;}
+.bc-main {background: #2bd3b2;}
+.bc-page {background: #f7fafc;}
+.bc-fff {background: #fff}
+.b1-ddd {border: 1px solid #ddd}
+.bt1-ddd {border-top: 1px solid #ddd}
+.br1-ddd {border-right: 1px solid #ddd}
+.bb1-ddd {border-bottom: 1px solid #ddd}
+.bl1-ddd {border-left: 1px solid #ddd}
+.b-none {border: none}
+.bt-none {border-top: none}
+.br-none {border-right: none}
+.bb-none {border-bottom: none}
+.bl-none {border-left: none}
+.dp-n {display: none;}
+.dp-ib {display: inline-block}
+.brp50 {border-radius: 50%}
+.f12 {font-size: 12px}
+.f13 {font-size: 13px}
+.f14 {font-size: 14px}
+.f16 {font-size: 16px}
+.f20 {font-size: 20px}
+.fl {float: left;}
+.fr {float: right;}
+.h40{ height: 40px}
+.h100 {height: 100px}
+.lh20 {line-height: 20px}
+.lh25 {line-height: 25px}
+.lh30 {line-height: 30px}
+.lh40 {line-height: 40px}
+.m20 {margin: 20px;}
+.mt0 {margin-top: 0;}
+.mt5 {margin-top: 5px;}
+.mt10 {margin-top: 10px;}
+.mr10 {margin-right: 10px;}
+.mr30 {margin-right: 30px;}
 .mb10{margin-bottom: 10px;}
 .ml10{margin-left: 10px;}
-.m20{margin: 20px;}
-.p10{padding: 10px;}
-.p20{padding: 20px}
-.p0-20{padding: 0 20px;}
-.p20-10{padding: 20px 10px;}
-.pl10{padding-left: 10px;}
-.pr10{padding-right: 10px;}
-.pt10{padding-top: 10px;}
-.pt20{padding-top: 20px;}
+.p10 {padding: 10px;}
+.p20 {padding: 20px}
+.p0-20 {padding: 0 20px;}
+.p20-10 {padding: 20px 10px;}
+.pl10 {padding-left: 10px;}
+.pr10 {padding-right: 10px;}
+.pt10 {padding-top: 10px;}
+.pt20 {padding-top: 20px;}
 .pa{position: absolute;}
 .pr{position: relative;}
 .tc{text-align: center;}
 .tr{text-align: right;}
 .vm{vertical-align: middle}
 .w40{width: 40px}
+.w50{width: 50px}
 .w60{width: 60px}
 .w70{width: 70px}
 .w100{width: 100px;}
@@ -300,7 +302,7 @@ textarea::-moz-placeholder{
 /* ---------------------components CSS----------------------- */
 .confirm-position{
     position: fixed;
-    top: 100px;
+    top: 40%;
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -328,8 +330,8 @@ textarea::-moz-placeholder{
     border-bottom: 1px solid #e3e8ee;
 }
 .confirm-content{
-    padding: 16px;
-    font-size: 12px;
+    padding: 20px 16px;
+    font-size: 14px;
     line-height: 1.5;
 }
 .confirm-buttons{
@@ -826,7 +828,7 @@ textarea::-moz-placeholder{
     transition: all .4s;
     z-index: 1;
 }
-.aa-addImg-btn.active{
+.aa-addImg-btn.active {
     left: 40px;
     top: 40px;
     width: 30px;
@@ -835,16 +837,60 @@ textarea::-moz-placeholder{
     font-size: 20px;
     opacity: 0.8;
 }
-.aa-item{
+.aa-deleteImg-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    opacity: 0.8;
+    text-align: center;
+    color: #fff;
+    border-radius: 4px;
+    background: #ff0000;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    transition: all .4s;
+    z-index: 1;
+}
+.aa-location-btn {
+    display: inline-block;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #333;
+    border-radius: 4px;
+    background: #ddd;
+}
+.aa-location-btn .icon {
+    font-size: 16px;
+}
+.aa-address-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    border-left: 1px solid #ddd;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+.aa-address-btn .icon {
+    font-size: 20px;
+}
+.aa-item {
     padding: 5px 10px;
     font-size: 15px;
 }
-.aa-item input{
+.aa-item input {
     line-height: 30px;
     height: 30px;
     border: none;
 }
-.aa-item textarea{
+.aa-item textarea {
     resize: none;
     min-height: 50px;
     padding: 7px 0;
@@ -858,7 +904,7 @@ textarea::-moz-placeholder{
     background: #ddd;
     font-size: 14px;
 }
-.aa-address-page{
+.aa-address-page {
     position: absolute;
     bottom: 0;
     left: 0;

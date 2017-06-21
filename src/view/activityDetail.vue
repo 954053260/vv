@@ -25,8 +25,13 @@
       <ul class="ad-list">
         <li class="ad-item">
           <i class="icon ion-ios-clock-outline"></i>
-          <span>活动时间</span>
+          <span>时间</span>
           <span>{{marker.beginTime | date('MM月dd日 HH:mm')}} - {{marker.endTime | date('MM月dd日 HH:mm')}}</span>
+        </li>
+        <li class="ad-item">
+          <i class="icon ion-ios-location-outline"></i>
+          <span>活动地点</span>
+          <p>{{marker.address}}</p>
         </li>
         <li class="ad-item">
           <i class="icon ion-ios-flag-outline"></i>
@@ -41,12 +46,7 @@
         <li class="ad-item">
           <i class="icon ion-ios-personadd-outline"></i>
           <span>已报名人数</span>
-          <span>{{marker.limitCount}}人</span>
-        </li>
-        <li class="mt10 ad-item">
-          <i class="icon ion-ios-location-outline"></i>
-          <span>活动地点</span>
-          <p>{{marker.address}}</p>
+          <span>{{marker.participantCount}}/{{marker.limitCount}}人</span>
         </li>
         <li class="ad-item">
           <i class="icon ion-ios-paper-outline"></i>

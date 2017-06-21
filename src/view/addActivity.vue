@@ -4,15 +4,19 @@
       <div class="ad-content">
         <header class="aa-header bb1-ddd">
           <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
-            <swiper-slide v-for="slide in swiperSlides">
-              <div class="aa-slide row row-center"><img :src="host + slide"/></div>
+            <swiper-slide v-for="(slide, index) in swiperSlides">
+              <div class="aa-slide row row-center">
+                <a class="aa-deleteImg-btn" @click="deleteImg(index)"><i class="icon ion-android-close"></i></a>
+                <img :src="host + slide"/>
+              </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
           <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
+            <a class="aa-deleteImg-btn" @click="deleteImg(0)"><i class="icon ion-android-close"></i></a>
             <img :src="host + swiperSlides[0]"/>
           </div>
-          <a class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
+          <a v-show="swiperSlides.length < 6" class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
             <i class="icon ion-android-add"></i>
           </a>
         </header>
@@ -41,13 +45,14 @@
               <date-picker ref="end" v-model="endDate"></date-picker>
             </div>
           </li>
-          <li class="aa-item item mt10 bt1-ddd">
-            <div class="row lh30">
+          <li class="aa-item item pr mt10 bt1-ddd">
+            <label class="row lh30">
               <span class="dp-ib w70">活动地址</span>
-              <p class="col c-666"  @click="selectAddress()">
-                {{address.address}}
-              </p>
-            </div>
+              <input class="col c-666" type="text" v-model="address.address">
+              <a class="aa-address-btn" @click="selectAddress()">
+                <i class="icon ion-ios-location-outline"></i>
+              </a>
+            </label>
           </li>
           <li class="aa-item item mt10 bt1-ddd">
             <label class="row lh30">
@@ -88,9 +93,12 @@
           <button class="btn btn-clear c-fff fr" @click="confirmAddress()">确定</button>
         </div>
         <ul class="p10 lh25">
-          <li class="mb10">
-            <b>地址:</b>
-            <p class="c-main">{{positionResult.address}}</p>
+          <li class="pr mb10">
+            <a class="aa-location-btn" @click="location()">
+              <i class="icon ion-ios-location-outline"></i>
+            </a>
+            <b class="c-333">地址:</b>
+            <p class="mt10 c-666">{{positionResult.address}}</p>
           </li>
         </ul>
       </div>
@@ -149,6 +157,21 @@
       }
     },
     methods: {
+      location: function () {
+        this.$loading.show('定位中...');
+        this.$map.loadMap((map) => {
+          map.doLocation(
+                  (data) => {
+                    this.$toast.info('定位成功');
+                    this.$loading.hide();
+                  },
+                  (data) => {
+                    this.$toast.info('定位失败');
+                    this.$loading.hide();
+                  }
+          );
+        });
+      },
       addImg: function () {
         if (this.swiperSlides.length < 6) {
           this.$file.upload({
@@ -170,6 +193,14 @@
         } else {
           this.$toast.info('最多上传5张');
         }
+      },
+      deleteImg: function (index) {
+        this.$dialog.confirm({
+          content: '确定要删除本张图片吗？',
+          onOk: () => {
+            this.swiperSlides.splice(index, 1);
+          }
+        });
       },
       selectDate: function (type) {
         if (type == 'start') {

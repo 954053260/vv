@@ -1,6 +1,6 @@
 <template>
     <transition :name="transitionName">
-        <div class="confirm-position">
+        <div class="confirm-position" :style="{'margin-top': marginTop}">
             <div class="confirm">
                 <h3 class="confirm-title">{{title}}</h3>
                 <div class="confirm-content">
@@ -8,7 +8,7 @@
                 </div>
                 <div class="confirm-buttons">
                     <button class="btn mr10" @click="cancel()">{{cancelText}}</button>
-                    <button class="btn btn-39f" @click="ok()">{{okText}}</button>
+                    <button class="btn bc-main c-fff" @click="ok()">{{okText}}</button>
                 </div>
             </div>
         </div>
@@ -19,10 +19,13 @@
         created: function () {
 
         },
+        mounted: function () {
+            this.marginTop = -this.$el.offsetHeight/2 + 'px';
+        },
         props: ['transitionName','title','content','cancelText','okText'],
         data: function () {
             return {
-
+                marginTop: '-86px'
             }
         },
         methods: {

@@ -8,19 +8,19 @@
         <ul class="list">
           <li class="aa-item item">
             <div class="row lh30">
-              <span class="dp-ib pr10 w60 tr">举办者</span>
+              <span class="dp-ib pr10 w50 tr">举办者</span>
               <p class="col c-999">{{info.linkMan}}</p>
             </div>
           </li>
           <li class="aa-item item">
             <div class="row lh30">
-              <span class="dp-ib pr10 w60 tr">地点</span>
+              <span class="dp-ib pr10 w50 tr">地点</span>
               <p class="col c-999">{{info.address}}</p>
             </div>
           </li>
           <li class="aa-item item">
             <div class="row lh30">
-              <span class="dp-ib pr10 w60 tr">活动时间</span>
+              <span class="dp-ib pr10 w50 tr">时间</span>
               <p class="col c-999">
                 {{info.beginTime | date('MM月dd日 HH:mm')}} - {{info.endTime | date('MM月dd日 HH:mm')}}
               </p>
@@ -28,13 +28,13 @@
           </li>
           <li class="aa-item item">
             <div class="row lh30">
-              <span class="dp-ib pr10 w60 tr">类型</span>
+              <span class="dp-ib pr10 w50 tr">类型</span>
               <p class="col c-999">{{info.activityType.desc}}</p>
             </div>
           </li>
           <li class="aa-item item" style="border-bottom: none">
             <div class="row lh30">
-              <span class="dp-ib pr10 w60 tr">状态</span>
+              <span class="dp-ib pr10 w50 tr">状态</span>
               <p class="col c-999">{{info.activityStatus.desc}}</p>
               <!--<p v-if="info.status == 1" class="col c-red">审核中</p>-->
               <!--<p v-if="info.status == 2" class="col c-main">报名中</p>-->
