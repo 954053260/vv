@@ -86,7 +86,7 @@
               this.$map.gd.remove(item);
             });
 
-            this.markers.forEach((item, i) => {
+            this.markers.forEach((item) => {
               var marker = map.createMarker(item);
               AMap.event.addListener(marker, 'click', () => {
                 this.$store.commit('SET_MARKER', item.info);

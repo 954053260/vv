@@ -572,7 +572,7 @@ textarea::-moz-placeholder{
 .login-point:after{
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -4px;
     left: 20px;
     border-left: 5px solid rgba(255, 255, 255, 0);
     border-right: 5px solid rgba(255, 255, 255, 0);
@@ -581,7 +581,7 @@ textarea::-moz-placeholder{
 .login-point:before{
     content: '';
     position: absolute;
-    bottom: -5.5px;
+    bottom: -4.5px;
     left: 20.5px;
     border-left: 5px solid rgba(255,255,255,0);
     border-right: 5px solid rgba(255,255,255,0);

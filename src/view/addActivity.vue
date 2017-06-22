@@ -45,7 +45,7 @@
               <date-picker ref="end" v-model="endDate"></date-picker>
             </div>
           </li>
-          <li class="aa-item item pr mt10 bt1-ddd">
+          <li class="aa-item item pr mt10 bt1-ddd" style="padding-right: 50px;">
             <label class="row lh30">
               <span class="dp-ib w70">活动地址</span>
               <input class="col c-666" type="text" v-model="address.address">

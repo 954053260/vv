@@ -114,21 +114,16 @@ export default {
                     map.gd.addControl(casicControl);
 
                     map.createMarker = function (data) {
-
                         return new SimpleMarker({
                             map: map.gd,
                             animation: 'AMAP_ANIMATION_DROP',
                             iconStyle: {
-                                src: 'static/img/marker-icon.png',
+                                src: data.info.activityOrganizationType.value == 2 ? 'static/img/marker-icon.png' : 'static/img/marker-icon-1.png',
                                 style: {
                                     width:'35px',
                                     height:'35px'
                                 }
                             },
-                            //label: {
-                            //    content: data.title,
-                            //    offset: new AMap.Pixel(27, 25)
-                            //},
                             position: data.center.split(','),
                             clickable: true
                         });
