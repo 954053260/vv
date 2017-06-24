@@ -63,15 +63,20 @@ textarea::-moz-placeholder{
 }
 /* ---------------------single CSS----------------------- */
 .c-main {color: #2bd3b2;}
+.c-ff9800 {color: #ff9800}
+.c-green {color: green}
+.c-1e90ff {color: #1e90ff}
+.c-red {color: red;}
 .c-000 {color: #000;}
 .c-333 {color: #333;}
 .c-666 {color: #666;}
 .c-999 {color: #999;}
 .c-bbb {color: #bbb;}
 .c-fff {color: #fff;}
-.c-ff9800 {color: #ff9800}
-.c-red {color: red;}
 .bc-main {background: #2bd3b2;}
+.bc-ff9800 {background: #ff9800}
+.bc-green {background: green}
+.bc-1e90ff {background: #1e90ff}
 .bc-page {background: #f7fafc;}
 .bc-fff {background: #fff}
 .b1-ddd {border: 1px solid #ddd}
@@ -91,6 +96,7 @@ textarea::-moz-placeholder{
 .f13 {font-size: 13px}
 .f14 {font-size: 14px}
 .f16 {font-size: 16px}
+.f18 {font-size: 18px}
 .f20 {font-size: 20px}
 .fl {float: left;}
 .fr {float: right;}
@@ -941,12 +947,31 @@ textarea::-moz-placeholder{
 .pi-item{
     padding: 5px 10px;
 }
-.pi-item input{
+.pi-item input {
     border: none;
     line-height: 30px;
 }
+.pi-tags-header {
+    padding-bottom: 20px;
+    padding-top: 5px;
+    border-bottom: 1px solid #ddd;
+}
+.pi-tags-header > p > a {
+    margin-right: 10px;
+    font-size: 30px;
+    color: #999;
+}
+.pi-tag {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px;
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 14px;
+}
 /*activityDetail css*/
-.ad-content{
+.ad-content {
     position: absolute;
     width: 100%;
     top: 0;
