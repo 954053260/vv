@@ -209,6 +209,7 @@
           this.isEdit = false;
 
           if (data.code == 0) {
+            this.$store.state.user.info.user.avatar = this.avatar;
             this.$store.state.user.info.user.hobbies = this.hobbies;
             this.$toast.info('保持信息成功');
           } else {

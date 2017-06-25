@@ -37,7 +37,7 @@
       <div v-if="isUserMenu" class="home-user-menu">
         <div class="p20-10 bc-main">
           <router-link to="/app/personInfo">
-            <img src="static/img/user.jpg" class="dp-ib vm w40 h40 brp50">
+            <img :src="host + user.user.avatar" class="dp-ib vm w40 h40 brp50">
             <span class="dp-ib vm f20 c-fff">{{user.user.nickname}}</span>
           </router-link>
         </div>
@@ -76,30 +76,12 @@
     <div v-if="isChat" class="mask z-999" @click="toggleChat(false)"></div>
     <transition name="slide-right">
       <ul v-if="isChat" class="home-chat bc-page home-chat-list">
-        <li class="home-chat-item">
-          <router-link class="row" to="/app/chat">
-            <img src="static/img/user.jpg" width="40" height="40">
+        <li class="home-chat-item" v-for="item in friends">
+          <router-link class="row" :to="'/app/chat?friendUserNo=' + item.friendUserNo">
+            <img :src="host + item.friendAvatar" width="40" height="40">
             <div class="home-chat-content col">
-              <p class="name">小唐<span class="time">6/9</span></p>
-              <p class="text">请大家按时到达活动地点</p>
-            </div>
-          </router-link>
-        </li>
-        <li class="home-chat-item">
-          <router-link class="row" to="/app/chat">
-            <img src="static/img/user.jpg" width="40" height="40">
-            <div class="home-chat-content col">
-              <p class="name">小唐<span class="time">6/9</span></p>
-              <p class="text">请大家按时到达活动地点</p>
-            </div>
-          </router-link>
-        </li>
-        <li class="home-chat-item">
-          <router-link class="row" to="/app/chat">
-            <img src="static/img/user.jpg" width="40" height="40">
-            <div class="home-chat-content col">
-              <p class="name">小唐<span class="time">6/9</span></p>
-              <p class="text">请大家按时到达活动地点</p>
+              <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | date('MM/dd HH:mm')}}</span></p>
+              <p class="text">{{item.lastMessageContent}}</p>
             </div>
           </router-link>
         </li>
@@ -121,10 +103,12 @@
       return {
         isFilter: false,
         isUserMenu: false,
-        isChat: false
+        isChat: false,
+        friends: []
       }
     },
     computed: mapState({
+      host:  state => state.host,
       user:  state => state.user.info,
       activityOrganizationTypes:  state => state.map.activityOrganizationTypes,
       activityTypes:  state => state.map.activityTypes,
@@ -148,13 +132,11 @@
                   }
           );
         });
-
       },
       toggleFilter: function () {
         this.isFilter = !this.isFilter;
       },
       toggleUserMenu: function (bool) {
-
         if (this.user.token) {
 
           if (typeof bool === 'boolean') {
@@ -166,11 +148,34 @@
         } else {
           this.$router.push('/app/login');
         }
-
       },
       toggleChat: function (bool) {
+        if (!this.user.token) {
+          return  this.$router.push('/app/login');
+        }
+
         if (typeof bool === 'boolean') {
-          this.isChat = bool;
+
+          if (bool) {
+            this.$loading.show('获取朋友列表');
+            this.$http.get('/user/chat/friend/list', {data: {
+              token: this.user.token
+            }}).then((data) => {
+              this.$loading.hide();
+              if (data.code == 0) {
+                this.friends = data.datas.friends;
+                this.isChat = true;
+              } else {
+                this.$toast.info(data.msg);
+              }
+            }, function () {
+              this.$loading.hide();
+              this.$toast.info('获取朋友列表失败');
+            });
+          } else {
+            this.isChat = false;
+          }
+
         } else {
           this.isChat = !this.isChat;
         }

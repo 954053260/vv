@@ -7,8 +7,9 @@
       </label>
     </header>
     <ul class="pa-list">
-      <li v-for="item in activities" class="pa-item" @click="toDetail(item)">
+      <li v-for="item in activities" class="pa-item" @click="toDetail(item.activityNo)">
         <img v-if="item.images" :src="host + item.images[0]" width="120" height="80"/>
+        <img v-if="item.image" :src="host + item.image" width="120" height="80"/>
         <div>
           <p class="mt5 f16 font-hide">{{item.title}}</p>
           <p class="mt10 f14 c-999">{{item.beginTime | date('yyyy-MM-dd HH:mm')}}</p>
@@ -16,18 +17,28 @@
         </div>
       </li>
     </ul>
+    <infinite-loading :on-infinite="getActivity" ref="infiniteLoading">
+      <div slot="no-results">
+        <span class="c-999">加载完成</span>
+      </div>
+      <div slot="spinner">
+        <img width="30" height="30" src="static/img/hourglass.gif" class="dp-ib vm">
+        <span class="dp-ib vm">加载中...</span>
+      </div>
+    </infinite-loading>
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import InfiniteLoading from 'vue-infinite-loading';
   export default {
     name: 'personActivity',
     created: function () {
       this.type = this.$route.query.type;
-      this.getActivity();
     },
     data: function () {
       return {
         type: 0,
+        pageNumber: 1,
         activities: []
       }
     },
@@ -36,9 +47,9 @@
         return this.$store.state.host;
       }
     },
+    components: {InfiniteLoading},
     methods: {
       getActivity: function () {
-
         var url = '/user/activity/';
 
         switch (parseInt(this.type)) {
@@ -53,27 +64,31 @@
             break;
         }
 
-        this.$loading.show('获取活动...');
         this.$http.get(url, {data: {
           token: this.$store.state.user.info.token,
-          pageNumber: 1,
+          pageNumber: this.pageNumber,
           pageSize: 10
         }}).then((data) => {
-          this.$loading.hide();
           if (data.code == 0) {
             this.activities = this.activities.concat(data.datas.page.content);
+            this.pageNumber += 1;
+
+            if (data.datas.page.content.length < 10) {
+              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+            } else {
+              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+            }
+
           } else {
             this.$toast.info('获取活动失败');
           }
         }, () => {
           this.$toast.info('获取活动失败');
-          this.$loading.hide();
         });
+
       },
-      toDetail: function (mark) {
-        console.log('mark', mark)
-        this.$store.commit('SET_MARKER', mark);
-        this.$router.push('/app/activityDetail');
+      toDetail: function (activityNo) {
+        this.$router.push('/app/activityDetail?activityNo=' +  activityNo);
       }
     }
   }

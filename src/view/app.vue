@@ -68,7 +68,7 @@
           var params = {
             centerLongitude: data.position.lng,
             centerLatitude: data.position.lat,
-            distance: map.mapScale[map.gd.getZoom()]*3
+            distance: map.mapScale[map.gd.getZoom()]*5
           };
 
           var activityType = this.activityTypes[this.typeIndex].value;
@@ -89,7 +89,6 @@
             this.markers.forEach((item) => {
               var marker = map.createMarker(item);
               AMap.event.addListener(marker, 'click', () => {
-                this.$store.commit('SET_MARKER', item.info);
                 this.showInfo(item.info);
               });
               markers.push(marker);
@@ -143,7 +142,7 @@
         this.isInfo = false;
 
         if (this.$store.state.user.info.token) {
-          this.$router.push('/app/activityDetail');
+          this.$router.push('/app/activityDetail?activityNo=' +  this.info.activityNo);
         } else {
           this.$router.push('/app/login');
         }

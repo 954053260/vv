@@ -3,19 +3,19 @@
     <div class="chat">
       <ul ref="chatList" class="chat-list">
         <li v-for="item in chats" class="chat-item">
-          <div v-if="item.type == 1" class="row">
-            <img src="static/img/user.jpg" width="40" height="40">
+          <div v-if="item.toUserNo == token" class="row">
+            <img :src="host + item.fromAvatar" width="40" height="40">
             <div class="col">
-              <p class="name">{{item.name}}</p>
-              <p class="text">{{item.text}}</p>
+              <p class="name">{{item.fromNickName}}</p>
+              <p class="text">{{item.content}}</p>
             </div>
           </div>
           <div v-else class="row item-type">
             <div class="col">
-              <p class="name tr">{{item.name}}</p>
-              <p class="text">{{item.text}}</p>
+              <p class="name tr">{{item.fromNickName}}</p>
+              <p class="text">{{item.content}}</p>
             </div>
-            <img src="static/img/user.jpg" width="40" height="40">
+            <img :src="host + item.fromAvatar" width="40" height="40">
           </div>
         </li>
       </ul>
@@ -31,7 +31,26 @@
   export default {
     name:'app',
     created: function () {
-
+      this.$loading.show('获取消息列表...');
+      this.$http.get('/user/chat/message/list', {data: {
+        friendUserNo: this.$route.query.friendUserNo,
+        token: this.token,
+        pageNumber: 1,
+        pageSize: 10
+      }}).then((data) => {
+        this.$loading.hide();
+        if (data.code == 0) {
+          this.chats = this.chats.concat(data.datas.page.content);
+          this.chats.sort(function (a, b) {
+            return a.createTime > b.createTime;
+          });
+        } else {
+          this.$toast.info('获取消息列表失败');
+        }
+      }, function () {
+        this.$loading.hide();
+        this.$toast.info('获取消息列表失败');
+      })
     },
     mounted: function () {
 
@@ -42,73 +61,48 @@
     data: function () {
       return {
         msg: '',
-        chats: [
-          {
-            name: '老王',
-            text: 'Hello！',
-            type: 1
-          },
-          {
-            name: '老王',
-            text: '@all 出来水！',
-            type: 1
-          },
-          {
-            name: 'tony',
-            text: '你好！',
-            type: 2
-          },
-          {
-            name: '老赵',
-            text: '你是谁？',
-            type: 1
-          },
-          {
-            name: '老王',
-            text: 'Hello！',
-            type: 1
-          },
-          {
-            name: '老王',
-            text: '@all 出来水！',
-            type: 1
-          },
-          {
-            name: 'tony',
-            text: '大水比！',
-            type: 2
-          },
-          {
-            name: '老赵',
-            text: '大水比大水比大水比？',
-            type: 1
-          },
-          {
-            name: 'tony',
-            text: '大水比！',
-            type: 2
-          },
-          {
-            name: '老赵',
-            text: '大水比大水比大水比？',
-            type: 1
-          }
-        ]
+        chats: []
       }
     },
     computed: {
-
+      host: function () {
+        return this.$store.state.host;
+      },
+      user:  function () {
+        return this.$store.state.user.info;
+      },
+      token: function () {
+        return this.$store.state.user.info.token;
+      }
     },
     methods: {
       sendMsg: function (e) {
         if (e.keyCode == 13 && this.msg) {
-          this.chats.push({
-            name: 'tony',
-            text: this.msg,
-            type: 2
+          this.$http.post('/user/chat/message/send', {data: {
+            token: this.token,
+            toUserNo: this.$route.query.friendUserNo,
+            msgType: 1,
+            content: this.msg
+          }}).then((data) => {
+
+            if (data.code == 0) {
+              this.chats.push({
+                name: 'tony',
+                fromAvatar: this.user.user.avatar,
+                fromNickName: this.user.user.nickname,
+                content: this.msg,
+                createTime: new Date().getTime()
+              });
+              this.msg = '';
+              this.scrollBottom();
+            } else {
+              this.$toast.info('发送失败');
+            }
+
+          }, () => {
+            this.$toast.info('发送失败');
           });
-          this.msg = '';
-          this.scrollBottom();
+
         }
       },
       scrollBottom: function () {
@@ -117,6 +111,9 @@
           $chatList.scrollTop = $chatList.scrollHeight;
         }, 50);
       },
+      getChats: function () {
+
+      }
     }
   }
 </script>

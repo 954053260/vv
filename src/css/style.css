@@ -102,6 +102,7 @@ textarea::-moz-placeholder{
 .fr {float: right;}
 .h40{ height: 40px}
 .h100 {height: 100px}
+.hidden {overflow: hidden}
 .lh20 {line-height: 20px}
 .lh25 {line-height: 25px}
 .lh30 {line-height: 30px}
@@ -128,6 +129,7 @@ textarea::-moz-placeholder{
 .tr{text-align: right;}
 .vm{vertical-align: middle}
 .w40{width: 40px}
+.w45{width: 45px}
 .w50{width: 50px}
 .w60{width: 60px}
 .w70{width: 70px}
@@ -710,11 +712,11 @@ textarea::-moz-placeholder{
 }
 .home-chat-item .time{
     float: right;
-    font-size: 14px;
+    font-size: 12px;
     color: #999;
 }
 .home-chat-item .text{
-    font-size: 12px;
+    font-size: 14px;
     color: #999;
 }
 /*chat css*/
@@ -722,7 +724,7 @@ textarea::-moz-placeholder{
     position: absolute;
     left: 10px;
     top: 0;
-    bottom: 40px;
+    bottom: 50px;
     right: 10px;
     overflow: auto;
 }
@@ -783,7 +785,7 @@ textarea::-moz-placeholder{
 }
 .chat-input{
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 0;
     width: 100%;
     background: #fff;
@@ -922,6 +924,7 @@ textarea::-moz-placeholder{
     background: #fff;
     z-index: 1000;
 }
+
 /*personActivity css*/
 .pa-input-search{
     display: block;
@@ -975,7 +978,7 @@ textarea::-moz-placeholder{
     position: absolute;
     width: 100%;
     top: 0;
-    bottom: 60px;
+    bottom: 45px;
     overflow: auto;
 }
 .ad-title{
@@ -1035,15 +1038,14 @@ textarea::-moz-placeholder{
 }
 .ad-confirm-btn{
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    height: 40px;
-    line-height: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    line-height: 45px;
     text-align: center;
     color: #fff;
     background: #2bd3b2;
-    border-radius: 4px;
 }
 .pa-item{
     position: relative;

@@ -3,7 +3,7 @@
         <div>
             <div class="mask z-1000"></div>
             <div class="loading">
-                <img src="../../../assets/hourglass.gif">
+                <img src="static/img/hourglass.gif">
                 <span>{{text}}</span>
             </div>
         </div>

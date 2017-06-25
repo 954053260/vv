@@ -57,6 +57,7 @@ router.beforeEach((to, from, next) => {
         case '/app/activityDetail':
         case '/app/personActivity':
         case '/app/personInfo':
+        case '/app/chat':
             if (!store.state.user.info.token) {
                 router.push('/app/login');
             }
