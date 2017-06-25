@@ -60,13 +60,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chat.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chat.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/chat.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6347826">
-              <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+            <state vertical-scroll-proportion="-1.2954545">
+              <caret line="77" column="14" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
               <folding>
-                <element signature="e#3016#3171#0" expanded="false" />
+                <element signature="e#3120#3275#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -106,21 +106,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="home.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/home.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.4090909">
-              <caret line="77" column="65" selection-start-line="77" selection-start-column="65" selection-end-line="77" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.9391304">
+              <caret line="94" column="45" selection-start-line="94" selection-start-column="45" selection-end-line="94" selection-end-column="45" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
                 <element signature="n#transition#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="e#4933#5345#0" expanded="false" />
-                <element signature="e#5379#5428#0" expanded="false" />
-                <element signature="e#6645#6804#0" expanded="false" />
-                <element signature="e#6842#6924#0" expanded="false" />
-                <element signature="e#6962#7044#0" expanded="false" />
-                <element signature="e#7089#7184#0" expanded="false" />
-                <element signature="e#7213#7314#0" expanded="false" />
+                <element signature="e#4980#5392#0" expanded="false" />
+                <element signature="e#5426#5475#0" expanded="false" />
+                <element signature="e#6692#6851#0" expanded="false" />
+                <element signature="e#6889#6971#0" expanded="false" />
+                <element signature="e#7009#7091#0" expanded="false" />
+                <element signature="e#7136#7231#0" expanded="false" />
+                <element signature="e#7260#7361#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -129,8 +129,8 @@
       <file leaf-file-name="personActivity.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/personActivity.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="17.311111">
-              <caret line="35" column="40" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="40" />
+            <state vertical-scroll-proportion="-1.0888889">
+              <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="27" selection-end-column="23" />
               <folding>
                 <element signature="e#1711#1959#0" expanded="false" />
               </folding>
@@ -179,8 +179,8 @@
         <option value="$PROJECT_DIR$/src/view/activityDetail.vue" />
         <option value="$PROJECT_DIR$/src/filter.js" />
         <option value="$PROJECT_DIR$/src/css/style.css" />
-        <option value="$PROJECT_DIR$/src/view/home.vue" />
         <option value="$PROJECT_DIR$/src/view/chat.vue" />
+        <option value="$PROJECT_DIR$/src/view/home.vue" />
       </list>
     </option>
   </component>
@@ -872,16 +872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/personActivity.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="17.311111">
-          <caret line="35" column="40" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="40" />
-          <folding>
-            <element signature="e#1711#1959#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/filter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -925,24 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/home.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.4090909">
-          <caret line="77" column="65" selection-start-line="77" selection-start-column="65" selection-end-line="77" selection-end-column="65" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#transition#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#4933#5345#0" expanded="false" />
-            <element signature="e#5379#5428#0" expanded="false" />
-            <element signature="e#6645#6804#0" expanded="false" />
-            <element signature="e#6842#6924#0" expanded="false" />
-            <element signature="e#6962#7044#0" expanded="false" />
-            <element signature="e#7089#7184#0" expanded="false" />
-            <element signature="e#7213#7314#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/addActivity.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.8">
@@ -955,10 +927,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/chat.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6347826">
-          <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+        <state vertical-scroll-proportion="-1.2954545">
+          <caret line="77" column="14" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
           <folding>
-            <element signature="e#3016#3171#0" expanded="false" />
+            <element signature="e#3120#3275#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/personActivity.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0888889">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="27" selection-end-column="23" />
+          <folding>
+            <element signature="e#1711#1959#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/home.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9391304">
+          <caret line="94" column="45" selection-start-line="94" selection-start-column="45" selection-end-line="94" selection-end-column="45" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#transition#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#4980#5392#0" expanded="false" />
+            <element signature="e#5426#5475#0" expanded="false" />
+            <element signature="e#6692#6851#0" expanded="false" />
+            <element signature="e#6889#6971#0" expanded="false" />
+            <element signature="e#7009#7091#0" expanded="false" />
+            <element signature="e#7136#7231#0" expanded="false" />
+            <element signature="e#7260#7361#0" expanded="false" />
           </folding>
         </state>
       </provider>

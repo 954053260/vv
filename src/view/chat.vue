@@ -78,13 +78,14 @@
     methods: {
       sendMsg: function (e) {
         if (e.keyCode == 13 && this.msg) {
+          this.$loading.show('发送消息');
           this.$http.post('/user/chat/message/send', {data: {
             token: this.token,
             toUserNo: this.$route.query.friendUserNo,
             msgType: 1,
             content: this.msg
           }}).then((data) => {
-
+            this.$loading.hide();
             if (data.code == 0) {
               this.chats.push({
                 name: 'tony',
@@ -98,8 +99,8 @@
             } else {
               this.$toast.info('发送失败');
             }
-
           }, () => {
+            this.$loading.hide();
             this.$toast.info('发送失败');
           });
 

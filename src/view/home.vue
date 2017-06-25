@@ -75,17 +75,19 @@
     </transition>
     <div v-if="isChat" class="mask z-999" @click="toggleChat(false)"></div>
     <transition name="slide-right">
-      <ul v-if="isChat" class="home-chat bc-page home-chat-list">
-        <li class="home-chat-item" v-for="item in friends">
-          <router-link class="row" :to="'/app/chat?friendUserNo=' + item.friendUserNo">
-            <img :src="host + item.friendAvatar" width="40" height="40">
-            <div class="home-chat-content col">
-              <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | date('MM/dd HH:mm')}}</span></p>
-              <p class="text">{{item.lastMessageContent}}</p>
-            </div>
-          </router-link>
-        </li>
-      </ul>
+      <div v-if="isChat" class="home-chat bc-page home-chat-list">
+        <ul>
+          <li class="home-chat-item" v-for="item in friends">
+            <router-link class="row" :to="'/app/chat?friendUserNo=' + item.friendUserNo">
+              <img :src="host + item.friendAvatar" width="40" height="40">
+              <div class="home-chat-content col">
+                <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | date('MM/dd HH:mm')}}</span></p>
+                <p class="text">{{item.lastMessageContent}}</p>
+              </div>
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </transition>
   </div>
 </template>
