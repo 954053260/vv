@@ -12,6 +12,7 @@ import personInfo from './view/personInfo.vue'
 import personActivity from './view/personActivity.vue'
 import addActivity from './view/addActivity.vue'
 import activityDetail from './view/activityDetail.vue'
+import evaluate from './view/evaluate.vue'
 import about from './view/about.vue'
 Vue.use(VueRouter);
 
@@ -28,6 +29,7 @@ const router = new VueRouter({
                 { path: 'personActivity', component: personActivity, name: '活动'},
                 { path: 'addActivity', component: addActivity, name: '发布活动'},
                 { path: 'activityDetail', component: activityDetail, name: '活动详情'},
+                { path: 'evaluate', component: evaluate, name: '评价'},
                 { path: 'about', component: about, name: '关于'}
             ]
         }

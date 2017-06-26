@@ -720,12 +720,12 @@ textarea::-moz-placeholder{
     color: #999;
 }
 /*chat css*/
-.chat-list{
-    position: absolute;
-    left: 10px;
-    top: 0;
-    bottom: 50px;
-    right: 10px;
+.chat {
+    padding-bottom: 50px;
+}
+.chat-list {
+    padding-left: 10px;
+    padding-right: 10px;
     overflow: auto;
 }
 .chat-item{
@@ -1052,6 +1052,7 @@ textarea::-moz-placeholder{
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px 10px 10px 140px;
+    height: 80px;
     background: #fff;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -1117,4 +1118,15 @@ textarea::-moz-placeholder{
 /*---------------------outer-components CSS-----------------------*/
 .swiper-pagination-bullet-active{
     background: #2bd3b2 !important;
+}
+.pull-down-header {
+    background-color: inherit !important;
+    border-bottom: 1px solid #ddd;
+}
+.pull-down-content--icon.pull-down-refresh {
+    background: url("/static/img/hourglass.gif") !important;
+    background-size: 20px 20px !important;
+}
+.pull-down-content{
+    color: #666 !important;
 }

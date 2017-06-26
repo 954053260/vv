@@ -11,7 +11,13 @@
         <img v-if="item.images" :src="host + item.images[0]" width="120" height="80"/>
         <img v-if="item.image" :src="host + item.image" width="120" height="80"/>
         <div>
-          <p class="mt5 f16 font-hide">{{item.title}}</p>
+          <div class="row mt5 f16">
+            <p class="col font-hide">{{item.title}}</p>
+            <a v-if="type == 1" @click.stop="toEvaluate(item)"
+                         class="ml10 bc-main c-fff f12" style="padding: 2px 5px;">
+              去评价
+            </a>
+          </div>
           <p class="mt10 f14 c-999">{{item.beginTime | date('yyyy-MM-dd HH:mm')}}</p>
           <p class="mt5 f14 c-999 font-hide">{{item.address}}</p>
         </div>
@@ -89,6 +95,9 @@
       },
       toDetail: function (activityNo) {
         this.$router.push('/app/activityDetail?activityNo=' +  activityNo);
+      },
+      toEvaluate: function (item) {
+        this.$router.push('/app/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
       }
     }
   }
