@@ -90,7 +90,8 @@ textarea::-moz-placeholder{
 .bb-none {border-bottom: none}
 .bl-none {border-left: none}
 .dp-n {display: none;}
-.dp-ib {display: inline-block}
+.dp-b {display: block;}
+.dp-ib {display: inline-block;}
 .brp50 {border-radius: 50%}
 .f12 {font-size: 12px}
 .f13 {font-size: 13px}
@@ -98,6 +99,7 @@ textarea::-moz-placeholder{
 .f16 {font-size: 16px}
 .f18 {font-size: 18px}
 .f20 {font-size: 20px}
+.f30 {font-size: 30px}
 .fl {float: left;}
 .fr {float: right;}
 .h40{ height: 40px}

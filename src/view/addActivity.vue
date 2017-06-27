@@ -181,13 +181,13 @@
                       .then((data) => {
                         this.$loading.hide();
                         this.swiperSlides = this.swiperSlides.concat(data.datas.uris);
-                      }, (err) => {
+                      }, () => {
                         this.$loading.hide();
                         this.$toast.info('上传失败');
                       })
             },
-            fail: (err) => {
-              this.$toast.info(err.msg);
+            fail: () => {
+              this.$toast.info('上传失败');
             }
           });
         } else {

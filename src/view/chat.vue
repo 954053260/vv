@@ -56,16 +56,14 @@
           if (data.code == 0) {
              var last = this.chats[this.chats.length - 1];
             data.datas.page.content.forEach((item) => {
-              if (!last || item.createTime > last.createTime) {
+              if (!last || new Date(item.createTime) > new Date(last.createTime)) {
                 this.chats.push(item);
               }
             });
 
             this.chats.sort(function (a, b) {
-              return a.createTime > b.createTime;
+              return new Date(a.createTime) -  new Date(b.createTime);
             });
-
-            this.scrollBottom();
 
           } else {
             this.$toast.info('获取消息列表失败');
@@ -118,16 +116,15 @@
         }}).then((data) => {
           if (data.code == 0) {
             success();
-
             var last = this.chats[this.chats.length - 1];
             data.datas.page.content.forEach((item) => {
-              if (!last || item.createTime > last.createTime) {
+              if (!last || new Date(item.createTime) > new Date(last.createTime)) {
                 this.chats.push(item);
               }
             });
 
             this.chats.sort(function (a, b) {
-              return a.createTime > b.createTime;
+              return new Date(a.createTime) -  new Date(b.createTime);
             });
 
             if (data.datas.page.content.length > 10) {
@@ -160,6 +157,7 @@
             this.$loading.hide();
             if (data.code == 0) {
               this.msg = '';
+              this.scrollBottom();
             } else {
               this.$toast.info('发送失败');
             }
