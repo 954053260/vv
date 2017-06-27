@@ -118,7 +118,7 @@ export default {
                             map: map.gd,
                             animation: 'AMAP_ANIMATION_DROP',
                             iconStyle: {
-                                src: data.info.activityOrganizationType.value == 2 ? 'static/img/marker-icon.png' : 'static/img/marker-icon-1.png',
+                                src: data.info.activityOrganizationType && data.info.activityOrganizationType.value == 2 ? 'static/img/marker-icon.png' : 'static/img/marker-icon-1.png',
                                 style: {
                                     width:'35px',
                                     height:'35px'

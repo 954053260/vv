@@ -42,7 +42,39 @@
       });
     },
     mounted: function () {
+      this.interval = setInterval(() => {
+        this.$http.get('/user/chat/message/list', {data: {
+          friendUserNo: this.$route.query.friendUserNo,
+          token: this.token,
+          pageNumber: 1,
+          pageSize: 10
+        }}).then((data) => {
+          if (data.code == 0) {
 
+            data.datas.page.content.forEach((item) => {
+              if (!this.chats[0] || item.createTime > this.chats[0].createTime) {
+                this.chats.unshift(item);
+              }
+            });
+
+            this.chats.sort(function (a, b) {
+              return a.createTime < b.createTime;
+            });
+
+            if (data.datas.page.content.length < 10) {
+              this.hasData = false;
+            }
+
+          } else {
+            this.$toast.info('获取消息列表失败');
+          }
+        }, function () {
+          this.$toast.info('获取消息列表失败');
+        });
+      }, 2000);
+    },
+    destroyed: function () {
+      clearInterval(this.interval);
     },
     components: {vuePullRefresh},
     data: function () {
@@ -81,9 +113,15 @@
         }}).then((data) => {
           if (data.code == 0) {
             success();
-            this.chats = this.chats.concat(data.datas.page.content);
+
+            data.datas.page.content.forEach((item) => {
+              if (!this.chats[0] || item.createTime > this.chats[0].createTime) {
+                this.chats.unshift(item);
+              }
+            });
+
             this.chats.sort(function (a, b) {
-              return a.createTime > b.createTime;
+              return a.createTime < b.createTime;
             });
 
             if (data.datas.page.content.length < 10) {

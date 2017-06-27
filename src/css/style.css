@@ -784,7 +784,7 @@ textarea::-moz-placeholder{
     border-right: none;
 }
 .chat-input{
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     left: 0;
     width: 100%;

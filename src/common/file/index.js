@@ -37,7 +37,7 @@ export default {
                         return;
                     }
 
-                    files.forEach(function(file) {
+                    files.forEach(function (file) {
 
                         if (!/\/(?:jpeg|png|gif)/i.test(file.type)) {
                             return;
