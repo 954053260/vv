@@ -127,8 +127,7 @@
       dateRange:  state => state.map.dateRange,
       dateIndex:  state => state.map.dateIndex,
       typeIndex:  state => state.map.typeIndex,
-      organizationTypesIndex:  state => state.map.organizationTypesIndex,
-      marker: state => state.map.marker
+      organizationTypesIndex:  state => state.map.organizationTypesIndex
     }),
     methods: {
       showInfo: function (data) {
@@ -153,7 +152,7 @@
           this.$loading.show('收藏...');
           this.$http.post('/user/activity/collect', {data: {
             token: this.$store.state.user.info.token,
-            activityNo: this.marker.activityNo
+            activityNo: this.info.activityNo
           }}).then((data) => {
             this.$loading.hide();
             if (data.code == 0) {

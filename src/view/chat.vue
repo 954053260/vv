@@ -42,36 +42,41 @@
       });
     },
     mounted: function () {
+      var isLoad = false;
+
       this.interval = setInterval(() => {
+        if (isLoad) return;
+        isLoad = true;
         this.$http.get('/user/chat/message/list', {data: {
           friendUserNo: this.$route.query.friendUserNo,
           token: this.token,
           pageNumber: 1,
-          pageSize: 10
+          pageSize: 20
         }}).then((data) => {
           if (data.code == 0) {
-
+             var last = this.chats[this.chats.length - 1];
             data.datas.page.content.forEach((item) => {
-              if (!this.chats[0] || item.createTime > this.chats[0].createTime) {
-                this.chats.unshift(item);
+              if (!last || item.createTime > last.createTime) {
+                this.chats.push(item);
               }
             });
 
             this.chats.sort(function (a, b) {
-              return a.createTime < b.createTime;
+              return a.createTime > b.createTime;
             });
 
-            if (data.datas.page.content.length < 10) {
-              this.hasData = false;
-            }
+            this.scrollBottom();
 
           } else {
             this.$toast.info('获取消息列表失败');
           }
+
+          isLoad = false;
         }, function () {
+          isLoad = false;
           this.$toast.info('获取消息列表失败');
         });
-      }, 2000);
+      }, 1000);
     },
     destroyed: function () {
       clearInterval(this.interval);
@@ -114,17 +119,18 @@
           if (data.code == 0) {
             success();
 
+            var last = this.chats[this.chats.length - 1];
             data.datas.page.content.forEach((item) => {
-              if (!this.chats[0] || item.createTime > this.chats[0].createTime) {
-                this.chats.unshift(item);
+              if (!last || item.createTime > last.createTime) {
+                this.chats.push(item);
               }
             });
 
             this.chats.sort(function (a, b) {
-              return a.createTime < b.createTime;
+              return a.createTime > b.createTime;
             });
 
-            if (data.datas.page.content.length < 10) {
+            if (data.datas.page.content.length > 10) {
               this.hasData = false;
             }
 
@@ -153,15 +159,7 @@
           }}).then((data) => {
             this.$loading.hide();
             if (data.code == 0) {
-              this.chats.push({
-                name: 'tony',
-                fromAvatar: this.user.user.avatar,
-                fromNickName: this.user.user.nickname,
-                content: this.msg,
-                createTime: new Date().getTime()
-              });
               this.msg = '';
-              this.scrollBottom();
             } else {
               this.$toast.info('发送失败');
             }
@@ -176,9 +174,6 @@
           var $chatList = this.$refs.chatList;
           $chatList.scrollTop = $chatList.scrollHeight;
         }, 50);
-      },
-      getChats: function () {
-
       }
     }
   }
