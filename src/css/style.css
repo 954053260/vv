@@ -113,10 +113,12 @@ textarea::-moz-placeholder{
 .mt0 {margin-top: 0;}
 .mt5 {margin-top: 5px;}
 .mt10 {margin-top: 10px;}
+.mt20 {margin-top: 20px;}
 .mr10 {margin-right: 10px;}
 .mr30 {margin-right: 30px;}
 .mb10{margin-bottom: 10px;}
 .ml10{margin-left: 10px;}
+.p5 {padding: 5px;}
 .p10 {padding: 10px;}
 .p20 {padding: 20px}
 .p0-20 {padding: 0 20px;}

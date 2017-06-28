@@ -13,6 +13,7 @@ import personActivity from './view/personActivity.vue'
 import addActivity from './view/addActivity.vue'
 import activityDetail from './view/activityDetail.vue'
 import evaluate from './view/evaluate.vue'
+import authentication from './view/authentication.vue'
 import about from './view/about.vue'
 Vue.use(VueRouter);
 
@@ -30,6 +31,7 @@ const router = new VueRouter({
                 { path: 'addActivity', component: addActivity, name: '发布活动'},
                 { path: 'activityDetail', component: activityDetail, name: '活动详情'},
                 { path: 'evaluate', component: evaluate, name: '评价'},
+                { path: 'authentication', component: authentication, name: '实名认证'},
                 { path: 'about', component: about, name: '关于'}
             ]
         }
@@ -60,6 +62,8 @@ router.beforeEach((to, from, next) => {
         case '/app/personActivity':
         case '/app/personInfo':
         case '/app/chat':
+        case '/app/evaluate':
+        case '/app/authentication':
             if (!store.state.user.info.token) {
                 router.push('/app/login');
             }

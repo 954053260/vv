@@ -1,0 +1,80 @@
+<template>
+  <div id="authentication" class="container">
+    <p class="m20 tc">实名认证</p>
+    <div class="m20">
+      <div class="row tc f14">
+        <label class="col">
+          <input type="radio" name="authenticationType" value="1" v-model="type"/>
+          <span>个人</span>
+        </label>
+        <label class="col">
+          <input type="radio" name="authenticationType" value="2" v-model="type"/>
+          <span>群体</span>
+        </label>
+      </div>
+      <div>
+        <label class="dp-b mt20 p5 b1-ddd">
+          <input type="text" placeholder="姓名" v-model="realname" class="w b-none"/>
+        </label>
+        <label class="dp-b mt10 p5 b1-ddd pr">
+          <input type="number" placeholder="身份证号码" v-model="idCardNo" class="w b-none"
+                 @blur="validateCardNo"
+                 @focus="isCardNo = true"/>
+          <p v-show="!isCardNo" class="login-point" style="left: 30px">请输入正确的身份证！</p>
+        </label>
+      </div>
+    </div>
+    <a class="dp-b m20 h40 lh40 tc bc-main c-fff" @click="submit">去认证</a>
+  </div>
+</template>
+<script type="text/ecmascript-6">
+  export default {
+    name: 'authentication',
+    created: function () {
+
+    },
+    data: function () {
+      return {
+        type: 1,
+        isCardNo: true,
+        realname: '',
+        idCardNo: ''
+      }
+    },
+    computed: {},
+    methods: {
+      validateCardNo: function () {
+        if (!/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/g.test(this.idCardNo)) {
+          this.isCardNo = false;
+        } else {
+          this.isCardNo = true;
+        }
+      },
+      submit: function () {
+        this.$loading.show('认证中...');
+        this.$http.post('/user/realname/approve', {
+          data: {
+            token: this.$store.state.user.info.token,
+            realname: this.realname,
+            idCardNo: this.idCardNo
+          }
+        }).then((data) => {
+          this.$loading.hide();
+          if (data.code == 0) {
+            this.$toast.info('认证成功');
+            this.$router.back();
+          } else {
+            this.$toast.info('认证失败');
+          }
+
+        }, () => {
+          this.$toast.info('认证失败');
+          this.$loading.hide();
+        });
+      }
+    }
+  }
+</script>
+<style scoped>
+
+</style>

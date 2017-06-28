@@ -40,9 +40,18 @@
               <label class="row lh30">
                 <span class="dp-ib w70 tr">兴趣爱好：</span>
                 <a class="col c-666" @click="showTags()">
-                  <span v-if="hobbies.length == 0" class="c-999">{{'添加兴趣爱好，逗号隔开'}}</span>
+                  <span v-if="hobbies.length == 0" class="c-999">添加兴趣爱好，逗号隔开</span>
                   <span v-for="(item, index) in hobbies"><span v-if="index">，</span>{{item.tagName}}</span>
                 </a>
+              </label>
+            </li>
+            <li class="pi-item item">
+              <label class="row lh30">
+                <span class="dp-ib w70 tr">实名认证：</span>
+                <router-link v-if="user.user.idCardNo" to="/app/authentication" class="col">
+                  <span class="c-999">未认证</span>
+                </router-link>
+                <span  else class="col c-666">{{user.user.realname}}</span>
               </label>
             </li>
           </ul>
@@ -76,12 +85,12 @@
   export default {
     name: 'personInfo',
     created: function () {
-      this.avatar = this.$store.state.user.info.user.avatar;
-      this.nickname = this.$store.state.user.info.user.nickname;
-      this.gender = this.$store.state.user.info.user.gender;
-      this.mobile = this.$store.state.user.info.user.mobile;
-      this.signature = this.$store.state.user.info.user.signature;
-      this.hobbies = this.$store.state.user.info.user.hobbies;
+      this.avatar = this.user.user.avatar;
+      this.nickname = this.user.user.nickname;
+      this.gender = this.user.user.gender;
+      this.mobile = this.user.user.mobile;
+      this.signature = this.user.user.signature;
+      this.hobbies = this.user.user.hobbies;
     },
     data: function () {
       return {
@@ -100,6 +109,9 @@
     computed: {
       host: function () {
         return this.$store.state.host;
+      },
+      user: function () {
+        return this.$store.state.user.info;
       }
     },
     methods: {

@@ -22,7 +22,7 @@
         </ul>
         <div class="chat-input">
           <label>
-            <input @keydown="sendMsg($event)" v-model="msg">
+            <input type="text" @keydown="sendMsg($event)" v-model="msg">
           </label>
         </div>
       </div>
