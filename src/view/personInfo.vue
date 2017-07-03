@@ -2,69 +2,53 @@
   <div id="personInfo" class="container bc-page">
     <transition name="fade">
       <div v-show="tab == 1">
-        <div class="ad-content">
-          <header class="p20-10 tc bc-main">
-            <img :src="host + avatar" class="db-ib vm w100 h100 brp50" @click="uploadAvatar">
-          </header>
-          <ul class="list">
-            <li class="pi-item item mt10">
-              <label class="row lh30">
-                <span class="dp-ib w70 tr">昵称：</span>
-                <span v-show="!isEdit" class="col c-666">{{nickname}}</span>
-                <input v-show="isEdit" class="col c-666" type="text" placeholder="请输入昵称" v-model="nickname">
+        <header class="pi-header">
+          <img :src="host + avatar" @click="uploadAvatar">
+        </header>
+        <div class="bc-fff">
+          <ul class="pi-list">
+            <li class="pi-item row">
+              <span>昵称</span>
+              <label class="col">
+                <input class="c-999" type="text" placeholder="请输入昵称" v-model="nickname">
               </label>
             </li>
-            <li class="pi-item item">
-              <label class="row lh30">
-                <span class="dp-ib w70 tr">性别：</span>
-                <span class="col" :class="{'c-666': gender, 'c-999': !gender}">{{gender || '身份认证确定性别'}}</span>
-              </label>
+            <li class="pi-item row">
+              <span>性别</span>
+              <span class="col c-999 tr">{{gender || '身份认证确定性别'}}</span>
             </li>
-            <li class="pi-item item pr">
-              <label class="row lh30">
-                <span class="dp-ib w70 tr">手机号：</span>
-                <span v-show="!isEdit" class="col c-666">{{mobile}}</span>
-                <input v-show="isEdit" class="col c-666" type="text" placeholder="请输入手机号" v-model="mobile"
+            <li class="pi-item row">
+              <span>手机号</span>
+              <label class="col pr">
+                <input class="c-999" type="text" placeholder="请输入手机号" v-model="mobile"
                        @focus="isPhone = true" @blur="validatePhone()">
-                <p v-show="!isPhone" class="login-point" style="left: 70px;">请输入正确的手机号！</p>
+                <p v-show="!isPhone" class="pi-point">请输入正确的手机号！</p>
               </label>
             </li>
-            <li class="pi-item item mt10">
-              <label class="row lh30">
-                <span class="dp-ib w70 tr">个性签名：</span>
-                <span v-show="!isEdit" class="col c-666">{{signature || '添加个性签名'}}</span>
-                <input v-show="isEdit" class="col c-666" type="text" placeholder="添加个性签名" v-model="signature">
+            <li class="pi-item pi-item-2 row">
+              <span>个性签名</span>
+              <label class="col">
+                <textarea class="c-999" :class="{'tr': !signature}" type="text" placeholder="添加个性签名" v-model="signature"></textarea>
               </label>
             </li>
-            <li class="pi-item item">
-              <label class="row lh30">
-                <span class="dp-ib w70 tr">兴趣爱好：</span>
-                <a class="col c-666" @click="showTags()">
-                  <span v-if="hobbies.length == 0" class="c-999">添加兴趣爱好，逗号隔开</span>
-                  <span v-for="(item, index) in hobbies"><span v-if="index">，</span>{{item.tagName}}</span>
-                </a>
-              </label>
-            </li>
-            <li class="pi-item item">
-              <label class="row lh30">
-                <span class="dp-ib w70 tr">实名认证：</span>
-                <router-link v-if="user.user.idCardNo" to="/app/authentication" class="col">
-                  <span class="c-999">未认证</span>
-                </router-link>
-                <span  else class="col c-666">{{user.user.realname}}</span>
-              </label>
+            <li class="pi-item row">
+              <span>兴趣爱好</span>
+              <a class="col c-999" :class="{'tr': hobbies.length == 0}" @click="showTags()">
+                <span v-if="hobbies.length == 0">添加兴趣爱好，逗号隔开</span>
+                <span v-for="(item, index) in hobbies"><span v-if="index">，</span>{{item.tagName}}</span>
+              </a>
             </li>
           </ul>
         </div>
-        <a class="ad-confirm-btn" @click="saveInfo()">{{isEdit ?  '保存' : '编辑'}}</a>
+        <a class="pi-btn" @click="saveInfo">保存</a>
       </div>
     </transition>
     <transition name="fade">
-    <div v-show="tab == 2" class="bc-fff">
+    <div v-show="tab == 2" class="f16 bc-fff">
         <div class="pi-tags-header">
           <p class="tr"><a @click="hideTags"><i class="icon ion-ios-close-outline"></i></a></p>
           <p class="f18 tc c-main">你对什么感兴趣？</p>
-          <p class="tc c-999">选择你想要看到的内容吧</p>
+          <p class="f14 tc c-999">选择你想要看到的内容吧</p>
         </div>
         <div class="row row-center" v-for="(item, outIndex) in tags"
              :class="{'c-main': outIndex%1 == 0, 'c-ff9800': outIndex%2 == 0, 'c-green': outIndex%3 == 0, 'c-1e90ff': outIndex%4 == 0}">
@@ -95,7 +79,6 @@
     data: function () {
       return {
         isPhone: true,
-        isEdit: false,
         tab: 1,
         tags: [],
         avatar: '',
@@ -123,10 +106,6 @@
         }
       },
       uploadAvatar: function () {
-        if (!this.isEdit) {
-          return;
-        }
-
         this.$file.upload({
           success: (data) => {
             this.$loading.show('上传图片');
@@ -145,9 +124,6 @@
         });
       },
       showTags: function () {
-        if (!this.isEdit) {
-          return;
-        }
 
         if (this.tags.length > 0) {
           return this.tab = 2;
@@ -156,6 +132,7 @@
         this.$loading.show('获取标签...');
         this.$http.get('/common/tags', {}).then((data) => {
           this.$loading.hide();
+
           if (data.code == 0) {
             data.datas.datas.forEach((item) => {
               item.tags.forEach((tag) => {
@@ -166,13 +143,12 @@
                 });
               });
             });
-
             this.tags = data.datas.datas;
-
             this.tab = 2;
           } else {
             this.$toast.info('获取标签失败');
           }
+
         }, () => {
           this.$toast.info('获取标签失败');
           this.$loading.hide();
@@ -198,11 +174,6 @@
       },
       saveInfo: function () {
         var hobbies = [];
-
-        if (!this.isEdit) {
-          return this.isEdit = true;
-        }
-
         this.hobbies.forEach(function (item) {
           hobbies.push(item.id);
         });
@@ -218,8 +189,6 @@
         }).
         then((data) => {
           this.$loading.hide();
-          this.isEdit = false;
-
           if (data.code == 0) {
             this.$store.state.user.info.user.avatar = this.avatar;
             this.$store.state.user.info.user.hobbies = this.hobbies;
@@ -230,7 +199,6 @@
 
         }, () => {
           this.$loading.hide();
-          this.isEdit = false;
           this.$toast.info('保持信息失败');
         });
       }

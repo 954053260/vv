@@ -4,48 +4,45 @@
     <div v-if="isInfo" class="mask-no z-999" @click="hideInfo()"></div>
     <transition name="slide-up">
       <div v-if="isInfo" class="app-info-window">
-        <h2>{{info.title}}</h2>
-        <ul class="list">
-          <li class="aa-item item">
-            <div class="row lh30">
-              <span class="dp-ib pr10 w50 tr">举办者</span>
-              <p class="col c-999">{{info.linkMan}}</p>
+        <h2><span></span><span>{{info.title}}</span></h2>
+        <ul class="app-list">
+          <li class="app-item">
+            <div class="row">
+              <p class="w60">举办者</p>
+              <p class="col c-666">{{info.linkMan}}</p>
             </div>
           </li>
-          <li class="aa-item item">
-            <div class="row lh30">
-              <span class="dp-ib pr10 w50 tr">地点</span>
-              <p class="col c-999">{{info.address}}</p>
+          <li class="app-item app-item-auto">
+            <div class="row">
+              <p class="w60">地点</p>
+              <p class="col c-666">{{info.address}}</p>
             </div>
           </li>
-          <li class="aa-item item">
-            <div class="row lh30">
-              <span class="dp-ib pr10 w50 tr">时间</span>
-              <p class="col c-999">
-                {{info.beginTime | date('MM月dd日 HH:mm')}} - {{info.endTime | date('MM月dd日 HH:mm')}}
-              </p>
+          <li class="app-item">
+            <div class="row">
+              <p class="w60">时间</p>
+              <p class="col c-666">{{info.beginTime | date('MM月dd日 HH:mm')}} - {{info.endTime | date('MM月dd日 HH:mm')}}</p>
             </div>
           </li>
-          <li class="aa-item item">
-            <div class="row lh30">
-              <span class="dp-ib pr10 w50 tr">类型</span>
-              <p class="col c-999">{{info.activityType.desc}}</p>
-            </div>
-          </li>
-          <li class="aa-item item" style="border-bottom: none">
-            <div class="row lh30">
-              <span class="dp-ib pr10 w50 tr">状态</span>
-              <p class="col c-999">{{info.activityStatus.desc}}</p>
-              <!--<p v-if="info.status == 1" class="col c-red">审核中</p>-->
-              <!--<p v-if="info.status == 2" class="col c-main">报名中</p>-->
-              <!--<p v-if="info.status == 3" class="col c-ff9800">进行中</p>-->
-              <!--<p v-if="info.status == 4" class="col c-999">已截止</p>-->
+          <li class="app-item">
+            <div class="row">
+              <div class="row col">
+                <p class="w60">类型</p>
+                <p class="col c-666">{{info.activityType.desc}}</p>
+              </div>
+              <div class="row col">
+                <p class="w60">状态</p>
+                <p class="col c-666">{{info.activityStatus.desc}}</p>
+              </div>
             </div>
           </li>
         </ul>
         <div class="app-info-window-buttons row">
-          <a class="col br1-ddd" @click="collectActivity()">收藏</a>
-          <a class="col" @click="toDetail()">详情</a>
+          <a class="col br1-eee" @click="collectActivity()">
+            <img class="pr dp-ib vm w30" src="static/icon/icon-star.png" style="top: -0.053334rem">
+            <span class="dp-ib vm">收藏</span>
+          </a>
+          <a class="col bc-main c-fff" @click="toDetail()">详情</a>
         </div>
       </div>
     </transition>

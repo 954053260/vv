@@ -1,6 +1,6 @@
 <template>
   <div id="activityDetail" class="container bc-page">
-    <div class="ad-content">
+    <div v-if="activity" class="ad-content">
       <header v-if="activity.images" class="aa-header bb1-ddd">
         <swiper :options="swiperOption">
           <swiper-slide v-for="slide in activity.images">
@@ -10,7 +10,7 @@
       </header>
       <div class="ad-title bc-fff">
         <div class="ad-title-tags">
-          <span>{{activity.activityType && activity.activityType.desc}}</span>
+          <span>{{activity.activityType.desc}}</span>
         </div>
         <div class="row">
           <div class="col ad-title-left">
@@ -57,7 +57,10 @@
     </div>
     <div class="ad-confirm-btn row">
       <a class="w45 tc f20 bc-fff c-666 bt1-ddd" @click="toChat()"><i class="pr icon ion-chatbubble-working" style="top: -2px"></i></a>
-      <a class="col"  @click="doActivity()">{{activity.isPartaked ? '取消参加' : '我要参加'}}</a>
+      <a v-if="activity.activityStatus.value == '106'" class="col bc-ccc">活动已开始</a>
+      <a v-if="activity.activityStatus.value == '107'" class="col bc-ccc">活动已结束</a>
+      <a v-if="activity.activityStatus.value != '106' && activity.activityStatus.value != '107' && activity.isPartaked" class="col" @click="cancelActivity()">取消参加</a>
+      <a v-if="activity.activityStatus.value != '105' && activity.activityStatus.value != '106' && activity.activityStatus.value != '107' && !activity.isPartaked" class="col" @click="submitActivity()">我要参加</a>
     </div>
   </div>
 </template>
@@ -96,7 +99,7 @@
           mousewheelControl : true,
           observeParents:true,
         },
-        activity: {}
+        activity: null
       }
     },
     computed: {
@@ -125,25 +128,41 @@
           this.$loading.hide();
         });
       },
-      doActivity: function () {
-        var isPartaked = this.activity.isPartaked
-        var url = isPartaked ? '/user/activity/partake/cancel' : '/user/activity/takePartIn';
-
-        this.$loading.show(isPartaked ? '取消...' : '参与...');
-        this.$http.post(url, {data: {
+      cancelActivity: function () {
+        this.$loading.show( '取消...');
+        this.$http.post('/user/activity/partake/cancel', {data: {
           token: this.$store.state.user.info.token,
           activityNo: this.$route.query.activityNo
         }}).then((data) => {
           this.$loading.hide();
           if (data.code == 0) {
-            this.$toast.info(isPartaked ? '取消成功' : '参与成功');
-            this.activity.isPartaked != isPartaked;
+            this.$toast.info('取消成功');
+            this.activity.isPartaked != this.activity.isPartaked;
             this.$router.back();
           } else {
-            this.$toast.info(isPartaked ? '取消失败' : '参与失败');
+            this.$toast.info('取消失败');
           }
         }, () => {
-          this.$toast.info(isPartaked ? '取消失败' : '参与失败');
+          this.$toast.info('取消失败');
+          this.$loading.hide();
+        });
+      },
+      submitActivity: function () {
+        this.$loading.show('参与...');
+        this.$http.post('/user/activity/takePartIn', {data: {
+          token: this.$store.state.user.info.token,
+          activityNo: this.$route.query.activityNo
+        }}).then((data) => {
+          this.$loading.hide();
+          if (data.code == 0) {
+            this.$toast.info('参与成功');
+            this.activity.isPartaked != this.activity.isPartaked;
+            this.$router.back();
+          } else {
+            this.$toast.info('参与失败');
+          }
+        }, () => {
+          this.$toast.info('参与失败');
           this.$loading.hide();
         });
       },

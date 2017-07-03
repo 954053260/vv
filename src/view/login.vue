@@ -5,6 +5,7 @@
       <div class="login-input pr row">
         <i class="icon ion-android-phone-portrait"></i>
         <input class="col" type="number" placeholder="请输入手机号" v-model="phone"
+               :class="{'c-999': !phone, 'c-666': phone}"
                @blur="validatePhone()"
                @focus="isPhone = true">
         <p v-show="!isPhone" class="login-point">请输入正确的手机号！</p>
@@ -12,7 +13,7 @@
       <div class="row">
         <div class="login-input row col">
           <i class="icon ion-locked"></i>
-          <input class="col" type="number" placeholder="短信验证码" v-model="code">
+          <input class="col" :class="{'c-999': !code, 'c-666': code}" type="number" placeholder="短信验证码" v-model="code">
         </div>
         <button class="login-code-btn" @click="getCode">{{codeText}}</button>
       </div>

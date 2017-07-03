@@ -3,7 +3,7 @@
     <header class="home-header clear-float">
       <img src="static/icon/icon-search.png">
       <label>
-        <input type="text" placeholder="请输入关键字搜索">
+        <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
       </label>
     </header>
     <a class="home-user-btn" @click="toggleUserMenu(true)">
@@ -122,7 +122,8 @@
         isFilter: false,
         isUserMenu: false,
         isChat: false,
-        friends: []
+        friends: [],
+        keyword: ''
       }
     },
     computed: mapState({

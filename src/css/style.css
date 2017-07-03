@@ -1,5 +1,4 @@
 /* ---------------------reset CSS----------------------- */
-/*---------------css reset---------------*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -44,7 +43,7 @@ table {
 html {
     font-family: Arial, Helvetica, sans-serif;
 }
-a:link, a:active, a:focus {
+a:link, a:active, a:focus, a:hover{
     text-decoration: none;
     cursor: pointer;
 }
@@ -53,23 +52,23 @@ button {
 }
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder{
-    color: #bbb;
-    font-size: 14px;
+    color: inherit;
+    font-size: inherit;
 }
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder{
-    color: #bbb;
-    font-size: 14px;
+    color: inherit;
+    font-size: inherit;
 }
 input:-moz-placeholder,
 textarea:-moz-placeholder{
-    color: #bbb;
-    font-size: 14px;
+    color: inherit;
+    font-size: inherit;
 }
 input::-moz-placeholder,
 textarea::-moz-placeholder{
-    color: #bbb;
-    font-size: 14px;
+    color: inherit;
+    font-size: inherit;
 }
 
 .container{
@@ -104,7 +103,7 @@ textarea::-moz-placeholder{
 .bc-fff {background: #fff}
 .b1-ddd {border: 1px solid #ddd}
 .bt1-ddd {border-top: 1px solid #ddd}
-.br1-ddd {border-right: 1px solid #ddd}
+.br1-eee {border-right: 1px solid #eee}
 .bb1-ddd {border-bottom: 1px solid #ddd}
 .bl1-ddd {border-left: 1px solid #ddd}
 .b-none {border: none}
@@ -156,11 +155,12 @@ textarea::-moz-placeholder{
 .tc{text-align: center;}
 .tr{text-align: right;}
 .vm{vertical-align: middle}
+.w30{width: 0.8rem}
 .w40{width: 40px}
 .w45{width: 45px}
-.w50{width: 50px}
-.w60{width: 60px}
-.w70{width: 70px}
+.w50{width: 1.33333rem}
+.w60{width: 1.6rem}
+.w70{width: 1.86666rem}
 .w100{width: 100px;}
 .w{width: 100%}
 .z-1{z-index: 1}
@@ -595,24 +595,45 @@ textarea::-moz-placeholder{
     width: 100%;
     background: #fff;
 }
-.app-info-window h2{
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    font-size: 16px;
-    font-weight: normal;
-    color: #fff;
+.app-info-window > h2{
+    padding: 0.26666rem 0.32rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 18px;
+}
+.app-info-window > h2 > span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.app-info-window > h2 > span:first-child {
+    margin-right: 0.53333rem;
+    height: 100%;
+    width: 0.10666rem;
     background: #2bd3b2;
 }
+.app-list {
+    font-size: 16px;
+    padding-left:  0.32rem;
+    padding-right:  0.32rem;
+}
+.app-item {
+    padding-top: 0.26666rem;
+    padding-bottom: 0.26666rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-top: 1px solid #eee;
+}
+.app-item.app-item-auto {
+    min-height: 0.8rem;
+    height: auto;
+}
 .app-info-window-buttons{
-    height: 40px;
-    line-height: 40px;
+    height: 1.17333rem;
+    line-height: 1.17333rem;
     text-align: center;
     font-size: 16px;
-    color: #2bd3b2;
-    background: #fff;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 /*login css*/
 .login-logo{
@@ -696,7 +717,7 @@ textarea::-moz-placeholder{
     left: 0.54666rem;
     border-left: 5px solid rgba(255,255,255,0);
     border-right: 5px solid rgba(255,255,255,0);
-    border-top: 5px solid rgba(153, 153, 153, 0.50);
+    border-top: 5px solid #fff;
 }
 /*home css*/
 #home{
@@ -798,15 +819,15 @@ textarea::-moz-placeholder{
 }
 .home-user-menu-header {
     position: relative;
-    padding: 1.40056rem 0.33613rem;
-    height: 2.24090rem;
+    padding: 1.33333rem 0.32rem;
+    height: 2.13333rem;
     background: url("/static/img/user-bg.jpg");
     background-size: cover;
 }
 .home-user-menu-header > img {
     float: left;
-    height: 2.24090rem;
-    width: 2.24090rem;
+    height: 2.13333rem;
+    width: 2.13333rem;
     border-radius: 50%;
 }
 .home-user-menu-header > div {
@@ -1121,30 +1142,147 @@ textarea::-moz-placeholder{
     color: #999;
 }
 /*personInfo css*/
-.pi-item{
-    padding: 5px 10px;
+.pi-header {
+    position: relative;
+    padding: 1.33333rem 0.32rem;
+    height: 2.13333rem;
+    text-align: center;
+    background: url("/static/img/user-bg.jpg");
+    background-size: cover;
+}
+.pi-header > img {
+    display: inline-block;
+    width: 2.13333rem;
+    height: 2.13333rem;
+    border-radius: 50%;
+}
+.pi-list {
+    margin-left: 0.32rem;
+    margin-right: 0.32rem;
+    font-size: 16px;
+}
+.pi-item {
+    padding-top: 0.26666rem;
+    padding-bottom: 0.26666rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-bottom: 1px solid #eee;
+}
+.pi-item.pi-item-auto {
+    min-height: 0.8rem;
+    height: auto;
+}
+.pi-item.pi-item-2 {
+    height: 1.6rem;
+}
+.pi-item > span:first-child {
+    padding-right: 0.26666rem;
 }
 .pi-item input {
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: right;
     border: none;
-    line-height: 30px;
 }
+.pi-item textarea {
+    width: 100%;
+    height: 1.6rem;
+    line-height: 0.8rem;
+    border: none;
+    resize: none;
+}
+.pi-item textarea::-webkit-scrollbar-track-piece {
+    background-color: rgba(0, 0, 0, 0);
+    border-left: 1px solid rgba(0, 0, 0, 0);
+}
+.pi-item textarea::-webkit-scrollbar {
+    width: 5px;
+    height: 13px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.pi-item textarea::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    background-clip: padding-box;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    min-height: 28px;
+}
+.pi-item textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.pi-btn {
+    display: block;
+    margin-top: 1.17333rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 1.17333rem;
+    line-height: 1.17333rem;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
+    color: #fff;
+    background: #2bd3b2;
+    border: 1px solid #2bd3b2;
+    border-radius: 1.17333rem;
+}
+.pi-point {
+    position: absolute;
+    right: 0;
+    top: -1.06666rem;
+    padding: 0.21333rem 0.44817rem;
+    border-radius: 0.10666rem;
+    white-space: nowrap;
+    font-size: 13px;
+    line-height: 0.53333rem;
+    color: red;
+    background: #fff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+.pi-point:after {
+    content: '';
+    position: absolute;
+    bottom: -0.10666px;
+    right: 0.53333rem;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-right: 5px solid rgba(255, 255, 255, 0);
+    border-top: 5px solid #fff;
+}
+.pi-point:before {
+    content: '';
+    position: absolute;
+    bottom: -0.12rem;
+    right: 0.54666rem;
+    border-left: 5px solid rgba(255,255,255,0);
+    border-right: 5px solid rgba(255,255,255,0);
+    border-top: 5px solid #fff;
+}
+
 .pi-tags-header {
-    padding-bottom: 20px;
-    padding-top: 5px;
-    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.53333rem;
+    padding-top: 0.13333rem;
+    line-height: 0.66666rem;
+    border-bottom: 1px solid #eee;
 }
 .pi-tags-header > p > a {
-    margin-right: 10px;
+    margin-right: 0.26666rem;
     font-size: 30px;
     color: #999;
 }
 .pi-tag {
     display: inline-block;
     vertical-align: middle;
-    margin: 10px;
-    padding: 5px 10px;
+    margin: 0.26666rem;
+    padding: 0.13333rem 0.26666rem;
     border: 1px solid;
-    border-radius: 4px;
+    border-radius: 0.10666rem;
     font-size: 14px;
 }
 /*activityDetail css*/
