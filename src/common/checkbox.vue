@@ -1,7 +1,7 @@
 <template>
     <div class="checkbox">
         <label class="checkbox-content">
-            <i class="icon" :class="{'ion-android-checkbox': checked, 'ion-android-checkbox-outline-blank': !checked}"></i>
+            <i class="icon" :class="{'ion-ios-checkmark-outline': checked, 'ion-ios-circle-outline': !checked}"></i>
             <input type="checkbox"  style="display: none"
                    :checked="checked"
                    :name="name"
@@ -36,8 +36,8 @@
     }
     .checkbox-content{
         display: block;
-        height: 20px;
-        line-height: 20px;
+        height: 0.8rem;
+        line-height: 0.8rem;
     }
     .checkbox-content > i,
     .checkbox-content > span{
@@ -45,10 +45,8 @@
         vertical-align: middle;
     }
     .checkbox-content > i{
-        position: relative;
-        top: 1px;
-        color: #2bd3b2;
-        font-size: 20px;
+        color: #999;
+        font-size: 22px;
     }
     .checkbox-content > span{
         font-size: 14px;

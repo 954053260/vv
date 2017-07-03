@@ -1,5 +1,5 @@
 <template>
-  <div id="login" class="container bc-page">
+  <div id="login" class="container">
     <img class="login-logo" src="static/img/logo.jpg">
     <div class="login-content">
       <div class="login-input pr row">
@@ -7,7 +7,7 @@
         <input class="col" type="number" placeholder="请输入手机号" v-model="phone"
                @blur="validatePhone()"
                @focus="isPhone = true">
-        <p v-show="!isPhone" class="login-point" style="left: 30px">请输入正确的手机号！</p>
+        <p v-show="!isPhone" class="login-point">请输入正确的手机号！</p>
       </div>
       <div class="row">
         <div class="login-input row col">
@@ -58,17 +58,21 @@
             return this.$toast.info('请输入验证码！')
           }
 
+          this.$loading.show('登录中...');
           this.$store.dispatch('login', {
             mobile: this.phone,
             smsCode: this.code,
             openid: '404f4fe64b1b070c12e6f3b0058cd87e'
           }).then((data) => {
             this.$store.dispatch('getUserInfo', this.user.token).then(() => {
+              this.$loading.hide();
               this.$router.back();
             }, () => {
+              this.$loading.hide();
               this.$toast.info('获取用户信息失败！')
             })
             }, () => {
+            this.$loading.hide();
             this.$toast.info('登录失败！')
           });
         }

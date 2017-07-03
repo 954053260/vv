@@ -1,73 +1,89 @@
 <template>
   <div id="home">
-    <header class="home-header row">
-      <a @click="toggleUserMenu(true)" class="br1-ddd"><i class="icon ion-person c-main"></i></a>
-      <input type="text" class="col" placeholder="请输入关键字搜索">
-      <a @click="toggleChat(true)" class="bl1-ddd"><i class="icon ion-chatbubbles c-main"></i></a>
+    <header class="home-header clear-float">
+      <img src="static/icon/icon-search.png">
+      <label>
+        <input type="text" placeholder="请输入关键字搜索">
+      </label>
     </header>
-
+    <a class="home-user-btn" @click="toggleUserMenu(true)">
+      <img src="static/icon/icon-user.png">
+    </a>
+    <a class="home-chat-btn" @click="toggleChat(true)">
+      <img src="static/icon/icon-chat-fill.png">
+    </a>
     <a class="home-refresh-btn" @click="refresh()">
-      <i class="icon ion-ios-refresh-empty"></i>
+     <img src="static/icon/icon-refresh.png">
     </a>
     <a class="home-plus-btn" @click="addActivity">
-      <i class="icon ion-android-add"></i>
+      <img src="static/icon/icon-add-marker.png">
     </a>
     <a class="home-location-btn" @click="location()">
-      <i class="icon ion-ios-location-outline"></i>
+      <img src="static/icon/icon-location.png">
     </a>
     <a class="home-filter-btn" @click="toggleFilter()">
-      <i class="icon ion-ios-settings-strong"></i>
+      <img src="static/icon/icon-list.png">
     </a>
     <div class="home-select-content">
-      <div class="row">
-        <transition name="fade">
-          <div v-if="isFilter" class="pr row col z-2">
-            <m-select class="col lh30 mr10" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
-                      @input="changeOrganization"></m-select>
-            <m-select class="col lh30 mr10" :list="activityTypes" bindValue="desc" v-model="typeIndex"
-                      @input="changeTypes"></m-select>
-            <m-select class="col lh30" :list="dateRange" bindValue="desc" v-model="dateIndex"
-                      @input="changeRange"></m-select>
-          </div>
-        </transition>
-      </div>
+      <transition name="fade">
+        <div v-if="isFilter" class="pr row col z-2">
+          <m-select class="col lh30 mr5" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
+                    @input="changeOrganization"></m-select>
+          <m-select class="col lh30 mr5" :list="activityTypes" bindValue="desc" v-model="typeIndex"
+                    @input="changeTypes"></m-select>
+          <m-select class="col lh30" :list="dateRange" bindValue="desc" v-model="dateIndex"
+                    @input="changeRange"></m-select>
+        </div>
+      </transition>
     </div>
     <div v-if="isUserMenu" class="mask z-999" @click="toggleUserMenu(false)"></div>
     <transition name="slide-left">
       <div v-if="isUserMenu" class="home-user-menu">
-        <div class="p20-10 bc-main">
+        <div class="home-user-menu-header">
           <router-link to="/app/personInfo">
-            <img :src="host + user.user.avatar" class="dp-ib vm w40 h40 brp50">
-            <span class="dp-ib vm f20 c-fff">{{user.user.nickname}}</span>
+            <img src="static/icon/icon-edit.png">
           </router-link>
+          <img :src="host + user.user.avatar">
+          <div class="c-fff">
+            <p class="f16">{{user.user.nickname}}</p>
+            <p class="lh20 f13">“{{user.user.signature}}”</p>
+          </div>
         </div>
-        <ul class="list">
-          <li class="item item-icon-right">
+        <ul class="home-user-list clear-float">
+          <li>
             <router-link to="/app/personActivity?type=1">
-              <span class="fl"><i class="home-user-menu-icon-left icon ion-person-add c-main"></i></span>
-              参与的活动
-              <i class="icon ion-ios-arrow-right f20"></i>
+              <img src="static/icon/icon-flag.png">
+              <img src="static/icon/icon-right.png">
+              <p class="f16">参与的活动</p>
             </router-link>
           </li>
-          <li class="item item-icon-right">
+          <li>
             <router-link to="/app/personActivity?type=2">
-              <span class="fl"><i class="home-user-menu-icon-left icon ion-paper-airplane c-main"></i></span>
-              发布的活动
-              <i class="icon ion-ios-arrow-right f20"></i>
+              <img src="static/icon/icon-release.png">
+              <img src="static/icon/icon-right.png">
+              <p class="f16">发布的活动</p>
             </router-link>
           </li>
-          <li class="item item-icon-right">
+          <li>
             <router-link to="/app/personActivity?type=3">
-              <span class="fl"><i class="home-user-menu-icon-left icon ion-heart c-main"></i></span>
-              收藏的活动
-              <i class="icon ion-ios-arrow-right f20"></i>
+              <img src="static/icon/icon-star.png">
+              <img src="static/icon/icon-right.png">
+              <p class="f16">收藏的活动</p>
             </router-link>
           </li>
-          <li class="item item-icon-right">
+          <li>
+            <router-link to="/app/authentication">
+              <img src="static/icon/icon-authenticate.png">
+              <img src="static/icon/icon-right.png">
+              <span v-if="!user.user.idCardNo">未认证</span>
+              <p>实名认证</p>
+            </router-link>
+          </li>
+          <li>
             <router-link to="/app/about">
-              <span class="fl"><i class="home-user-menu-icon-left icon ion-information-circled c-main"></i></span>
-              关于我们
-              <i class="icon ion-ios-arrow-right f20"></i>
+              <img src="static/icon/icon-about.png">
+              <img src="static/icon/icon-right.png">
+              <p class="f16">关于我们</p>
             </router-link>
           </li>
         </ul>

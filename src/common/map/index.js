@@ -30,8 +30,8 @@ export default {
 
             AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.Geolocation', 'AMap.Autocomplete'], function(){
 
-                var scale = new AMap.Scale(),
-                    toolBar = new AMap.ToolBar(),
+                var toolBar = new AMap.ToolBar(),
+                    //scale = new AMap.Scale(),
                     geolocation;
 
                 toolBar.hide();
@@ -79,7 +79,7 @@ export default {
 
 
                 //创建并添加工具条控件
-                map.gd.addControl(scale);
+                //map.gd.addControl(scale);
                 map.gd.addControl(toolBar);
 
                 isLoadMap = true;
@@ -102,12 +102,12 @@ export default {
                         }),
                         positionPicker = new PositionPicker({
                             mode:'dragMap',
-                            map: map.gd
-                            //iconStyle: { //自定义外观
-                            //    url: 'static/img/position-picker.png',
-                            //    ancher: [20, 32],
-                            //    size: [40, 40]
-                            //}
+                            map: map.gd,
+                            iconStyle: { //自定义外观
+                                url: 'static/img/position-picker.png',
+                                ancher: [12, 37],
+                                size: [25, 38]
+                            }
                         });
 
 
