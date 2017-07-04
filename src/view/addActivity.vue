@@ -1,106 +1,103 @@
 <template>
   <div id="addActivity">
     <div v-show="show" class="container bc-page">
-      <div class="ad-content">
-        <header class="aa-header bb1-ddd">
-          <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
-            <swiper-slide v-for="(slide, index) in swiperSlides">
-              <div class="aa-slide row row-center">
-                <a class="aa-deleteImg-btn" @click="deleteImg(index)"><i class="icon ion-android-close"></i></a>
-                <img :src="host + slide"/>
-              </div>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-          </swiper>
-          <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
-            <a class="aa-deleteImg-btn" @click="deleteImg(0)"><i class="icon ion-android-close"></i></a>
-            <img :src="host + swiperSlides[0]"/>
-          </div>
-          <a v-show="swiperSlides.length < 6" class="aa-addImg-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
-            <i class="icon ion-android-add"></i>
-          </a>
-        </header>
-        <ul class="list">
-          <li class="aa-item item mt10">
-            <label class="row lh30">
-              <span class="dp-ib w70">活动标题</span>
-              <input class="col c-666" type="text" v-model="aTitle">
-            </label>
-          </li>
-          <li class="aa-item item mt10 bt1-ddd">
-            <div class="row lh30">
-              <span class="dp-ib w70">开始时间</span>
-              <p class="col c-666" @click="selectDate('start')">
-                {{startDate | date('yyyy-MM-dd HH:mm')}}
-              </p>
-              <date-picker ref="start" v-model="startDate"></date-picker>
-            </div>
-          </li>
-          <li class="aa-item item">
-            <div class="row lh30">
-              <span class="dp-ib w70">结束时间</span>
-              <p class="col c-666"  @click="selectDate('end')">
-                {{endDate | date('yyyy-MM-dd HH:mm')}}
-              </p>
-              <date-picker ref="end" v-model="endDate"></date-picker>
-            </div>
-          </li>
-          <li class="aa-item item pr mt10 bt1-ddd" style="padding-right: 50px;">
-            <label class="row lh30">
-              <span class="dp-ib w70">活动地址</span>
-              <input class="col c-666" type="text" v-model="address.address">
-              <a class="aa-address-btn" @click="selectAddress()">
-                <i class="icon ion-ios-location-outline"></i>
+      <header class="aa-header">
+        <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
+          <swiper-slide v-for="(slide, index) in swiperSlides">
+            <div class="aa-slide row row-center">
+              <a class="aa-delete-btn" @click="deleteImg(index)">
+                <img src="static/icon/icon-close.png">
               </a>
-            </label>
-          </li>
-          <li class="aa-item item mt10 bt1-ddd">
-            <label class="row lh30">
-              <span class="dp-ib w70">活动人数</span>
-              <input class="col c-666" type="number" v-model="limitCount">
-            </label>
-          </li>
-          <li class="aa-item item">
-            <label class="row lh30">
-              <span class="dp-ib w70">活动费用</span>
-              <input class="col c-666" type="number" v-model="fee">
-            </label>
-          </li>
-          <li class="aa-item item" style="border-bottom: none;">
-            <div class="row lh30">
-              <span class="dp-ib w70">活动类别</span>
-              <p class="col c-666">
-                {{activityTypes[typeIndex].desc}}
-              </p>
+              <img :src="host + slide"/>
             </div>
-          </li>
-          <li class="aa-item item" style="padding: 0 10px;">
-              <span v-for="(type, index) in activityTypes" class="aa-tag" @click="selectType(index)">{{type.desc}}</span>
-          </li>
-          <li class="aa-item item mt10 bt1-ddd">
-            <label class="row lh30">
-              <textarea class="col c-666" placeholder="填写活动说明" v-model="content"></textarea>
-            </label>
-          </li>
-        </ul>
-      </div>
-      <a class="ad-confirm-btn" @click="saveActivity()">发布</a>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+        <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
+          <a class="aa-delete-btn" @click="deleteImg(0)">
+            <img src="static/icon/icon-close.png">
+          </a>
+          <img :src="host + swiperSlides[0]"/>
+        </div>
+        <a v-show="swiperSlides.length < 6" class="aa-add-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
+         <img src="static/icon/icon-add.png">
+        </a>
+      </header>
+      <ul class="aa-list">
+        <li class="aa-item row">
+          <span>活动标题</span>
+          <label class="col tr">
+            <input class="c-999" type="text" placeholder="请输入" v-model="aTitle">
+          </label>
+        </li>
+        <li class="aa-item row mt10">
+          <span>开始时间</span>
+          <p class="col c-999 tr" @click="selectDate('start')">
+            <span>{{startDate | date('yyyy-MM-dd HH:mm')}}</span>
+            <span v-if="!startDate">请选择</span>
+          </p>
+          <date-picker ref="start" v-model="startDate"></date-picker>
+        </li>
+        <li class="aa-item row">
+          <span>结束时间</span>
+          <p class="col c-999 tr" @click="selectDate('end')">
+            <span>{{endDate | date('yyyy-MM-dd HH:mm')}}</span>
+            <span v-if="!endDate">请选择</span>
+          </p>
+          <date-picker ref="end" v-model="endDate"></date-picker>
+        </li>
+        <li class="aa-item row">
+          <span>活动地址</span>
+          <label class="col pr" style="padding-right: 1.27466rem;">
+            <input class="c-999" type="text" v-model="address.address">
+            <a class="aa-address-btn" @click="selectAddress()">
+              <img src="static/icon/icon-location.png">
+            </a>
+          </label>
+        </li>
+        <li class="aa-item row mt10">
+          <span>活动人数</span>
+          <label class="col tr">
+            <input class="c-999" type="text" placeholder="请输入" v-model="limitCount">
+          </label>
+        </li>
+        <li class="aa-item row">
+          <span>活动费用</span>
+          <label class="col tr">
+            <input class="c-999" type="text" placeholder="请输入" v-model="fee">
+          </label>
+        </li>
+        <li class="aa-item row" style="border-bottom: none;">
+          <span>活动类别</span>
+          <p class="col c-999 tr">
+            {{activityTypes[typeIndex].desc}}
+          </p>
+        </li>
+        <li class="pb10 bc-fff bb1-eee">
+          <span v-for="(type, index) in activityTypes" class="aa-tag" :class="{active: type.desc == activityTypes[typeIndex].desc}"
+                @click="selectType(index)">{{type.desc}}</span>
+        </li>
+        <li class="aa-textarea" >
+          <textarea placeholder="填写详细活动介绍" v-model="content"></textarea>
+        </li>
+      </ul>
+      <a class="aa-submit-btn" @click="saveActivity()">发布</a>
     </div>
     <transition name="slide-bottom">
       <div v-if="!show" class="aa-address-page">
-        <div class="bc-main clear-float">
-          <button class="btn btn-clear c-fff fl" @click="cancelAddress()">取消</button>
-          <button class="btn btn-clear c-fff fr" @click="confirmAddress()">确定</button>
-        </div>
-        <ul class="p10 lh25">
-          <li class="pr mb10">
-            <a class="aa-location-btn" @click="location()">
-              <i class="icon ion-ios-location-outline"></i>
-            </a>
-            <b class="c-333">地址:</b>
-            <p class="mt10 c-666">{{positionResult.address}}</p>
-          </li>
-        </ul>
+        <header>
+          <a class="fl c-fff ml10" @click="cancelAddress()">取消</a>
+          <a class="fr c-fff mr10" @click="confirmAddress()">确定</a>
+        </header>
+        <p class="clear-float">
+          <a class="fr aa-location-btn" @click="location()">
+            <img src="static/icon/icon-location.png">
+          </a>
+          <span class="dp-ib lh30">地址</span>
+        </p>
+        <p class="lh25 c-999">
+          {{positionResult.address}}
+        </p>
       </div>
     </transition>
   </div>

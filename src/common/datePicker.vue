@@ -171,5 +171,6 @@
         bottom: 0;
         z-index: 10000;
         width: 100%;
+        font-size: 16px;
     }
 </style>

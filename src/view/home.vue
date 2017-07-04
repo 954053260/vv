@@ -19,7 +19,7 @@
       <img src="static/icon/icon-add-marker.png">
     </a>
     <a class="home-location-btn" @click="location()">
-      <img src="static/icon/icon-location.png">
+      <img src="static/icon/icon-location-fill.png">
     </a>
     <a class="home-filter-btn" @click="toggleFilter()">
       <img src="static/icon/icon-list.png">
