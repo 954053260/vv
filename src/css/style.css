@@ -573,16 +573,15 @@ textarea::-moz-placeholder{
     transform: translate3d(0, -100%, 0);
 }
 /* ---------------------detail CSS----------------------- */
-#map-container{
+#map-container {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
 }
-
 /*app css*/
-.app-info-window{
+.app-info-window {
     position: absolute;
     top: 0;
     left: 0;
@@ -591,7 +590,7 @@ textarea::-moz-placeholder{
     width: 100%;
     background: #fff;
 }
-.app-info-window > h2{
+.app-info-window > h2 {
     padding: 0.26666rem 0.32rem;
     height: 0.8rem;
     line-height: 0.8rem;
@@ -623,7 +622,7 @@ textarea::-moz-placeholder{
     min-height: 0.8rem;
     height: auto;
 }
-.app-info-window-buttons{
+.app-info-window-buttons {
     height: 1.17333rem;
     line-height: 1.17333rem;
     text-align: center;
@@ -632,35 +631,35 @@ textarea::-moz-placeholder{
     border-bottom: 1px solid #eee;
 }
 /*login css*/
-.login-logo{
+.login-logo {
     display: block;
     margin: 0.8rem auto;
     width: 2.13333rem;
     height: 2.13333rem;
     border-radius: 50%;
 }
-.login-content{
+.login-content {
     margin: 0.8rem 0.88rem;
 }
-.login-input{
+.login-input {
     margin-bottom: 0.26666rem;
     height: 1.17333rem;
     line-height: 1.17333rem;
     border: 1px solid #ddd;
     background: #fff;
 }
-.login-input > img{
+.login-input > img {
     float: left;
     padding: 0.1866666rem;
     height: 0.8rem;
     width: 0.8rem;
 }
-.login-input > input{
+.login-input > input {
     float: left;
     font-size: 16px;
     border: none;
 }
-.login-code-btn{
+.login-code-btn {
     width: 3.40rem;
     height: 1.17333rem;
     line-height: 1.17333rem;
@@ -670,7 +669,7 @@ textarea::-moz-placeholder{
     background: #2bd3b2;
     border: 1px solid #2bd3b2;
 }
-.login-btn{
+.login-btn {
     display: block;
     margin-top: 1.17333rem;
     height: 1.17333rem;
@@ -715,11 +714,11 @@ textarea::-moz-placeholder{
     border-top: 5px solid #fff;
 }
 /*home css*/
-#home{
+#home {
     height: 100%;
     overflow: auto;
 }
-.home-header{
+.home-header {
     position: fixed;
     top: 0.45333rem;
     left: 1.86666rem;
@@ -729,7 +728,7 @@ textarea::-moz-placeholder{
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     border-radius: 1.0666rem;
 }
-.home-header img{
+.home-header img {
     float: left;
     padding-right: 0.26666rem;
     width: 0.53333rem;
@@ -751,7 +750,7 @@ textarea::-moz-placeholder{
 .home-refresh-btn,
 .home-plus-btn,
 .home-location-btn,
-.home-filter-btn{
+.home-filter-btn {
     position: fixed;
     z-index: 999;
 }
@@ -760,7 +759,7 @@ textarea::-moz-placeholder{
 .home-refresh-btn img,
 .home-plus-btn img,
 .home-location-btn img,
-.home-filter-btn img{
+.home-filter-btn img {
     display: inline-block;
     padding: 0.16rem;
     width: 0.82666rem;
@@ -803,7 +802,7 @@ textarea::-moz-placeholder{
     border-radius: 0.4rem;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
-.home-user-menu{
+.home-user-menu {
     position: relative;
     z-index: 1000;
     margin-right: auto;
@@ -844,7 +843,7 @@ textarea::-moz-placeholder{
     width: 0.86834rem;
     height: 0.86834rem;
 }
-.home-user-list > li{
+.home-user-list > li {
     margin: 0 0.13333rem;
     padding: 0.4rem 0;
     font-size: 16px;
@@ -870,7 +869,6 @@ textarea::-moz-placeholder{
 .home-user-list img:first-child {
     float: left;
 }
-
 .home-chat {
     position: relative;
     z-index: 1000;
@@ -878,34 +876,34 @@ textarea::-moz-placeholder{
     width: 80%;
     height: 100%;
 }
-.home-chat-list{
+.home-chat-list {
 }
-.home-chat-item{
+.home-chat-item {
     padding: 0.266666rem;
     line-height: 0.533333rem;
     border-bottom: 1px solid #ddd;
     background: #fff;
 }
-.home-chat-item:first-child{
+.home-chat-item:first-child {
     border-top: 1px solid #ddd;
 }
-.home-chat-content{
+.home-chat-content {
     padding-left: 10px;
 }
-.home-chat-item img{
+.home-chat-item img {
     width: 1.333333rem;
     height: 1.333333rem;
 }
-.home-chat-item .name{
+.home-chat-item .name {
     color: #000;
     font-size: 16px;
 }
-.home-chat-item .time{
+.home-chat-item .time {
     float: right;
     font-size: 14px;
     color: #999;
 }
-.home-chat-item .text{
+.home-chat-item .text {
     padding-top: 0.25rem;
     font-size: 14px;
     color: #999;
@@ -919,28 +917,28 @@ textarea::-moz-placeholder{
     padding-right: 0.2666666rem;
     overflow: auto;
 }
-.chat-item{
+.chat-item {
     margin-top: 0.5333333rem;
     margin-bottom: 0.5333333rem;
 }
-.chat-item img{
+.chat-item img {
     width: 1.0666666rem;
     height: 1.0666666rem;
     border-radius: 4px;
 }
-.chat-item .col{
+.chat-item .col {
     padding-left: 0.2666666rem;
     overflow: hidden;
 }
-.chat-item .item-type .col{
+.chat-item .item-type .col {
     padding-left: 0;
     padding-right: 0.2666666rem;
 }
-.chat-item .name{
+.chat-item .name {
     font-size: 12px;
     color: #666;
 }
-.chat-item .text{
+.chat-item .text {
     position: relative;
     display: inline-block;
     margin-top: 0.1333333rem;
@@ -950,7 +948,7 @@ textarea::-moz-placeholder{
     background: #fff;
     border-radius: 4px;
 }
-.chat-item .text:before{
+.chat-item .text:before {
     content: '';
     position: absolute;
     top: 5px;
@@ -963,12 +961,12 @@ textarea::-moz-placeholder{
     border-right: 9px solid #FFF;
     border-left: none;
 }
-.chat-item .item-type .text{
+.chat-item .item-type .text {
     float: right;
     color: #fff;
     background: #25A5F7;
 }
-.chat-item .item-type .text:before{
+.chat-item .item-type .text:before {
     left: inherit;
     right: -8px;
     border-bottom:6px solid rgba(0, 0, 0, 0);
@@ -976,19 +974,19 @@ textarea::-moz-placeholder{
     border-left: 9px solid #25A5F7;
     border-right: none;
 }
-.chat-input{
+.chat-input {
     position: fixed;
     bottom: 0.2666666rem;
     left: 0;
     width: 100%;
     background: #fff;
 }
-.chat-input label{
+.chat-input label {
     display: block;
     margin: 0.1333333rem 0.2666666rem;
     border-radius: 4px;
 }
-.chat-input input{
+.chat-input input {
     text-indent: 0.1333333rem;
     width: 100%;
     line-height: 0.8rem;
@@ -996,11 +994,11 @@ textarea::-moz-placeholder{
     background: #ddd;
 }
 /*addActivity css*/
-.aa-header{
+.aa-header {
     position: relative;
     height: 4.8rem;
 }
-.aa-header .aa-slide{
+.aa-header .aa-slide {
     height: 4.8rem;
     line-height: 4.8rem;
     text-align: center;
@@ -1069,7 +1067,7 @@ textarea::-moz-placeholder{
     text-align: right;
     border: none;
 }
-.aa-address-btn > img{
+.aa-address-btn > img {
     position: absolute;
     top: 0;
     right: 0;
@@ -1107,7 +1105,7 @@ textarea::-moz-placeholder{
     border-bottom: 1px solid #eee;
     background: #fff;
 }
-.aa-textarea > textarea{
+.aa-textarea > textarea {
     display: block;
     width: 100%;
     height: 3.73333rem;
@@ -1129,7 +1127,6 @@ textarea::-moz-placeholder{
     border: 1px solid #2bd3b2;
     border-radius: 1.17333rem;
 }
-
 .aa-address-page {
     position: absolute;
     bottom: 0;
@@ -1150,7 +1147,6 @@ textarea::-moz-placeholder{
 .aa-address-page > p {
     margin: 0.26666rem;
 }
-
 /*personInfo css*/
 .pi-header {
     position: relative;
@@ -1272,7 +1268,6 @@ textarea::-moz-placeholder{
     border-right: 5px solid rgba(255,255,255,0);
     border-top: 5px solid #fff;
 }
-
 .pi-tags-header {
     padding-bottom: 0.53333rem;
     padding-top: 0.13333rem;
@@ -1363,7 +1358,7 @@ textarea::-moz-placeholder{
 .ad-title-right p {
     font-size: 14px;
 }
-.ad-item{
+.ad-item {
     padding: 0.4rem 0.32rem;
     font-size: 16px;
     border-bottom: 1px solid #eee;
@@ -1375,8 +1370,7 @@ textarea::-moz-placeholder{
     width: 0.8rem;
     height: 0.8rem;
 }
-
-.ad-confirm-btn{
+.ad-confirm-btn {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1404,13 +1398,13 @@ textarea::-moz-placeholder{
     color: #2bd3b2;
     border-bottom: 0.08rem solid #2bd3b2;
 }
-.pa-search{
+.pa-search {
     margin: 0.26666rem 0.32rem;
     line-height: 0.8rem;
     border-radius: 0.4rem;
     background: #eee;
 }
-.pa-search img{
+.pa-search img {
     float: left;
     padding-top: 0.13333rem;
     padding-left: 0.26666rem;
@@ -1430,13 +1424,13 @@ textarea::-moz-placeholder{
     border: none;
     background: transparent;
 }
-.pa-item{
+.pa-item {
     position: relative;
     padding: 0.4rem 0.26666rem 0.4rem 2.13333rem;
     background: #fff;
     border-bottom: 1px solid #eee;
 }
-.pa-item > img{
+.pa-item > img {
     position: absolute;
     left: 0.26666rem;
     top: 0.4rem;
@@ -1484,7 +1478,7 @@ textarea::-moz-placeholder{
 .hi-header p {
     margin: 0.266666rem;
 }
-.hi-header > p:last-child{
+.hi-header > p:last-child {
     font-size: 14px;
 }
 /*authentication css*/
@@ -1580,10 +1574,10 @@ textarea::-moz-placeholder{
     color: #999 !important;
 }
 /*---------------------map CSS-----------------------*/
-.amap-logo{
+.amap-logo {
     display: none !important;
 }
-.amap-copyright{
+.amap-copyright {
     display: none !important;
 }
 .amap-marker-label {
@@ -1593,17 +1587,16 @@ textarea::-moz-placeholder{
     border-radius: 10px 0 0 0;
     color: #2bd3b2;
 }
-
-.amap-ui-control-theme-m{
+.amap-ui-control-theme-m {
     right: 0.32rem !important;
 }
-.amap-ui-control-theme-m .amap-ui-control-zoom{
+.amap-ui-control-theme-m .amap-ui-control-zoom {
     width: 0.85333rem !important;
     border: none;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     border-radius: 0.42666rem;
 }
-.amap-ui-control-theme-m .amap-ui-control-zoom > a{
+.amap-ui-control-theme-m .amap-ui-control-zoom > a {
     width: 0.85333rem !important;
     font-size: 20px !important;
     color: #2bd3b2 !important;
@@ -1613,11 +1606,11 @@ textarea::-moz-placeholder{
 .amap-ui-control-theme-m .amap-ui-control-zoom > a:first-child {
     border-bottom: 1px solid #ddd;
 }
-.amap-sug-result{
+.amap-sug-result {
     z-index: 1000;
 }
 /*---------------------outer-components CSS-----------------------*/
-.swiper-pagination-bullet-active{
+.swiper-pagination-bullet-active {
     background: #2bd3b2 !important;
 }
 .pull-down-header {
@@ -1628,6 +1621,6 @@ textarea::-moz-placeholder{
     background: url("/static/img/hourglass.gif") !important;
     background-size: 20px 20px !important;
 }
-.pull-down-content{
+.pull-down-content {
     color: #666 !important;
 }
