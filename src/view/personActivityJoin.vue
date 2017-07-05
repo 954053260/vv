@@ -17,9 +17,9 @@
         <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
       </label>
     </div>
-    <p class="pl10 lh44 f16 bt1-eee">主办方：广百百货</p>
     <ul class="pa-list bt1-eee">
-      <li v-for="item in activities" @click="toDetail(item.activityNo)">
+      <li v-for="(item, index) in activities" @click="toDetail(item.activityNo)">
+        <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
         <div class="pa-item">
           <img v-if="item.images" :src="host + item.images[0]"/>
           <img v-if="item.image" :src="host + item.image"/>
@@ -32,8 +32,8 @@
           </div>
         </div>
         <div class="pa-buttons">
-          <a class="pa-btn">联系客服</a>
-          <a class="pa-btn">取消参加</a>
+          <a class="pa-btn" @click="toChat(item.publisherUserNo)">联系客服</a>
+          <a class="pa-btn" @click="cancelActivity(index, item.activityNo)">取消参加</a>
         </div>
       </li>
     </ul>
@@ -98,11 +98,34 @@
           this.$toast.info('获取活动失败');
         });
       },
+      cancelActivity: function (index, activityNo) {
+        this.$loading.show( '取消...');
+        this.$http.post('/user/activity/partake/cancel', {data: {
+          token: this.$store.state.user.info.token,
+          activityNo: activityNo
+        }}).then((data) => {
+          this.$loading.hide();
+
+          if (data.code == 0) {
+            this.$toast.info('取消成功');
+            this.activities.splice(index, 1);
+          } else {
+            this.$toast.info('取消失败');
+          }
+
+        }, () => {
+          this.$toast.info('取消失败');
+          this.$loading.hide();
+        });
+      },
       toDetail: function (activityNo) {
         this.$router.push('/app/activityDetail?activityNo=' +  activityNo);
       },
       toEvaluate: function (item) {
         this.$router.push('/app/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
+      },
+      toChat: function (publisherUserNo, linkMan) {
+        this.$router.push('/app/chat?friendUserNo=' + publisherUserNo + '&linkMan=' + linkMan);
       }
     }
   }

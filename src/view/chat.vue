@@ -5,7 +5,7 @@
         <ul ref="chatList" class="chat-list">
           <li v-for="item in chats" class="chat-item">
             <div v-if="item.toUserNo == token" class="row">
-              <img :src="host + item.fromAvatar" width="40" height="40">
+              <img :src="host + item.fromAvatar">
               <div class="col">
                 <p class="name">{{item.fromNickName}}</p>
                 <p class="text">{{item.content}}</p>
@@ -16,7 +16,7 @@
                 <p class="name tr">{{item.fromNickName}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
-              <img :src="host + item.fromAvatar" width="40" height="40">
+              <img :src="host + item.fromAvatar">
             </div>
           </li>
         </ul>

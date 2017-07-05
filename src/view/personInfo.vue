@@ -20,7 +20,7 @@
             <li class="pi-item row">
               <span>手机号</span>
               <label class="col pr">
-                <input class="c-999" type="text" placeholder="请输入手机号" v-model="mobile"
+                <input class="c-999" type="number" placeholder="请输入手机号" v-model="mobile"
                        @focus="isPhone = true" @blur="validatePhone()">
                 <p v-show="!isPhone" class="pi-point">请输入正确的手机号！</p>
               </label>

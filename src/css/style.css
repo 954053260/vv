@@ -881,8 +881,8 @@ textarea::-moz-placeholder{
 .home-chat-list{
 }
 .home-chat-item{
-    padding: 10px;
-    line-height: 20px;
+    padding: 0.266666rem;
+    line-height: 0.533333rem;
     border-bottom: 1px solid #ddd;
     background: #fff;
 }
@@ -892,46 +892,49 @@ textarea::-moz-placeholder{
 .home-chat-content{
     padding-left: 10px;
 }
-.home-chat-item > img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+.home-chat-item img{
+    width: 1.333333rem;
+    height: 1.333333rem;
 }
 .home-chat-item .name{
-    font-size: 14px;
+    color: #000;
+    font-size: 16px;
 }
 .home-chat-item .time{
     float: right;
-    font-size: 12px;
+    font-size: 14px;
     color: #999;
 }
 .home-chat-item .text{
+    padding-top: 0.25rem;
     font-size: 14px;
     color: #999;
 }
 /*chat css*/
 .chat {
-    padding-bottom: 50px;
+    padding-bottom: 1.3333333rem;
 }
 .chat-list {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0.2666666rem;
+    padding-right: 0.2666666rem;
     overflow: auto;
 }
 .chat-item{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 0.5333333rem;
+    margin-bottom: 0.5333333rem;
 }
 .chat-item img{
+    width: 1.0666666rem;
+    height: 1.0666666rem;
     border-radius: 4px;
 }
 .chat-item .col{
-    padding-left: 10px;
+    padding-left: 0.2666666rem;
     overflow: hidden;
 }
 .chat-item .item-type .col{
     padding-left: 0;
-    padding-right: 10px;
+    padding-right: 0.2666666rem;
 }
 .chat-item .name{
     font-size: 12px;
@@ -940,8 +943,8 @@ textarea::-moz-placeholder{
 .chat-item .text{
     position: relative;
     display: inline-block;
-    margin-top: 5px;
-    padding: 10px;
+    margin-top: 0.1333333rem;
+    padding: 0.2666666rem;
     font-size: 14px;
     color: #333;
     background: #fff;
@@ -975,20 +978,20 @@ textarea::-moz-placeholder{
 }
 .chat-input{
     position: fixed;
-    bottom: 10px;
+    bottom: 0.2666666rem;
     left: 0;
     width: 100%;
     background: #fff;
 }
 .chat-input label{
     display: block;
-    margin: 5px 10px;
+    margin: 0.1333333rem 0.2666666rem;
     border-radius: 4px;
 }
 .chat-input input{
-    text-indent: 5px;
+    text-indent: 0.1333333rem;
     width: 100%;
-    line-height: 30px;
+    line-height: 0.8rem;
     border: none;
     background: #ddd;
 }
@@ -1466,6 +1469,93 @@ textarea::-moz-placeholder{
     color: #666;
     border: 1px solid #eee;
     border-radius: 4px;
+}
+.hi-header {
+    position: relative;
+    padding: 2.133333rem 0.32rem 0;
+    height: 2.66666rem;
+    line-height: 0.533333rem;
+    text-align: center;
+    background: url("/static/img/user-bg.jpg");
+    background-size: cover;
+    color: #fff;
+    font-size: 16px;
+}
+.hi-header p {
+    margin: 0.266666rem;
+}
+.hi-header > p:last-child{
+    font-size: 14px;
+}
+/*authentication css*/
+.au-header {
+    padding: 0.4rem 0.32rem;
+    color: #999;
+    font-size: 16px;
+}
+.au-list {
+    font-size: 16px;
+}
+.au-item {
+    padding: 0.26666rem 0.32rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-bottom: 1px solid #eee;
+}
+.au-item > span:first-child {
+    padding-right: 0.26666rem;
+}
+.au-item input {
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: right;
+    border: none;
+}
+.au-point {
+    position: absolute;
+    right: 0;
+    top: -1.06666rem;
+    padding: 0.21333rem 0.44817rem;
+    border-radius: 0.10666rem;
+    white-space: nowrap;
+    font-size: 13px;
+    line-height: 0.53333rem;
+    color: red;
+    background: #fff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+.au-point:after {
+    content: '';
+    position: absolute;
+    bottom: -0.10666px;
+    right: 0.53333rem;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-right: 5px solid rgba(255, 255, 255, 0);
+    border-top: 5px solid #fff;
+}
+.au-point:before {
+    content: '';
+    position: absolute;
+    bottom: -0.12rem;
+    right: 0.54666rem;
+    border-left: 5px solid rgba(255,255,255,0);
+    border-right: 5px solid rgba(255,255,255,0);
+    border-top: 5px solid #fff;
+}
+.au-btn {
+    display: block;
+    margin: 1.17333rem auto 0.53333rem;
+    width: 90%;
+    height: 1.17333rem;
+    line-height: 1.17333rem;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
+    color: #fff;
+    background: #2bd3b2;
+    border: 1px solid #2bd3b2;
+    border-radius: 1.17333rem;
 }
 /*infinite loading*/
 .infinite-spinner {

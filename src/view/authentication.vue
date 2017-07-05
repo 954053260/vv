@@ -1,30 +1,24 @@
 <template>
-  <div id="authentication" class="container">
-    <p class="m20 tc">实名认证</p>
-    <div class="m20">
-      <div class="row tc f14">
+  <div id="authentication" class="container bc-page">
+    <header class="au-header">身份验证后，可参加平台活动</header>
+    <ul class="au-list bc-fff">
+      <li class="au-item row">
+        <span>真实姓名</span>
         <label class="col">
-          <input type="radio" name="authenticationType" value="1" v-model="type"/>
-          <span>个人</span>
+          <input class="c-999" type="text" placeholder="请输入" v-model="realname">
         </label>
-        <label class="col">
-          <input type="radio" name="authenticationType" value="2" v-model="type"/>
-          <span>群体</span>
-        </label>
-      </div>
-      <div>
-        <label class="dp-b mt20 p5 b1-ddd">
-          <input type="text" placeholder="姓名" v-model="realname" class="w b-none"/>
-        </label>
-        <label class="dp-b mt10 p5 b1-ddd pr">
-          <input type="number" placeholder="身份证号码" v-model="idCardNo" class="w b-none"
+      </li>
+      <li class="au-item row">
+        <span>身份证号</span>
+        <label class="col pr">
+          <input class="c-999" type="number" placeholder="请输入" v-model="idCardNo"
                  @blur="validateCardNo"
                  @focus="isCardNo = true"/>
-          <p v-show="!isCardNo" class="login-point" style="left: 30px">请输入正确的身份证！</p>
+          <p v-show="!isCardNo" class="au-point">请输入正确的身份证号！</p>
         </label>
-      </div>
-    </div>
-    <a class="dp-b m20 h40 lh40 tc bc-main c-fff" @click="submit">去认证</a>
+      </li>
+    </ul>
+    <a class="au-btn" @click="submit">去认证</a>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -66,7 +60,6 @@
           } else {
             this.$toast.info('认证失败');
           }
-
         }, () => {
           this.$toast.info('认证失败');
           this.$loading.hide();

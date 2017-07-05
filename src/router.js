@@ -16,6 +16,7 @@ import addActivity from './view/addActivity.vue'
 import activityDetail from './view/activityDetail.vue'
 import evaluate from './view/evaluate.vue'
 import authentication from './view/authentication.vue'
+import hostInfo from './view/hostInfo.vue'
 import about from './view/about.vue'
 Vue.use(VueRouter);
 
@@ -36,6 +37,7 @@ const router = new VueRouter({
                 { path: 'activityDetail', component: activityDetail, name: '活动详情'},
                 { path: 'evaluate', component: evaluate, name: '评价'},
                 { path: 'authentication', component: authentication, name: '实名认证'},
+                { path: 'hostInfo', component: hostInfo, name: '主办方'},
                 { path: 'about', component: about, name: '关于'}
             ]
         }
