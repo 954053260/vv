@@ -100,7 +100,8 @@ textarea::-moz-placeholder{
 .bc-green {background: green}
 .bc-1e90ff {background: #1e90ff}
 .bc-page {background: #f2f2f2;}
-.bc-fff {background: #fff}
+.bc-999 {background: #999}
+.bc-fff {background: #fff;}
 .b1-eee {border: 1px solid #eee}
 .bt1-eee {border-top: 1px solid #eee}
 .br1-eee {border-right: 1px solid #eee}
@@ -124,32 +125,32 @@ textarea::-moz-placeholder{
 .f30 {font-size: 30px}
 .fl {float: left;}
 .fr {float: right;}
-.h40{ height: 40px}
+.h30 {height: 0.8rem}
 .h100 {height: 100px}
 .hidden {overflow: hidden}
-.lh20 {line-height: 0.53333rem}
-.lh25 {line-height: 0.66666rem}
+.lh20 {line-height: 0.533333rem}
+.lh25 {line-height: 0.666666rem}
 .lh30 {line-height: 0.8rem}
-.lh40 {line-height: 40px}
+.lh44 {line-height: 1.173333rem}
 .m20 {margin: 20px;}
 .mt0 {margin-top: 0;}
 .mt5 {margin-top: 5px;}
-.mt10 {margin-top: 0.26666rem;}
+.mt10 {margin-top: 0.266666rem;}
 .mt20 {margin-top: 20px;}
-.mr5 {margin-right: 0.13333rem;}
-.mr10 {margin-right: 0.26666rem;}
+.mr5 {margin-right: 0.133333rem;}
+.mr10 {margin-right: 0.266666rem;}
 .mr30 {margin-right: 30px;}
-.mb10{margin-bottom: 0.26666rem;}
-.ml10{margin-left: 0.26666rem;}
+.mb10{margin-bottom: 0.266666rem;}
+.ml10{margin-left: 0.266666rem;}
 .p5 {padding: 5px;}
 .p10 {padding: 10px;}
 .p20 {padding: 20px}
-.p0-20 {padding: 0 20px;}
-.p20-10 {padding: 20px 10px;}
-.pl10 {padding-left: 0.26666rem;}
-.pr10 {padding-right: 0.26666rem;}
+.pl5 {padding-left: 0.133333rem;}
+.pl10 {padding-left: 0.266666rem;}
+.pr10 {padding-right: 0.266666rem;}
 .pt10 {padding-top: 10px;}
-.pb10 {padding-bottom: 0.26666rem;}
+.pb10 {padding-bottom: 0.266666rem;}
+.pb15 {padding-bottom: 0.4rem;}
 .pt20 {padding-top: 20px;}
 .pa{position: absolute;}
 .pr{position: relative;}
@@ -159,9 +160,9 @@ textarea::-moz-placeholder{
 .w30{width: 0.8rem}
 .w40{width: 40px}
 .w45{width: 45px}
-.w50{width: 1.33333rem}
+.w50{width: 1.333333rem}
 .w60{width: 1.6rem}
-.w70{width: 1.86666rem}
+.w70{width: 1.866666rem}
 .w100{width: 100px;}
 .w{width: 100%}
 .z-1{z-index: 1}
@@ -311,12 +312,6 @@ textarea::-moz-placeholder{
     flex:1;
 }
 
-.row{
-    display:-webkit-box;
-    display:-webkit-flex;
-    display:-ms-flexbox;
-    display:flex;
-}
 .list{
 
 }
@@ -1297,62 +1292,88 @@ textarea::-moz-placeholder{
     font-size: 14px;
 }
 /*activityDetail css*/
-
-.ad-title{
-    padding: 10px;
+.ad-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 1.1733333rem;
+    overflow: auto;
 }
-.ad-title-tags{
-    margin-bottom: 5px;
-}
-.ad-title-tags > span{
-    display: inline-block;
-    margin-right: 10px;
-    padding: 2px 10px 3px;
-    background: #2bd3b2;
-    font-size: 12px;
-    color: #fff;
-}
-.ad-title-left{
-    height: 50px;
-    padding-right: 20px;
-    border-right: 1px solid #ddd;
-    font-size: 18px;
-    line-height: 25px;
-}
-.ad-title-right{
-    display: block;
-    width: 80px;
+.ad-foot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1.1733333rem;
+    line-height: 1.1733333rem;
+    font-size: 16px;
     text-align: center;
-    font-size: 13px;
-    color: #999;
 }
-.ad-title-right > .icon{
-    font-size: 24px;
-    color: red;
+.ad-header{
+    position: relative;
+    height: 4.8rem;
 }
-.ad-list{  }
-.ad-item{
-    padding: 15px 10px;
-    line-height: 20px;
-    font-size: 15px;
-    border-top: 1px solid #ddd;
+.ad-header .aa-slide{
+    height: 4.8rem;
+    line-height: 4.8rem;
+    text-align: center;
+}
+.ad-header img {
+    display: inline-block;
+    width: 100%;
+    height: 4.8rem;
+}
+.ad-title {
+    padding: 0.4rem 0.32rem;
     background: #fff;
 }
-.ad-item > .icon{
-    display: inline-block;
-    width: 20px;
-    text-align: center;
+.ad-title + .ad-title {
+    padding-top: 0;
+}
+.ad-title + .ad-title p {
+    margin-left: 0.426666rem;
+}
+.ad-title-left {
+    overflow: hidden;
+}
+.ad-title-left h2 {
+    padding-left: 0.32rem;
+    line-height: 0.533333rem;
     font-size: 16px;
+    font-weight: bold;
+    border-left: 0.106666rem solid #2bd3b2;
 }
-.ad-item > span:last-child{
-    float: right;
+.ad-title-tags {
+    margin-left: 0.426666rem;
+    margin-top: 0.4rem;
+}
+.ad-title-right {
+    width: 2.133333rem;
+    text-align: center;
     color: #999;
+    border-left: 1px solid #eee;
 }
-.ad-item > p{
-    padding-top: 5px;
-    padding-left: 24px;
-    color: #999;
+.ad-title-right img {
+    width: 0.8rem;
+    height: 0.8rem;
 }
+.ad-title-right p {
+    font-size: 14px;
+}
+.ad-item{
+    padding: 0.4rem 0.32rem;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+}
+.ad-item img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
 .ad-confirm-btn{
     position: absolute;
     bottom: 0;
@@ -1371,12 +1392,13 @@ textarea::-moz-placeholder{
     text-align: center;
     color: #999;
     font-size: 16px;
+    border-bottom: 1px solid #eee;
 }
 .pa-tabs span {
-    padding: 0.293333rem 0.13333rem;
+    padding: 0.426666rem 0.4rem;
 }
 .pa-tabs .active {
-    padding-bottom: 0.213333rem;
+    padding-bottom: 0.346666rem;
     color: #2bd3b2;
     border-bottom: 0.08rem solid #2bd3b2;
 }
@@ -1429,7 +1451,7 @@ textarea::-moz-placeholder{
 }
 .pa-buttons {
     padding: 0.26666rem;
-    line-height: 0.8rem;
+    line-height: 0.746666rem;
     background: #fff;
     border-bottom: 1px solid #eee;
     text-align: right;
@@ -1437,14 +1459,36 @@ textarea::-moz-placeholder{
 .pa-btn {
     display: inline-block;
     margin: 0 0.13333rem;
-    line-height: 0.746666rem;
-    width: 2.13333rem;
-    height: 0.746666rem;
+    line-height: 0.693333rem;
+    width: 2.29333rem;
+    height: 0.693333rem;
     text-align: center;
     font-size: 14px;
     color: #666;
     border: 1px solid #eee;
     border-radius: 4px;
+}
+/*infinite loading*/
+.infinite-spinner {
+    padding: 0.266666rem;
+}
+.infinite-spinner > img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0.8rem;
+    height: 0.8rem;
+}
+.infinite-spinner > .text {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    color: #999;
+}
+.infinite-status-prompt {
+    padding: 0.266666rem !important;
+    line-height: 0.666666rem;
+    font-size: 16px !important;
+    color: #999 !important;
 }
 /*---------------------map CSS-----------------------*/
 .amap-logo{

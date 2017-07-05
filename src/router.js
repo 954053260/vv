@@ -9,7 +9,9 @@ import login from './view/login.vue'
 import home from './view/home.vue'
 import chat from './view/chat.vue'
 import personInfo from './view/personInfo.vue'
-import personActivity from './view/personActivity.vue'
+import personActivityJoin from './view/personActivityJoin.vue'
+import personActivityAdd from './view/personActivityAdd.vue'
+import personActivityCollection from './view/personActivityCollection.vue'
 import addActivity from './view/addActivity.vue'
 import activityDetail from './view/activityDetail.vue'
 import evaluate from './view/evaluate.vue'
@@ -27,7 +29,9 @@ const router = new VueRouter({
                 { path: 'home', component: home, name: '主页'},
                 { path: 'chat', component: chat, name: '聊天'},
                 { path: 'personInfo', component: personInfo, name: '个人中心'},
-                { path: 'personActivity', component: personActivity, name: '活动'},
+                { path: 'personActivityJoin', component: personActivityJoin, name: '我的参与'},
+                { path: 'personActivityAdd', component: personActivityAdd, name: '我的发布'},
+                { path: 'personActivityCollection', component: personActivityCollection, name: '我的收藏'},
                 { path: 'addActivity', component: addActivity, name: '发布活动'},
                 { path: 'activityDetail', component: activityDetail, name: '活动详情'},
                 { path: 'evaluate', component: evaluate, name: '评价'},
@@ -39,27 +43,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-
-    if (to.path != '/app/personActivity') {
-        document.title = to.name;
-    } else {
-        switch (to.query.type) {
-            case '1':
-                document.title = '参与的' + to.name;
-                break;
-            case '2':
-                document.title = '发布的' + to.name;
-                break;
-            case '3':
-                document.title = '收藏的' + to.name;
-                break;
-        }
-    }
-
     switch (to.path) {
         case '/app/addActivity':
         case '/app/activityDetail':
-        case '/app/personActivity':
+        case '/app/personActivityJoin':
+        case '/app/personActivityAdd':
+        case '/app/personActivityCollection':
         case '/app/personInfo':
         case '/app/chat':
         case '/app/evaluate':

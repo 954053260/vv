@@ -7,7 +7,7 @@
       </label>
     </header>
     <a class="home-user-btn" @click="toggleUserMenu(true)">
-      <img src="static/icon/icon-user.png">
+      <img src="static/icon/icon-user-fill.png">
     </a>
     <a class="home-chat-btn" @click="toggleChat(true)">
       <img src="static/icon/icon-chat-fill.png">
@@ -51,21 +51,21 @@
         </div>
         <ul class="home-user-list clear-float">
           <li>
-            <router-link to="/app/personActivity?type=1">
+            <router-link to="/app/personActivityJoin">
               <img src="static/icon/icon-flag.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">参与的活动</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/app/personActivity?type=2">
+            <router-link to="/app/personActivityAdd">
               <img src="static/icon/icon-release.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">发布的活动</p>
             </router-link>
           </li>
           <li>
-            <router-link to="/app/personActivity?type=3">
+            <router-link to="/app/personActivityCollection">
               <img src="static/icon/icon-star.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">收藏的活动</p>

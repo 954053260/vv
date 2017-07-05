@@ -1,66 +1,90 @@
 <template>
   <div id="activityDetail" class="container bc-page">
-    <div v-if="activity" class="ad-content">
-      <header v-if="activity.images" class="aa-header bb1-ddd">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="slide in activity.images">
-            <div class="aa-slide row row-center"><img :src="host + slide"/></div>
-          </swiper-slide>
-        </swiper>
-      </header>
-      <div class="ad-title bc-fff">
-        <div class="ad-title-tags">
-          <span>{{activity.activityType.desc}}</span>
-        </div>
-        <div class="row">
-          <div class="col ad-title-left">
-            {{activity.title}}
+    <div v-if="activity">
+      <div class="ad-content">
+        <header v-if="activity.images" class="ad-header">
+          <swiper :options="swiperOption">
+            <swiper-slide v-for="slide in activity.images">
+              <div class="ad-slide row row-center"><img :src="host + slide"/></div>
+            </swiper-slide>
+          </swiper>
+        </header>
+        <div class="ad-title">
+          <div class="row pb15 bb1-eee">
+            <div class="col ad-title-left">
+              <h2 class="font-hide">{{activity.title}}</h2>
+              <div class="ad-title-tags c-ff9800 f16">
+                <span>#{{activity.activityType.desc}}#</span>
+                <span :class="{'c-999': activity.activityStatus.value != 103}">#{{activity.activityStatus.desc}}#</span>
+              </div>
+            </div>
+            <div class="ad-title-right row row-center">
+              <a v-if="activity.isCollected" @click="collectActivity">
+                <img src="static/icon/icon-star-fill.png">
+                <p class="c-main">已收藏</p>
+              </a>
+              <a v-else="!activity.isCollected" @click="collectActivity">
+                <img src="static/icon/icon-star.png">
+                <p class="c-main">收藏</p>
+              </a>
+            </div>
           </div>
-          <a class="ad-title-right" @click="collectActivity">
-            <i class="icon ion-ios-heart-outline"></i>
-            <p>{{activity.isCollected ? '取消收藏' : '收藏'}}</p>
-          </a>
+        </div>
+        <div class="ad-title bb1-eee">
+          <div class="row row-center">
+            <a class="col ad-title-left lh30 f16">
+              <img class="fr w30 h30" src="static/icon/icon-right.png">
+              <span class="fr c-ff9800">4.8分好评</span>
+              <p class="font-hide">{{activity.linkMan}}</p>
+            </a>
+            <div class="ad-title-right">
+              <a @click="toChat()">
+                <img src="static/icon/icon-chat.png">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="ad-item row lh30 mt10">
+          <img src="static/icon/icon-address.png">
+          <p class="col">{{activity.address}}</p>
+        </div>
+        <div class="ad-item row lh30">
+          <img src="static/icon/icon-time.png">
+          <p class="col">{{activity.beginTime | date('MM月dd日 HH:mm')}} - {{activity.endTime | date('MM月dd日 HH:mm')}}</p>
+        </div>
+        <div class="ad-item mt10">
+          <div class="row lh30">
+           <div class="row col">
+             <img src="static/icon/icon-rmb.png">
+             <p class="col c-main">{{activity.fee}}元/人</p>
+           </div>
+            <div class="row col">
+              <img src="static/icon/icon-user.png">
+              <p class="col c-main">{{activity.participantCount}}/{{activity.limitCount}}人参与</p>
+            </div>
+          </div>
+        </div>
+        <div class="ad-item">
+          <div class="row">
+            <img src="static/icon/icon-desc.png">
+            <div class="col lh30">
+              <p>活动介绍</p>
+              <p class="lh25 c-666">{{activity.content}}</p>
+            </div>
+          </div>
         </div>
       </div>
-      <ul class="ad-list">
-        <li class="ad-item">
-          <i class="icon ion-ios-clock-outline"></i>
-          <span>时间</span>
-          <span>{{activity.beginTime | date('MM月dd日 HH:mm')}} - {{activity.endTime | date('MM月dd日 HH:mm')}}</span>
-        </li>
-        <li class="ad-item">
-          <i class="icon ion-ios-location-outline"></i>
-          <span>活动地点</span>
-          <p>{{activity.address}}</p>
-        </li>
-        <li class="ad-item">
-          <i class="icon ion-ios-flag-outline"></i>
-          <span>主办方</span>
-          <span>{{activity.linkMan}}</span>
-        </li>
-        <li class="ad-item">
-          <i class="icon ion-ios-pricetag-outline"></i>
-          <span>活动费用</span>
-          <span>{{activity.fee}}元</span>
-        </li>
-        <li class="ad-item">
-          <i class="icon ion-ios-personadd-outline"></i>
-          <span>已报名人数</span>
-          <span>{{activity.participantCount}}/{{activity.limitCount}}人</span>
-        </li>
-        <li class="ad-item">
-          <i class="icon ion-ios-paper-outline"></i>
-          <span>活动介绍</span>
-          <p>{{activity.content}}</p>
-        </li>
-      </ul>
-    </div>
-    <div class="ad-confirm-btn row">
-      <a class="w45 tc f20 bc-fff c-666 bt1-ddd" @click="toChat()"><i class="pr icon ion-chatbubble-working" style="top: -2px"></i></a>
-      <a v-if="activity.activityStatus.value == '106'" class="col bc-ccc">活动已开始</a>
-      <a v-if="activity.activityStatus.value == '107'" class="col bc-ccc">活动已结束</a>
-      <a v-if="activity.activityStatus.value != '106' && activity.activityStatus.value != '107' && activity.isPartaked" class="col" @click="cancelActivity()">取消参加</a>
-      <a v-if="activity.activityStatus.value != '105' && activity.activityStatus.value != '106' && activity.activityStatus.value != '107' && !activity.isPartaked" class="col" @click="submitActivity()">我要参加</a>
+      <a v-if="!activity.isPartaked && activity.activityStatus.value != '105' && activity.activityStatus.value != '106' && activity.activityStatus.value != '107'"
+         class="ad-foot bc-main c-fff" @click="submitActivity()">
+        我要参加
+      </a>
+      <a v-if="activity.isPartaked && activity.activityStatus.value != '106' && activity.activityStatus.value != '107' && activity.isPartaked"
+         class="ad-foot bc-999 c-fff" @click="cancelActivity()">
+        我要取消
+      </a>
+      <a v-if="activity.activityStatus.value == '105' && !activity.isPartaked" class="ad-foot bc-ccc">截止报名</a>
+      <a v-if="activity.activityStatus.value == '106'" class="ad-foot bc-999 c-fff">已开始</a>
+      <a v-if="activity.activityStatus.value == '107'" class="ad-foot bc-999 c-fff">已结束</a>
     </div>
   </div>
 </template>
@@ -117,12 +141,14 @@
           activityNo: this.$route.query.activityNo
         }}).then((data) => {
           this.$loading.hide();
+
           if (data.code == 0) {
             this.$toast.info(isCollected ? '取消成功' : '收藏成功');
             this.activity.isCollected = !isCollected;
           } else {
             this.$toast.info(isCollected ? '取消失败' : '收藏失败');
           }
+
         }, () => {
           this.$toast.info(isCollected ? '取消失败' : '收藏失败');
           this.$loading.hide();
@@ -135,6 +161,7 @@
           activityNo: this.$route.query.activityNo
         }}).then((data) => {
           this.$loading.hide();
+
           if (data.code == 0) {
             this.$toast.info('取消成功');
             this.activity.isPartaked != this.activity.isPartaked;
@@ -142,6 +169,7 @@
           } else {
             this.$toast.info('取消失败');
           }
+
         }, () => {
           this.$toast.info('取消失败');
           this.$loading.hide();
@@ -154,6 +182,7 @@
           activityNo: this.$route.query.activityNo
         }}).then((data) => {
           this.$loading.hide();
+
           if (data.code == 0) {
             this.$toast.info('参与成功');
             this.activity.isPartaked != this.activity.isPartaked;
@@ -161,6 +190,7 @@
           } else {
             this.$toast.info('参与失败');
           }
+
         }, () => {
           this.$toast.info('参与失败');
           this.$loading.hide();
