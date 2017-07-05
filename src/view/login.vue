@@ -3,7 +3,7 @@
     <img class="login-logo" src="static/img/logo.jpg">
     <div class="login-content">
       <div class="login-input pr row">
-        <i class="icon ion-android-phone-portrait"></i>
+        <img src="static/icon/icon-phone.png">
         <input class="col" type="number" placeholder="请输入手机号" v-model="phone"
                :class="{'c-999': !phone, 'c-666': phone}"
                @blur="validatePhone()"
@@ -12,7 +12,7 @@
       </div>
       <div class="row">
         <div class="login-input row col">
-          <i class="icon ion-locked"></i>
+          <img src="static/icon/icon-pwd.png">
           <input class="col" :class="{'c-999': !code, 'c-666': code}" type="number" placeholder="短信验证码" v-model="code">
         </div>
         <button class="login-code-btn" @click="getCode">{{codeText}}</button>

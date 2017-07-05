@@ -649,12 +649,11 @@ textarea::-moz-placeholder{
     border: 1px solid #ddd;
     background: #fff;
 }
-.login-input > .icon{
+.login-input > img{
     float: left;
-    font-size: 22px;
-    width: 1.17333rem;
-    text-align: center;
-    color: #ccc;
+    padding: 0.1866666rem;
+    height: 0.8rem;
+    width: 0.8rem;
 }
 .login-input > input{
     float: left;
