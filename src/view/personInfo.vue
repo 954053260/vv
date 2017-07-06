@@ -44,9 +44,13 @@
       </div>
     </transition>
     <transition name="fade">
-    <div v-show="tab == 2" class="f16 bc-fff">
+    <div v-show="tab == 2" class="h f16 bc-fff">
         <div class="pi-tags-header">
-          <p class="tr"><a @click="hideTags"><i class="icon ion-ios-close-outline"></i></a></p>
+          <p class="tr">
+            <a @click="hideTags">
+              <img class="w30" src="static/icon/icon-close.png">
+            </a>
+          </p>
           <p class="f18 tc c-main">你对什么感兴趣？</p>
           <p class="f14 tc c-999">选择你想要看到的内容吧</p>
         </div>
@@ -85,7 +89,7 @@
         nickname: '',
         gender: '',
         mobile: '',
-        signature: '失败是成功之母，go! go！go！',
+        signature: '',
         hobbies: []
       }
     },

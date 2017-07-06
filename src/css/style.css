@@ -125,8 +125,8 @@ textarea::-moz-placeholder{
 .f30 {font-size: 30px}
 .fl {float: left;}
 .fr {float: right;}
+.h {height: 100%;}
 .h30 {height: 0.8rem}
-.h100 {height: 100px}
 .hidden {overflow: hidden}
 .lh20 {line-height: 0.533333rem}
 .lh25 {line-height: 0.666666rem}
@@ -720,29 +720,29 @@ textarea::-moz-placeholder{
 }
 .home-header {
     position: fixed;
-    top: 0.45333rem;
-    left: 1.86666rem;
-    right: 1.86666rem;
-    padding: 0.23333rem 0.4rem;
+    top: 0.48rem;
+    left: 1.866666rem;
+    right: 1.866666rem;
+    padding: 0.18666666rem 0.4rem;
     background: #fff;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     border-radius: 1.0666rem;
 }
 .home-header img {
     float: left;
-    padding-right: 0.26666rem;
-    width: 0.53333rem;
-    height: 0.53333rem;
+    padding-right: 0.266666rem;
+    width: 0.533333rem;
+    height: 0.533333rem;
 }
 .home-header label {
     display: block;
     overflow: hidden;
 }
 .home-header input {
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
-    height: 0.55555rem;
-    line-height: 0.55555rem;
+    height: 0.533333rem;
+    line-height: 0.533333rem;
     border: none;
 }
 .home-user-btn,
@@ -761,9 +761,9 @@ textarea::-moz-placeholder{
 .home-location-btn img,
 .home-filter-btn img {
     display: inline-block;
-    padding: 0.16rem;
-    width: 0.82666rem;
-    height: 0.82666rem;
+    padding: 0.24rem;
+    width: 0.693333rem;
+    height: 0.693333rem;
     border-radius: 50%;
     background: #fff;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);

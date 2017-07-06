@@ -1,5 +1,5 @@
 import './assets/hourglass.gif'
-import './css/ionicons.min.css'
+//import './css/ionicons.min.css'
 import './css/style.css'
 import './directive.js'
 import './filter.js'

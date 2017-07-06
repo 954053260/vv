@@ -1,7 +1,8 @@
 <template>
     <div class="checkbox">
         <label class="checkbox-content">
-            <i class="icon" :class="{'ion-ios-checkmark-outline': checked, 'ion-ios-circle-outline': !checked}"></i>
+            <img v-show="checked" src="static/icon/icon-check.png">
+            <img v-show="!checked" src="static/icon/icon-circle.png">
             <input type="checkbox"  style="display: none"
                    :checked="checked"
                    :name="name"
@@ -39,14 +40,14 @@
         height: 0.8rem;
         line-height: 0.8rem;
     }
-    .checkbox-content > i,
+    .checkbox-content > img,
     .checkbox-content > span{
         display: inline-block;
         vertical-align: middle;
     }
-    .checkbox-content > i{
-        color: #999;
-        font-size: 22px;
+    .checkbox-content > img{
+        width: 0.533333333rem;
+        height: 0.533333333rem;
     }
     .checkbox-content > span{
         font-size: 14px;
