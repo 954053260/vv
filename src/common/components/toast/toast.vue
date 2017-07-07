@@ -2,7 +2,7 @@
     <transition :name="transitionName">
         <div class="toast-notice">
             <p class="toast-message">
-                <i class="toast-icon icon ion-information-circled"></i>{{message}}
+                {{message}}
             </p>
         </div>
     </transition>

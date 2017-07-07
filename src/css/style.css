@@ -66,12 +66,11 @@ textarea:-moz-placeholder{
     font-size: inherit;
 }
 input::-moz-placeholder,
-textarea::-moz-placeholder{
+textarea::-moz-placeholder {
     color: inherit;
     font-size: inherit;
 }
-
-.container{
+.container {
     position: absolute;
     top: 0;
     right: 0;
@@ -99,7 +98,7 @@ textarea::-moz-placeholder{
 .bc-ff9800 {background: #ff9800}
 .bc-green {background: green}
 .bc-1e90ff {background: #1e90ff}
-.bc-page {background: #f2f2f2;}
+.bc-page {background: #fafafa;}
 .bc-999 {background: #999}
 .bc-fff {background: #fff;}
 .b1-eee {border: 1px solid #eee}
@@ -115,23 +114,22 @@ textarea::-moz-placeholder{
 .dp-n {display: none;}
 .dp-b {display: block;}
 .dp-ib {display: inline-block;}
-.brp50 {border-radius: 50%}
-.f12 {font-size: 12px}
-.f13 {font-size: 13px}
-.f14 {font-size: 14px}
-.f16 {font-size: 16px}
-.f18 {font-size: 18px}
-.f20 {font-size: 20px}
-.f30 {font-size: 30px}
+.brp50 {border-radius: 50%;}
+.f12 {font-size: 12px;}
+.f13 {font-size: 13px;}
+.f14 {font-size: 14px;}
+.f16 {font-size: 16px;}
+.f18 {font-size: 18px;}
+.f20 {font-size: 20px;}
 .fl {float: left;}
 .fr {float: right;}
 .h {height: 100%;}
-.h30 {height: 0.8rem}
-.hidden {overflow: hidden}
-.lh20 {line-height: 0.533333rem}
-.lh25 {line-height: 0.666666rem}
-.lh30 {line-height: 0.8rem}
-.lh44 {line-height: 1.173333rem}
+.h30 {height: 0.8rem;}
+.hidden {overflow: hidden;}
+.lh20 {line-height: 0.533333rem;}
+.lh25 {line-height: 0.666666rem;}
+.lh30 {line-height: 0.8rem;}
+.lh44 {line-height: 1.173333rem;}
 .m20 {margin: 20px;}
 .mt0 {margin-top: 0;}
 .mt5 {margin-top: 5px;}
@@ -140,8 +138,8 @@ textarea::-moz-placeholder{
 .mr5 {margin-right: 0.133333rem;}
 .mr10 {margin-right: 0.266666rem;}
 .mr30 {margin-right: 30px;}
-.mb10{margin-bottom: 0.266666rem;}
-.ml10{margin-left: 0.266666rem;}
+.mb10 {margin-bottom: 0.266666rem;}
+.ml10 {margin-left: 0.266666rem;}
 .p5 {padding: 5px;}
 .p10 {padding: 10px;}
 .p20 {padding: 20px}
@@ -152,26 +150,26 @@ textarea::-moz-placeholder{
 .pb10 {padding-bottom: 0.266666rem;}
 .pb15 {padding-bottom: 0.4rem;}
 .pt20 {padding-top: 20px;}
-.pa{position: absolute;}
-.pr{position: relative;}
-.tc{text-align: center;}
-.tr{text-align: right;}
-.vm{vertical-align: middle}
-.w30{width: 0.8rem}
-.w40{width: 40px}
-.w45{width: 45px}
-.w50{width: 1.333333rem}
-.w60{width: 1.6rem}
-.w70{width: 1.866666rem}
-.w100{width: 100px;}
-.w{width: 100%}
-.z-1{z-index: 1}
-.z-2{z-index: 2}
-.z-999{z-index: 999}
-.z-1000{z-index: 1000}
+.pa {position: absolute;}
+.pr {position: relative;}
+.tc {text-align: center;}
+.tr {text-align: right;}
+.vm {vertical-align: middle;}
+.w30 {width: 0.8rem;}
+.w40 {width: 40px;}
+.w45 {width: 45px;}
+.w50 {width: 1.333333rem;}
+.w60 {width: 1.6rem;}
+.w70 {width: 1.866666rem;}
+.w100 {width: 100px;}
+.w {width: 100%;}
+.z-1 {z-index: 1;}
+.z-2 {z-index: 2;}
+.z-999 {z-index: 999;}
+.z-1000 {z-index: 1000;}
 /* ---------------------common CSS----------------------- */
 .mask,
-.mask-no{
+.mask-no {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -179,10 +177,10 @@ textarea::-moz-placeholder{
     right: 0;
     height: 100%;
 }
-.mask{
+.mask {
     background-color: rgba(55,55,55,.6);
 }
-.btn{
+.btn {
     display: inline-block;
     padding: 8px 16px;
     font-size: 14px;
@@ -190,14 +188,14 @@ textarea::-moz-placeholder{
     outline: none;
     border: none;
 }
-.btn-clear{
+.btn-clear {
     background: transparent;
     border-radius: 0;
 }
-.btn-full{
+.btn-full {
     width: 100%;
 }
-.clear-float{/*清除浮动*/
+.clear-float {/*清除浮动*/
     zoom:1;
 }
 .clear-float:after {
@@ -208,13 +206,13 @@ textarea::-moz-placeholder{
     height: 0;
     visibility:hidden;
 }
-.row{
+.row {
     display:-webkit-box;
     display:-webkit-flex;
     display:-ms-flexbox;
     display:flex;
 }
-.row-center{
+.row-center {
     -webkit-box-direction: normal;
     -moz-box-direction: normal;
     -webkit-box-orient: horizontal;
@@ -231,7 +229,6 @@ textarea::-moz-placeholder{
     -ms-flex-pack: center;
     justify-content: center;
     -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
     align-content: stretch;
     -webkit-box-align: center;
     -moz-box-align: center;
@@ -240,96 +237,46 @@ textarea::-moz-placeholder{
     align-items: center;
 }
 .col,
-.col-1{
+.col-1 {
     -webkit-box-flex:1;
     -webkit-flex:1;
     -ms-flex:1;
     flex:1;
 }
-.col-2{
+.col-2 {
     -webkit-box-flex:2;
     -webkit-flex:2;
     -ms-flex:2;
     flex:2;
 }
-.col-3{
+.col-3 {
     -webkit-box-flex:3;
     -webkit-flex:3;
     -ms-flex:3;
     flex:3;
 }
-.col-4{
+.col-4 {
     -webkit-box-flex:4;
     -webkit-flex:4;
     -ms-flex:4;
     flex:4;
 }
-.col-5{
+.col-5 {
     -webkit-box-flex:5;
     -webkit-flex:5;
     -ms-flex:5;
     flex:5;
 }
-.col-5{
+.col-5 {
     -webkit-box-flex:5;
     -webkit-flex:5;
     -ms-flex:5;
     flex:5;
 }
-.font-hide{
+.font-hide {
     overflow: hidden;
     white-space: nowrap;
     text-overflow:ellipsis;
-}
-.i-table{
-    font-size: 14px;
-    color: #333;
-    border-left: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-}
-.i-tr{
-    display:-webkit-box;
-    display:-webkit-flex;
-    display:-ms-flexbox;
-    display:flex;
-}
-.i-tr:nth-child(2n+1){
-    background:#eee;
-}
-.i-tr:first-child{
-    color: #fff;
-    background: #39f;
-}
-.i-td{
-    padding: 8px 10px;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-}
-.i-td-1{
-    -webkit-box-flex:1;
-    -webkit-flex:1;
-    -ms-flex:1;
-    flex:1;
-}
-
-.list{
-
-}
-.item{
-    padding: 15px;
-    font-size: 14px;
-    background: #fff;
-    border-bottom: 1px solid #ddd;
-}
-.item:first-child{
-    border-top: 1px solid #ddd;
-}
-.item-icon-right > .icon,
-.item-icon-right > a > .icon{
-    float: right;
-}
-.item-icon-right > a{
-    display: block;
 }
 /* ---------------------components CSS----------------------- */
 .m-select {
@@ -376,7 +323,7 @@ textarea::-moz-placeholder{
     max-height: 5.33333rem;
     overflow: auto;
 }
-.m-select-list li{
+.m-select-list li {
     padding: 0.13333rem;
     line-height: 0.8rem;
 }
@@ -405,14 +352,14 @@ textarea::-moz-placeholder{
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
-.confirm-position{
+.confirm-position {
     position: fixed;
     top: 40%;
     left: 0;
     width: 100%;
     z-index: 1000;
 }
-.confirm{
+.confirm {
     position: relative;
     margin: 0 auto;
     width: 80%;
@@ -424,7 +371,7 @@ textarea::-moz-placeholder{
     border: 1px solid #ddd;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
-.confirm-title{
+.confirm-title {
     padding: 14px 16px;
     font-size: 14px;
     line-height: 20px;
@@ -434,12 +381,12 @@ textarea::-moz-placeholder{
     white-space: nowrap;
     border-bottom: 1px solid #e3e8ee;
 }
-.confirm-content{
+.confirm-content {
     padding: 20px 16px;
     font-size: 14px;
     line-height: 1.5;
 }
-.confirm-buttons{
+.confirm-buttons {
     border-top: 1px solid #e3e8ee;
     padding: 12px 18px;
     text-align: right;
@@ -454,21 +401,21 @@ textarea::-moz-placeholder{
     animation-play-state: running;
     animation-timing-function: ease-in-out
 }
-.toast-content{
+.toast-content {
     position: fixed;
-    font-size: 12px;
+    font-size: 14px;
     z-index: 1000;
     width: 100%;
     top: 16px;
     left: 0;
 }
-.toast-notice{
+.toast-notice {
     position: absolute;
     left: 50%;
     width: auto;
     vertical-align: middle;
 }
-.toast-message{
+.toast-message {
     position: relative;
     right: 50%;
     padding: 8px 16px;
@@ -476,13 +423,6 @@ textarea::-moz-placeholder{
     box-shadow: 0 1px 6px rgba(0,0,0,.2);
     background: #fff;
     display: block;
-}
-.toast-icon{
-    position: relative;
-    top: 1px;
-    margin-right: 10px;
-    color: #39f;
-    font-size: 14px;
 }
 /*transition-toast*/
 .toast-enter-active {
@@ -879,10 +819,29 @@ textarea::-moz-placeholder{
 .home-chat-list {
 }
 .home-chat-item {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+}
+.home-chat-item > .row {
+    position: relative;
     padding: 0.266666rem;
     line-height: 0.533333rem;
-    border-bottom: 1px solid #ddd;
+    z-index: 2;
     background: #fff;
+}
+.home-chat-item > .item-options {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1.86666666rem;
+    line-height: 1.86666666rem;
+    text-align: center;
+    background: #F44336;
+    font-size: 16px;
+    color: #fff;
+    z-index: 1;
 }
 .home-chat-item:first-child {
     border-top: 1px solid #ddd;

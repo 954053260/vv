@@ -94,13 +94,14 @@
       <div v-if="isChat" class="home-chat bc-page home-chat-list">
         <ul>
           <li class="home-chat-item" v-for="item in friends">
-            <router-link class="row" :to="'/app/chat?friendUserNo=' + item.friendUserNo">
+            <router-link v-cell-swipe class="row" :to="'/app/chat?friendUserNo=' + item.friendUserNo">
               <img :src="host + item.friendAvatar" width="40" height="40">
               <div class="home-chat-content col">
                 <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | date('MM/dd HH:mm')}}</span></p>
                 <p class="text">{{item.lastMessageContent}}</p>
               </div>
             </router-link>
+            <a class="item-options">删除</a>
           </li>
         </ul>
       </div>
@@ -127,14 +128,14 @@
       }
     },
     computed: mapState({
-      host:  state => state.host,
-      user:  state => state.user.info,
-      activityOrganizationTypes:  state => state.map.activityOrganizationTypes,
-      activityTypes:  state => state.map.activityTypes,
-      dateRange:  state => state.map.dateRange,
-      dateIndex:  state => state.map.dateIndex,
-      typeIndex:  state => state.map.typeIndex,
-      organizationTypesIndex:  state => state.map.organizationTypesIndex,
+      host: state => state.host,
+      user: state => state.user.info,
+      activityOrganizationTypes: state => state.map.activityOrganizationTypes,
+      activityTypes: state => state.map.activityTypes,
+      dateRange: state => state.map.dateRange,
+      dateIndex: state => state.map.dateIndex,
+      typeIndex: state => state.map.typeIndex,
+      organizationTypesIndex: state => state.map.organizationTypesIndex,
     }),
     methods: {
       location: function () {

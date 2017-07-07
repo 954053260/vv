@@ -24,6 +24,61 @@ Vue.directive('clickoutside', {
     }
 });
 
+Vue.directive('cellSwipe', {
+    inserted (el, binding, vnode) {
+
+        el.className += ' cell-swipe';
+
+        el.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+            e = e.touches[0];
+            var x = e.clientX;
+            var optionsWidth = el.nextElementSibling && el.nextElementSibling.offsetWidth;
+            var distance;
+            var translateX = el.style.transform ? el.style.transform.match(/(\d+)px/)[1] : 0;
+            var cellNodes = document.querySelectorAll('.cell-swipe');
+            var i = 0;
+
+            if (!translateX) {
+                for (; i < cellNodes.length; i++) {
+                    cellNodes[i].transform = null;
+                }
+            }
+
+            document.addEventListener('touchmove', mouseMove);
+            document.addEventListener('touchend', mouseUp);
+
+            function mouseMove (e) {
+                e = e.touches[0];
+                distance = Math.abs(x - e.clientX);
+
+                if (distance <= optionsWidth) {
+
+                    if (translateX) {
+                        el.style.transform = 'translate3d(-' + (translateX - distance) +'px, 0, 0)';
+                    } else {
+                        el.style.transform = 'translate3d(-' + distance +'px, 0, 0)';
+                    }
+
+                }
+            }
+            //停止事件
+            function mouseUp () {
+
+                if ((distance >= optionsWidth/2 && !translateX) || distance < optionsWidth/2 && translateX) {
+                    el.style.transform = 'translate3d(-' + optionsWidth +'px, 0, 0)';
+                } else {
+                    el.style.transform = null;
+                }
+
+                //卸载事件
+                document.removeEventListener('touchmove',mouseMove);
+                document.removeEventListener('touchend',mouseUp);
+            }
+        });
+    }
+});
+
 Vue.directive('imgload', {
     bind (el, binding, vnode) {
         var img = new Image(),
