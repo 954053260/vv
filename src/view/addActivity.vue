@@ -44,7 +44,7 @@
             <span>{{endDate | date('yyyy-MM-dd HH:mm')}}</span>
             <span v-if="!endDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
           </p>
-          <date-picker ref="end" v-model="endDate"></date-picker>
+          <date-picker ref="end" v-model="endDate" :start="startDate"></date-picker>
         </li>
         <li class="aa-item row">
           <span>活动地址</span>

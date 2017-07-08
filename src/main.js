@@ -13,8 +13,8 @@ import store from './store'
 import app from './view/app.vue'
 import ajax from './ajax.js'
 //import socket from './socket.js'
-import 'vue-smooth-picker/dist/css/style.css'
-import smoothPicker from 'vue-smooth-picker'
+import './common/vue-picker/style.css'
+import smoothPicker from './common/vue-picker/index.js'
 
 Vue.component('checkbox', checkbox);
 

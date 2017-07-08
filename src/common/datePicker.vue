@@ -30,7 +30,7 @@
             this.data.forEach((item, index) => {
                 switch (index) {
                     case 0:
-                        item.currentIndex = 10;
+                        item.currentIndex = 0;
                         item.list = this.createYear(year);
                         break;
                     case 1:
@@ -62,7 +62,7 @@
                 }
             });
         },
-        props: ['value'],
+        props: ['value', 'start'],
         data: function () {
             return {
                 show: false,
@@ -98,7 +98,6 @@
         methods: {
             createYear: function (year) {
                 var years = [];
-                year -= 10;
 
                 for (var i = 0; i < 21;i ++) {
                     years.push(year + i + '年');

@@ -38,9 +38,13 @@
           </li>
         </ul>
         <div class="app-info-window-buttons row">
-          <a class="col br1-eee" @click="collectActivity()">
+          <a v-if="!info.isCollected"class="col br1-eee" @click="collectActivity()">
             <img class="pr dp-ib vm w30" src="static/icon/icon-star.png" style="top: -0.053334rem">
             <span class="dp-ib vm">收藏</span>
+          </a>
+          <a v-if="info.isCollected" class="col br1-eee" @click="collectActivity()">
+            <img class="pr dp-ib vm w30" src="static/icon/icon-star-fill.png" style="top: -0.053334rem">
+            <span class="dp-ib vm">已收藏</span>
           </a>
           <a class="col bc-main c-fff" @click="toDetail()">详情</a>
         </div>
@@ -72,9 +76,21 @@
           var timeRange = this.dateRange[this.dateIndex].value;
           var activityOrganizationType = this.activityOrganizationTypes[this.organizationTypesIndex].value;
 
-          if (activityType) {params.activityType = activityType};
-          if (timeRange) {params.timeRange = timeRange};
-          if (activityOrganizationType) {params.activityOrganizationType = activityOrganizationType};
+          if (activityType) {
+            params.activityType = activityType;
+          }
+
+          if (timeRange) {
+            params.timeRange = timeRange;
+          }
+
+          if (activityOrganizationType) {
+            params.activityOrganizationType = activityOrganizationType;
+          }
+
+          if (this.token) {
+            params.token = this.token;
+          }
 
           this.$store.commit('SET_POSITION_RESULT', data);
 
@@ -125,6 +141,7 @@
       }
     },
     computed: mapState({
+      token: state => state.user.info.token,
       markers:  state => state.map.markers,
       positionResult:  state => state.map.positionResult,
       activityOrganizationTypes:  state => state.map.activityOrganizationTypes,
@@ -154,19 +171,28 @@
       },
       collectActivity: function () {
         if (this.$store.state.user.info.token) {
-          this.$loading.show('收藏...');
-          this.$http.post('/user/activity/collect', {data: {
-            token: this.$store.state.user.info.token,
+
+          var isCollected = this.info.isCollected;
+          var url = isCollected ? '/user/activity/collection/cancel' : '/user/activity/collect';
+          this.$loading.show(isCollected ? '取消...' : '收藏...');
+          this.$http.post(url, {data: {
+            token: this.token,
             activityNo: this.info.activityNo
           }}).then((data) => {
             this.$loading.hide();
+
             if (data.code == 0) {
-              this.$toast.info('收藏成功');
+              this.$toast.info(isCollected ? '取消成功' : '收藏成功');
+              this.info.isCollected = !isCollected;
+              this.$map.loadMap((map) => {
+                map.getPositionPicker().start();
+              });
             } else {
-              this.$toast.info('收藏失败');
+              this.$toast.info(isCollected ? '取消失败' : '收藏失败');
             }
+
           }, () => {
-            this.$toast.info('收藏失败');
+            this.$toast.info(isCollected ? '取消失败' : '收藏失败');
             this.$loading.hide();
           });
         } else {
