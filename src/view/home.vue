@@ -106,7 +106,10 @@
               <img :src="host + item.friendAvatar" width="40" height="40">
               <div class="home-chat-content col">
                 <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | date('MM/dd HH:mm')}}</span></p>
-                <p class="text">{{item.lastMessageContent}}</p>
+                <div>
+                  <span v-if="!item.isReaded" class="point"></span>
+                  <p class="text">{{item.lastMessageContent}}</p>
+                </div>
               </div>
             </router-link>
             <a class="item-options">删除</a>

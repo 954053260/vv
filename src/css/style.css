@@ -880,6 +880,15 @@ textarea::-moz-placeholder {
     padding-top: 0.25rem;
     font-size: 14px;
     color: #999;
+    overflow: hidden;
+}
+.home-chat-item .point {
+    float: right;
+    margin-top: 0.4rem;
+    width: 0.266666666666666rem;
+    height: 0.266666666666666rem;
+    border-radius: 50%;
+    background: red;
 }
 /*chat css*/
 .chat {

@@ -4,7 +4,7 @@
       <vue-pull-refresh :on-refresh="onRefresh">
         <ul class="chat-list">
           <li v-for="item in chats" class="chat-item">
-            <div v-if="item.toUserNo == token" class="row">
+            <div v-if="item.fromUserNo == friendUserNo" class="row">
               <img :src="host + item.fromAvatar">
               <div class="col">
                 <p class="name">{{item.fromNickName}}</p>
@@ -35,6 +35,7 @@
   export default {
     name:'app',
     created: function () {
+      this.friendUserNo = this.$route.query.friendUserNo;
       this.$loading.show('获取消息列表...');
       this.getMessages(() => {
         this.$loading.hide();
@@ -44,12 +45,11 @@
     },
     mounted: function () {
       var isLoad = false;
-
       this.interval = setInterval(() => {
         if (isLoad) return;
         isLoad = true;
         this.$http.get('/user/chat/message/list', {data: {
-          friendUserNo: this.$route.query.friendUserNo,
+          friendUserNo: this.friendUserNo,
           token: this.token,
           pageNumber: 1,
           pageSize: 20
@@ -91,7 +91,8 @@
         pageNumber: 1,
         hasData: true,
         chats: [],
-        isToBottom: false
+        isToBottom: false,
+        friendUserNo: ''
       }
     },
     computed: {
