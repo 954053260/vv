@@ -34,7 +34,7 @@
           <span>开始时间</span>
           <p class="col c-999 tr" @click="selectDate('start')">
             <span>{{startDate | date('yyyy-MM-dd HH:mm')}}</span>
-            <span v-if="!startDate">请选择</span>
+            <span v-if="!startDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
           </p>
           <date-picker ref="start" v-model="startDate"></date-picker>
         </li>
@@ -42,7 +42,7 @@
           <span>结束时间</span>
           <p class="col c-999 tr" @click="selectDate('end')">
             <span>{{endDate | date('yyyy-MM-dd HH:mm')}}</span>
-            <span v-if="!endDate">请选择</span>
+            <span v-if="!endDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
           </p>
           <date-picker ref="end" v-model="endDate"></date-picker>
         </li>
@@ -69,9 +69,9 @@
         </li>
         <li class="aa-item row" style="border-bottom: none;">
           <span>活动类别</span>
-          <p class="col c-999 tr">
-            {{activityTypes[typeIndex].desc}}
-          </p>
+          <!--<p class="col c-999 tr">-->
+            <!--{{activityTypes[typeIndex].desc}}-->
+          <!--</p>-->
         </li>
         <li class="pb10 bc-fff bb1-eee">
           <span v-for="(type, index) in activityTypes" class="aa-tag" :class="{active: type.desc == activityTypes[typeIndex].desc}"
@@ -120,7 +120,7 @@
     data: function () {
       return {
         swiperOption: {
-          autoplay: 3000,
+          autoplay: 30000,
           setWrapperSize :true,
           pagination : '.swiper-pagination',
           paginationClickable :true,

@@ -1,12 +1,14 @@
 <template>
-  <div id="personActivityAdd" class="container">
-    <div class="pa-search clear-float">
-      <img src="static/icon/icon-search.png">
-      <label>
-        <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
-      </label>
+  <div id="personActivityAdd" class="container bc-page">
+    <div class="bc-fff">
+      <div class="pa-search clear-float">
+        <img src="static/icon/icon-search.png">
+        <label>
+          <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        </label>
+      </div>
     </div>
-    <ul class="pa-list bt1-eee">
+    <ul class="pa-list">
       <li v-for="item in activities" @click="toDetail(item.activityNo)">
         <div class="pa-item">
           <img v-if="item.images" :src="host + item.images[0]"/>

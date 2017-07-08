@@ -7,7 +7,7 @@
                     <button class="btn btn-clear c-fff fl" @click="toggle(false)">取消</button>
                     <button class="btn btn-clear c-fff fr" @click="confirm()">确定</button>
                 </div>
-                <smooth-picker ref="smoothPicker" :data="data" :change="change" />
+                <smooth-picker ref="smoothPicker" :data="data" :change="change"/>
             </div>
         </transition>
     </div>

@@ -8,7 +8,8 @@ import map from './map.js'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
-        host: 'http://39.108.88.153:8080'
+        host: 'http://39.108.88.153:8080',
+        isRefresh: false // home页刷新按钮状态
     },
     getters:{
 

@@ -79,6 +79,11 @@
           this.$store.commit('SET_POSITION_RESULT', data);
 
           this.$store.dispatch('refreshMarker', params).then(() => {
+            if (this.$store.state.isRefresh) {
+              this.$store.state.isRefresh = false;
+              this.$toast.info('刷新成功');
+            }
+
             markers.forEach((item) => {
               this.$map.gd.remove(item);
             });
@@ -92,9 +97,12 @@
             });
 
           }, () => {
-
+            if (this.$store.state.isRefresh) {
+              this.$store.state.isRefresh = false;
+              this.$toast.info('数据暂无更新');
+            }
           });
-        }, (error) => {
+        }, () => {
           this.$toast.info('地址获取失败');
         });
         this.positionPicker.show();

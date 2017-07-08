@@ -1,5 +1,5 @@
 <template>
-  <div id="personActivityJoin" class="container">
+  <div id="personActivityJoin" class="container bc-page">
     <div class="pa-tabs row">
       <a class="col" @click="selectTab(0)">
         <span :class="{active: tab == 0}">进行中</span>
@@ -11,13 +11,15 @@
         <span :class="{active: tab == 2}">待评价</span>
       </a>
     </div>
-    <div class="pa-search clear-float">
-      <img src="static/icon/icon-search.png">
-      <label>
-        <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
-      </label>
+    <div class="bc-fff">
+      <div class="pa-search clear-float">
+        <img src="static/icon/icon-search.png">
+        <label>
+          <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        </label>
+      </div>
     </div>
-    <ul class="pa-list bt1-eee">
+    <ul class="pa-list">
       <li v-for="(item, index) in activities" @click="toDetail(item.activityNo)">
         <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
         <div class="pa-item">

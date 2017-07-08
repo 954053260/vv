@@ -1,8 +1,8 @@
 <template>
   <div id="chat" class="container bc-page">
-    <vue-pull-refresh :on-refresh="onRefresh">
-      <div class="chat">
-        <ul ref="chatList" class="chat-list">
+    <div class="chat" ref="chatList">
+      <vue-pull-refresh :on-refresh="onRefresh">
+        <ul class="chat-list">
           <li v-for="item in chats" class="chat-item">
             <div v-if="item.toUserNo == token" class="row">
               <img :src="host + item.fromAvatar">
@@ -20,13 +20,14 @@
             </div>
           </li>
         </ul>
-        <div class="chat-input">
-          <label>
-            <input type="text" @keydown="sendMsg($event)" v-model="msg">
-          </label>
-        </div>
-      </div>
-    </vue-pull-refresh>
+      </vue-pull-refresh>
+    </div>
+    <form class="chat-input" target="form-submit">
+      <label>
+        <input type="text" @keydown="sendMsg($event)" v-model="msg">
+      </label>
+    </form>
+    <iframe name="form-submit" style="display:none;"></iframe>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -65,6 +66,10 @@
               return new Date(a.createTime) -  new Date(b.createTime);
             });
 
+            if (this.isToBottom) {
+              this.isToBottom = false;
+              this.scrollBottom();
+            }
           } else {
             this.$toast.info('获取消息列表失败');
           }
@@ -85,7 +90,8 @@
         msg: '',
         pageNumber: 1,
         hasData: true,
-        chats: []
+        chats: [],
+        isToBottom: false
       }
     },
     computed: {
@@ -157,7 +163,7 @@
             this.$loading.hide();
             if (data.code == 0) {
               this.msg = '';
-              this.scrollBottom();
+              this.isToBottom = true;
             } else {
               this.$toast.info('发送失败');
             }

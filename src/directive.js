@@ -30,7 +30,7 @@ Vue.directive('cellSwipe', {
         el.className += ' cell-swipe';
 
         el.addEventListener('touchstart', function (e) {
-            e.preventDefault();
+            //e.preventDefault();
             e = e.touches[0];
             var x = e.clientX;
             var optionsWidth = el.nextElementSibling && el.nextElementSibling.offsetWidth;

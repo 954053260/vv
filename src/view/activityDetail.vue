@@ -12,6 +12,7 @@
         <div class="ad-title">
           <div class="row pb15 bb1-eee">
             <div class="col ad-title-left">
+              <span class="ad-title-borer"></span>
               <h2 class="font-hide">{{activity.title}}</h2>
               <div class="ad-title-tags c-ff9800 f16">
                 <span>#{{activity.activityType.desc}}#</span>
@@ -34,7 +35,7 @@
           <div class="row row-center">
             <router-link class="ad-title-left col lh30 f16" to="/app/hostInfo">
               <img class="fr w30 h30" src="static/icon/icon-right.png">
-              <span class="fr c-ff9800">4.8分好评</span>
+              <span class="fr c-ff9800">4.8好评</span>
               <p class="c-000 font-hide">{{activity.linkMan}}</p>
             </router-link>
             <div class="ad-title-right">
@@ -186,7 +187,6 @@
           if (data.code == 0) {
             this.$toast.info('参与成功');
             this.activity.isPartaked != this.activity.isPartaked;
-            this.$router.back();
           } else {
             this.$toast.info('参与失败');
           }

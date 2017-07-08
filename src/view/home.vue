@@ -3,7 +3,7 @@
     <header class="home-header clear-float">
       <img src="static/icon/icon-search.png">
       <label>
-        <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
       </label>
     </header>
     <a class="home-user-btn" @click="toggleUserMenu(true)">
@@ -21,17 +21,17 @@
     <a class="home-location-btn" @click="location()">
       <img src="static/icon/icon-location-fill.png">
     </a>
-    <a class="home-filter-btn" @click="toggleFilter()">
+    <a class="home-filter-btn" :class="{active: isFilter}" @click="toggleFilter()">
       <img src="static/icon/icon-list.png">
     </a>
     <div class="home-select-content">
       <transition name="fade">
         <div v-if="isFilter" class="pr row col z-2">
-          <m-select class="col lh30 mr5" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
+          <m-select class="col mr5" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
                     @input="changeOrganization"></m-select>
-          <m-select class="col lh30 mr5" :list="activityTypes" bindValue="desc" v-model="typeIndex"
+          <m-select class="col mr5" :list="activityTypes" bindValue="desc" v-model="typeIndex"
                     @input="changeTypes"></m-select>
-          <m-select class="col lh30" :list="dateRange" bindValue="desc" v-model="dateIndex"
+          <m-select class="col" :list="dateRange" bindValue="desc" v-model="dateIndex"
                     @input="changeRange"></m-select>
         </div>
       </transition>
@@ -46,44 +46,52 @@
           <img :src="host + user.user.avatar">
           <div class="c-fff">
             <p class="f16">{{user.user.nickname}}</p>
-            <p class="lh20 f13">“{{user.user.signature}}”</p>
+            <p class="lh20 f13"><span ng-if="user.user.signature">“</span>{{user.user.signature}}<span ng-if="user.user.signature">”</span></p>
           </div>
         </div>
         <ul class="home-user-list clear-float">
-          <li>
+          <li class="home-user-item">
             <router-link to="/app/personActivityJoin">
               <img src="static/icon/icon-flag.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">参与的活动</p>
             </router-link>
           </li>
-          <li>
+          <li class="home-user-item">
             <router-link to="/app/personActivityAdd">
               <img src="static/icon/icon-release.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">发布的活动</p>
             </router-link>
           </li>
-          <li>
+          <li class="home-user-item">
             <router-link to="/app/personActivityCollection">
               <img src="static/icon/icon-star.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">收藏的活动</p>
             </router-link>
           </li>
-          <li>
+          <li class="home-user-item">
             <router-link to="/app/authentication">
-              <img src="static/icon/icon-authenticate.png">
+              <img src="static/icon/icon-card.png">
               <img src="static/icon/icon-right.png">
               <span v-if="!user.user.idCardNo">未认证</span>
               <p>实名认证</p>
             </router-link>
           </li>
-          <li>
+          <li class="home-user-item">
             <router-link to="/app/about">
               <img src="static/icon/icon-about.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">关于我们</p>
+            </router-link>
+          </li>
+          <li class="home-user-item">
+            <router-link to="/app/authentication">
+              <img src="static/icon/icon-authenticate.png">
+              <img src="static/icon/icon-right.png">
+              <!--<span v-if="!user.user.idCardNo">未认证</span>-->
+              <p>群体用户申请</p>
             </router-link>
           </li>
         </ul>
@@ -220,6 +228,7 @@
         this.refresh();
       },
       refresh: function () {
+        this.$store.state.isRefresh = true;
         this.$map.loadMap((map) => {
           map.getPositionPicker().start();
         });

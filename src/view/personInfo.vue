@@ -28,19 +28,19 @@
             <li class="pi-item pi-item-2 row">
               <span>个性签名</span>
               <label class="col">
-                <textarea class="c-999" :class="{'tr': !signature}" type="text" placeholder="添加个性签名" v-model="signature"></textarea>
+                <textarea class="c-999 tr" :class="{'tr': !signature}" type="text" placeholder="添加个性签名" v-model="signature"></textarea>
               </label>
             </li>
             <li class="pi-item row">
               <span>兴趣爱好</span>
-              <a class="col c-999" :class="{'tr': hobbies.length == 0}" @click="showTags()">
+              <a class="col c-999 tr" :class="{'tr': hobbies.length == 0}" @click="showTags()">
                 <span v-if="hobbies.length == 0">添加兴趣爱好，逗号隔开</span>
                 <span v-for="(item, index) in hobbies"><span v-if="index">，</span>{{item.tagName}}</span>
               </a>
             </li>
           </ul>
         </div>
-        <a class="pi-btn" @click="saveInfo">保存</a>
+        <a class="pi-btn" :class="{active: isEdit}" @click="saveInfo">保存</a>
       </div>
     </transition>
     <transition name="fade">
@@ -82,6 +82,7 @@
     },
     data: function () {
       return {
+        isEdit: false,
         isPhone: true,
         tab: 1,
         tags: [],
@@ -205,6 +206,38 @@
           this.$loading.hide();
           this.$toast.info('保持信息失败');
         });
+      }
+    },
+    watch: {
+      'nickname': function (val, oldVal) {
+        console.log(oldVal)
+        if (oldVal) {
+          this.isEdit = true;
+        }
+      },
+      'avatar': function (val, oldVal) {
+        console.log(oldVal)
+        if (oldVal) {
+          this.isEdit = true;
+        }
+      },
+      'mobile': function (val, oldVal) {
+        console.log(oldVal)
+        if (oldVal) {
+          this.isEdit = true;
+        }
+      },
+      'signature': function (val, oldVal) {
+        console.log(oldVal)
+        if (oldVal) {
+          this.isEdit = true;
+        }
+      },
+      'hobbies': function (val, oldVal) {
+        console.log(oldVal)
+        if (oldVal.length) {
+          this.isEdit = true;
+        }
       }
     }
   }
