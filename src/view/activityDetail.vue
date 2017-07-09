@@ -165,8 +165,7 @@
 
           if (data.code == 0) {
             this.$toast.info('取消成功');
-            this.activity.isPartaked != this.activity.isPartaked;
-            this.$router.back();
+            this.activity.isPartaked = false;
           } else {
             this.$toast.info('取消失败');
           }
@@ -186,7 +185,7 @@
 
           if (data.code == 0) {
             this.$toast.info('参与成功');
-            this.activity.isPartaked != this.activity.isPartaked;
+            this.activity.isPartaked = true;
           } else {
             this.$toast.info('参与失败');
           }
