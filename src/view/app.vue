@@ -170,8 +170,9 @@
 
       },
       collectActivity: function () {
+        this.isInfo = false;
+        
         if (this.$store.state.user.info.token) {
-
           var isCollected = this.info.isCollected;
           var url = isCollected ? '/user/activity/collection/cancel' : '/user/activity/collect';
           this.$loading.show(isCollected ? '取消...' : '收藏...');

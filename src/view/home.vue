@@ -126,7 +126,9 @@
   export default {
     name: 'home',
     created: function () {
-
+      this.$map.loadMap((map) => {
+        map.getPositionPicker().start();
+      });
     },
     components: {mSelect},
     data: function () {
