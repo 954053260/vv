@@ -76,8 +76,9 @@
         </div>
       </div>
       <a v-if="!activity.isPartaked && activity.activityStatus.value != '105' && activity.activityStatus.value != '106' && activity.activityStatus.value != '107'"
-         class="ad-foot bc-main c-fff" @click="submitActivity()">
-        我要参加
+         :class="{'bc-999': activity.participantCount == activity.limitCount, 'bc-main': activity.participantCount < activity.limitCount}"
+         class="ad-foot c-fff" @click="submitActivity()">
+        {{activity.participantCount == activity.limitCount ? '报名人数已满' : '我要参加'}}
       </a>
       <a v-if="activity.isPartaked && activity.activityStatus.value != '106' && activity.activityStatus.value != '107' && activity.isPartaked"
          class="ad-foot bc-999 c-fff" @click="cancelActivity()">
@@ -165,6 +166,7 @@
 
           if (data.code == 0) {
             this.$toast.info('取消成功');
+            this.activity.participantCount -= 1;
             this.activity.isPartaked = false;
           } else {
             this.$toast.info('取消失败');
@@ -176,6 +178,11 @@
         });
       },
       submitActivity: function () {
+        if (this.activity.participantCount == this.activity.limitCount) {
+          this.$toast.info('活动报名人数已满!');
+          return;
+        }
+
         this.$loading.show('参与...');
         this.$http.post('/user/activity/takePartIn', {data: {
           token: this.$store.state.user.info.token,
@@ -185,6 +192,7 @@
 
           if (data.code == 0) {
             this.$toast.info('参与成功');
+            this.activity.participantCount += 1;
             this.activity.isPartaked = true;
           } else {
             this.$toast.info('参与失败');
