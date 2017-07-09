@@ -892,11 +892,8 @@ textarea::-moz-placeholder {
 }
 /*chat css*/
 .chat {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 1.3333333rem;
+    height: 100%;
+    padding-bottom: 1.3333333rem;
     overflow: auto;
 }
 .chat-list {
@@ -961,7 +958,7 @@ textarea::-moz-placeholder {
     border-right: none;
 }
 .chat-input {
-    position: absolute;
+    position: fixed;
     bottom: 0.2666666rem;
     left: 0;
     width: 100%;

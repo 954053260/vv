@@ -22,12 +22,11 @@
         </ul>
       </vue-pull-refresh>
     </div>
-    <form class="chat-input" target="form-submit">
+    <div class="chat-input" target="form-submit">
       <label>
         <input type="text" @keydown="sendMsg($event)" v-model="msg">
       </label>
-    </form>
-    <iframe name="form-submit" style="display:none;"></iframe>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
