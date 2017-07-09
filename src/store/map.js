@@ -16,9 +16,9 @@ export default {
         organizationTypesIndex: 0,
         typeIndex: 0,
         dateIndex: 0,
-        activityOrganizationTypes: [{value: 0, desc: '活动属性'}],
-        activityTypes: [{value: 0, desc: '活动类型'}],
-        dateRange: [{value: 0, desc: '活动时间'}]
+        activityOrganizationTypes: [{value: 0, desc: '全部'}],
+        activityTypes: [{value: 0, desc: '全部'}],
+        dateRange: [{value: 0, desc: '全部'}]
     },
     getters: {},
     mutations: {
