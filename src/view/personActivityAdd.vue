@@ -9,7 +9,7 @@
     </form>
     <div class="pa-list">
       <scroller :on-infinite="getActivity" ref="scroller">
-        <ul>
+        <ul style="min-height: 1px;">
           <li v-for="item in activities" @click="toDetail(item.activityNo)">
             <div class="pa-item">
               <img v-if="item.images" :src="host + item.images[0]"/>

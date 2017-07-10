@@ -19,53 +19,9 @@
       </label>
     </form>
     <div class="pa-list has-tabs">
-      <scroller v-if="tab == 0" :on-infinite="getActivity" ref="scroller0">
-        <ul>
-          <li v-for="(item, index) in activities[0].list" @click="toDetail(item.activityNo)">
-            <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
-            <div class="pa-item">
-              <img v-if="item.images" :src="host + item.images[0]"/>
-              <img v-if="item.image" :src="host + item.image"/>
-              <div>
-                <p class="title font-hide">{{item.title}}</p>
-                <div class="text">
-                  <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
-                  <p class="font-hide c-999">地点：{{item.address}}</p>
-                </div>
-              </div>
-            </div>
-            <div class="pa-buttons">
-              <a class="pa-btn" @click.stop="toChat(item.publisherUserNo)">联系客服</a>
-              <a class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消参加</a>
-            </div>
-          </li>
-        </ul>
-      </scroller>
-      <scroller v-if="tab == 1" :on-infinite="getActivity" ref="scroller1">
-        <ul>
-          <li v-for="(item, index) in activities[1].list" @click="toDetail(item.activityNo)">
-            <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
-            <div class="pa-item">
-              <img v-if="item.images" :src="host + item.images[0]"/>
-              <img v-if="item.image" :src="host + item.image"/>
-              <div>
-                <p class="title font-hide">{{item.title}}</p>
-                <div class="text">
-                  <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
-                  <p class="font-hide c-999">地点：{{item.address}}</p>
-                </div>
-              </div>
-            </div>
-            <div class="pa-buttons">
-              <a class="pa-btn" @click.stop="toChat(item.publisherUserNo)">联系客服</a>
-              <a class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消参加</a>
-            </div>
-          </li>
-        </ul>
-      </scroller>
-      <scroller v-if="tab == 2" :on-infinite="getActivity" ref="scroller2">
-        <ul>
-          <li v-for="(item, index) in activities[2].list" @click="toDetail(item.activityNo)">
+      <scroller :on-infinite="getActivity" ref="scroller">
+        <ul style="min-height: 1px;">
+          <li v-for="(item, index) in activities[tab].list" @click="toDetail(item.activityNo)">
             <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
             <div class="pa-item">
               <img v-if="item.images" :src="host + item.images[0]"/>
@@ -89,7 +45,6 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import InfiniteLoading from 'vue-infinite-loading';
   export default {
     name: 'personActivityJoin',
     created: function () {
@@ -111,37 +66,43 @@
         return this.$store.state.host;
       }
     },
-    components: {InfiniteLoading},
     methods: {
       selectTab: function (tab) {
         this.tab = tab;
-      },
-      getActivity: function (done) {
 
-        var scroller = this.$refs['scroller' + this.tab];
+        if (!this.activities[tab].isComplete) {
+          this.$refs.scroller.finishInfinite(false);
+        }
+      },
+      getActivity: function () {
+        var tab = this.tab;
+
+        if (this.activities[tab].isComplete) {
+          return this.$refs.scroller.finishInfinite(true);
+        }
 
         this.$http.get('/user/activity/partake', {data: {
           token: this.$store.state.user.info.token,
-          pageNumber: this.activities[this.tab].pageNumber,
+          pageNumber: this.activities[tab].pageNumber,
           pageSize: 10
         }}).then((data) => {
-          done();
           if (data.code == 0) {
-            this.activities[this.tab].list = this.activities[this.tab].list.concat(data.datas.page.content);
-            this.activities[this.tab].pageNumber += 1;
+            this.activities[tab].list = this.activities[tab].list.concat(data.datas.page.content);
+            this.activities[tab].pageNumber += 1;
 
             if (data.datas.page.content.length < 10) {
-              this.activities[this.tab].isComplete = true;
-              scroller.finishInfinite(true);
+              this.activities[tab].isComplete = true;
+              this.$refs.scroller.finishInfinite(true);
+            } else {
+              this.$refs.scroller.finishInfinite(false);
             }
 
           } else {
-            scroller.finishInfinite(true);
+            this.$refs.scroller.finishInfinite(true);
             this.$toast.info('获取活动失败');
           }
         }, () => {
-          done();
-          scroller.finishInfinite(true);
+          this.$refs.scroller.finishInfinite(true);
           this.$toast.info('获取活动失败');
         });
       },
