@@ -21,11 +21,12 @@
           </li>
         </ul>
       </div>
-      <div class="chat-input">
+      <form class="chat-input">
         <label>
+          <input type="text" name="test" style="display:none"/>
           <input type="text" @keydown="sendMsg($event)" v-model="msg">
         </label>
-      </div>
+      </form>
     </vue-pull-refresh>
   </div>
 </template>

@@ -2,10 +2,13 @@
   <div id="home">
     <header class="home-header clear-float">
       <img src="static/icon/icon-search.png">
-      <label>
-        <input type="search" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
-                @change="changeKeyword">
-      </label>
+      <form>
+        <label>
+          <input type="text" name="test" style="display:none"/>
+          <input type="search" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
+                 @change="changeKeyword">
+        </label>
+      </form>
     </header>
     <a class="home-user-btn" @click="toggleUserMenu(true)">
       <img src="static/icon/icon-user-fill.png">
