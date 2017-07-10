@@ -891,13 +891,19 @@ html, body {
     color: #999;
     overflow: hidden;
 }
-.home-chat-item .point {
+.home-chat-item .point,
+.home-chat-btn .point{
     float: right;
     margin-top: 0.4rem;
     width: 0.266666666666666rem;
     height: 0.266666666666666rem;
     border-radius: 50%;
     background: red;
+}
+.home-chat-btn .point {
+    position: absolute;
+    right: 0.2rem;
+    top: -0.1rem;
 }
 /*chat css*/
 .chat {

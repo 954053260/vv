@@ -1,5 +1,5 @@
 <template>
-    <div id="mSelect" class="m-select">
+    <div class="m-select">
         <div class="m-select-content" @click="toggle">
             {{text}}
             <img src="static/icon/icon-bottom.png">

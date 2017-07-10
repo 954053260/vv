@@ -3,7 +3,7 @@
     <div class="pa-search clear-float">
       <img src="static/icon/icon-search.png">
       <label>
-        <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
       </label>
     </div>
     <div class="pa-list">

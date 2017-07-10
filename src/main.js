@@ -28,7 +28,12 @@ Vue.use(map, {
 });
 Vue.use(ajax, {
   root: store.state.host,
-  timeout: 30000
+  timeout: 30000,
+  success: (data) => {
+    if (data && data.code == '10010007') {
+      router.push('/app/login');
+    }
+  }
 });
 
 new Vue({

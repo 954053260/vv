@@ -8,6 +8,8 @@ export default {
         http.config = {
             root: option.root || '',
             timeout: option.timeout || 0,
+            success: option.success || function () {},
+            fail: option.fail || function () {},
             ontimeout: option.ontimeout || function () {return '连接超时'}
         };
         /**
@@ -32,14 +34,17 @@ export default {
                 xhr.responseType = options.dataType || "json";
 
                 xhr.onload = function () {
+                    option.success(this.response);
                     resolve(this.response);
                 };
 
                 xhr.error = function () {
+                    option.fail(this.statusText);
                     reject(this.statusText);
                 };
 
                 xhr.ontimeout = function () {
+                    option.fail('连接超时');
                     http.config.ontimeout();
                     reject();
                 };
@@ -63,14 +68,17 @@ export default {
                 xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 
                 xhr.onload = function () {
+                    option.success(this.response);
                     resolve(this.response);
                 };
 
                 xhr.error = function () {
+                    option.fail(this.statusText);
                     reject(this.statusText);
                 };
 
                 xhr.ontimeout = function () {
+                    option.fail('连接超时');
                     reject(http.config.ontimeout());
                 };
 
@@ -86,6 +94,7 @@ export default {
                 head.appendChild(script);
 
                 window.jsonpCallback = function (data) {
+                    option.fail(data);
                     resolve (data);
                     head.removeChild(script);
                     clearTimeout(timer);
@@ -103,6 +112,7 @@ export default {
 
                 if (http.config.timeout) {
                     timer = setTimeout(function () {
+                        option.fail('连接超时');
                         reject(http.config.ontimeout());
                         head.removeChild(script);
                     }, http.config.timeout);

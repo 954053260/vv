@@ -3,7 +3,7 @@
     <header class="home-header clear-float">
       <img src="static/icon/icon-search.png">
       <label>
-        <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
+        <input type="search" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
                 @change="changeKeyword">
       </label>
     </header>
@@ -11,6 +11,7 @@
       <img src="static/icon/icon-user-fill.png">
     </a>
     <a class="home-chat-btn" @click="toggleChat(true)">
+      <span v-if="hasMessage" class="point"></span>
       <img src="static/icon/icon-chat-fill.png">
     </a>
     <a class="home-refresh-btn" @click="refresh()">
@@ -28,11 +29,14 @@
     <div class="home-select-content">
       <transition name="fade">
         <div v-if="isFilter" class="pr row col z-2">
-          <m-select class="col mr5" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
+          <m-select ref="organization" class="col mr5" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
+                    @click.native="hideSelect(['types', 'dateRange'])"
                     @input="changeOrganization"></m-select>
-          <m-select class="col mr5" :list="activityTypes" bindValue="desc" v-model="typeIndex"
+          <m-select ref="types" class="col mr5" :list="activityTypes" bindValue="desc" v-model="typeIndex"
+                    @click.native="hideSelect(['organization', 'dateRange'])"
                     @input="changeTypes"></m-select>
-          <m-select class="col" :list="dateRange" bindValue="desc" v-model="dateIndex"
+          <m-select ref="dateRange" class="col" :list="dateRange" bindValue="desc" v-model="dateIndex"
+                    @click.native="hideSelect(['organization', 'types'])"
                     @input="changeRange"></m-select>
         </div>
       </transition>
@@ -130,6 +134,13 @@
       this.$map.loadMap((map) => {
         map.getPositionPicker().start();
       });
+      this.getFriend((data) => {
+        data.datas.friends.forEach((item) => {
+          if (!item.isReaded) {
+            this.hasMessage = true;
+          }
+        });
+      });
     },
     components: {mSelect},
     data: function () {
@@ -137,6 +148,7 @@
         isFilter: false,
         isUserMenu: false,
         isChat: false,
+        hasMessage: false,
         friends: [],
         keyword: ''
       }
@@ -152,6 +164,24 @@
       organizationTypesIndex: state => state.map.organizationTypesIndex,
     }),
     methods: {
+      hideSelect: function (arr) {
+        arr.forEach((item) => {
+          this.$refs[item].show = false;
+        });
+      },
+      getFriend: function (success, fail) {
+        if (this.user.token) {
+          this.$http.get('/user/chat/friend/list', {data: {
+            token: this.user.token
+          }}).then((data) => {
+            if (data.code == 0) {
+              success(data);
+            } else {
+              fail(data.msg);
+            }
+          }, fail);
+        }
+      },
       location: function () {
         this.$loading.show('定位中...');
         this.$map.loadMap((map) => {
@@ -189,27 +219,19 @@
         }
 
         if (typeof bool === 'boolean') {
-
           if (bool) {
             this.$loading.show('获取朋友列表');
-            this.$http.get('/user/chat/friend/list', {data: {
-              token: this.user.token
-            }}).then((data) => {
+            this.getFriend((data) => {
               this.$loading.hide();
-              if (data.code == 0) {
-                this.friends = data.datas.friends;
-                this.isChat = true;
-              } else {
-                this.$toast.info(data.msg);
-              }
-            }, function () {
+              this.friends = data.datas.friends;
+              this.isChat = true;
+            }, () => {
               this.$loading.hide();
               this.$toast.info('获取朋友列表失败');
             });
           } else {
             this.isChat = false;
           }
-
         } else {
           this.isChat = !this.isChat;
         }
