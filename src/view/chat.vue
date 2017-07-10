@@ -1,10 +1,10 @@
 <template>
-  <div id="chat" class="container hidden bc-page">
-    <vue-pull-refresh :on-refresh="onRefresh">
-      <div class="chat">
-        <ul ref="chatList" class="chat-list">
+  <div id="chat" class="container bc-page">
+    <div class="chat" ref="chatList">
+      <vue-pull-refresh :on-refresh="onRefresh">
+        <ul class="chat-list">
           <li v-for="item in chats" class="chat-item">
-            <div v-if="item.toUserNo == token" class="row">
+            <div v-if="item.fromUserNo == friendUserNo" class="row">
               <img :src="host + item.fromAvatar">
               <div class="col">
                 <p class="name">{{item.fromNickName}}</p>
@@ -20,14 +20,14 @@
             </div>
           </li>
         </ul>
-      </div>
-      <form class="chat-input">
-        <label>
-          <input type="text" name="test" style="display:none"/>
-          <input type="text" @keydown="sendMsg($event)" v-model="msg">
-        </label>
-      </form>
-    </vue-pull-refresh>
+      </vue-pull-refresh>
+    </div>
+    <form class="chat-input">
+      <label>
+        <input type="text" name="test" style="display:none"/>
+        <input type="text" ref="input" @focus="scrollBottom" @keydown="sendMsg($event)" v-model="msg">
+      </label>
+    </form>
   </div>
 </template>
 <script type="text/ecmascript-6">
