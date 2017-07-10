@@ -11,12 +11,13 @@
         <span :class="{active: tab == 2}">待评价</span>
       </a>
     </div>
-    <div class="pa-search clear-float">
+    <form class="pa-search clear-float">
       <img src="static/icon/icon-search.png">
       <label>
+        <input type="text" name="test" style="display:none"/>
         <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
       </label>
-    </div>
+    </form>
     <div class="pa-list has-tabs">
       <ul>
         <li v-for="(item, index) in activities[tab].list" @click="toDetail(item.activityNo)">

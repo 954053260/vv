@@ -119,6 +119,11 @@
         }
 
         return new Promise((resolve, reject) => {
+
+          if (this.$refs.chatList.scrollTop != 0) {
+            return resolve();
+          }
+
           var endTime =  Number(this.chats[0].createTime) - 1;
           this.$http.get('/user/chat/message/history/list', {data: {
             friendUserNo: this.friendUserNo,
