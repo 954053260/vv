@@ -15,7 +15,9 @@ import ajax from './ajax.js'
 //import socket from './socket.js'
 import './common/vue-picker/style.css'
 import smoothPicker from './common/vue-picker/index.js'
-
+//https://github.com/wangdahoo/vue-scroller?utm_source=tuicool&utm_medium=referral
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller);
 Vue.component('checkbox', checkbox);
 
 Vue.use(smoothPicker);

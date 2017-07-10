@@ -1,7 +1,7 @@
 <template>
   <div id="chat" class="container bc-page">
-    <div class="chat" ref="chatList">
-      <vue-pull-refresh :on-refresh="onRefresh">
+    <div class="chat">
+      <scroller ref="scroller" :on-refresh="onRefresh">
         <div class="chat-list">
           <div v-for="item in chats" class="chat-item">
             <div v-if="item.fromUserNo == friendUserNo" class="row">
@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-      </vue-pull-refresh>
+      </scroller>
     </div>
     <form class="chat-input" target="form-submit">
       <label>
@@ -112,36 +112,23 @@
           this.$toast.info('获取消息列表失败');
         });
       },
-      onRefresh: function () {
-
-        if (this.$refs.chatList.scrollTop != 0) {
-          return;
-        }
-
-        return new Promise((resolve, reject) => {
-
-          if (this.$refs.chatList.scrollTop != 0) {
-            return resolve();
-          }
-
-          var endTime =  Number(this.chats[0].createTime) - 1;
-          this.$http.get('/user/chat/message/history/list', {data: {
-            friendUserNo: this.friendUserNo,
-            token: this.token,
-            count: 10,
-            endTime: endTime
-          }}).then((data) => {
-            if (data.code == 0) {
-              resolve();
-              this.chats = data.datas.messages.concat(this.chats);
-            } else {
-              reject();
-              this.$toast.info('获取消息列表失败');
-            }
-          }, function () {
-            reject();
+      onRefresh: function (done) {
+        var endTime =  Number(this.chats[0].createTime) - 1;
+        this.$http.get('/user/chat/message/history/list', {data: {
+          friendUserNo: this.friendUserNo,
+          token: this.token,
+          count: 10,
+          endTime: endTime
+        }}).then((data) => {
+          done();
+          if (data.code == 0) {
+            this.chats = data.datas.messages.concat(this.chats);
+          } else {
             this.$toast.info('获取消息列表失败');
-          });
+          }
+        }, function () {
+          done();
+          this.$toast.info('获取消息列表失败');
         });
       },
       sendMsg: function (e) {
@@ -168,8 +155,7 @@
       },
       scrollBottom: function () {
         setTimeout(() => {
-          var $chatList = this.$refs.chatList;
-          $chatList.scrollTop = $chatList.scrollHeight;
+          this.$refs.scroller.scrollTo(0, 9999999);
         }, 50);
       }
     }

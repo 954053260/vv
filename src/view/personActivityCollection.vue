@@ -8,36 +8,29 @@
       </label>
     </form>
     <div class="pa-list">
-      <ul>
-        <li v-for="item in activities" @click="toDetail(item.activityNo)">
-          <div class="pa-item">
-            <img v-if="item.images" :src="host + item.images[0]"/>
-            <img v-if="item.image" :src="host + item.image"/>
-            <div>
+      <scroller :on-infinite="getActivity" ref="scroller">
+        <ul>
+          <li v-for="item in activities" @click="toDetail(item.activityNo)">
+            <div class="pa-item">
+              <img v-if="item.images" :src="host + item.images[0]"/>
+              <img v-if="item.image" :src="host + item.image"/>
               <div>
-                <div class="fr pl5 c-ff9800 f16">
-                  <!--<span>#{{item.activityType.desc}}#</span>-->
-                  <span :class="{'c-999': item.activityStatus.value != 103}">#{{item.activityStatus.desc}}#</span>
+                <div>
+                  <div class="fr pl5 c-ff9800 f16">
+                    <!--<span>#{{item.activityType.desc}}#</span>-->
+                    <span :class="{'c-999': item.activityStatus.value != 103}">#{{item.activityStatus.desc}}#</span>
+                  </div>
+                  <p class="title font-hide">{{item.title}}</p>
                 </div>
-                <p class="title font-hide">{{item.title}}</p>
-              </div>
-              <div class="text">
-                <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
-                <p class="font-hide c-999">地点：{{item.address}}</p>
+                <div class="text">
+                  <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
+                  <p class="font-hide c-999">地点：{{item.address}}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
-      <infinite-loading :on-infinite="getActivity" ref="infiniteLoading">
-        <div slot="no-more">
-          <span class="c-999">~暂无更多数据~</span>
-        </div>
-        <div slot="spinner" class="infinite-spinner">
-          <img src="static/img/hourglass.gif">
-          <span class="text">加载中...</span>
-        </div>
-      </infinite-loading>
+          </li>
+        </ul>
+      </scroller>
     </div>
   </div>
 </template>
@@ -65,28 +58,28 @@
       selectTab: function (tab) {
         this.tab = tab;
       },
-      getActivity: function () {
+      getActivity: function (done) {
         this.$http.get('/user/activity/collection', {data: {
           token: this.$store.state.user.info.token,
           pageNumber: this.pageNumber,
           pageSize: 10
         }}).then((data) => {
+          done();
           if (data.code == 0) {
             this.activities = this.activities.concat(data.datas.page.content);
             this.pageNumber += 1;
 
             if (data.datas.page.content.length < 10) {
-              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-            } else {
-              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+              this.$refs.scroller.finishInfinite(true);
             }
 
           } else {
-            this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+            this.$refs.scroller.finishInfinite(true);
             this.$toast.info('获取活动失败');
           }
         }, () => {
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+          done();
+          this.$refs.scroller.finishInfinite(true);
           this.$toast.info('获取活动失败');
         });
       },
