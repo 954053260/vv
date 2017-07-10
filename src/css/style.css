@@ -911,7 +911,7 @@ html, body {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 1.3333333rem;
+    bottom: 1.0666666666666667rem;
     overflow: auto;
 }
 .chat-list {
@@ -978,7 +978,7 @@ html, body {
 }
 .chat-input {
     position: fixed;
-    bottom: 0.2666666rem;
+    bottom: 0;
     left: 0;
     width: 100%;
     z-index: 1;
