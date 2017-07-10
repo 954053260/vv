@@ -13,6 +13,7 @@ export default {
             nearestRoad: '',
             nearestPOI:''
         },
+        keyword: '',
         organizationTypesIndex: 0,
         typeIndex: 0,
         dateIndex: 0,

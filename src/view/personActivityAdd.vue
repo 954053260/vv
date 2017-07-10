@@ -1,43 +1,43 @@
 <template>
-  <div id="personActivityAdd" class="container bc-page">
-    <div class="bc-fff">
-      <div class="pa-search clear-float">
-        <img src="static/icon/icon-search.png">
-        <label>
-          <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
-        </label>
-      </div>
+  <div id="personActivityAdd" class="container bt1-eee">
+    <div class="pa-search clear-float">
+      <img src="static/icon/icon-search.png">
+      <label>
+        <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+      </label>
     </div>
-    <ul class="pa-list">
-      <li v-for="item in activities" @click="toDetail(item.activityNo)">
-        <div class="pa-item">
-          <img v-if="item.images" :src="host + item.images[0]"/>
-          <img v-if="item.image" :src="host + item.image"/>
-          <div>
+    <div class="pa-list">
+      <ul>
+        <li v-for="item in activities" @click="toDetail(item.activityNo)">
+          <div class="pa-item">
+            <img v-if="item.images" :src="host + item.images[0]"/>
+            <img v-if="item.image" :src="host + item.image"/>
             <div>
-              <div class="fr pl5 c-ff9800 f16">
-                <span>#{{item.activityType.desc}}#</span>
-                <span :class="{'c-999': item.activityStatus.value != 103}">#{{item.activityStatus.desc}}#</span>
+              <div>
+                <div class="fr pl5 c-ff9800 f16">
+                  <span>#{{item.activityType.desc}}#</span>
+                  <span :class="{'c-999': item.activityStatus.value != 103}">#{{item.activityStatus.desc}}#</span>
+                </div>
+                <p class="title font-hide">{{item.title}}</p>
               </div>
-              <p class="title font-hide">{{item.title}}</p>
-            </div>
-            <div class="text">
-              <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
-              <p class="font-hide c-999">地点：{{item.address}}</p>
+              <div class="text">
+                <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
+                <p class="font-hide c-999">地点：{{item.address}}</p>
+              </div>
             </div>
           </div>
+        </li>
+      </ul>
+      <infinite-loading :on-infinite="getActivity" ref="infiniteLoading">
+        <div slot="no-more">
+          <span class="c-999">~暂无更多数据~</span>
         </div>
-      </li>
-    </ul>
-    <infinite-loading :on-infinite="getActivity" ref="infiniteLoading">
-      <div slot="no-results">
-        <span class="c-999">~暂无更多数据~</span>
-      </div>
-      <div slot="spinner" class="infinite-spinner">
-        <img src="static/img/hourglass.gif">
-        <span class="text">加载中...</span>
-      </div>
-    </infinite-loading>
+        <div slot="spinner" class="infinite-spinner">
+          <img src="static/img/hourglass.gif">
+          <span class="text">加载中...</span>
+        </div>
+      </infinite-loading>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">

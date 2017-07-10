@@ -70,6 +70,12 @@ textarea::-moz-placeholder {
     color: inherit;
     font-size: inherit;
 }
+html {
+    font-size: 37.5px;
+}
+html, body {
+    overflow: hidden;
+}
 .container {
     position: absolute;
     top: 0;
@@ -143,7 +149,7 @@ textarea::-moz-placeholder {
 .mb10 {margin-bottom: 0.266666rem;}
 .ml10 {margin-left: 0.266666rem;}
 .p5 {padding: 5px;}
-.p10 {padding: 10px;}
+.p10 {padding: 0.266666rem;}
 .p20 {padding: 20px}
 .pl5 {padding-left: 0.133333rem;}
 .pl10 {padding-left: 0.266666rem;}
@@ -522,6 +528,9 @@ textarea::-moz-placeholder {
     bottom: 0;
 }
 /*app css*/
+#app {
+    overflow: hidden;
+}
 .app-info-window {
     position: absolute;
     top: 0;
@@ -1430,6 +1439,17 @@ textarea::-moz-placeholder {
     line-height: 0.55555rem;
     border: none;
     background: transparent;
+}
+.pa-list {
+    position: absolute;
+    top: 1.2rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+}
+.pa-list.has-tabs {
+    top: 2.533333333333333rem;
 }
 .pa-list li{
     margin-bottom: 0.26666666666666666rem;

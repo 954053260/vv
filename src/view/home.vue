@@ -3,7 +3,8 @@
     <header class="home-header clear-float">
       <img src="static/icon/icon-search.png">
       <label>
-        <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
+                @change="changeKeyword">
       </label>
     </header>
     <a class="home-user-btn" @click="toggleUserMenu(true)">
@@ -222,15 +223,27 @@
       },
       changeTypes: function (value) {
         this.$store.state.map.typeIndex = value;
-        this.refresh();
+        this.$map.loadMap((map) => {
+          map.getPositionPicker().start();
+        });
       },
       changeRange: function (value) {
         this.$store.state.map.dateIndex = value;
-        this.refresh();
+        this.$map.loadMap((map) => {
+          map.getPositionPicker().start();
+        });
       },
       changeOrganization: function (value) {
         this.$store.state.map.organizationTypesIndex = value;
-        this.refresh();
+        this.$map.loadMap((map) => {
+          map.getPositionPicker().start();
+        });
+      },
+      changeKeyword: function () {
+        this.$store.state.map.keyword = this.keyword;
+        this.$map.loadMap((map) => {
+          map.getPositionPicker().start();
+        });
       },
       refresh: function () {
         this.$store.state.isRefresh = true;

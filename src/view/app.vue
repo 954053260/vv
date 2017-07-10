@@ -67,6 +67,7 @@
         this.positionPicker = map.positionPicker((data) => {
 
           var params = {
+            keyword: this.keyword,
             centerLongitude: data.position.lng,
             centerLatitude: data.position.lat,
             distance: map.mapScale[map.gd.getZoom()]*5
@@ -142,6 +143,7 @@
     },
     computed: mapState({
       token: state => state.user.info.token,
+      keyword:  state => state.map.keyword,
       markers:  state => state.map.markers,
       positionResult:  state => state.map.positionResult,
       activityOrganizationTypes:  state => state.map.activityOrganizationTypes,

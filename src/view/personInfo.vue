@@ -15,7 +15,7 @@
             </li>
             <li class="pi-item row">
               <span>性别</span>
-              <span class="col c-999 tr">{{gender || '身份认证确定性别'}}</span>
+              <span class="col c-999 tr">{{(gender && gender.desc) || '身份认证确定性别'}}</span>
             </li>
             <li class="pi-item row">
               <span>手机号</span>
@@ -25,13 +25,13 @@
                 <p v-show="!isPhone" class="pi-point">请输入正确的手机号！</p>
               </label>
             </li>
-            <li class="pi-item pi-item-2 row">
+            <li class="pi-item pi-item-auto row">
               <span>个性签名</span>
-              <label class="col">
-                <textarea class="c-999 tr" :class="{'tr': !signature}" type="text" placeholder="添加个性签名" v-model="signature"></textarea>
-              </label>
+              <a class="col c-999 tr" @click="showSignature">
+                {{signature || '添加个性签名'}}
+              </a>
             </li>
-            <li class="pi-item row">
+            <li class="pi-item pi-item-auto row">
               <span>兴趣爱好</span>
               <a class="col c-999 tr" :class="{'tr': hobbies.length == 0}" @click="showTags()">
                 <span v-if="hobbies.length == 0">添加兴趣爱好，逗号隔开</span>
@@ -47,7 +47,7 @@
     <div v-show="tab == 2" class="h f16 bc-fff">
         <div class="pi-tags-header">
           <p class="tr">
-            <a @click="hideTags">
+            <a @click="tab = 1">
               <img class="w30" src="static/icon/icon-close.png">
             </a>
           </p>
@@ -64,6 +64,19 @@
                   'bc-green  c-fff': tag.is && outIndex%3 == 0,
                   'bc-1e90ff  c-fff': tag.is && outIndex%4 == 0}">{{tag.tagName}}</span>
           </div>
+        </div>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div v-show="tab == 3" class="h f16 bc-page">
+        <div class="p10 h30 lh30 tr">
+          <b class="fl">请输入个性签名</b>
+          <a @click="tab = 1">
+            <img class="w30" src="static/icon/icon-close.png">
+          </a>
+        </div>
+        <div class="p10 bc-fff">
+          <textarea class="w b-none c-999" type="text" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 2.6666666666666665rem"></textarea>
         </div>
       </div>
     </transition>
@@ -160,9 +173,6 @@
         });
 
       },
-      hideTags: function () {
-        this.tab = 1;
-      },
       selectTag: function (outIndex,index) {
         var tag = this.tags[outIndex].tags[index];
         if (tag.is) {
@@ -176,6 +186,9 @@
           tag.is = true;
           this.hobbies.push(tag);
         }
+      },
+      showSignature: function () {
+        this.tab = 3;
       },
       saveInfo: function () {
         var hobbies = [];

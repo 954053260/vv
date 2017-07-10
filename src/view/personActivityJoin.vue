@@ -1,5 +1,5 @@
 <template>
-  <div id="personActivityJoin" class="container bc-page">
+  <div id="personActivityJoin" class="container hidden">
     <div class="pa-tabs row">
       <a class="col" @click="selectTab(0)">
         <span :class="{active: tab == 0}">进行中</span>
@@ -11,43 +11,46 @@
         <span :class="{active: tab == 2}">待评价</span>
       </a>
     </div>
-    <div class="bc-fff">
-      <div class="pa-search clear-float">
-        <img src="static/icon/icon-search.png">
-        <label>
-          <input type="text" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
-        </label>
-      </div>
+    <div class="pa-search clear-float">
+      <img src="static/icon/icon-search.png">
+      <label>
+        <input type="text" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+      </label>
     </div>
-    <ul class="pa-list">
-      <li v-for="(item, index) in activities" @click="toDetail(item.activityNo)">
-        <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
-        <div class="pa-item">
-          <img v-if="item.images" :src="host + item.images[0]"/>
-          <img v-if="item.image" :src="host + item.image"/>
-          <div>
-            <p class="title font-hide">{{item.title}}</p>
-            <div class="text">
-              <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
-              <p class="font-hide c-999">地点：{{item.address}}</p>
+    <div class="pa-list has-tabs">
+      <ul>
+        <li v-for="(item, index) in activities[tab].list" @click="toDetail(item.activityNo)">
+          <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
+          <div class="pa-item">
+            <img v-if="item.images" :src="host + item.images[0]"/>
+            <img v-if="item.image" :src="host + item.image"/>
+            <div>
+              <p class="title font-hide">{{item.title}}</p>
+              <div class="text">
+                <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>
+                <p class="font-hide c-999">地点：{{item.address}}</p>
+              </div>
             </div>
           </div>
+          <div class="pa-buttons">
+            <a class="pa-btn" @click.stop="toChat(item.publisherUserNo)">联系客服</a>
+            <a class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消参加</a>
+          </div>
+        </li>
+      </ul>
+      <infinite-loading :on-infinite="getActivity" ref="infiniteLoading">
+        <div slot="no-more">
+          <span class="c-999">~暂无更多数据~</span>
         </div>
-        <div class="pa-buttons">
-          <a class="pa-btn" @click="toChat(item.publisherUserNo)">联系客服</a>
-          <a class="pa-btn" @click="cancelActivity(index, item.activityNo)">取消参加</a>
+        <div slot="no-results">
+          <span class="c-999">~暂无更多数据~</span>
         </div>
-      </li>
-    </ul>
-    <infinite-loading :on-infinite="getActivity" ref="infiniteLoading">
-      <div slot="no-results">
-        <span class="c-999">~暂无更多数据~</span>
-      </div>
-      <div slot="spinner" class="infinite-spinner">
-        <img src="static/img/hourglass.gif">
-        <span class="text">加载中...</span>
-      </div>
-    </infinite-loading>
+        <div slot="spinner" class="infinite-spinner">
+          <img src="static/img/hourglass.gif">
+          <span class="text">加载中...</span>
+        </div>
+      </infinite-loading>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -61,8 +64,11 @@
       return {
         tab: 0,
         keyword: '',
-        pageNumber: 1,
-        activities: []
+        activities: [
+          {pageNumber: 1, isComplete: false, list: []},
+          {pageNumber: 1, isComplete: false, list: []},
+          {pageNumber: 1, isComplete: false, list: []}
+        ]
       }
     },
     computed: {
@@ -74,29 +80,42 @@
     methods: {
       selectTab: function (tab) {
         this.tab = tab;
+
+        if (!this.activities[this.tab].isComplete) {
+          setTimeout(() => {
+            this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+          }, 50);
+        } else {
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+        }
+
       },
       getActivity: function () {
+
+        var infiniteLoading = this.$refs.infiniteLoading;
+
         this.$http.get('/user/activity/partake', {data: {
           token: this.$store.state.user.info.token,
-          pageNumber: this.pageNumber,
+          pageNumber: this.activities[this.tab].pageNumber,
           pageSize: 10
         }}).then((data) => {
           if (data.code == 0) {
-            this.activities = this.activities.concat(data.datas.page.content);
-            this.pageNumber += 1;
+            this.activities[this.tab].list = this.activities[this.tab].list.concat(data.datas.page.content);
+            this.activities[this.tab].pageNumber += 1;
 
             if (data.datas.page.content.length < 10) {
-              this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+              this.activities[this.tab].isComplete = true;
+              infiniteLoading.$emit('$InfiniteLoading:complete');
             } else {
-              this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+              infiniteLoading.$emit('$InfiniteLoading:loaded');
             }
 
           } else {
-            this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+            infiniteLoading.$emit('$InfiniteLoading:complete');
             this.$toast.info('获取活动失败');
           }
         }, () => {
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+          infiniteLoading.$emit('$InfiniteLoading:complete');
           this.$toast.info('获取活动失败');
         });
       },
