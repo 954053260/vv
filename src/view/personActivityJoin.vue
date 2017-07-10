@@ -116,7 +116,7 @@
       selectTab: function (tab) {
         this.tab = tab;
       },
-      getActivity: function () {
+      getActivity: function (done) {
 
         var scroller = this.$refs['scroller' + this.tab];
 
@@ -125,6 +125,7 @@
           pageNumber: this.activities[this.tab].pageNumber,
           pageSize: 10
         }}).then((data) => {
+          done();
           if (data.code == 0) {
             this.activities[this.tab].list = this.activities[this.tab].list.concat(data.datas.page.content);
             this.activities[this.tab].pageNumber += 1;
@@ -139,6 +140,7 @@
             this.$toast.info('获取活动失败');
           }
         }, () => {
+          done();
           scroller.finishInfinite(true);
           this.$toast.info('获取活动失败');
         });
