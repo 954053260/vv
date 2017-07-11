@@ -316,7 +316,8 @@ html, body {
     content: '';
     position: absolute;
     top: -0.12rem;
-    right: 0.54666rem;
+    right: 50%;
+    margin-right: -3px;
     border-left: 6px solid rgba(255,255,255,0);
     border-right: 6px solid rgba(255,255,255,0);
     border-bottom: 6px solid #fff;
@@ -329,10 +330,16 @@ html, body {
     border: 1px solid #f2f2f2;
     max-height: 5.33333rem;
     overflow: auto;
+    border-radius: 5px;
 }
 .m-select-list li {
-    padding: 0.13333rem;
+    padding: 0.18666666666666668rem;
     line-height: 0.8rem;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+.m-select-list li:last-child {
+    border-bottom: none;
 }
 .m-select-list::-webkit-scrollbar-track-piece {
     background-color: rgba(0, 0, 0, 0);
