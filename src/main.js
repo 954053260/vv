@@ -1,5 +1,4 @@
-import './assets/hourglass.gif'
-//import './css/ionicons.min.css'
+// import './css/ionicons.min.css'
 import './css/style.css'
 import './directive.js'
 import './filter.js'
@@ -12,14 +11,13 @@ import router from './router.js'
 import store from './store'
 import app from './view/app.vue'
 import ajax from './ajax.js'
-//import socket from './socket.js'
+// import socket from './socket.js'
 import './common/vue-picker/style.css'
 import smoothPicker from './common/vue-picker/index.js'
-//https://github.com/wangdahoo/vue-scroller?utm_source=tuicool&utm_medium=referral
+// https://github.com/wangdahoo/vue-scroller?utm_source=tuicool&utm_medium=referral
 import VueScroller from 'vue-scroller'
-Vue.use(VueScroller);
 Vue.component('checkbox', checkbox);
-
+Vue.use(VueScroller);
 Vue.use(smoothPicker);
 Vue.use(file);
 //Vue.use(socket);
@@ -33,11 +31,11 @@ Vue.use(ajax, {
   timeout: 30000,
   success: (data) => {
     if (data && data.code == '10010007') {
+      Vue.toast.info('登录失效，请重新登录！');
       router.push('/app/login');
     }
   }
 });
-
 new Vue({
   el: '#main',
   router,

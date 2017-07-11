@@ -14,7 +14,7 @@
           <input class="c-999" type="number" placeholder="请输入" v-model="idCardNo"
                  @blur="validateCardNo"
                  @focus="isCardNo = true"/>
-          <p v-show="!isCardNo" class="au-point">请输入正确的身份证号！</p>
+          <span v-show="!isCardNo" class="au-point">请输入正确的身份证号！</span>
         </label>
       </li>
     </ul>

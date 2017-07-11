@@ -95,7 +95,7 @@
             </router-link>
           </li>
           <li class="home-user-item">
-            <router-link to="/app/authentication">
+            <router-link to="/app/apply">
               <img src="static/icon/icon-authenticate.png">
               <img src="static/icon/icon-right.png">
               <!--<span v-if="!user.user.idCardNo">未认证</span>-->

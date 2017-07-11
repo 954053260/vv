@@ -1022,7 +1022,7 @@ html, body {
     text-align: center;
 }
 .aa-header img {
-    display: inline-block;
+    display: block;
     width: 100%;
     height: 4.8rem;
 }
@@ -1598,6 +1598,117 @@ html, body {
     width: 90%;
     height: 1.17333rem;
     line-height: 1.17333rem;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
+    color: #fff;
+    background: #2bd3b2;
+    border: 1px solid #2bd3b2;
+    border-radius: 1.17333rem;
+}
+.apply-bg {
+    height: 100%;
+    background: url("/static/img/apply-bg.jpg") no-repeat;
+    /*background-position: center;*/
+    background-size: 100% 100%;
+}
+.apply-group-button,
+.apply-other-button {
+    position: absolute;
+    bottom: 0.666666666666666666rem;
+}
+.apply-group-button {
+    left: 0.26666666666666666rem;
+}
+.apply-other-button {
+    right: 0.26666666666666666rem;
+}
+.apply-group-button > img,
+.apply-other-button > img{
+    display: block;
+    width: 4.56rem;
+    height: 2.1333333333333333rem;
+}
+.ag-text {
+    padding: 0.4rem 0.32rem;
+    color: #999;
+    font-size: 16px;
+}
+.ag-list {
+    font-size: 16px;
+}
+.ag-item {
+    padding: 0.26666rem 0.32rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-bottom: 1px solid #f2f2f2;
+}
+.ag-item > span:first-child {
+    padding-right: 0.26666rem;
+}
+.ag-item input {
+    width: 100%;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: right;
+    border: none;
+}
+.ag-add-content {
+    text-align: center;
+}
+.ag-add-content img {
+    padding: 1.2rem;
+    width: 0.6666666666666666rem;
+    height: 0.6666666666666666rem;
+    border: 1px solid #ddd;
+}
+.ag-image {
+    position: relative;
+    margin: 0.26666rem 0.32rem;
+    border: 1px solid #ddd;
+}
+.ag-image img {
+    display: block;
+    width: 100%;
+    max-height: 200px;
+}
+.ag-slide {
+    height: 4.8rem;
+    line-height: 4.8rem;
+    text-align: center;
+}
+.ag-slide img {
+    display: block;
+    width: 100%;
+    height: 4.8rem;
+}
+.ag-add img,
+.ag-delete img {
+    position: absolute;
+    top: 0.26666rem;
+    padding: 0.13333rem;
+    width: 0.53333rem;
+    height: 0.53333rem;
+    background: #fff;
+    opacity: 0.9;
+    border: 1px solid #f2f2f2;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    transition: all .4s;
+    z-index: 1;
+}
+.ag-add img {
+    left: 0.26666rem;
+}
+.ag-delete img {
+    right: 0.26666rem;
+}
+.ag-btn {
+    display: block;
+    margin: 0 auto 0.53333333333333333rem;
+    width: 90%;
+    height: 1.17333333333333rem;
+    line-height: 1.17333333333333rem;
     font-size: 16px;
     outline: none;
     text-align: center;
