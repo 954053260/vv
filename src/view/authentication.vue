@@ -45,7 +45,7 @@
         }
       },
       submit: function () {
-        this.$loading.show('认证中...');
+        this.$loading.show('提交中...');
         this.$http.post('/user/realname/approve', {
           data: {
             token: this.$store.state.user.info.token,
@@ -55,13 +55,13 @@
         }).then((data) => {
           this.$loading.hide();
           if (data.code == 0) {
-            this.$toast.info('认证成功');
+            this.$toast.info('提交成功');
             this.$router.back();
           } else {
-            this.$toast.info('认证失败');
+            this.$toast.info('提交失败');
           }
         }, () => {
-          this.$toast.info('认证失败');
+          this.$toast.info('提交失败');
           this.$loading.hide();
         });
       }

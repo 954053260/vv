@@ -1717,6 +1717,70 @@ html, body {
     border: 1px solid #2bd3b2;
     border-radius: 1.17333rem;
 }
+.evaluate-content {
+    padding: 0.4rem 0.32rem;
+}
+.evaluate-mark-content {
+    font-size: 16px;
+    color: #999;
+}
+.evaluate-mark-content .row {
+    padding: 0.4rem 0.32rem;
+    height: .5333333333333333rem;
+}
+.evaluate-mark-content .text {
+    width: 2.1333333333333333rem;
+    line-height: 0.6133333333333333rem;
+}
+.evaluate-mark-content .mark img {
+    display: inline-block;
+    margin: 0 0.1rem;
+    vertical-align: middle;
+    width: .5333333333333333rem;
+}
+.evaluate-content-area {
+    position: relative;
+    margin: 0 0.32rem 0.4rem;
+    padding: 0.26666666666rem;
+    border: 1px solid #ddd;
+}
+.evaluate-content-area textarea {
+    width: 100%;
+    height: 150px;
+    font-size: 16px;
+    border: none;
+    resize: none;
+}
+.evaluate-content-area .point {
+    position: absolute;
+    right: 0.26666666666rem;
+    bottom: 0.2666666666rem;
+}
+.evaluate-content-tag {
+    margin: 0 0.4rem;
+}
+.evaluate-content-tag .row {
+    margin: .266666666666rem 0;
+}
+.evaluate-content-tag .col{
+    position: relative;
+    line-height: 0.8rem;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    color: #999;
+}
+.evaluate-content-tag .col.active {
+    border: 1px solid #2bd3b2;
+    color: #2bd3b2;
+}
+.evaluate-content-tag .col img {
+    position: absolute;
+    top: 0.13333333333333333rem;
+    right: .1333333333333333rem;
+    width: .533333333333rem;
+}
 /*infinite loading*/
 .infinite-spinner {
     padding: 0.266666rem;

@@ -9,6 +9,12 @@
         </label>
       </li>
       <li class="ag-item row">
+        <span>{{type == 1 ? '企业' : '团体'}}名称</span>
+        <label class="col">
+          <input class="c-999" type="text" placeholder="请输入" v-model="name">
+        </label>
+      </li>
+      <li class="ag-item row">
         <span>联系电话</span>
         <label class="col pr">
           <input class="c-999" type="number" placeholder="请输入" v-model="phone"/>
@@ -65,6 +71,7 @@
         },
         swiperSlides: [],
         type: '',
+        name: '',
         realname: '',
         phone: '',
         business: ''
@@ -103,7 +110,28 @@
         });
       },
       submit: function () {
-
+        this.$loading.show('提交中...');
+        this.$http.post('/user/approve/apply', {
+          data: {
+            token: this.$store.state.user.info.token,
+            approveType: this.type == 1 ? '1' : '100',
+            realname: this.realname,
+            name: this.name,
+            organCode: this.business,
+            attachments: this.swiperSlides
+          }
+        }).then((data) => {
+          this.$loading.hide();
+          if (data.code == 0) {
+            this.$toast.info('提交成功');
+            this.$router.back();
+          } else {
+            this.$toast.info('提交失败');
+          }
+        }, () => {
+          this.$toast.info('提交失败');
+          this.$loading.hide();
+        });
       }
     }
   }

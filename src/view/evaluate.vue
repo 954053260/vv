@@ -1,6 +1,61 @@
 <template>
-  <div id="evaluate" class="container">
-
+  <div id="evaluate" class="container bc-page">
+    <p class="evaluate-content f16 c-999">我们期待你的每一个活动反馈</p>
+    <div class="bc-fff bt1-eee">
+      <p class="evaluate-content f18">综合评分</p>
+      <div class="evaluate-mark-content">
+        <div class="row">
+          <p class="text">描述相符</p>
+          <div class="col">
+            <a v-for="(item, index) in scoreList" class="mark" @click="mark(index + 1)">
+              <img v-if="item == 0" src="static/icon/icon-mark-3.png">
+              <img v-if="item == 1" src="static/icon/icon-mark-2.png">
+              <img v-if="item == 2" src="static/icon/icon-mark-1.png">
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <p class="text">活动环境</p>
+          <div class="col">
+            <a v-for="(item, index) in scoreList" class="mark" @click="mark(index + 1)">
+              <img v-if="item == 0" src="static/icon/icon-mark-3.png">
+              <img v-if="item == 1" src="static/icon/icon-mark-2.png">
+              <img v-if="item == 2" src="static/icon/icon-mark-1.png">
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <p class="text">服务态度</p>
+          <div class="col">
+            <a v-for="(item, index) in scoreList" class="mark" @click="mark(index + 1)">
+              <img v-if="item == 0" src="static/icon/icon-mark-3.png">
+              <img v-if="item == 1" src="static/icon/icon-mark-2.png">
+              <img v-if="item == 2" src="static/icon/icon-mark-1.png">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bc-fff bt1-eee">
+      <p class="evaluate-content f18">活动标签</p>
+      <div class="evaluate-content-tag">
+        <div class="row" v-for="(tag, outer) in tags">
+          <div class="col" :class="{active: item.check, ml10: index, mr10: !index}" v-for="(item, index) in tag"
+               @click="selectTag(outer, index)">
+            {{item.text}}
+            <img v-if="item.check" src="static/icon/icon-check.png">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bc-fff bt1-eee">
+      <p class="evaluate-content f18">活动评价</p>
+      <div class="evaluate-content-area">
+        <textarea v-model="content" :class="{'c-000': content, 'c-999': !content}" maxlength="400" placeholder="请描述你参加活动的过程，比如：活动氛围如何，活动怎样，我们期待你的建议"></textarea>
+        <span class="point">{{content.length}}/400</span>
+      </div>
+    </div>
+    <a class="au-btn" @click="">提交评价</a>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -14,6 +69,13 @@
         title: '',
         score: 10,
         content: '',
+        tags: [
+          [{text: '主办方帮帮哒', check: false}, {text: '主办方不咋地', check: false}],
+          [{text: '环境高大上', check: false}, {text: '环境一般般', check: false}],
+          [{text: '活动准时开办', check: false}, {text: '活动开办延时', check: false}],
+          [{text: '气氛一级棒', check: false}, {text: '气氛尴尬', check: false}],
+          [{text: '帅哥美女敲鸡多', check: false}, {text: '没几个人参加', check: false}]
+        ],
         images: []
       }
     },
@@ -32,6 +94,9 @@
       }
     },
     methods: {
+      selectTag: function (outer, index) {
+        this.tags[outer][index].check = !this.tags[outer][index].check;
+      },
       addImg: function () {
         if (this.images.length < 6) {
           this.$file.upload({

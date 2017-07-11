@@ -102,6 +102,14 @@
               <p>群体用户申请</p>
             </router-link>
           </li>
+          <li class="home-user-item">
+            <router-link to="/app/evaluate">
+              <img src="static/icon/icon-authenticate.png">
+              <img src="static/icon/icon-right.png">
+              <!--<span v-if="!user.user.idCardNo">未认证</span>-->
+              <p>测试评论</p>
+            </router-link>
+          </li>
         </ul>
       </div>
     </transition>
