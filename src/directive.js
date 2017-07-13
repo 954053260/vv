@@ -3,7 +3,7 @@
  */
 import Vue from 'vue'
 Vue.directive('clickoutside', {
-    bind (el, binding, vnode) {
+    bind (el, binding) {
         function documentHandler (e) {
             if (el.contains(e.target)) {
                 return false;
@@ -18,16 +18,16 @@ Vue.directive('clickoutside', {
     update () {
 
     },
-    unbind (el, binding) {
+    unbind (el) {
         document.removeEventListener('click', el.__vueClickOutside__);
         delete el.__vueClickOutside__;
     }
 });
 
 Vue.directive('cellSwipe', {
-    inserted (el, binding, vnode) {
-
+    bind (el) {
         el.className += ' cell-swipe';
+        el.style.transform = null;
 
         el.addEventListener('touchstart', function (e) {
             //e.preventDefault();
@@ -35,6 +35,7 @@ Vue.directive('cellSwipe', {
             var x = e.clientX;
             var optionsWidth = el.nextElementSibling && el.nextElementSibling.offsetWidth;
             var distance;
+            var directive;
             var translateX = el.style.transform ? el.style.transform.match(/(\d+)px/)[1] : 0;
             var cellNodes = document.querySelectorAll('.cell-swipe');
             var i = 0;
@@ -50,14 +51,25 @@ Vue.directive('cellSwipe', {
 
             function mouseMove (e) {
                 e = e.touches[0];
+
+                if (e.clientX - x > 0) {
+                    directive = 'right';
+                } else {
+                    directive = 'left';
+                }
+
                 distance = Math.abs(x - e.clientX);
 
                 if (distance <= optionsWidth) {
 
                     if (translateX) {
-                        el.style.transform = 'translate3d(-' + (translateX - distance) +'px, 0, 0)';
+                        if (directive == 'right') {
+                            el.style.transform = 'translate3d(-' + (translateX - distance) +'px, 0, 0)';
+                        }
                     } else {
-                        el.style.transform = 'translate3d(-' + distance +'px, 0, 0)';
+                        if (directive == 'left') {
+                            el.style.transform = 'translate3d(-' + distance +'px, 0, 0)';
+                        }
                     }
 
                 }
@@ -65,22 +77,25 @@ Vue.directive('cellSwipe', {
             //停止事件
             function mouseUp () {
 
-                if ((distance >= optionsWidth/2 && !translateX) || distance < optionsWidth/2 && translateX) {
-                    el.style.transform = 'translate3d(-' + optionsWidth +'px, 0, 0)';
-                } else {
+                if ((translateX && directive == 'right' && distance >= optionsWidth/2) || (!translateX && directive == 'left' && distance < optionsWidth/2)) {
                     el.style.transform = null;
+                } else {
+                    el.style.transform = 'translate3d(-' + optionsWidth +'px, 0, 0)';
                 }
 
                 //卸载事件
-                document.removeEventListener('touchmove',mouseMove);
-                document.removeEventListener('touchend',mouseUp);
+                document.removeEventListener('touchmove', mouseMove);
+                document.removeEventListener('touchend', mouseUp);
             }
         });
+    },
+    update (el) {
+        el.style.transform = null;
     }
 });
 
 Vue.directive('imgload', {
-    bind (el, binding, vnode) {
+    bind (el) {
         var img = new Image(),
             defaultSrc = '/images/audio.png';
         img.src = el.getAttribute('src');

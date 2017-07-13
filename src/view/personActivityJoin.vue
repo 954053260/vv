@@ -7,9 +7,9 @@
       <a class="col" @click="selectTab(1)">
         <span :class="{active: tab == 1}">已结束</span>
       </a>
-      <a class="col" @click="selectTab(2)">
-        <span :class="{active: tab == 2}">待评价</span>
-      </a>
+      <!--<a class="col" @click="selectTab(2)">-->
+        <!--<span :class="{active: tab == 2}">待评价</span>-->
+      <!--</a>-->
     </div>
     <form class="pa-search clear-float">
       <img src="static/icon/icon-search.png">
@@ -36,7 +36,8 @@
             </div>
             <div class="pa-buttons">
               <a class="pa-btn" @click.stop="toChat(item.publisherUserNo)">联系客服</a>
-              <a class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消参加</a>
+              <a v-if="tab == 0" class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消参加</a>
+              <a v-if="tab == 1" class="pa-btn" @click.stop="toEvaluate(activityNo)">评价</a>
             </div>
           </li>
         </ul>
@@ -56,7 +57,7 @@
         keyword: '',
         activities: [
           {pageNumber: 1, isComplete: false, list: []},
-          {pageNumber: 1, isComplete: false, list: []},
+//          {pageNumber: 1, isComplete: false, list: []},
           {pageNumber: 1, isComplete: false, list: []}
         ]
       }
@@ -84,7 +85,8 @@
         this.$http.get('/user/activity/partake', {data: {
           token: this.$store.state.user.info.token,
           pageNumber: this.activities[tab].pageNumber,
-          pageSize: 10
+          pageSize: 10,
+          status: this.tab ? 'finish' : 'underway'
         }}).then((data) => {
           if (data.code == 0) {
             this.activities[tab].list = this.activities[tab].list.concat(data.datas.page.content);

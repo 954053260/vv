@@ -10,8 +10,8 @@
     <div class="pa-list">
       <scroller :on-infinite="getActivity" ref="scroller">
         <ul style="min-height: 1px;">
-          <li v-for="item in activities" @click="toDetail(item.activityNo)">
-            <div class="pa-item">
+          <li class="pr" v-for="(item, index) in activities" @click="toDetail(item.activityNo)">
+            <div v-cell-swipe class="pa-item">
               <img v-if="item.images" :src="host + item.images[0]"/>
               <img v-if="item.image" :src="host + item.image"/>
               <div>
@@ -28,6 +28,7 @@
                 </div>
               </div>
             </div>
+            <a class="item-options" @click.stop="cancelCollect(index, item.activityNo)">删除</a>
           </li>
         </ul>
       </scroller>
@@ -88,6 +89,26 @@
       },
       toEvaluate: function (item) {
         this.$router.push('/app/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
+      },
+      cancelCollect: function (index, activityNo) {
+        this.$loading.show('取消...');
+        this.$http.post('/user/activity/collection/cancel', {data: {
+          token: this.$store.state.user.info.token,
+          activityNo: activityNo
+        }}).then((data) => {
+          this.$loading.hide();
+
+          if (data.code == 0) {
+            this.activities.splice(index, 1);
+            this.$toast.info('取消成功');
+          } else {
+            this.$toast.info('取消成功');
+          }
+
+        }, () => {
+          this.$toast.info('取消成功');
+          this.$loading.hide();
+        });
       }
     }
   }

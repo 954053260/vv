@@ -33,11 +33,15 @@
         </div>
         <div class="ad-title bb1-eee">
           <div class="row row-center">
-            <router-link class="ad-title-left col lh30 f16" to="/app/hostInfo">
+            <a class="ad-title-left col lh30 f16">
               <img class="fr w30 h30" src="static/icon/icon-right.png">
-              <span class="fr c-ff9800">4.8好评</span>
               <p class="c-000 font-hide">{{activity.linkMan}}</p>
-            </router-link>
+            </a>
+            <!--<router-link class="ad-title-left col lh30 f16" to="/app/hostInfo">-->
+              <!--<img class="fr w30 h30" src="static/icon/icon-right.png">-->
+              <!--<span class="fr c-ff9800">4.8好评</span>-->
+              <!--<p class="c-000 font-hide">{{activity.linkMan}}</p>-->
+            <!--</router-link>-->
             <div class="ad-title-right">
               <a @click="toChat()">
                 <img src="static/icon/icon-chat.png">

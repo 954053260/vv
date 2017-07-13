@@ -7,7 +7,7 @@
         <div class="row">
           <p class="text">描述相符</p>
           <div class="col">
-            <a v-for="(item, index) in scoreList" class="mark" @click="mark(index + 1)">
+            <a v-for="(item, index) in trueScoreList" class="mark" @click="mark('true', index + 1)">
               <img v-if="item == 0" src="static/icon/icon-mark-3.png">
               <img v-if="item == 1" src="static/icon/icon-mark-2.png">
               <img v-if="item == 2" src="static/icon/icon-mark-1.png">
@@ -17,7 +17,7 @@
         <div class="row">
           <p class="text">活动环境</p>
           <div class="col">
-            <a v-for="(item, index) in scoreList" class="mark" @click="mark(index + 1)">
+            <a v-for="(item, index) in environmentScoreList" class="mark" @click="mark('environment', index + 1)">
               <img v-if="item == 0" src="static/icon/icon-mark-3.png">
               <img v-if="item == 1" src="static/icon/icon-mark-2.png">
               <img v-if="item == 2" src="static/icon/icon-mark-1.png">
@@ -27,7 +27,7 @@
         <div class="row">
           <p class="text">服务态度</p>
           <div class="col">
-            <a v-for="(item, index) in scoreList" class="mark" @click="mark(index + 1)">
+            <a v-for="(item, index) in serviceScoreList" class="mark" @click="mark('service', index + 1)">
               <img v-if="item == 0" src="static/icon/icon-mark-3.png">
               <img v-if="item == 1" src="static/icon/icon-mark-2.png">
               <img v-if="item == 2" src="static/icon/icon-mark-1.png">
@@ -36,18 +36,18 @@
         </div>
       </div>
     </div>
-    <div class="bc-fff bt1-eee">
-      <p class="evaluate-content f18">活动标签</p>
-      <div class="evaluate-content-tag">
-        <div class="row" v-for="(tag, outer) in tags">
-          <div class="col" :class="{active: item.check, ml10: index, mr10: !index}" v-for="(item, index) in tag"
-               @click="selectTag(outer, index)">
-            {{item.text}}
-            <img v-if="item.check" src="static/icon/icon-check.png">
-          </div>
-        </div>
-      </div>
-    </div>
+    <!--<div class="bc-fff bt1-eee">-->
+      <!--<p class="evaluate-content f18">活动标签</p>-->
+      <!--<div class="evaluate-content-tag">-->
+        <!--<div class="row" v-for="(tag, outer) in tags">-->
+          <!--<div class="col" :class="{active: item.check, ml10: index, mr10: !index}" v-for="(item, index) in tag"-->
+               <!--@click="selectTag(outer, index)">-->
+            <!--{{item.text}}-->
+            <!--<img v-if="item.check" src="static/icon/icon-check.png">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="bc-fff bt1-eee">
       <p class="evaluate-content f18">活动评价</p>
       <div class="evaluate-content-area">
@@ -67,15 +67,17 @@
     data: function () {
       return {
         title: '',
-        score: 10,
+        trueScore: 10,
+        environmentScore: 10,
+        serviceScore: 10,
         content: '',
-        tags: [
-          [{text: '主办方帮帮哒', check: false}, {text: '主办方不咋地', check: false}],
-          [{text: '环境高大上', check: false}, {text: '环境一般般', check: false}],
-          [{text: '活动准时开办', check: false}, {text: '活动开办延时', check: false}],
-          [{text: '气氛一级棒', check: false}, {text: '气氛尴尬', check: false}],
-          [{text: '帅哥美女敲鸡多', check: false}, {text: '没几个人参加', check: false}]
-        ],
+//        tags: [
+//          [{text: '主办方帮帮哒', check: false}, {text: '主办方不咋地', check: false}],
+//          [{text: '环境高大上', check: false}, {text: '环境一般般', check: false}],
+//          [{text: '活动准时开办', check: false}, {text: '活动开办延时', check: false}],
+//          [{text: '气氛一级棒', check: false}, {text: '气氛尴尬', check: false}],
+//          [{text: '帅哥美女敲鸡多', check: false}, {text: '没几个人参加', check: false}]
+//        ],
         images: []
       }
     },
@@ -83,10 +85,28 @@
       host: function () {
         return this.$store.state.host;
       },
-      scoreList: function () {
+      trueScoreList: function () {
         var list = [0, 0, 0, 0, 0], i;
 
-        for(i = 0;i < parseInt(this.score/2); i++) {
+        for(i = 0;i < parseInt(this.trueScore/2); i++) {
+          list[i] = 2;
+        }
+
+        return list;
+      },
+      environmentScoreList: function () {
+        var list = [0, 0, 0, 0, 0], i;
+
+        for(i = 0;i < parseInt(this.environmentScore/2); i++) {
+          list[i] = 2;
+        }
+
+        return list;
+      },
+      serviceScoreList: function () {
+        var list = [0, 0, 0, 0, 0], i;
+
+        for(i = 0;i < parseInt(this.serviceScore/2); i++) {
           list[i] = 2;
         }
 
@@ -119,8 +139,18 @@
           this.$toast.info('最多上传5张');
         }
       },
-      mark: function (number) {
-        this.score = number*2;
+      mark: function (type, number) {
+        switch (type) {
+          case 'true':
+            this.trueScore =  number*2;
+                break;
+          case 'environment':
+            this.environmentScore =  number*2;
+            break;
+          case 'service':
+            this.serviceScore =  number*2;
+            break;
+        }
       },
       submit: function () {
         this.$loading.show('提交评价...');
@@ -128,7 +158,7 @@
               data: {
                 token: this.$store.state.user.info.token,
                 activityPartakeId: this.$route.query.activityPartakeId,
-                score: this.score,
+                score: (this.trueScore + this.environmentScore + this.serviceScore)/3,
                 content: this.content,
                 images: this.images.join()
               }
