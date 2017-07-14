@@ -49,7 +49,7 @@
         <li class="aa-item row">
           <span>活动地址</span>
           <label class="col pr" style="padding-right: 1.27466rem;">
-            <input class="c-999" type="text" v-model="address.address">
+            <input class="c-999" type="text" v-model="address.address" @focus="toTextEnd($event)">
             <a class="aa-address-btn" @click="selectAddress()">
               <img src="static/icon/icon-location.png">
             </a>
@@ -154,6 +154,23 @@
       }
     },
     methods: {
+      toTextEnd: function (e) {
+        var len = this.address.address ? this.address.address.length : 0;
+        var input = e.target;
+        var range;
+        setTimeout(() => {
+          if (input.setSelectionRange) {
+            input.focus();
+            input.setSelectionRange(len, len);
+          } else if (input.createTextRange) {
+            range = input.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', len);
+            range.moveStart('character', len);
+            range.select();
+          }
+        }, 0);
+      },
       location: function () {
         this.$loading.show('定位中...');
         this.$map.loadMap((map) => {
