@@ -155,21 +155,23 @@
     },
     methods: {
       toTextEnd: function (e) {
-        var len = this.address.address ? this.address.address.length : 0;
         var input = e.target;
         var range;
-        setTimeout(() => {
-          if (input.setSelectionRange) {
-            input.focus();
-            input.setSelectionRange(len, len);
-          } else if (input.createTextRange) {
-            range = input.createTextRange();
-            range.collapse(true);
-            range.moveEnd('character', len);
-            range.moveStart('character', len);
-            range.select();
+        console.dir(input)
+        console.dir(input.value.length)
+        input.focus();
+
+        setTimeout(function () {
+          if (document.selection) {
+            var sel = input.createTextRange();
+            sel.moveStart('character', input.value.length);
+            sel.collapse();
+            sel.select();
+          } else if (typeof input.selectionStart == 'number' && typeof input.selectionEnd == 'number') {
+            input.selectionStart = input.selectionEnd = input.value.length;
           }
-        }, 0);
+        });
+
       },
       location: function () {
         this.$loading.show('定位中...');
