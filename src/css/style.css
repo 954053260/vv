@@ -221,6 +221,10 @@ html, body {
     display:-ms-flexbox;
     display:flex;
 }
+.row-direction-column {
+    box-orient: vertical;
+    flex-direction: column;
+}
 .row-center {
     -webkit-box-direction: normal;
     -moz-box-direction: normal;
@@ -934,13 +938,6 @@ html, body {
     top: -0.1rem;
 }
 /*chat css*/
-.chat {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 1.0666666666666667rem;
-}
 .chat-list {
     padding-left: 0.2666666rem;
     padding-right: 0.2666666rem;
@@ -1020,15 +1017,12 @@ html, body {
     border-right: none;
 }
 .chat-input {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
+    padding: 0 0.2666666rem;
+    line-height: 0.8rem;
+    height: 1.0666666666666667rem;
 }
 .chat-input label {
     display: block;
-    margin: 0.1333333rem 0.2666666rem;
     border-radius: 4px;
 }
 .chat-input input {

@@ -77,10 +77,12 @@ Vue.directive('cellSwipe', {
             //停止事件
             function mouseUp () {
 
-                if ((translateX && directive == 'right' && distance >= optionsWidth/2) || (!translateX && directive == 'left' && distance < optionsWidth/2)) {
-                    el.style.transform = null;
-                } else {
-                    el.style.transform = 'translate3d(-' + optionsWidth +'px, 0, 0)';
+                if (distance && directive) {
+                    if ((translateX && directive == 'right' && distance >= optionsWidth/2) || (!translateX && directive == 'left' && distance < optionsWidth/2)) {
+                        el.style.transform = null;
+                    } else {
+                        el.style.transform = 'translate3d(-' + optionsWidth +'px, 0, 0)';
+                    }
                 }
 
                 //卸载事件
