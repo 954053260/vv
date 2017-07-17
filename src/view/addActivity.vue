@@ -156,24 +156,14 @@
     methods: {
       toTextEnd: function (e) {
         var input = e.target;
-//        var range;
         var value = input.value;
         this.address.address = '';
         setTimeout(() => {
           this.address.address = value;
+          setTimeout(() => {
+            input.scrollLeft = input.scrollWidth;
+          });
         });
-//        input.focus();
-//        setTimeout(function () {
-//          if (document.selection) {
-//            var sel = input.createTextRange();
-//            sel.moveStart('character', input.value.length);
-//            sel.collapse();
-//            sel.select();
-//          } else if (typeof input.selectionStart == 'number' && typeof input.selectionEnd == 'number') {
-//            input.selectionStart = input.selectionEnd = input.value.length;
-//          }
-//        });
-
       },
       location: function () {
         this.$loading.show('定位中...');
