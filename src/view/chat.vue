@@ -142,7 +142,6 @@
         var msg = this.msg;
         if (e.keyCode == 13 && msg) {
           this.msg = '';
-          this.$refs.input.blur();
           this.$http.post('/user/chat/message/send', {data: {
             token: this.token,
             toUserNo: this.$route.query.friendUserNo,
@@ -151,7 +150,6 @@
           }}).then((data) => {
             if (data.code == 0) {
               this.getMessages();
-              this.$refs.input.blur();
             } else {
               this.$toast.info('发送失败');
             }
