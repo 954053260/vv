@@ -222,7 +222,9 @@ html, body {
     display:flex;
 }
 .row-direction-column {
+    -webkit-box-orient: vertical;
     box-orient: vertical;
+    -webkit-flex-direction:row;
     flex-direction: column;
 }
 .row-center {
