@@ -941,8 +941,11 @@ html, body {
 }
 /*chat css*/
 .chat {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 1.0666666666666667rem;
 }
 .chat-list {
     padding-left: 0.2666666rem;
@@ -1023,12 +1026,15 @@ html, body {
     border-right: none;
 }
 .chat-input {
-    padding: 0 0.2666666rem;
-    line-height: 0.8rem;
-    height: 1.0666666666666667rem;
+    position: absolute;
+    bottom: 0.1333333rem;
+    left: 0;
+    width: 100%;
+    z-index: 1;
 }
 .chat-input label {
     display: block;
+    margin: 0.1333333rem 0.2666666rem;
     border-radius: 4px;
 }
 .chat-input input {

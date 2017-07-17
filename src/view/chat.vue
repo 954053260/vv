@@ -1,35 +1,33 @@
 <template>
   <div id="chat" class="container bc-page">
-    <div class="h row row-direction-column">
-      <div class="col chat">
-        <scroller ref="scroller" :on-refresh="onRefresh">
-          <div class="chat-list">
-            <div v-for="item in chats" class="chat-item">
-              <div v-if="item.fromUserNo == friendUserNo" class="row">
-                <img :src="host + item.fromAvatar">
-                <div class="col">
-                  <p class="name">{{item.fromNickName}}</p>
-                  <p class="text">{{item.content}}</p>
-                </div>
-              </div>
-              <div v-else class="row item-type">
-                <div class="col">
-                  <p class="name tr">{{item.fromNickName}}</p>
-                  <p class="text">{{item.content}}</p>
-                </div>
-                <img :src="host + item.fromAvatar">
+    <div class="chat">
+      <scroller ref="scroller" :on-refresh="onRefresh">
+        <div class="chat-list">
+          <div v-for="item in chats" class="chat-item">
+            <div v-if="item.fromUserNo == friendUserNo" class="row">
+              <img :src="host + item.fromAvatar">
+              <div class="col">
+                <p class="name">{{item.fromNickName}}</p>
+                <p class="text">{{item.content}}</p>
               </div>
             </div>
+            <div v-else class="row item-type">
+              <div class="col">
+                <p class="name tr">{{item.fromNickName}}</p>
+                <p class="text">{{item.content}}</p>
+              </div>
+              <img :src="host + item.fromAvatar">
+            </div>
           </div>
-        </scroller>
-      </div>
-      <form class="chat-input" target="form-submit">
-        <label>
-          <input type="text" name="test" style="display:none"/>
-          <input type="text" ref="input" @focus="scrollBottom" @keydown="sendMsg($event)" v-model="msg">
-        </label>
-      </form>
+        </div>
+      </scroller>
     </div>
+    <form class="chat-input" target="form-submit">
+      <label>
+        <input type="text" name="test" style="display:none"/>
+        <input type="text" ref="input" @focus="scrollBottom" @click="inputScroll($event)" @keydown="sendMsg($event)" v-model="msg">
+      </label>
+    </form>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -85,6 +83,13 @@
       }
     },
     methods: {
+      inputScroll: function (e) {
+        var target = e.target;;
+        // 使用定时器是为了让输入框上滑时更加自然
+        setTimeout(function(){
+          target.scrollIntoView(true);
+        }, 100);
+      },
       getMessages: function () {
         var startTime;
 
