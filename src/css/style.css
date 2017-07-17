@@ -1110,6 +1110,7 @@ html, body {
     line-height: 0.8rem;
     text-align: right;
     border: none;
+    overflow-x: auto;
 }
 .aa-item img {
     display: inline-block;
