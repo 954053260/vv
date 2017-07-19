@@ -79,18 +79,21 @@
           </div>
         </div>
       </div>
-      <a v-if="!activity.isPartaked && activity.activityStatus.value != '105' && activity.activityStatus.value != '106' && activity.activityStatus.value != '107'"
-         :class="{'bc-999': activity.participantCount == activity.limitCount, 'bc-main': activity.participantCount < activity.limitCount}"
-         class="ad-foot c-fff" @click="submitActivity()">
-        {{activity.participantCount == activity.limitCount ? '报名人数已满' : '我要参加'}}
-      </a>
-      <a v-if="activity.isPartaked && activity.activityStatus.value != '106' && activity.activityStatus.value != '107' && activity.isPartaked"
-         class="ad-foot bc-999 c-fff" @click="cancelActivity()">
-        我要取消
-      </a>
-      <a v-if="activity.activityStatus.value == '105' && !activity.isPartaked" class="ad-foot bc-ccc">截止报名</a>
-      <a v-if="activity.activityStatus.value == '106'" class="ad-foot bc-999 c-fff">已开始</a>
-      <a v-if="activity.activityStatus.value == '107'" class="ad-foot bc-999 c-fff">已结束</a>
+      <section v-if="activity.activityStatus.value != '100'">
+        <a v-if="!activity.isPartaked && activity.activityStatus.value != '104' && activity.activityStatus.value != '105' && activity.activityStatus.value != '106'"
+           :class="{'bc-999': activity.participantCount == activity.limitCount, 'bc-main': activity.participantCount < activity.limitCount}"
+           class="ad-foot c-fff" @click="submitActivity()">
+          {{activity.participantCount == activity.limitCount ? '报名人数已满' : '我要参加'}}
+        </a>
+        <a v-if="activity.isPartaked && activity.activityStatus.value != '105' && activity.activityStatus.value != '106' && activity.isPartaked"
+           class="ad-foot bc-999 c-fff" @click="cancelActivity()">
+          我要取消
+        </a>
+        <a v-if="activity.activityStatus.value == '104' && !activity.isPartaked" class="ad-foot bc-ccc">截止报名</a>
+        <a v-if="activity.activityStatus.value == '105'" class="ad-foot bc-999 c-fff">已开始</a>
+        <a v-if="activity.activityStatus.value == '106'" class="ad-foot bc-999 c-fff">已结束</a>
+      </section>
+      <a v-if="activity.activityStatus.value == '100'" class="ad-foot bc-999 c-fff">待审核</a>
     </div>
   </div>
 </template>

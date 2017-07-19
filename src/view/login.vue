@@ -63,7 +63,7 @@
           this.$store.dispatch('login', {
             mobile: this.phone,
             smsCode: this.code,
-            openid: '404f4fe64b1b070c12e6f3b0058cd87e'
+            openid: user.openid
           }).then((data) => {
             this.$store.dispatch('getUserInfo', this.user.token).then(() => {
               this.$loading.hide();
@@ -77,8 +77,6 @@
             this.$toast.info('登录失败！')
           });
         }
-
-
       },
       getCode: function () {
         if (this.validate()) {

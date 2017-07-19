@@ -6,6 +6,7 @@ export default {
     state: {
         info: {
             token: '',
+            openid: window.vvOpenid,
             user: {}
         }
     },
