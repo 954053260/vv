@@ -63,7 +63,7 @@
           this.$store.dispatch('login', {
             mobile: this.phone,
             smsCode: this.code,
-            openid: user.openid
+            openid: this.user.openid
           }).then((data) => {
             this.$store.dispatch('getUserInfo', this.user.token).then(() => {
               this.$loading.hide();
