@@ -121,11 +121,11 @@
       return {
         swiperOption: {
           autoplay: 30000,
-          setWrapperSize :true,
-          pagination : '.swiper-pagination',
-          paginationClickable :true,
-          mousewheelControl : true,
-          observeParents:true,
+          setWrapperSize: true,
+          pagination: '.swiper-pagination',
+          paginationClickable: true,
+          mousewheelControl: true,
+          observeParents: true,
         },
         swiperSlides: [],
         show: true,
@@ -143,7 +143,7 @@
       host: function () {
         return this.$store.state.host;
       },
-      activityTypes:  function () {
+      activityTypes: function () {
         return this.$store.state.map.activityTypes.slice(1);
       },
       positionResult: function () {
@@ -192,7 +192,7 @@
                       }, () => {
                         this.$loading.hide();
                         this.$toast.info('上传失败');
-                      })
+                      });
             },
             fail: () => {
               this.$toast.info('上传失败');
