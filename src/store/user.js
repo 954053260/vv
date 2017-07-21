@@ -5,7 +5,7 @@ import Vue from 'vue'
 export default {
     state: {
         info: {
-            token: '',
+            token: window.token || '',
             openid: window.vvOpenid,
             user: {}
         }
