@@ -33,6 +33,7 @@ Vue.directive('cellSwipe', {
             //e.preventDefault();
             e = e.touches[0];
             var x = e.clientX;
+            var y = e.clientY;
             var optionsWidth = el.nextElementSibling && el.nextElementSibling.offsetWidth;
             var distance;
             var directive;
@@ -51,14 +52,17 @@ Vue.directive('cellSwipe', {
 
             function mouseMove (e) {
                 e = e.touches[0];
+                distance = Math.abs(x - e.clientX);
+
+                if (distance < Math.abs(y - e.clientY)) {
+                    return;
+                }
 
                 if (e.clientX - x > 0) {
                     directive = 'right';
                 } else {
                     directive = 'left';
                 }
-
-                distance = Math.abs(x - e.clientX);
 
                 if (distance <= optionsWidth) {
 
