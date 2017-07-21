@@ -10,7 +10,7 @@
     <div class="pa-list">
       <scroller :on-infinite="getActivity" ref="scroller">
         <ul style="min-height: 1px;">
-          <li v-for="item in activities" @click="toDetail(item.activityNo)">
+          <li v-for="item in activities.list" @click="toDetail(item.activityNo)">
             <div class="pa-item">
               <img v-if="item.images" :src="host + item.images[0]"/>
               <img v-if="item.image" :src="host + item.image"/>
@@ -45,7 +45,7 @@
       return {
         keyword: '',
         pageNumber: 1,
-        activities: []
+        activities: {list: [], isComplete: false}
       }
     },
     computed: {
@@ -59,6 +59,11 @@
         this.tab = tab;
       },
       getActivity: function (done) {
+        if (this.activities.isComplete) {
+          this.$refs.scroller.finishInfinite(true);
+          return;
+        }
+
         this.$http.get('/user/activity/publication', {data: {
           token: this.$store.state.user.info.token,
           pageNumber: this.pageNumber,
@@ -66,13 +71,14 @@
         }}).then((data) => {
           done();
           if (data.code == 0) {
-            this.activities = this.activities.concat(data.datas.page.content);
+            this.activities.list = this.activities.list.concat(data.datas.page.content);
             this.pageNumber += 1;
 
             if (data.datas.page.content.length < 10) {
+              this.activities.isComplete = true;
               this.$refs.scroller.finishInfinite(true);
             } else {
-              this.$refs.scroller.finishInfinite(true);
+              this.$refs.scroller.finishInfinite(false);
             }
 
           } else {

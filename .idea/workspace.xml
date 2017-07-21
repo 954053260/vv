@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f5dcd8e-1692-495e-afd8-d5517b523375" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/login.vue" afterPath="$PROJECT_DIR$/src/view/login.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/build.js.map" afterPath="$PROJECT_DIR$/dist/build.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/build.js" afterPath="$PROJECT_DIR$/dist/build.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/personActivityAdd.vue" afterPath="$PROJECT_DIR$/src/view/personActivityAdd.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/personActivityCollection.vue" afterPath="$PROJECT_DIR$/src/view/personActivityCollection.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vv.iws" />
@@ -24,33 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/router.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="33" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="33" />
-              <folding>
-                <marker date="1500598231449" expanded="true" signature="2285:2307" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -76,11 +57,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/login.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4415243">
-              <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
+            <state vertical-scroll-proportion="-12.363636">
+              <caret line="73" column="11" selection-start-line="73" selection-start-column="11" selection-end-line="73" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="personActivityAdd.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/view/personActivityAdd.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8347107">
+              <caret line="77" column="29" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="personActivityCollection.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/personActivityCollection.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.454545">
+              <caret line="109" column="32" selection-start-line="109" selection-start-column="32" selection-end-line="109" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="personActivityJoin.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/personActivityJoin.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="19.030304">
+              <caret line="58" column="36" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -151,8 +162,6 @@
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/store/map.js" />
         <option value="$PROJECT_DIR$/src/view/app.vue" />
-        <option value="$PROJECT_DIR$/src/view/personActivityCollection.vue" />
-        <option value="$PROJECT_DIR$/src/view/personActivityAdd.vue" />
         <option value="$PROJECT_DIR$/src/view/personActivityJoin.vue" />
         <option value="$PROJECT_DIR$/src/view/authentication.vue" />
         <option value="$PROJECT_DIR$/src/view/home.vue" />
@@ -165,6 +174,8 @@
         <option value="$PROJECT_DIR$/src/view/addActivity.vue" />
         <option value="$PROJECT_DIR$/src/directive.js" />
         <option value="$PROJECT_DIR$/src/view/login.vue" />
+        <option value="$PROJECT_DIR$/src/view/personActivityAdd.vue" />
+        <option value="$PROJECT_DIR$/src/view/personActivityCollection.vue" />
       </list>
     </option>
   </component>
@@ -430,7 +441,13 @@
       <option name="project" value="LOCAL" />
       <updated>1500630050991</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="提交vv">
+      <created>1500630360981</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1500630360981</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -668,27 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/personActivityAdd.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.946794">
-          <caret line="60" column="33" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/personActivityCollection.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5402456">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/personActivityJoin.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26603">
-          <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/icon/icon-mark-2.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -752,7 +748,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="33" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="33" />
           <folding>
-            <marker date="1500598231449" expanded="true" signature="2285:2307" placeholder="{...}" />
+            <marker date="1500598231449" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -799,14 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ajax.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -835,8 +823,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/login.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4415243">
-          <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
+        <state vertical-scroll-proportion="-12.363636">
+          <caret line="73" column="11" selection-start-line="73" selection-start-column="11" selection-end-line="73" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/personActivityJoin.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="19.030304">
+          <caret line="58" column="36" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/personActivityCollection.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.454545">
+          <caret line="109" column="32" selection-start-line="109" selection-start-column="32" selection-end-line="109" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/personActivityAdd.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8347107">
+          <caret line="77" column="29" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="29" />
           <folding />
         </state>
       </provider>
