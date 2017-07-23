@@ -11,7 +11,6 @@ import router from './router.js'
 import store from './store'
 import app from './view/app.vue'
 import ajax from './ajax.js'
-// import socket from './socket.js'
 import './common/vue-picker/style.css'
 import smoothPicker from './common/vue-picker/index.js'
 // https://github.com/wangdahoo/vue-scroller?utm_source=tuicool&utm_medium=referral

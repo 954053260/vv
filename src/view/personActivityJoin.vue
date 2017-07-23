@@ -22,7 +22,7 @@
       <scroller :on-infinite="getActivity" ref="scroller">
         <ul style="min-height: 1px;">
           <li v-for="(item, index) in activities[tab].list" @click="toDetail(item.activityNo)">
-            <p class="pl10 lh44 f16 bb1-eee">主办方：广百百货</p>
+            <p class="pl10 lh44 f16 bb1-eee">主办方：{{item.publisherNickname}}</p>
             <div class="pa-item">
               <img v-if="item.images" :src="host + item.images[0]"/>
               <img v-if="item.image" :src="host + item.image"/>
@@ -92,7 +92,7 @@
             this.activities[tab].list = this.activities[tab].list.concat(data.datas.page.content);
             this.activities[tab].pageNumber += 1;
 
-            if (data.datas.page.content.length < 10) {
+            if (!data.datas.page.hasNext) {
               this.activities[tab].isComplete = true;
               this.$refs.scroller.finishInfinite(true);
             } else {

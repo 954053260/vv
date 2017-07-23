@@ -107,7 +107,7 @@
             this.activities[tab].list = this.activities[tab].list.concat(data.datas.page.content);
             this.activities[tab].pageNumber += 1;
 
-            if (data.datas.page.content.length < 10) {
+            if (!data.datas.page.hasNext) {
               this.activities[tab].isComplete = true;
               this.$refs.scroller.finishInfinite(true);
             } else {

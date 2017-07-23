@@ -118,7 +118,7 @@
             realname: this.realname,
             name: this.name,
             organCode: this.business,
-            attachments: this.swiperSlides
+            attachments: this.swiperSlides.join()
           }
         }).then((data) => {
           this.$loading.hide();

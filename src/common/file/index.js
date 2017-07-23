@@ -1,6 +1,7 @@
 /**
  * Created by tz on 2017/6/8.
  */
+import EXIF from '../../lib//exif.js'
 export default {
     install: function (Vue) {
         Vue.file = Vue.prototype.$file = {
@@ -49,6 +50,9 @@ export default {
                             var result = this.result;
                             var img = new Image();
                             img.src = result;
+                            console.log('==img==', img);
+                            console.dir(img);
+                            img = drawPhoto(img, 0, 0, img.width, img.height);
                             //如果图片大小小于100kb，则直接上传
                             if (result.length <= option.size) {
                                 img = null;
@@ -132,6 +136,51 @@ export default {
             tCanvas.width = tCanvas.height = canvas.width = canvas.height = 0;
 
             return ndata;
+        }
+
+        //获取照片的元信息（拍摄方向）
+        function getPhotoOrientation(img){
+            var orient;
+            EXIF.getData(img, function () {
+                orient = EXIF.getTag(this, "Orientation");
+            });
+            return orient;
+        }
+
+        function drawPhoto(photo, x, y, w, h) {
+
+            //获取照片的拍摄方向
+            var orient = getPhotoOrientation(photo);
+            var canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            if (canvas.getContext) {
+                var ctx = canvas.getContext("2d");
+                //draw on Canvas
+                var img = new Image();
+                img.onload = function () {
+                    var canvas_w = Number(ctx.canvas.width);
+                    var canvas_h = Number(ctx.canvas.height);
+
+                    //判断图片拍摄方向是否旋转了90度
+                    if (orient == 6) {
+                        ctx.save();//保存状态
+                        ctx.translate(canvas_w / 2, canvas_h / 2);//设置画布上的(0,0)位置，也就是旋转的中心点
+                        ctx.rotate(90 * Math.PI / 180);//把画布旋转90度
+                        // 执行Canvas的drawImage语句
+                        ctx.drawImage(img, Number(y) - canvas_h / 2, Number(x) - canvas_w / 2, h, w);//把图片绘制在画布translate之前的中心点，
+                        ctx.restore();//恢复状态
+                    } else {
+                        // 执行Canvas的drawImage语句
+                        ctx.drawImage(img, x, y, w, h);
+                    }
+
+                };
+
+                img.src = photo.src; // 设置图片源地址
+
+                return img;
+            }
         }
     }
 }

@@ -74,7 +74,7 @@
             this.activities.list = this.activities.list.concat(data.datas.page.content);
             this.pageNumber += 1;
 
-            if (data.datas.page.content.length < 10) {
+            if (!data.datas.page.hasNext) {
               this.activities.isComplete = true;
               this.$refs.scroller.finishInfinite(true);
             } else {

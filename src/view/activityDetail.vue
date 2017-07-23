@@ -83,7 +83,7 @@
             <div class="ad-item mt10">
               <img class="comment-title dp-ib vm" src="static/icon/icon-chats.png">
               <span class="dp-ib vm">用户评价</span>
-              <!--<span class="dp-ib vm c-999">（123）</span>-->
+              <span class="dp-ib vm c-999">（{{comments.total}}）</span>
             </div>
             <ul>
               <li v-for="item in comments.list" class="ad-comment-item">
@@ -150,7 +150,7 @@
           observeParents:true,
         },
         activity: null,
-        comments: {pageNumber: 1, list: [], isComplete: false}
+        comments: {total: 0, pageNumber: 1, list: [], isComplete: false}
       }
     },
     computed: {
@@ -214,10 +214,11 @@
           pageSize: 10
         }}).then((data) => {
           if (data.code == 0) {
+            this.comments.total = data.datas.page.total;
             this.comments.list = this.comments.list.concat(data.datas.page.content);
             this.pageNumber += 1;
 
-            if (data.datas.page.content.length < 10) {
+            if (!data.datas.page.hasNext) {
               this.comments.isComplete = true;
               this.$refs.scroller.finishInfinite(true);
             } else {

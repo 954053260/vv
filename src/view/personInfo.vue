@@ -19,7 +19,8 @@
             </li>
             <li class="pi-item row">
               <span>手机号</span>
-              <label class="col pr">
+              <span class="col c-999 tr">{{mobile}}</span>
+              <label class="col pr" style='display: none'>
                 <input class="c-999" type="number" placeholder="请输入手机号" v-model="mobile"
                        @focus="isPhone = true" @blur="validatePhone()">
                 <p v-show="!isPhone" class="pi-point">请输入正确的手机号！</p>
@@ -191,20 +192,24 @@
         this.tab = 3;
       },
       saveInfo: function () {
-        var hobbies = [];
+         var hobbies = [];
+         var data = {token: this.$store.state.user.info.token};
+
+        if (!this.isEdit) {
+          return;
+        }
+
+     
         this.hobbies.forEach(function (item) {
           hobbies.push(item.id);
         });
 
+        data.hobbies = hobbies;
+        this.nickname && (data.nickname = this.nickname);
+        this.signature && (data.nickname = this.signature);
+        // this.mobile && (data.mobile = this.mobile);
         this.$loading.show('保存信息中...');
-        this.$http.post('/user/update', {data: {
-          token: this.$store.state.user.info.token,
-          nickname: this.nickname,
-          avatar: this.avatar,
-          signature: this.signature,
-          hobbies: hobbies
-        }
-        }).
+        this.$http.post('/user/update', {data: data}).
         then((data) => {
           this.$loading.hide();
           if (data.code == 0) {

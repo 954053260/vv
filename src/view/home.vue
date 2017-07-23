@@ -83,7 +83,7 @@
             <router-link to="/app/authentication">
               <img src="static/icon/icon-card.png">
               <img src="static/icon/icon-right.png">
-              <span v-if="!user.user.idCardNo">未认证</span>
+              <span>{{user.user.idCardNo ? '已认证' :  '未认证'}}</span>
               <p>实名认证</p>
             </router-link>
           </li>
@@ -91,7 +91,7 @@
             <router-link to="/app/apply">
               <img src="static/icon/icon-authenticate.png">
               <img src="static/icon/icon-right.png">
-              <!--<span v-if="!user.user.idCardNo">未认证</span>-->
+              <span>{{user.user.userType.value == 2 ? '已认证' :  '未认证'}}</span>
               <p>群体用户申请</p>
             </router-link>
           </li>
@@ -180,7 +180,7 @@
             if (data.code == 0) {
               success(data);
             } else {
-              fail(data.msg);
+              fail && fail(data.msg);
             }
           }, fail);
         }
