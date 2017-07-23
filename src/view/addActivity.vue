@@ -258,6 +258,10 @@
           return this.$toast.info('活动地址不能为空！');
         }
 
+        if (!this.address.lat || !this.address.lat) {
+          return this.$toast.info('获取活动地址坐标失败，请重新选择地址');
+        }
+
         this.$loading.show('提交活动...');
         this.$map.loadMap((map) => {
           map.gd.getCity((data) => {

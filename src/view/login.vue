@@ -65,6 +65,7 @@
             smsCode: this.code,
             openid: this.user.openid
           }).then((data) => {
+            localStorage.setItem('token', this.user.token);
             this.$store.dispatch('getUserInfo', this.user.token).then(() => {
               this.$loading.hide();
               this.$router.back();

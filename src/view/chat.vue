@@ -1,5 +1,5 @@
 <template>
-  <div id="chat" class="container bc-page">
+  <div id="chat" class="container bc-eee">
     <div class="chat">
       <scroller ref="scroller" :on-refresh="onRefresh">
         <div class="chat-list">
@@ -7,13 +7,13 @@
             <div v-if="item.fromUserNo == friendUserNo" class="row">
               <img :src="host + item.fromAvatar">
               <div class="col">
-                <p class="name">{{item.fromNickName}}</p>
+                <p class="name">{{item.fromNickName}}　{{item.createTime | date('HH:mm:ss')}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
             </div>
             <div v-else class="row item-type">
               <div class="col">
-                <p class="name tr">{{item.fromNickName}}</p>
+                <p class="name tr">{{item.createTime | date('HH:mm:ss')}}　{{item.fromNickName}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
               <img :src="host + item.fromAvatar">
@@ -84,11 +84,11 @@
     },
     methods: {
       inputScroll: function (e) {
-        var target = e.target;;
+        var target = e.target;
         // 使用定时器是为了让输入框上滑时更加自然
         setTimeout(function(){
           target.scrollIntoView(true);
-        }, 100);
+        }, 150);
       },
       getMessages: function () {
         var startTime;

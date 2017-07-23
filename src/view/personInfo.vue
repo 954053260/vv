@@ -212,7 +212,7 @@
             this.$store.state.user.info.user.hobbies = this.hobbies;
             this.$toast.info('保持信息成功');
           } else {
-            this.$toast.info('保持信息失败');
+            this.$toast.info(data.msg);
           }
 
         }, () => {

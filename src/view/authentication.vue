@@ -55,13 +55,17 @@
         }).then((data) => {
           this.$loading.hide();
           if (data.code == 0) {
-            this.$toast.info('提交成功');
+            this.$toast.info('认证成功');
+            this.$store.dispatch('getUserInfo', this.$store.state.user.info.token).then(() => {
+            }, () => {
+              this.$toast.info('获取用户信息失败！')
+            });
             this.$router.back();
           } else {
-            this.$toast.info('提交失败');
+            this.$toast.info(data.msg);
           }
         }, () => {
-          this.$toast.info('提交失败');
+          this.$toast.info('认证失败');
           this.$loading.hide();
         });
       }

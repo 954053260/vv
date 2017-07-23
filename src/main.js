@@ -32,10 +32,25 @@ Vue.use(ajax, {
   success: (data) => {
     if (data && data.code == '10010007') {
       Vue.toast.info('登录失效，请重新登录！');
+      localStorage.setItem('token', null);
       router.push('/app/login');
     }
   }
 });
+
+if (window.token || localStorage.getItem('token')) {
+  Vue.loading.show('自动登录中...');
+  store.dispatch('getUserInfo', window.token || localStorage.getItem('token')).then(() => {
+    Vue.loading.hide();
+  }, () => {
+    Vue.loading.hide();
+    Vue.toast.info('获取用户信息失败，请重新登录');
+    localStorage.setItem('token', null);
+    router.push('/app/home');
+    router.push('/app/login');
+  });
+}
+
 new Vue({
   el: '#main',
   router,

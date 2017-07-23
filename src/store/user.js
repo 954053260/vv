@@ -2,11 +2,20 @@
  * Created by tz on 2017/1/11.
  */
 import Vue from 'vue'
+
+if (window.token) {
+    localStorage.setItem('token', window.token);
+}
+
+if (window.vvOpenid) {
+    localStorage.setItem('vvOpenid', window.vvOpenid);
+}
+
 export default {
     state: {
         info: {
-            token: window.token || '',
-            openid: window.vvOpenid,
+            token: localStorage.getItem('token') || '',
+            openid: localStorage.getItem('vvOpenid'),
             user: {}
         }
     },

@@ -31,7 +31,7 @@
     </a>
     <div class="home-select-content">
       <transition name="fade">
-        <div v-if="isFilter" class="pr row col z-2">
+        <div v-show="isFilter" class="pr row col z-2">
           <m-select ref="organization" class="col mr5" :list="activityOrganizationTypes" bindValue="desc" v-model="organizationTypesIndex"
                     @click.native="hideSelect(['types', 'dateRange'])"
                     @input="changeOrganization"></m-select>
@@ -88,18 +88,18 @@
             </router-link>
           </li>
           <li class="home-user-item">
-            <router-link to="/app/about">
-              <img src="static/icon/icon-about.png">
-              <img src="static/icon/icon-right.png">
-              <p class="f16">关于我们</p>
-            </router-link>
-          </li>
-          <li class="home-user-item">
             <router-link to="/app/apply">
               <img src="static/icon/icon-authenticate.png">
               <img src="static/icon/icon-right.png">
               <!--<span v-if="!user.user.idCardNo">未认证</span>-->
               <p>群体用户申请</p>
+            </router-link>
+          </li>
+          <li class="home-user-item">
+            <router-link to="/app/about">
+              <img src="static/icon/icon-about.png">
+              <img src="static/icon/icon-right.png">
+              <p class="f16">关于我们</p>
             </router-link>
           </li>
         </ul>
@@ -110,17 +110,17 @@
       <div v-if="isChat" class="home-chat bc-page home-chat-list">
         <ul>
           <li class="home-chat-item" v-for="item in friends">
-            <router-link v-cell-swipe class="row" :to="'/app/chat?friendUserNo=' + item.friendUserNo">
-              <img :src="host + item.friendAvatar" width="40" height="40">
-              <div class="home-chat-content col">
+            <router-link :to="'/app/chat?friendUserNo=' + item.friendUserNo">
+              <img :src="host + item.friendAvatar">
+              <div class="home-chat-content">
                 <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | date('MM/dd HH:mm')}}</span></p>
                 <div>
                   <span v-if="!item.isReaded" class="point"></span>
-                  <p class="text">{{item.lastMessageContent}}</p>
+                  <p class="text font-hide">{{item.lastMessageContent}}</p>
                 </div>
               </div>
             </router-link>
-            <a class="item-options">删除</a>
+            <!--<a class="item-options">删除</a>-->
           </li>
         </ul>
       </div>
@@ -186,6 +186,7 @@
         }
       },
       location: function () {
+        this.hideSelect(['organization', 'dateRange', 'types']);
         this.$loading.show('定位中...');
         this.$map.loadMap((map) => {
           map.doLocation(
@@ -201,9 +202,11 @@
         });
       },
       toggleFilter: function () {
+        this.hideSelect(['organization', 'dateRange', 'types']);
         this.isFilter = !this.isFilter;
       },
       toggleUserMenu: function (bool) {
+        this.hideSelect(['organization', 'dateRange', 'types']);
         if (this.user.token) {
 
           if (typeof bool === 'boolean') {
@@ -217,6 +220,7 @@
         }
       },
       toggleChat: function (bool) {
+        this.hideSelect(['organization', 'dateRange', 'types']);
         if (!this.user.token) {
           return  this.$router.push('/app/login');
         }
@@ -240,8 +244,13 @@
         }
       },
       addActivity: function () {
+        this.hideSelect(['organization', 'dateRange', 'types']);
         if (this.user.token) {
-          this.$router.push('/app/addActivity');
+          if (this.user.user.idCardNo) {
+            this.$router.push('/app/addActivity');
+          } else {
+            this.$toast.info('没有实名认证不能发布活动');
+          }
         } else {
           this.$router.push('/app/login');
         }
@@ -271,6 +280,7 @@
         });
       },
       refresh: function () {
+        this.hideSelect(['organization', 'dateRange', 'types']);
         this.$store.state.isRefresh = true;
         this.$map.loadMap((map) => {
           map.getPositionPicker().start();

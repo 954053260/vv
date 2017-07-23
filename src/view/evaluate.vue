@@ -55,7 +55,7 @@
         <span class="point">{{content.length}}/400</span>
       </div>
     </div>
-    <a class="au-btn" @click="">提交评价</a>
+    <a class="au-btn" @click="submit">提交评价</a>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -153,12 +153,17 @@
         }
       },
       submit: function () {
+        if (!this.content) {
+         this.$toast.info('评价内容不能为空！');
+         return;
+        }
+
         this.$loading.show('提交评价...');
             this.$http.post('/user/activity/evaluate/publish', {
               data: {
                 token: this.$store.state.user.info.token,
                 activityPartakeId: this.$route.query.activityPartakeId,
-                score: (this.trueScore + this.environmentScore + this.serviceScore)/3,
+                score: (this.trueScore + this.environmentScore + this.serviceScore)/6,
                 content: this.content,
                 images: this.images.join()
               }

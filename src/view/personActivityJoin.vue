@@ -37,7 +37,7 @@
             <div class="pa-buttons">
               <a class="pa-btn" @click.stop="toChat(item.publisherUserNo)">联系客服</a>
               <a v-if="tab == 0" class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消参加</a>
-              <a v-if="tab == 1" class="pa-btn" @click.stop="toEvaluate(activityNo)">评价</a>
+              <a v-if="tab == 1 && item.status.value == 103" class="pa-btn" @click.stop="toEvaluate(item)">评价</a>
             </div>
           </li>
         </ul>
