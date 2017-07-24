@@ -11,7 +11,7 @@
       <li class="au-item row">
         <span>身份证号</span>
         <label class="col pr">
-          <input class="c-999" type="number" placeholder="请输入" v-model="idCardNo"
+          <input class="c-999" type="text" placeholder="请输入" v-model="idCardNo"
                  @blur="validateCardNo"
                  @focus="isCardNo = true"/>
           <span v-show="!isCardNo" class="au-point">请输入正确的身份证号！</span>

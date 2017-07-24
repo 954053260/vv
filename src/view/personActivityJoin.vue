@@ -15,7 +15,8 @@
       <img src="static/icon/icon-search.png">
       <label>
         <input type="text" name="test" style="display:none"/>
-        <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
+               @change="changeKeyword">
       </label>
     </form>
     <div class="pa-list has-tabs">
@@ -57,7 +58,6 @@
         keyword: '',
         activities: [
           {pageNumber: 1, isComplete: false, list: []},
-//          {pageNumber: 1, isComplete: false, list: []},
           {pageNumber: 1, isComplete: false, list: []}
         ]
       }
@@ -84,6 +84,7 @@
 
         this.$http.get('/user/activity/partake', {data: {
           token: this.$store.state.user.info.token,
+          keyword: this.keyword,
           pageNumber: this.activities[tab].pageNumber,
           pageSize: 10,
           status: this.tab ? 'finish' : 'underway'
@@ -127,6 +128,15 @@
           this.$toast.info('取消失败');
           this.$loading.hide();
         });
+      },
+      changeKeyword: function () {
+        this.activities[0].pageNumber = 1;
+        this.activities[0].isComplete = false;
+        this.activities[0].list = [];
+        this.activities[1].pageNumber = 1;
+        this.activities[1].isComplete = false;
+        this.activities[1].list = [];
+        this.$refs.scroller.finishInfinite(false);
       },
       toDetail: function (activityNo) {
         this.$router.push('/app/activityDetail?activityNo=' +  activityNo);

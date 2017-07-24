@@ -50,28 +50,31 @@ export default {
                             var result = this.result;
                             var img = new Image();
                             img.src = result;
-                            console.log('==img==', img);
-                            console.dir(img);
-                            img = drawPhoto(img, 0, 0, img.width, img.height);
-                            //如果图片大小小于100kb，则直接上传
-                            if (result.length <= option.size) {
-                                img = null;
-                                option.success(result, file.type);
+                            img.onload = function () {
+                                drawPhoto(img, 0, 0, img.width, img.height, (src) => {
+                                    var img = new Image();
+                                    img.src = src;
 
-                            } else {
+                                    //如果图片大小小于100kb，则直接上传
+                                    if (src.length <= option.size) {
+                                        img = null;
+                                        option.success(src, file.type);
+                                    } else {
 
-                                if (img.complete) {
-                                    callback();
-                                } else {
-                                    img.onload = callback;
-                                }
+                                        if (img.complete) {
+                                            callback();
+                                        } else {
+                                            img.onload = callback;
+                                        }
 
-                                function callback() {
-                                    option.success(compress(img), file.type);
-                                    img = null;
-                                }
+                                        function callback() {
+                                            option.success(compress(img), file.type);
+                                            img = null;
+                                        }
 
-                            }
+                                    }
+                                });
+                            };
                         };
 
                         reader.readAsDataURL(file);
@@ -147,13 +150,14 @@ export default {
             return orient;
         }
 
-        function drawPhoto(photo, x, y, w, h) {
+        function drawPhoto (photo, x, y, w, h, callback) {
 
             //获取照片的拍摄方向
             var orient = getPhotoOrientation(photo);
             var canvas = document.createElement("canvas");
             canvas.width = w;
             canvas.height = h;
+
             if (canvas.getContext) {
                 var ctx = canvas.getContext("2d");
                 //draw on Canvas
@@ -161,7 +165,6 @@ export default {
                 img.onload = function () {
                     var canvas_w = Number(ctx.canvas.width);
                     var canvas_h = Number(ctx.canvas.height);
-
                     //判断图片拍摄方向是否旋转了90度
                     if (orient == 6) {
                         ctx.save();//保存状态
@@ -175,12 +178,12 @@ export default {
                         ctx.drawImage(img, x, y, w, h);
                     }
 
+                    callback(canvas.toDataURL());
                 };
 
                 img.src = photo.src; // 设置图片源地址
-
-                return img;
             }
         }
     }
-}
+};
+

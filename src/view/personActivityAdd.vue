@@ -4,7 +4,8 @@
       <img src="static/icon/icon-search.png">
       <label>
         <input type="text" name="test" style="display:none"/>
-        <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
+               @change="changeKeyword">
       </label>
     </form>
     <div class="pa-list">
@@ -27,6 +28,9 @@
                   <p class="font-hide c-999">地点：{{item.address}}</p>
                 </div>
               </div>
+            </div>
+            <div class="pa-buttons">
+              <a v-if="item.activityStatus.value < 104 && item.activityStatus.value !=102" class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消</a>
             </div>
           </li>
         </ul>
@@ -55,9 +59,6 @@
     },
     components: {InfiniteLoading},
     methods: {
-      selectTab: function (tab) {
-        this.tab = tab;
-      },
       getActivity: function (done) {
         if (this.activities.isComplete) {
           this.$refs.scroller.finishInfinite(true);
@@ -66,6 +67,7 @@
 
         this.$http.get('/user/activity/publication', {data: {
           token: this.$store.state.user.info.token,
+          keyword: this.keyword,
           pageNumber: this.pageNumber,
           pageSize: 10
         }}).then((data) => {
@@ -89,6 +91,32 @@
           done();
           this.$refs.scroller.finishInfinite(true);
           this.$toast.info('获取活动失败');
+        });
+      },
+      changeKeyword: function () {
+        this.pageNumber = 1;
+        this.activities.list = [];
+        this.activities.isComplete = false;
+        this.$refs.scroller.finishInfinite(false);
+      },
+      cancelActivity: function (index, activityNo) {
+        this.$loading.show('取消...');
+        this.$http.post('/user/activity/cancel', {data: {
+          token: this.$store.state.user.info.token,
+          activityNo: activityNo
+        }}).then((data) => {
+          this.$loading.hide();
+
+          if (data.code == 0) {
+            this.activities.list.splice(index, 1);
+            this.$toast.info('取消成功');
+          } else {
+            this.$toast.info('取消成功');
+          }
+
+        }, () => {
+          this.$toast.info('取消成功');
+          this.$loading.hide();
         });
       },
       toDetail: function (activityNo) {

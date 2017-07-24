@@ -88,6 +88,10 @@
     methods: {
       selectTab: function (tab) {
         this.tab = tab;
+
+        if (!this.activities[tab].isComplete) {
+          this.$refs.scroller.finishInfinite(false);
+        }
       },
       getActivity: function () {
         var tab = this.tab;

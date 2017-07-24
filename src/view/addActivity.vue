@@ -196,8 +196,8 @@
                         this.$toast.info('上传失败');
                       });
             },
-            fail: () => {
-              this.$toast.info('上传失败');
+            fail: (error) => {
+              this.$toast.info(error ? error.msg : '上传失败');
             }
           });
         } else {

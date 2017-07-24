@@ -4,7 +4,8 @@
       <img src="static/icon/icon-search.png">
       <label>
         <input type="text" name="test" style="display:none"/>
-        <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索">
+        <input type="search" :class="{'c-999': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
+               @change="changeKeyword">
       </label>
     </form>
     <div class="pa-list">
@@ -56,9 +57,6 @@
     },
     components: {InfiniteLoading},
     methods: {
-      selectTab: function (tab) {
-        this.tab = tab;
-      },
       getActivity: function (done) {
         if (this.activities.isComplete) {
           this.$refs.scroller.finishInfinite(true);
@@ -67,6 +65,7 @@
 
         this.$http.get('/user/activity/collection', {data: {
           token: this.$store.state.user.info.token,
+          keyword: this.keyword,
           pageNumber: this.pageNumber,
           pageSize: 10
         }}).then((data) => {
@@ -90,6 +89,12 @@
           this.$refs.scroller.finishInfinite(true);
           this.$toast.info('获取活动失败');
         });
+      },
+      changeKeyword: function () {
+        this.pageNumber = 1;
+        this.activities.list = [];
+        this.activities.isComplete = false;
+        this.$refs.scroller.finishInfinite(false);
       },
       toDetail: function (activityNo) {
         this.$router.push('/app/activityDetail?activityNo=' +  activityNo);

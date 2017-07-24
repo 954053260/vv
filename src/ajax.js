@@ -34,19 +34,18 @@ export default {
                 xhr.responseType = options.dataType || "json";
 
                 xhr.onload = function () {
-                    option.success(this.response);
+                    option.success && option.success(this.response);
                     resolve(this.response);
                 };
 
                 xhr.error = function () {
-                    option.fail(this.statusText);
+                    option.fail && option.fail(this.statusText);
                     reject(this.statusText);
                 };
 
                 xhr.ontimeout = function () {
-                    option.fail('连接超时');
-                    http.config.ontimeout();
-                    reject();
+                    option.fail && option.fail('连接超时');
+                    reject(http.config.ontimeout());
                 };
 
                 xhr.send();
@@ -78,7 +77,7 @@ export default {
                 };
 
                 xhr.ontimeout = function () {
-                    option.fail('连接超时');
+                    option.fail && option.fail('连接超时');
                     reject(http.config.ontimeout());
                 };
 
@@ -112,7 +111,7 @@ export default {
 
                 if (http.config.timeout) {
                     timer = setTimeout(function () {
-                        option.fail('连接超时');
+                        option.fail && option.fail('连接超时');
                         reject(http.config.ontimeout());
                         head.removeChild(script);
                     }, http.config.timeout);

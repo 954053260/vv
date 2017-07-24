@@ -215,14 +215,14 @@
           if (data.code == 0) {
             this.$store.state.user.info.user.avatar = this.avatar;
             this.$store.state.user.info.user.hobbies = this.hobbies;
-            this.$toast.info('保持信息成功');
+            this.$toast.info('保存信息成功');
           } else {
             this.$toast.info(data.msg);
           }
 
         }, () => {
           this.$loading.hide();
-          this.$toast.info('保持信息失败');
+          this.$toast.info('保存信息失败');
         });
       }
     },
