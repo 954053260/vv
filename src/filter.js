@@ -45,3 +45,62 @@ Vue.filter('date', function (value, format) {
     return format;
 });
 
+Vue.filter("dateStyle", function (value) {
+        var date = new Date(value);
+
+        if (date == 'Invalid Date') {
+            return value;
+        }
+
+        var dateToday = new Date().getTime();
+        var dateTodayNum = new Date().getDay();
+        var dateTheDay = new Date(value).getTime();
+        var dateTheDayNum = new Date(value).getDay();
+        var timeText = ''; //返回文字格式
+        switch (true) {
+            //天
+            case ((dateTheDay + 3600000 * 24) >= dateToday && dateTodayNum == dateTheDayNum):
+                timeText = $filter('date')(dateTheDay, 'HH:mm');
+                break;
+            //昨天
+            case (dateTheDay + 3600000 * 24 * 2) >= dateToday:
+                timeText = '昨天';
+                break;
+            //一星期内
+            case (dateTheDay + 3600000 * 24 * 7) >= dateToday:
+                switch (new Date(dateTheDay).getDay()) {
+                    case 0:
+                        timeText = '星期日';
+                        break;
+                    case 1:
+                        timeText = '星期一';
+                        break;
+                    case 2:
+                        timeText = '星期二';
+                        break;
+                    case 3:
+                        timeText = '星期三';
+                        break;
+                    case 4:
+                        timeText = '星期四';
+                        break;
+                    case 5:
+                        timeText = '星期五';
+                        break;
+                    case 6:
+                        timeText = '星期六';
+                        break;
+                    default:
+                        timeText = 'unknown';
+                        break;
+                }
+                break;
+
+            default:
+                timeText = $filter('date')(dateTheDay, 'M月d日');
+                break;
+        }
+
+        return timeText;
+    });
+

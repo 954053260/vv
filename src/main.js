@@ -45,8 +45,6 @@ if (window.token || localStorage.getItem('token')) {
     Vue.loading.hide();
     Vue.toast.info('获取用户信息失败，请重新登录');
     localStorage.setItem('token', null);
-    router.push('/app/home');
-    router.push('/app/login');
   });
 }
 

@@ -25,10 +25,19 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
+  var hasPrePage = false;
+
   export default {
     name: 'login',
     created: function () {
 
+    },
+    beforeRouteEnter: function (to, from, next) {
+      if (to && to.path) {
+        hasPrePage = true;
+      }
+
+      next();
     },
     data: function () {
       return {
@@ -56,7 +65,7 @@
         if (this.validate()) {
 
           if (!this.code) {
-            return this.$toast.info('请输入验证码！')
+            return this.$toast.info('请输入验证码！');
           }
 
           this.$loading.show('登录中...');
@@ -68,7 +77,13 @@
             localStorage.setItem('token', this.user.token);
             this.$store.dispatch('getUserInfo', this.user.token).then(() => {
               this.$loading.hide();
-              this.$router.back();
+
+              if (hasPrePage) {
+                hasPrePage = false;
+                this.$router.back();
+              } else {
+                this.$router.push('/app/home');
+              }
             }, () => {
               this.$loading.hide();
               this.$toast.info('获取用户信息失败！')
