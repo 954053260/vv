@@ -57,13 +57,13 @@
           <li class="aa-item row mt10">
             <span>活动人数</span>
             <label class="col tr">
-              <input class="c-999" type="text" placeholder="请输入" v-model="limitCount">
+              <input class="c-999" type="number" placeholder="请输入" v-model="limitCount">
             </label>
           </li>
           <li class="aa-item row">
             <span>活动费用</span>
             <label class="col tr">
-              <input class="c-999" type="text" placeholder="请输入" v-model="fee">
+              <input class="c-999" type="number" placeholder="请输入" v-model="fee">
             </label>
           </li>
           <li class="aa-item row" style="border-bottom: none;">

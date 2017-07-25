@@ -35,7 +35,7 @@
           <div class="ad-title bb1-eee">
             <div class="row row-center">
               <a v-if="userNo == activity.publisherUserNo" class="ad-title-left col lh30 f16">
-                <p class="c-000 font-hide">{{activity.linkMan}}</p>
+                <p class="c-000 font-hide">{{activity.publisherNickname}}</p>
               </a>
               <router-link v-if="userNo != activity.publisherUserNo" class="ad-title-left col lh30 f16" :to="'/app/hostInfo?publisherUserNo='+ activity.publisherUserNo">
                 <img class="fr w30 h30" src="static/icon/icon-right.png">

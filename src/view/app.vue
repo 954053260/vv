@@ -9,7 +9,7 @@
           <li class="app-item">
             <div class="row">
               <p class="w60">举办者</p>
-              <p class="col c-666">{{info.linkMan}}</p>
+              <p class="col c-666">{{info.publisherNickname}}</p>
             </div>
           </li>
           <li class="app-item app-item-auto">
