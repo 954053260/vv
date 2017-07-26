@@ -206,7 +206,7 @@
 
         data.hobbies = hobbies;
         this.nickname && (data.nickname = this.nickname);
-        this.signature && (data.nickname = this.signature);
+        this.signature && (data.signature = this.signature);
         // this.mobile && (data.mobile = this.mobile);
         this.$loading.show('保存信息中...');
         this.$http.post('/user/update', {data: data}).

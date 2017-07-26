@@ -7,13 +7,13 @@
             <div v-if="item.fromUserNo == friendUserNo" class="row">
               <img :src="host + item.fromAvatar">
               <div class="col">
-                <p class="name">{{item.fromNickName}}　{{item.createTime | date('HH:mm:ss')}}</p>
+                <p class="name">{{item.fromNickName}}　{{item.createTime | dateStyle}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
             </div>
             <div v-else class="row item-type">
               <div class="col">
-                <p class="name tr">{{item.createTime | date('HH:mm:ss')}}　{{item.fromNickName}}</p>
+                <p class="name tr">{{item.createTime | dateStyle}}　{{item.fromNickName}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
               <img :src="host + item.fromAvatar">

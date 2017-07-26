@@ -113,7 +113,7 @@
             <router-link :to="'/app/chat?friendUserNo=' + item.friendUserNo">
               <img :src="host + item.friendAvatar">
               <div class="home-chat-content">
-                <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | date('MM/dd HH:mm')}}</span></p>
+                <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | dateStyle}}</span></p>
                 <div>
                   <span v-if="!item.isReaded" class="point"></span>
                   <p class="text font-hide">{{item.lastMessageContent}}</p>
