@@ -193,27 +193,29 @@
       },
       saveInfo: function () {
          var hobbies = [];
-         var data = {token: this.$store.state.user.info.token};
+         var param = {token: this.$store.state.user.info.token};
 
         if (!this.isEdit) {
           return;
         }
-
      
         this.hobbies.forEach(function (item) {
           hobbies.push(item.id);
         });
 
-        data.hobbies = hobbies;
-        this.nickname && (data.nickname = this.nickname);
-        this.signature && (data.signature = this.signature);
+        param.hobbies = hobbies.join();
+        this.avatar && (param.avatar = this.avatar);
+        this.nickname && (param.nickname = this.nickname);
+        this.signature && (param.signature = this.signature);
         // this.mobile && (data.mobile = this.mobile);
         this.$loading.show('保存信息中...');
-        this.$http.post('/user/update', {data: data}).
+        this.$http.post('/user/update', {data: param}).
         then((data) => {
           this.$loading.hide();
           if (data.code == 0) {
-            this.$store.state.user.info.user.avatar = this.avatar;
+            param.nickname && (this.$store.state.user.info.user.nickname = param.nickname);
+            param.signature && (this.$store.state.user.info.user.signature = param.signature);
+            param.avatar && (this.$store.state.user.info.user.avatar = param.avatar);
             this.$store.state.user.info.user.hobbies = this.hobbies;
             this.$toast.info('保存信息成功');
           } else {

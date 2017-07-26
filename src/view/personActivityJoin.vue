@@ -119,7 +119,7 @@
 
           if (data.code == 0) {
             this.$toast.info('取消成功');
-            this.activities.splice(index, 1);
+            this.activities[this.tab].list.splice(index, 1);
           } else {
             this.$toast.info(data.msg);
           }

@@ -54,7 +54,7 @@
           <img :src="host + user.user.avatar">
           <div class="c-fff">
             <p class="f16">{{user.user.nickname}}</p>
-            <p class="lh20 f13"><span ng-if="user.user.signature">“</span>{{user.user.signature}}<span ng-if="user.user.signature">”</span></p>
+            <p ng-if="user.user.signature" class="lh20 f13">“{{user.user.signature}}”</p>
           </div>
         </div>
         <ul class="home-user-list clear-float">
