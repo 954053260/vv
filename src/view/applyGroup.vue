@@ -126,7 +126,7 @@
             this.$toast.info('提交成功');
             this.$router.back();
           } else {
-            this.$toast.info('提交失败');
+            this.$toast.info(data.msg);
           }
         }, () => {
           this.$toast.info('提交失败');

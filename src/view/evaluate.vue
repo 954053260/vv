@@ -173,7 +173,7 @@
                 this.$toast.info('提交评价成功');
                 this.$router.back();
               } else {
-                this.$toast.info('提交评价失败');
+                this.$toast.info(data.msg);
               }
             }, () => {
               this.$toast.info('提交评价失败');

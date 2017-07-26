@@ -102,7 +102,7 @@
 
           } else {
             this.$refs.scroller.finishInfinite(true);
-            this.$toast.info('获取活动失败');
+            this.$toast.info(data.msg);
           }
         }, () => {
           this.$refs.scroller.finishInfinite(true);
@@ -121,7 +121,7 @@
             this.$toast.info('取消成功');
             this.activities.splice(index, 1);
           } else {
-            this.$toast.info('取消失败');
+            this.$toast.info(data.msg);
           }
 
         }, () => {

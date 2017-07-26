@@ -48,7 +48,7 @@
         if (data.code == 0) {
           this.chats = data.datas.messages;
         } else {
-          this.$toast.info('获取消息列表失败');
+          this.$toast.info(data.msg);
         }
       }, function () {
         this.isLoading = false;
@@ -112,7 +112,7 @@
               this.scrollBottom();
             }
           } else {
-            this.$toast.info('获取消息列表失败');
+            this.$toast.info(data.msg);
           }
         }, function () {
           this.isLoading = false;
@@ -131,7 +131,7 @@
           if (data.code == 0) {
             this.chats = data.datas.messages.concat(this.chats);
           } else {
-            this.$toast.info('获取消息列表失败');
+            this.$toast.info(data.msg);
           }
         }, function () {
           done();
@@ -151,7 +151,7 @@
             if (data.code == 0) {
               this.getMessages();
             } else {
-              this.$toast.info('发送失败');
+              this.$toast.info(data.msg);
             }
           }, () => {
             this.$toast.info('发送失败');

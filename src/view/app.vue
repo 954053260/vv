@@ -4,7 +4,7 @@
     <div v-if="isInfo" class="mask-no z-999" @click="hideInfo()"></div>
     <transition name="slide-up">
       <div v-if="isInfo" class="app-info-window">
-        <h2><span></span><span>{{info.title}}</span></h2>
+        <h2><span class="font-hide">{{info.title}}</span></h2>
         <ul class="app-list">
           <li class="app-item">
             <div class="row">
@@ -191,7 +191,7 @@
                 map.getPositionPicker().start();
               });
             } else {
-              this.$toast.info(isCollected ? '取消失败' : '收藏失败');
+              this.$toast.info(data.msg);
             }
 
           }, () => {

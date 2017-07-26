@@ -565,15 +565,10 @@ html, body {
     border-bottom: 1px solid #f2f2f2;
 }
 .app-info-window > h2 > span {
-    display: inline-block;
-    vertical-align: middle;
-}
-.app-info-window > h2 > span:first-child {
-    margin-right: 0.53333333333333rem;
-    height: 100%;
-    width: 0.10666666666rem;
+    display: block;
+    text-indent: 0.53333333333333rem;
+    border-left: 0.10666666666rem solid #2bd3b2;
     border-radius: 0.053333333333rem;
-    background: #2bd3b2;
 }
 .app-list {
     font-size: 16px;

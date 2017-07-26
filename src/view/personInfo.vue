@@ -165,7 +165,7 @@
             this.tags = data.datas.datas;
             this.tab = 2;
           } else {
-            this.$toast.info('获取标签失败');
+            this.$toast.info(data.msg);
           }
 
         }, () => {

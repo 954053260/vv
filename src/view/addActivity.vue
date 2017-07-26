@@ -260,6 +260,18 @@
           return this.$toast.info('活动地址不能为空！');
         }
 
+        if (/\.|\-/.test(this.limitCount)) {
+          return this.$toast.info('参加人数只能为正整数！');
+        }
+
+        if (!this.limitCount) {
+          return this.$toast.info('参加人数不能为空！');
+        }
+
+        if (/\-/.test(this.fee)) {
+          return this.$toast.info('费用只能为正数！');
+        }
+
         if (!this.address.lat || !this.address.lat) {
           return this.$toast.info('获取活动地址坐标失败，请重新选择地址');
         }
@@ -294,7 +306,7 @@
                 this.$toast.info('提交活动成功');
                 this.$router.back();
               } else {
-                this.$toast.info('提交活动失败');
+                this.$toast.info(data.msg);
               }
 
             }, () => {

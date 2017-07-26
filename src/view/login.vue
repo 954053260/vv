@@ -112,7 +112,7 @@
                     if (data.code == 0) {
                       this.code = data.msg.replace('短信验证码：', '');
                     } else {
-                      this.$toast.info('获取验证码失败！');
+                      this.$toast.info(data.msg);
                     }
                   }, () => {
                     clearInterval(interval);

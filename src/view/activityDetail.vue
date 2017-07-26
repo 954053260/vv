@@ -40,7 +40,7 @@
               <router-link v-if="userNo != activity.publisherUserNo" class="ad-title-left col lh30 f16" :to="'/app/hostInfo?publisherUserNo='+ activity.publisherUserNo">
                 <img class="fr w30 h30" src="static/icon/icon-right.png">
                 <!--<span class="fr c-ff9800">4.8好评</span>-->
-                <p class="c-000 font-hide">{{activity.linkMan}}</p>
+                <p class="c-000 font-hide">{{activity.publisherNickname}}</p>
               </router-link>
               <div v-if="userNo != activity.publisherUserNo" class="ad-title-right">
                 <a @click="toChat()">
@@ -129,7 +129,7 @@
         if (data.code == 0) {
           this.activity = data.datas.activity;
         } else {
-          this.$toast.info('获取活动详情失败');
+          this.$toast.info(data.msg);
         }
       }, () => {
         this.$toast.info('获取活动详情失败');
@@ -177,7 +177,7 @@
             this.$toast.info(isCollected ? '取消成功' : '收藏成功');
             this.activity.isCollected = !isCollected;
           } else {
-            this.$toast.info(isCollected ? '取消失败' : '收藏失败');
+            this.$toast.info(data.msg);
           }
 
         }, () => {
@@ -198,7 +198,7 @@
             this.activity.participantCount -= 1;
             this.activity.isPartaked = false;
           } else {
-            this.$toast.info('取消失败');
+            this.$toast.info(data.msg);
           }
 
         }, () => {
@@ -256,7 +256,7 @@
             this.activity.participantCount += 1;
             this.activity.isPartaked = true;
           } else {
-            this.$toast.info('参与失败');
+            this.$toast.info(data.msg);
           }
 
         }, () => {
@@ -265,7 +265,7 @@
         });
       },
       toChat: function () {
-        this.$router.push('/app/chat?friendUserNo=' + this.activity.publisherUserNo + '&linkMan=' + this.activity.linkMan);
+        this.$router.push('/app/chat?friendUserNo=' + this.activity.publisherUserNo + '&linkMan=' + this.activity.publisherNickname);
       }
     }
   }
