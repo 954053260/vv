@@ -1,87 +1,91 @@
 <template>
   <div id="addActivity">
     <div v-show="show" class="container bc-page">
-      <scroller class="h">
-        <header class="aa-header">
-          <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
-            <swiper-slide v-for="(slide, index) in swiperSlides">
-              <div class="aa-slide row row-center">
-                <a class="aa-delete-btn" @click="deleteImg(index)">
-                  <img src="static/icon/icon-close.png">
-                </a>
-                <img :src="host + slide"/>
-              </div>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-          </swiper>
-          <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
-            <a class="aa-delete-btn" @click="deleteImg(0)">
-              <img src="static/icon/icon-close.png">
-            </a>
-            <img :src="host + swiperSlides[0]"/>
-          </div>
-          <a v-show="swiperSlides.length < 6" class="aa-add-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
-            <img src="static/icon/icon-add.png">
-          </a>
-        </header>
-        <ul class="aa-list">
-          <li class="aa-item row">
-            <span>活动标题</span>
-            <label class="col tr">
-              <input class="c-999" type="text" placeholder="请输入" v-model="aTitle">
-            </label>
-          </li>
-          <li class="aa-item row mt10">
-            <span>开始时间</span>
-            <p class="col c-999 tr" @click="selectDate('start')">
-              <span>{{startDate | date('yyyy-MM-dd HH:mm')}}</span>
-              <span v-if="!startDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
-            </p>
-          </li>
-          <li class="aa-item row">
-            <span>结束时间</span>
-            <p class="col c-999 tr" @click="selectDate('end')">
-              <span>{{endDate | date('yyyy-MM-dd HH:mm')}}</span>
-              <span v-if="!endDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
-            </p>
-          </li>
-          <li class="aa-item row">
-            <span>活动地址</span>
-            <label class="col pr" style="padding-right: 1.27466rem;">
-              <input class="c-999" type="text" v-model="address.address" @focus="toTextEnd($event)">
-              <a class="aa-address-btn" @click="selectAddress()">
-                <img src="static/icon/icon-location.png">
+      <header class="aa-header">
+        <swiper v-if="swiperSlides.length > 1" :options="swiperOption">
+          <swiper-slide v-for="(slide, index) in swiperSlides">
+            <div class="aa-slide row row-center">
+              <a class="aa-delete-btn" @click="deleteImg(index)">
+                <img src="static/icon/icon-close.png">
               </a>
-            </label>
-          </li>
-          <li class="aa-item row mt10">
-            <span>活动人数</span>
-            <label class="col tr">
-              <input class="c-999" type="number" placeholder="请输入" v-model="limitCount">
-            </label>
-          </li>
-          <li class="aa-item row">
-            <span>活动费用</span>
-            <label class="col tr">
-              <input class="c-999" type="number" placeholder="请输入" v-model="fee">
-            </label>
-          </li>
-          <li class="aa-item row" style="border-bottom: none;">
-            <span>活动类别</span>
-            <!--<p class="col c-999 tr">-->
-            <!--{{activityTypes[typeIndex].desc}}-->
-            <!--</p>-->
-          </li>
-          <li class="pb10 bc-fff bb1-eee">
+              <img :src="host + slide"/>
+            </div>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+        <div v-if="swiperSlides.length == 1" class="aa-slide row row-center">
+          <a class="aa-delete-btn" @click="deleteImg(0)">
+            <img src="static/icon/icon-close.png">
+          </a>
+          <img :src="host + swiperSlides[0]"/>
+        </div>
+        <a v-show="swiperSlides.length < 6" class="aa-add-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
+          <img src="static/icon/icon-add.png">
+        </a>
+      </header>
+      <ul class="aa-list">
+        <li class="aa-item row">
+          <span>活动标题</span>
+          <label class="col tr">
+            <input class="c-999" type="text" placeholder="请输入" v-model="aTitle" maxlength="15">
+          </label>
+        </li>
+        <li class="aa-item row mt10">
+          <span>开始时间</span>
+          <p class="col c-999 tr" @click="selectDate('start')">
+            <span>{{startDate | date('yyyy-MM-dd HH:mm')}}</span>
+            <span v-if="!startDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
+          </p>
+        </li>
+        <li class="aa-item row">
+          <span>结束时间</span>
+          <p class="col c-999 tr" @click="selectDate('end')">
+            <span>{{endDate | date('yyyy-MM-dd HH:mm')}}</span>
+            <span v-if="!endDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
+          </p>
+        </li>
+        <li class="aa-item row">
+          <span>活动地址</span>
+          <label class="col pr" style="padding-right: 1.27466rem;">
+            <input class="c-999" type="text" v-model="address.address" @focus="toTextEnd($event)">
+            <a class="aa-address-btn" @click="selectAddress()">
+              <img src="static/icon/icon-location.png">
+            </a>
+          </label>
+        </li>
+        <li class="aa-item row mt10">
+          <span>活动人数</span>
+          <label class="col tr">
+            <input class="c-999" type="number" placeholder="请输入" v-model="limitCount"
+                   @blur="validateLimitCount()"
+                   @focus="isLimitCount = true">
+          </label>
+          <p v-show="!isLimitCount" class="point">参加人数只能为正整数！</p>
+        </li>
+        <li class="aa-item row">
+          <span>活动费用</span>
+          <label class="col tr">
+            <input class="c-999" type="number" placeholder="请输入" v-model="fee"
+                   @blur="validateFee()"
+                   @focus="isFee = true">
+          </label>
+          <p v-show="!isFee" class="point">费用只能为正数！</p>
+        </li>
+        <li class="aa-item row" style="border-bottom: none;">
+          <span>活动类别</span>
+          <!--<p class="col c-999 tr">-->
+          <!--{{activityTypes[typeIndex].desc}}-->
+          <!--</p>-->
+        </li>
+        <li class="pb10 bc-fff bb1-eee">
           <span v-for="(type, index) in activityTypes" class="aa-tag" :class="{active: type.desc == activityTypes[typeIndex].desc}"
                 @click="selectType(index)">{{type.desc}}</span>
-          </li>
-          <li class="aa-textarea" >
-            <textarea placeholder="填写详细活动介绍" v-model="content"></textarea>
-          </li>
-        </ul>
-        <a class="aa-submit-btn" @click="saveActivity()">发布</a>
-      </scroller>
+        </li>
+        <li class="aa-textarea" >
+          <textarea placeholder="填写详细活动介绍" v-model="content"></textarea>
+        </li>
+      </ul>
+      <a class="aa-submit-btn" @click="saveActivity()">发布</a>
       <date-picker ref="start" v-model="startDate"></date-picker>
       <date-picker ref="end" v-model="endDate" :start="startDate"></date-picker>
     </div>
@@ -130,6 +134,8 @@
           observeParents: true,
         },
         swiperSlides: [],
+        isLimitCount: true,
+        isFee: true,
         show: true,
         typeIndex: 0,
         aTitle: '',
@@ -156,6 +162,20 @@
       }
     },
     methods: {
+      validateLimitCount: function () {
+        if (/\.|\-/.test(this.limitCount)) {
+          this.isLimitCount = false;
+        } else {
+          this.isLimitCount = true;
+        }
+      },
+      validateFee: function () {
+        if (/\-/.test(this.fee)) {
+          this.isFee = false;
+        } else {
+          this.isFee = true;
+        }
+      },
       toTextEnd: function (e) {
         var input = e.target;
         var value = input.value;
@@ -315,7 +335,6 @@
             });
           });
         });
-
       }
     }
   }

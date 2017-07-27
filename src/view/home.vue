@@ -275,13 +275,14 @@
       },
       changeKeyword: function () {
         this.$store.state.map.keyword = this.keyword;
+        this.$store.state.refreshText = "搜索成功";
         this.$map.loadMap((map) => {
           map.getPositionPicker().start();
         });
       },
       refresh: function () {
         this.hideSelect(['organization', 'dateRange', 'types']);
-        this.$store.state.isRefresh = true;
+        this.$store.state.refreshText = "刷新成功";
         this.$map.loadMap((map) => {
           map.getPositionPicker().start();
         });

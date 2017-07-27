@@ -77,7 +77,7 @@
           </a>
         </div>
         <div class="p10 bc-fff">
-          <textarea class="w b-none c-999" type="text" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 2.6666666666666665rem"></textarea>
+          <textarea class="w b-none c-999" type="text" maxlength="20" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 2.6666666666666665rem"></textarea>
         </div>
       </div>
     </transition>

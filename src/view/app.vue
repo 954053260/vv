@@ -38,11 +38,11 @@
           </li>
         </ul>
         <div class="app-info-window-buttons row">
-          <a v-if="!info.isCollected"class="col br1-eee" @click="collectActivity()">
+          <a v-if="userNo != info.publisherUserNo && !info.isCollected"class="col br1-eee" @click="collectActivity()">
             <img class="pr dp-ib vm w30" src="static/icon/icon-star.png" style="top: -0.053334rem">
             <span class="dp-ib vm">收藏</span>
           </a>
-          <a v-if="info.isCollected" class="col br1-eee" @click="collectActivity()">
+          <a v-if="userNo != info.publisherUserNo && info.isCollected" class="col br1-eee" @click="collectActivity()">
             <img class="pr dp-ib vm w30" src="static/icon/icon-star-fill.png" style="top: -0.053334rem">
             <span class="dp-ib vm">已收藏</span>
           </a>
@@ -96,9 +96,9 @@
           this.$store.commit('SET_POSITION_RESULT', data);
 
           this.$store.dispatch('refreshMarker', params).then(() => {
-            if (this.$store.state.isRefresh) {
-              this.$store.state.isRefresh = false;
-              this.$toast.info('刷新成功');
+            if (this.$store.state.refreshText) {
+              this.$toast.info(this.$store.state.refreshText);
+              this.$store.state.refreshText = "";
             }
 
             markers.forEach((item) => {
@@ -142,6 +142,7 @@
       }
     },
     computed: mapState({
+      userNo: state => state.user.info.user.userNo,
       token: state => state.user.info.token,
       keyword:  state => state.map.keyword,
       markers:  state => state.map.markers,

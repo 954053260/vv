@@ -88,9 +88,9 @@
               this.$loading.hide();
               this.$toast.info('获取用户信息失败！')
             })
-            }, () => {
+            }, (err) => {
             this.$loading.hide();
-            this.$toast.info('登录失败！')
+            this.$toast.info(err.msg);
           });
         }
       },

@@ -115,9 +115,10 @@
           data: {
             token: this.$store.state.user.info.token,
             approveType: this.type == 1 ? '1' : '100',
-            realname: this.realname,
+            director: this.realname,
             name: this.name,
             organCode: this.business,
+            linkPhone: this.phone,
             attachments: this.swiperSlides.join()
           }
         }).then((data) => {
