@@ -2,6 +2,7 @@
  * Created by tz on 2017/6/8.
  */
 import EXIF from '../../lib//exif.js'
+
 export default {
     install: function (Vue) {
         Vue.file = Vue.prototype.$file = {

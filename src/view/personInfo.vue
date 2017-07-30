@@ -8,10 +8,13 @@
         <div class="bc-fff">
           <ul class="pi-list">
             <li class="pi-item row">
-              <span>昵称</span>
-              <label class="col">
-                <input class="c-999" type="text" placeholder="请输入昵称" v-model="nickname">
-              </label>
+                <span>昵称</span>
+                <span v-if="user.user.userType && user.user.userType.value == 2" class="col c-main tr">{{nickname}}</span>
+                <label v-else class="col pr">
+                    <input class="c-999" type="text" placeholder="请输入昵称" v-model="nickname"
+                           @focus="isNickname = true" @blur="validateNickname()">
+                    <p v-show="!isNickname" class="pi-point">昵称长度2-20字符！</p>
+                </label>
             </li>
             <li class="pi-item row">
               <span>性别</span>
@@ -20,11 +23,11 @@
             <li class="pi-item row">
               <span>手机号</span>
               <span class="col c-999 tr">{{mobile}}</span>
-              <label class="col pr" style='display: none'>
-                <input class="c-999" type="number" placeholder="请输入手机号" v-model="mobile"
-                       @focus="isPhone = true" @blur="validatePhone()">
-                <p v-show="!isPhone" class="pi-point">请输入正确的手机号！</p>
-              </label>
+              <!--<label class="col pr" style='display: none'>-->
+                <!--<input class="c-999" type="number" placeholder="请输入手机号" v-model="mobile"-->
+                       <!--@focus="isPhone = true" @blur="validatePhone()">-->
+                <!--<p v-show="!isPhone" class="pi-point">请输入正确的手机号！</p>-->
+              <!--</label>-->
             </li>
             <li class="pi-item pi-item-auto row">
               <span>个性签名</span>
@@ -46,38 +49,40 @@
     </transition>
     <transition name="fade">
     <div v-show="tab == 2" class="h f16 bc-fff">
-        <div class="pi-tags-header">
-          <p class="tr">
-            <a @click="tab = 1">
-              <img class="w30" src="static/icon/icon-close.png">
-            </a>
-          </p>
-          <p class="f18 tc c-main">你对什么感兴趣？</p>
-          <p class="f14 tc c-999">选择你想要看到的内容吧</p>
-        </div>
-        <div class="row row-center" v-for="(item, outIndex) in tags"
-             :class="{'c-main': outIndex%1 == 0, 'c-ff9800': outIndex%2 == 0, 'c-green': outIndex%3 == 0, 'c-1e90ff': outIndex%4 == 0}">
-          <span class="w70 tc">{{item.tagTypeName}}</span>
-          <div class="col">
+      <div class="pi-page-header bb1-eee">
+        <a class="fr" @click="tab = 1">
+          <span>完成</span>
+          <img src="static/icon/icon-complete.png">
+        </a>
+        <p class="f18">你对什么感兴趣？</p>
+        <p class="mt10 c-999">选择你想要看到的内容吧</p>
+      </div>
+      <div class="row row-center" v-for="(item, outIndex) in tags"
+           :class="{'c-main': outIndex%1 == 0, 'c-ff9800': outIndex%2 == 0, 'c-green': outIndex%3 == 0, 'c-1e90ff': outIndex%4 == 0}">
+        <span class="w70 tc">{{item.tagTypeName}}</span>
+        <div class="col">
             <span v-for="(tag, index) in item.tags" class="pi-tag" @click="selectTag(outIndex, index)"
                   :class="{'bc-main  c-fff': tag.is && outIndex%1 == 0,
                   'bc-ff9800  c-fff': tag.is && outIndex%2 == 0,
                   'bc-green  c-fff': tag.is && outIndex%3 == 0,
                   'bc-1e90ff  c-fff': tag.is && outIndex%4 == 0}">{{tag.tagName}}</span>
-          </div>
         </div>
+      </div>
       </div>
     </transition>
     <transition name="fade">
-      <div v-show="tab == 3" class="h f16 bc-page">
-        <div class="p10 h30 lh30 tr">
-          <b class="fl">请输入个性签名</b>
-          <a @click="tab = 1">
-            <img class="w30" src="static/icon/icon-close.png">
+      <div v-show="tab == 3" class="bc-fff h f16">
+        <div class="pi-page-header">
+          <a class="fr" @click="tab = 1">
+            <span>完成</span>
+            <img src="static/icon/icon-complete.png">
           </a>
+          <p class="f18">有趣的签名显个性</p>
+          <p class="mt10 c-999">请填写你的签名吧</p>
         </div>
-        <div class="p10 bc-fff">
-          <textarea class="w b-none c-999" type="text" maxlength="20" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 2.6666666666666665rem"></textarea>
+        <div class="pr bt1-eee bb1-eee p20">
+          <textarea class="w b-none c-999" type="text" maxlength="20" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 1.3333333333333333rem"></textarea>
+          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{signature.length}}/20</span>
         </div>
       </div>
     </transition>
@@ -87,16 +92,17 @@
   export default {
     name: 'personInfo',
     created: function () {
-      this.avatar = this.user.user.avatar;
-      this.nickname = this.user.user.nickname;
-      this.gender = this.user.user.gender;
-      this.mobile = this.user.user.mobile;
-      this.signature = this.user.user.signature;
-      this.hobbies = this.user.user.hobbies;
+      this.avatar = this.user.user.avatar || '';
+      this.nickname = this.user.user.nickname || '';
+      this.gender = this.user.user.gender || '';
+      this.mobile = this.user.user.mobile || '';
+      this.signature = this.user.user.signature || '';
+      this.hobbies = this.user.user.hobbies || [];
     },
     data: function () {
       return {
         isEdit: false,
+        isNickname: true,
         isPhone: true,
         tab: 1,
         tags: [],
@@ -117,6 +123,14 @@
       }
     },
     methods: {
+      validateNickname: function () {
+        var length = this.nickname.replace(/[^\x00-\xff]/g,"aa").length;
+        if (length < 2 || length > 20) {
+          this.isNickname = false;
+        } else {
+          this.isNickname = true;
+        }
+      },
       validatePhone: function () {
         if (!/^1(3|4|5|7|8)\d{9}$/g.test(this.mobile)) {
           this.isPhone = false;
@@ -229,32 +243,40 @@
       }
     },
     watch: {
+      'tab': function () {
+        switch (String(this.tab)) {
+          case '1':
+            document.title = '个人中心';
+            break;
+          case '2':
+            document.title = '兴趣爱好';
+            break;
+          case '3':
+            document.title = '个性签名';
+            break;
+        }
+      },
       'nickname': function (val, oldVal) {
-        console.log(oldVal)
         if (oldVal) {
           this.isEdit = true;
         }
       },
       'avatar': function (val, oldVal) {
-        console.log(oldVal)
         if (oldVal) {
           this.isEdit = true;
         }
       },
       'mobile': function (val, oldVal) {
-        console.log(oldVal)
         if (oldVal) {
           this.isEdit = true;
         }
       },
       'signature': function (val, oldVal) {
-        console.log(oldVal)
         if (oldVal) {
           this.isEdit = true;
         }
       },
       'hobbies': function (val, oldVal) {
-        console.log(oldVal)
         if (oldVal.length) {
           this.isEdit = true;
         }

@@ -13,6 +13,7 @@ import personActivityJoin from './view/personActivityJoin.vue'
 import personActivityAdd from './view/personActivityAdd.vue'
 import personActivityCollection from './view/personActivityCollection.vue'
 import addActivity from './view/addActivity.vue'
+import cancelActivity from './view/cancelActivity.vue'
 import activityDetail from './view/activityDetail.vue'
 import evaluate from './view/evaluate.vue'
 import authentication from './view/authentication.vue'
@@ -29,26 +30,28 @@ const router = new VueRouter({
         { path: '/app/', component: app,
             children: [
                 { path: 'login', component: login, name: '登录'},
-                { path: 'home', component: home, name: '主页'},
+                { path: 'home', component: home, name: 'VV活动'},
                 { path: 'chat', component: chat, name: '聊天'},
                 { path: 'personInfo', component: personInfo, name: '个人中心'},
                 { path: 'personActivityJoin', component: personActivityJoin, name: '我的参与'},
                 { path: 'personActivityAdd', component: personActivityAdd, name: '我的发布'},
                 { path: 'personActivityCollection', component: personActivityCollection, name: '我的收藏'},
                 { path: 'addActivity', component: addActivity, name: '发布活动'},
+                { path: 'cancelActivity', component: cancelActivity, name: '取消活动'},
                 { path: 'activityDetail', component: activityDetail, name: '活动详情'},
                 { path: 'evaluate', component: evaluate, name: '评价'},
                 { path: 'authentication', component: authentication, name: '实名认证'},
-                { path: 'apply', component: apply, name: 'VV活动'},
+                { path: 'apply', component: apply, name: '群体用户申请'},
                 { path: 'applyGroup', component: applyGroup, name: '用户申请'},
                 { path: 'hostInfo', component: hostInfo, name: '主办方'},
-                { path: 'about', component: about, name: '关于'}
+                { path: 'about', component: about, name: '关于我们'}
             ]
         }
     ]
 });
 
 router.beforeEach((to, from, next) => {
+    document.title = to.name;
     switch (to.path) {
         case '/app/addActivity':
         case '/app/activityDetail':
@@ -64,7 +67,6 @@ router.beforeEach((to, from, next) => {
             }
             break;
     }
-
     next();
 });
 

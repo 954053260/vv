@@ -36,12 +36,12 @@
             <div class="row row-center">
               <a v-if="userNo == activity.publisherUserNo" class="ad-title-left col lh30 f16">
                 <span class="fr c-ff9800">{{activity.averageScore}}分好评</span>
-                <p class="c-000 font-hide">{{activity.publisherNickname}}</p>
+                <p class="c-main font-hide" :class="{'c-000': !user.user.userType || user.user.userType.value != 2}">{{activity.publisherNickname}}</p>
               </a>
               <router-link v-if="userNo != activity.publisherUserNo" class="ad-title-left col lh30 f16" :to="'/app/hostInfo?publisherUserNo='+ activity.publisherUserNo">
                 <img class="fr w30 h30" src="static/icon/icon-right.png">
                 <span class="fr c-ff9800">{{activity.averageScore}}分好评</span>
-                <p class="c-000 font-hide">{{activity.publisherNickname}}</p>
+                <p class="c-main font-hide" :class="{'c-000': !user.user.userType || user.user.userType.value != 2}">{{activity.publisherNickname}}</p>
               </router-link>
               <div v-if="userNo != activity.publisherUserNo" class="ad-title-right">
                 <a @click="toChat()">
@@ -76,6 +76,19 @@
               <div class="col lh30">
                 <p>活动介绍</p>
                 <p class="lh25 c-666">{{activity.content}}</p>
+              </div>
+            </div>
+          </div>
+          <div v-if="activity.activityStatus.value != '106' && activity.partakeUsers && activity.partakeUsers.length" class="bb1-eee">
+            <div class="ad-item mt10 bt1-eee c-main">
+              {{activity.partakeUsers.length}}人报名参与
+            </div>
+            <div class="ad-item bt1-eee" v-for="item in activity.partakeUsers">
+              <img :src="host + item.avatar" class="brp50" style="width: 1.0666666666666667rem; height: 1.0666666666666667rem">
+              <span class="ml10">{{item.nickname}}</span>
+              <div class="dp-ib ml10 bc-main" style="padding: 2px 12px 4px;border-radius: 11px;">
+                <img v-if="item.gender.value == 1" src="static/icon/icon-boy.png" style="width: 0.32rem; height: 0.32rem">
+                <img v-else src="static/icon/icon-girl.png"  style="width: 0.32rem; height: 0.32rem">
               </div>
             </div>
           </div>
@@ -161,6 +174,9 @@
       },
       userNo: function () {
         return this.$store.state.user.info.user.userNo;
+      },
+      user: function () {
+        return this.$store.state.user.info;
       }
     },
     methods: {

@@ -23,10 +23,13 @@
       </scroller>
     </div>
     <form class="chat-input" target="form-submit">
-      <label>
-        <input type="text" name="test" style="display:none"/>
-        <input type="text" ref="input" @focus="scrollBottom" @click="inputScroll($event)" @keydown="sendMsg($event)" v-model="msg">
-      </label>
+      <div>
+        <label>
+          <input type="text" name="test" style="display:none"/>
+          <input type="text" ref="input" @focus="scrollBottom" @click="inputScroll($event)" @keydown="keydown($event)" v-model="msg">
+        </label>
+        <a @click="sendMsg()">发送</a>
+      </div>
     </form>
   </div>
 </template>
@@ -138,9 +141,14 @@
           this.$toast.info('获取消息列表失败');
         });
       },
-      sendMsg: function (e) {
+      keydown: function (e) {
+        if (e.keyCode == 13) {
+          this.sendMsg();
+        }
+      },
+      sendMsg: function () {
         var msg = this.msg;
-        if (e.keyCode == 13 && msg) {
+        if (msg) {
           this.msg = '';
           this.$http.post('/user/chat/message/send', {data: {
             token: this.token,

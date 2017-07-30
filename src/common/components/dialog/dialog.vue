@@ -7,7 +7,7 @@
                     <p v-html="content"></p>
                 </div>
                 <div class="confirm-buttons">
-                    <button class="btn mr10" @click="cancel()">{{cancelText}}</button>
+                    <button class="btn mr10 bc-bbb c-fff" @click="cancel()">{{cancelText}}</button>
                     <button class="btn bc-main c-fff" @click="ok()">{{okText}}</button>
                 </div>
             </div>

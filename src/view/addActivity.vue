@@ -81,8 +81,9 @@
           <span v-for="(type, index) in activityTypes" class="aa-tag" :class="{active: type.desc == activityTypes[typeIndex].desc}"
                 @click="selectType(index)">{{type.desc}}</span>
         </li>
-        <li class="aa-textarea" >
-          <textarea placeholder="填写详细活动介绍" v-model="content"></textarea>
+        <li class="aa-textarea pr">
+          <textarea placeholder="填写详细活动介绍" v-model="content" maxlength="400"></textarea>
+          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{content.length}}/400</span>
         </li>
       </ul>
       <a class="aa-submit-btn" @click="saveActivity()">发布</a>
@@ -163,18 +164,20 @@
     },
     methods: {
       validateLimitCount: function () {
-        if (/\.|\-/.test(this.limitCount)) {
-          this.isLimitCount = false;
-        } else {
+        if (/^[\d]+$/g.test(this.limitCount)) {
           this.isLimitCount = true;
+        } else {
+          this.isLimitCount = false;
         }
+        console.log('this.isLimitCount', this.isLimitCount)
       },
       validateFee: function () {
-        if (/\-/.test(this.fee)) {
-          this.isFee = false;
-        } else {
+        if (/^[\d]+[\.]?[\d]*$/g.test(this.fee)) {
           this.isFee = true;
+        } else {
+          this.isFee = false;
         }
+        console.log('this.isFee', this.isFee)
       },
       toTextEnd: function (e) {
         var input = e.target;
@@ -288,8 +291,8 @@
           return this.$toast.info('参加人数不能为空！');
         }
 
-        if (/\-/.test(this.fee)) {
-          return this.$toast.info('费用只能为正数！');
+        if (!this.fee) {
+          return this.$toast.info('费用不能为空！');
         }
 
         if (!this.address.lat || !this.address.lat) {

@@ -29,8 +29,8 @@
                 </div>
               </div>
             </div>
-            <div class="pa-buttons">
-              <a v-if="item.activityStatus.value < 104 && item.activityStatus.value !=102" class="pa-btn" @click.stop="cancelActivity(index, item.activityNo)">取消</a>
+            <div v-if="item.activityStatus.value < 104 && item.activityStatus.value !=102"  class="pa-buttons">
+              <a class="pa-btn" @click.stop="toCancel(item.activityNo)">取消</a>
             </div>
           </li>
         </ul>
@@ -99,25 +99,8 @@
         this.activities.isComplete = false;
         this.$refs.scroller.finishInfinite(false);
       },
-      cancelActivity: function (index, activityNo) {
-        this.$loading.show('取消...');
-        this.$http.post('/user/activity/cancel', {data: {
-          token: this.$store.state.user.info.token,
-          activityNo: activityNo
-        }}).then((data) => {
-          this.$loading.hide();
-
-          if (data.code == 0) {
-            this.activities.list.splice(index, 1);
-            this.$toast.info('取消成功');
-          } else {
-            this.$toast.info(data.msg);
-          }
-
-        }, () => {
-          this.$toast.info('取消成功');
-          this.$loading.hide();
-        });
+      toCancel: function (activityNo) {
+        this.$router.push('/app/cancelActivity?activityNo=' +  activityNo);
       },
       toDetail: function (activityNo) {
         this.$router.push('/app/activityDetail?activityNo=' +  activityNo);

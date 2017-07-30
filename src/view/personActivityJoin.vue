@@ -23,7 +23,7 @@
       <scroller :on-infinite="getActivity" ref="scroller">
         <ul style="min-height: 1px;">
           <li v-for="(item, index) in activities[tab].list" @click="toDetail(item.activityNo)">
-            <p class="pl10 lh44 f16 bb1-eee">主办方：{{item.publisherNickname}}</p>
+            <p class="pl10 lh44 f16 bb1-eee" :class="{'c-main': user.user.userType && user.user.userType.value == 2}"><span class="c-000">主办方：</span>{{item.publisherNickname}}</p>
             <div class="pa-item">
               <img v-if="item.images" :src="host + item.images[0]"/>
               <img v-if="item.image" :src="host + item.image"/>
@@ -65,6 +65,9 @@
     computed: {
       host: function () {
         return this.$store.state.host;
+      },
+      user: function () {
+        return this.$store.state.user.info;
       }
     },
     methods: {

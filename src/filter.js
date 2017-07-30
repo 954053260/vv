@@ -64,38 +64,35 @@ Vue.filter('dateStyle', function (value) {
             break;
         //昨天
         case (dateTheDay + 3600000 * 24 * 2) >= dateToday:
-            timeText = '昨天';
+            timeText = '昨天 ' + Vue.filter('date')(dateTheDay, 'HH:mm');
             break;
         //一星期内
         case (dateTheDay + 3600000 * 24 * 7) >= dateToday:
+            timeText = Vue.filter('date')(dateTheDay, 'HH:mm');
             switch (new Date(dateTheDay).getDay()) {
                 case 0:
-                    timeText = '星期日';
+                    timeText =  '星期日 ' + timeText;
                     break;
                 case 1:
-                    timeText = '星期一';
+                    timeText = '星期一 ' + timeText;
                     break;
                 case 2:
-                    timeText = '星期二';
+                    timeText = '星期二 ' + timeText;
                     break;
                 case 3:
-                    timeText = '星期三';
+                    timeText = '星期三 ' + timeText;
                     break;
                 case 4:
-                    timeText = '星期四';
+                    timeText = '星期四 ' + timeText;
                     break;
                 case 5:
-                    timeText = '星期五';
+                    timeText = '星期五 ' + timeText;
                     break;
                 case 6:
-                    timeText = '星期六';
-                    break;
-                default:
-                    timeText = 'unknown';
+                    timeText = '星期六 ' + timeText;
                     break;
             }
             break;
-
         default:
             timeText = Vue.filter('date')(dateTheDay, 'M月d日');
             break;

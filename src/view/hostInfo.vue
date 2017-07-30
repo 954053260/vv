@@ -7,14 +7,14 @@
           <p>{{info.nickname}}</p>
           <p v-if="info.signature">“{{info.signature}}”</p>
         </header>
-        <div class="hi-hobby">
+        <div v-if="info.userType.value == 1" class="hi-hobby mb10">
           <span class="borer"></span>
           <span>兴趣爱好</span>
           <div v-if="info.hobbies" class="mt10 lh20 f14">
             <span class="hobby" v-for="(hobby, index) in info.hobbies"><span v-if="index">，</span>{{hobby.tagName}}</span>
           </div>
         </div>
-        <div class="mt10 pa-tabs row">
+        <div class="pa-tabs row">
           <a class="col" @click="selectTab(0)">
             <span :class="{active: tab == 0}">进行中</span>
           </a>
