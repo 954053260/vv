@@ -9,7 +9,7 @@
           <li class="app-item">
             <div class="row">
               <p class="w60">举办者</p>
-              <p class="col c-main" :class="{'c-666': !user.user.userType || user.user.userType.value != 2}">{{info.publisherNickname}}</p>
+              <p class="col c-main" :class="{'c-666': info.activityOrganizationType.value == 1}">{{info.publisherNickname}}</p>
             </div>
           </li>
           <li class="app-item app-item-auto">

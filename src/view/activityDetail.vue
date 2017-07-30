@@ -41,7 +41,7 @@
               <router-link v-if="userNo != activity.publisherUserNo" class="ad-title-left col lh30 f16" :to="'/app/hostInfo?publisherUserNo='+ activity.publisherUserNo">
                 <img class="fr w30 h30" src="static/icon/icon-right.png">
                 <span class="fr c-ff9800">{{activity.averageScore}}分好评</span>
-                <p class="c-main font-hide" :class="{'c-000': !user.user.userType || user.user.userType.value != 2}">{{activity.publisherNickname}}</p>
+                <p class="c-main font-hide" :class="{'c-000': activity.activityOrganizationType.value == 1}">{{activity.publisherNickname}}</p>
               </router-link>
               <div v-if="userNo != activity.publisherUserNo" class="ad-title-right">
                 <a @click="toChat()">
