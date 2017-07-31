@@ -7,7 +7,7 @@
             <div v-if="item.fromUserNo == friendUserNo" class="row">
               <img :src="host + item.fromAvatar">
               <div class="col">
-                <p class="name">{{item.fromNickName}}　{{item.createTime | dateStyle}}</p>
+                <p class="name" :class="{'c-main': friendType == 2}">{{item.fromNickName}}　{{item.createTime | dateStyle}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
             </div>
@@ -39,6 +39,7 @@
     name: 'chat',
     created: function () {
       this.friendUserNo = this.$route.query.friendUserNo;
+      this.friendType = this.$route.query.friendType;
       this.isLoading = true;
       this.$loading.show('获取消息列表...');
       this.$http.get('/user/chat/message/recent/list', {data: {
@@ -71,7 +72,8 @@
         isLoading: false,
         msg: '',
         chats: [],
-        friendUserNo: ''
+        friendUserNo: '',
+        friendType: ''
       }
     },
     computed: {

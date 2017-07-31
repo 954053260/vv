@@ -109,18 +109,22 @@
     <transition name="slide-right">
       <div v-if="isChat" class="home-chat bc-page home-chat-list">
         <ul>
-          <li class="home-chat-item" v-for="item in friends">
-            <router-link :to="'/app/chat?friendUserNo=' + item.friendUserNo">
+          <li class="home-chat-item" v-for="(item, index) in friends">
+            <router-link v-cell-swipe class="home-chat-item-content"
+                         :to="'/app/chat?friendUserNo=' + item.friendUserNo + '&linkMan=' + item.friendNickName + '&friendType=' + item.friendUserType.value">
               <img :src="host + item.friendAvatar">
               <div class="home-chat-content">
-                <p class="name">{{item.friendNickName}}<span class="time">{{item.lastChatTime | dateStyle}}</span></p>
+                <p class="name">
+                  <span :class="{'c-main': item.friendUserType.value == 2}">{{item.friendNickName}}</span>
+                  <span class="time">{{item.lastChatTime | dateStyle}}</span>
+                </p>
                 <div>
                   <span v-if="!item.isReaded" class="point"></span>
                   <p class="text font-hide">{{item.lastMessageContent}}</p>
                 </div>
               </div>
             </router-link>
-            <!--<a class="item-options">删除</a>-->
+            <a class="item-options" @click.stop="deleteFriend(index, item.friendUserNo)">删除</a>
           </li>
         </ul>
       </div>
@@ -184,6 +188,23 @@
             }
           }, fail);
         }
+      },
+      deleteFriend: function (index, friendUserNo) {
+        this.$loading.show('删除...');
+        this.$http.post('/user/chat/friend/delete', {data: {
+          token: this.$store.state.user.info.token,
+          friendUserNo: friendUserNo
+        }}).then((data) => {
+          this.$loading.hide();
+          if (data.code == 0) {
+            this.friends.splice(index, 1);
+          } else {
+            this.$toast.info(data.msg);
+          }
+        }, () => {
+          this.$toast.info('删除失败');
+          this.$loading.hide();
+        });
       },
       location: function () {
         this.hideSelect(['organization', 'dateRange', 'types']);

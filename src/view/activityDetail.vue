@@ -282,7 +282,9 @@
         });
       },
       toChat: function () {
-        this.$router.push('/app/chat?friendUserNo=' + this.activity.publisherUserNo + '&linkMan=' + this.activity.publisherNickname);
+        this.$router.push('/app/chat?friendUserNo=' + this.activity.publisherUserNo +
+                '&friendType=' + this.activity.activityOrganizationType.value +
+                '&linkMan=' + this.activity.publisherNickname);
       }
     }
   }

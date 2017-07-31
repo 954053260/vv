@@ -868,7 +868,7 @@ html, body {
     border-bottom: 1px solid #f2f2f2;
     background: #fff;
 }
-.home-chat-item > a {
+.home-chat-item-content {
     display: block;
     position: relative;
     padding: 0.266666666666666rem 0.266666666666666rem 0.266666666666666rem 1.8666666666666667rem;
@@ -975,6 +975,7 @@ html, body {
 .chat-item {
     margin-top: 0.5333333rem;
     margin-bottom: 0.5333333rem;
+    color: #666;
 }
 .chat-item img {
     width: 1.0666666rem;
@@ -990,8 +991,7 @@ html, body {
     padding-right: 0.2666666rem;
 }
 .chat-item .name {
-    font-size: 12px;
-    color: #666;
+    font-size: 13px;
 }
 .chat-item .text {
     position: relative;
