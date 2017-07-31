@@ -87,7 +87,7 @@
               <img :src="host + item.avatar" class="brp50" style="width: 1.0666666666666667rem; height: 1.0666666666666667rem">
               <span class="ml10">{{item.nickname}}</span>
               <div class="dp-ib ml10 bc-main" style="padding: 2px 12px 4px;border-radius: 11px;">
-                <img v-if="item.gender.value == 1" src="static/icon/icon-boy.png" style="width: 0.32rem; height: 0.32rem">
+                <img v-if="item.gender && item.gender.value == 1" src="static/icon/icon-boy.png" style="width: 0.32rem; height: 0.32rem">
                 <img v-else src="static/icon/icon-girl.png"  style="width: 0.32rem; height: 0.32rem">
               </div>
             </div>
