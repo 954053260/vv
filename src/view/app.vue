@@ -166,7 +166,7 @@
       toDetail: function () {
         this.isInfo = false;
 
-        if (this.$store.state.user.info.token) {
+        if (this.token) {
           this.$router.push('/app/activityDetail?activityNo=' +  this.info.activityNo);
         } else {
           this.$router.push('/app/login');

@@ -4,7 +4,7 @@
       <img src="static/icon/icon-search.png">
       <form>
         <label>
-          <input type="text" name="test" style="display:none"/>
+          <input type="text" name="test" style="display: none;"/>
           <input type="search" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
                  @change="changeKeyword">
         </label>
@@ -148,6 +148,11 @@
           }
         });
       });
+    },
+    destroyed: function () {
+      this.isFilter = false;
+      this.isUserMenu = false;
+      this.isChat = false;
     },
     components: {mSelect},
     data: function () {

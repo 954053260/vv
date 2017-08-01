@@ -86,9 +86,11 @@
             <div class="ad-item bt1-eee" v-for="item in activity.partakeUsers">
               <img :src="host + item.avatar" class="brp50" style="width: 1.0666666666666667rem; height: 1.0666666666666667rem">
               <span class="ml10">{{item.nickname}}</span>
-              <div class="dp-ib ml10 bc-main" style="padding: 2px 12px 4px;border-radius: 11px;">
-                <img v-if="item.gender && item.gender.value == 1" src="static/icon/icon-boy.png" style="width: 0.32rem; height: 0.32rem">
-                <img v-else src="static/icon/icon-girl.png"  style="width: 0.32rem; height: 0.32rem">
+              <div v-if="item.gender && item.gender.value == 1" class="dp-ib ml10 bc-main" style="padding: 2px 12px 4px;border-radius: 11px;">
+                <img src="static/icon/icon-boy.png" style="width: 0.32rem; height: 0.32rem">
+              </div>
+              <div v-if="item.gender && item.gender.value == 2" class="dp-ib ml10 bc-E9B4FF" style="padding: 2px 12px 4px;border-radius: 11px;">
+                <img src="static/icon/icon-girl.png"  style="width: 0.32rem; height: 0.32rem">
               </div>
             </div>
           </div>
@@ -256,6 +258,11 @@
         });
       },
       submitActivity: function () {
+        if (!this.user.user.idCardNo) {
+          this.$toast.info('没有实名认证不能参加活动!');
+          return;
+        }
+
         if (this.activity.participantCount == this.activity.limitCount) {
           this.$toast.info('活动报名人数已满!');
           return;

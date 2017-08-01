@@ -13,7 +13,7 @@
             </div>
             <div v-else class="row item-type">
               <div class="col">
-                <p class="name tr">{{item.createTime | dateStyle}}　{{item.fromNickName}}</p>
+                <p class="name tr" :class="{'c-main': user.user.userType && user.user.userType.value == 2}">{{item.createTime | dateStyle}}　{{item.fromNickName}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
               <img :src="host + item.fromAvatar">
@@ -51,6 +51,7 @@
         this.$loading.hide();
         if (data.code == 0) {
           this.chats = data.datas.messages;
+          this.scrollBottom();
         } else {
           this.$toast.info(data.msg);
         }
@@ -134,6 +135,9 @@
         }}).then((data) => {
           done();
           if (data.code == 0) {
+            data.datas.messages.sort(function (a, b) {
+              return new Date(a.createTime) -  new Date(b.createTime);
+            });
             this.chats = data.datas.messages.concat(this.chats);
           } else {
             this.$toast.info(data.msg);
