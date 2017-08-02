@@ -43,6 +43,7 @@
             <span>{{endDate | date('yyyy-MM-dd HH:mm')}}</span>
             <span v-if="!endDate">请选择<img src="static/icon/icon-bottom-2.png"/></span>
           </p>
+          <p v-show="!isEndDate" class="point">活动结束时间要大于开始时间！</p>
         </li>
         <li class="aa-item row">
           <span>活动地址</span>
@@ -82,8 +83,8 @@
                 @click="selectType(index)">{{type.desc}}</span>
         </li>
         <li class="aa-textarea pr">
-          <textarea placeholder="填写详细活动介绍" v-model="content" maxlength="400"></textarea>
-          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{content.length}}/400</span>
+          <textarea placeholder="填写详细活动介绍" v-model="content"></textarea>
+          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{content.length}}/200</span>
         </li>
       </ul>
       <a class="aa-submit-btn" @click="saveActivity()">发布</a>
@@ -160,6 +161,13 @@
       },
       user: function () {
         return this.$store.state.user.info;
+      },
+      isEndDate: function () {
+        if (this.startDate && this.endDate) {
+          return this.endDate.getTime() > this.startDate.getTime();
+        } else {
+          return true;
+        }
       }
     },
     methods: {
@@ -279,6 +287,10 @@
           return this.$toast.info('活动结束时间不能为空！');
         }
 
+        if (this.endDate.getTime() < this.startDate.getTime()) {
+          return this.$toast.info('活动结束时间要大于开始时间！');
+        }
+
         if (!this.address.address) {
           return this.$toast.info('活动地址不能为空！');
         }
@@ -338,6 +350,13 @@
             });
           });
         });
+      }
+    },
+    watch: {
+      'content': function (val) {
+        if (val.length > 200) {
+          this.content = this.content.substr(0, 200);
+        }
       }
     }
   }

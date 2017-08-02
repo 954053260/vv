@@ -10,12 +10,12 @@
                @focus="isPhone = true">
         <p v-show="!isPhone" class="login-point">请输入正确的手机号！</p>
       </div>
-      <div class="row">
-        <div class="login-input row col">
+      <div>
+        <button class="login-code-btn" @click="getCode">{{codeText}}</button>
+        <div class="login-input row" style="overflow: hidden;">
           <img src="static/icon/icon-pwd.png">
           <input class="col" :class="{'c-999': !code, 'c-666': code}" type="number" placeholder="短信验证码" v-model="code">
         </div>
-        <button class="login-code-btn" @click="getCode">{{codeText}}</button>
       </div>
       <checkbox v-model="isAgree" name="login-check">
         <span class="c-ff9800">我已阅读并同意签署《用户注册协议》</span>

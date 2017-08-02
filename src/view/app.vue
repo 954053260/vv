@@ -95,9 +95,18 @@
 
           this.$store.commit('SET_POSITION_RESULT', data);
 
-          this.$store.dispatch('refreshMarker', params).then(() => {
+          this.$store.dispatch('refreshMarker', params).then((data) => {
             if (this.$store.state.refreshText) {
-              this.$toast.info(this.$store.state.refreshText);
+              if (this.$store.state.refreshText == '搜索成功') {
+                if (data.datas.activities.length) {
+                  this.$toast.info("成功搜索" + data.datas.activities.length + "条活动记录");
+                } else {
+                  this.$toast.info("没有相关活动");
+                }
+              } else {
+                this.$toast.info(this.$store.state.refreshText);
+              }
+
               this.$store.state.refreshText = "";
             }
 

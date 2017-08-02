@@ -3,8 +3,8 @@
     <p class="ag-text">为了保障参与者的权利与知情性，请注明原因</p>
     <p class="p15-12 f16 bc-fff">活动取消原因</p>
     <div class="pr bt1-eee bb1-eee p20 f14 bc-fff">
-      <textarea class="w b-none c-999" type="text" maxlength="400" placeholder="请描述活动取消的原因，如：因天气原因取消活动。" v-model="content" style="resize: none; min-height: 3.7333333333333334rem"></textarea>
-      <span class="pa" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{content.length}}/400</span>
+      <textarea class="w b-none c-999" type="text" placeholder="请描述活动取消的原因，如：因天气原因取消活动。" v-model="content" style="resize: none; min-height: 3.7333333333333334rem"></textarea>
+      <span class="pa" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{content.length}}/200</span>
     </div>
     <a class="ag-btn" style="margin-top: 0.53333333333rem;" @click="cancelActivity">确认取消</a>
   </div>
@@ -47,6 +47,13 @@
             });
           }
         });
+      }
+    },
+    watch: {
+      'content': function (val) {
+        if (val.length > 200) {
+          this.content = this.content.substr(0, 200);
+        }
       }
     }
   }

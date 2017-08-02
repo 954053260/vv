@@ -81,8 +81,8 @@
           <p class="mt10 c-999">请填写你的签名吧</p>
         </div>
         <div class="pr bt1-eee bb1-eee p20">
-          <textarea class="w b-none c-999" type="text" maxlength="20" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 1.3333333333333333rem"></textarea>
-          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{signature.length}}/20</span>
+          <textarea class="w b-none c-999" type="text" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 1.3333333333333333rem"></textarea>
+          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{signature.length()}}/20</span>
         </div>
       </div>
     </transition>
@@ -272,6 +272,9 @@
         }
       },
       'signature': function (val, oldVal) {
+        if (val.length > 20) {
+          this.signature = this.signature.substr(0, 20);
+        }
         if (oldVal) {
           this.isEdit = true;
         }

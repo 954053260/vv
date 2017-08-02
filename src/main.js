@@ -48,6 +48,39 @@ if (window.token || localStorage.getItem('token')) {
   });
 }
 
+// 获取字符串字符长度
+String.prototype.getByteLength = function () {
+  var len = 0;
+  for (var i = 0; i < this.length; i++) {
+    var a = this.charAt(i);
+    if (a.match(/[^\x00-\xff]/ig) != null) {
+      len += 2;
+    } else {
+      len += 1;
+    }
+  }
+  return len;
+};
+// 按照字符截取长度
+String.prototype.substrByte = function (start, length) {
+  var len = 0;
+  for (var i = 0; i < this.length; i++) {
+    var a = this.charAt(i);
+
+    if (a.match(/[^\x00-\xff]/ig) != null) {
+      len += 2;
+    } else {
+      len += 1;
+    }
+
+    if (len > (length + start)) {
+      return this.substr(start, i);
+    }
+
+  }
+  return len;
+};
+
 new Vue({
   el: '#main',
   router,

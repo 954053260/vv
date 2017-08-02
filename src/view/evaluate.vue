@@ -51,8 +51,8 @@
     <div class="bc-fff bt1-eee">
       <p class="evaluate-content f18">活动评价</p>
       <div class="evaluate-content-area">
-        <textarea v-model="content" :class="{'c-000': content, 'c-999': !content}" maxlength="400" placeholder="请描述你参加活动的过程，比如：活动氛围如何，活动怎样，我们期待你的建议"></textarea>
-        <span class="point">{{content.length}}/400</span>
+        <textarea v-model="content" :class="{'c-000': content, 'c-999': !content}" placeholder="请描述你参加活动的过程，比如：活动氛围如何，活动怎样，我们期待你的建议"></textarea>
+        <span class="point">{{content.length}}/200</span>
       </div>
     </div>
     <a class="au-btn" @click="submit">提交评价</a>
@@ -179,6 +179,13 @@
               this.$toast.info('提交评价失败');
               this.$loading.hide();
             });
+      }
+    },
+    watch: {
+      'content': function (val) {
+        if (val.length > 200) {
+          this.content = this.content.substr(0, 200);
+        }
       }
     }
   }

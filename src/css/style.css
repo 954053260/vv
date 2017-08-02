@@ -632,6 +632,7 @@ html, body {
     border: none;
 }
 .login-code-btn {
+    float: right;
     width: 3.40rem;
     height: 1.17333rem;
     line-height: 1.17333rem;
