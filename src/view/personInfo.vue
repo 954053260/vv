@@ -82,7 +82,7 @@
         </div>
         <div class="pr bt1-eee bb1-eee p20">
           <textarea class="w b-none c-999" type="text" placeholder="添加个性签名" v-model="signature" style="resize: none; min-height: 1.3333333333333333rem"></textarea>
-          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{signature.length()}}/20</span>
+          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{signature.length}}/20</span>
         </div>
       </div>
     </transition>
