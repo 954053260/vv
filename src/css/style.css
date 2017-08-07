@@ -135,6 +135,7 @@ html, body {
 .f16 {font-size: 16px;}
 .f18 {font-size: 18px;}
 .f20 {font-size: 20px;}
+.fb {font-weight: bold;}
 .fl {float: left;}
 .fr {float: right;}
 .h {height: 100%;}
@@ -144,15 +145,18 @@ html, body {
 .lh25 {line-height: 0.666666rem;}
 .lh30 {line-height: 0.8rem;}
 .lh44 {line-height: 1.173333rem;}
-.m20 {margin: 20px;}
+.m10 {margin: 0.2666666666rem;}
+.m20 {margin: 0.53333333333rem;}
 .mt0 {margin-top: 0;}
 .mt5 {margin-top: 5px;}
 .mt10 {margin-top: 0.2666666666rem;}
 .mt20 {margin-top: 0.53333333333rem;}
+.mt30 {margin-top: 0.8rem;}
 .mr5 {margin-right: 0.133333rem;}
 .mr10 {margin-right: 0.266666rem;}
-.mr30 {margin-right: 30px;}
+.mr30 {margin-right:  0.8rem;}
 .mb10 {margin-bottom: 0.266666rem;}
+.mb30 {margin-bottom: 0.8rem;}
 .ml10 {margin-left: 0.266666rem;}
 .p5 {padding: 5px;}
 .p10 {padding: 0.2666666rem;}
@@ -621,7 +625,7 @@ html, body {
     background: #fff;
 }
 .login-input > img {
-    float: left;
+    display: inline-block;
     padding: 0.1866666rem;
     height: 0.8rem;
     width: 0.8rem;
@@ -697,16 +701,29 @@ html, body {
     top: 0.5333333333333333rem;
     left: 1.866666rem;
     right: 1.866666rem;
-    padding: 0.18666666rem 0.4rem 0.13333333333333333rem;
     background: #fff;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     border-radius: 1.0666rem;
 }
-.home-header img {
-    float: left;
-    padding-right: 0.266666rem;
+.home-header > div {
+    position: absolute;
+    font-size: 14px;
+    width: 100%;
+    line-height: 30px;
+    z-index: 0;
+}
+.home-header > div img {
     width: 0.48rem;
     height: 0.48rem;
+}
+.home-header > div span,
+.home-header > div img {
+    display: inline-block;
+    vertical-align: middle;
+}
+.home-header > form {
+    position: relative;
+    padding: 0.18666666rem 0.4rem 0.13333333333333333rem;
 }
 .home-header label {
     display: block;
@@ -717,6 +734,7 @@ html, body {
     width: 100%;
     height: 0.533333rem;
     line-height: 0.533333rem;
+    background: transparent;
     border: none;
 }
 .home-user-btn,
@@ -1961,6 +1979,20 @@ html, body {
     top: 0.13333333333333333rem;
     right: .1333333333333333rem;
     width: .533333333333rem;
+}
+.about-logo {
+    display: inline-block;
+    margin: 0.8rem auto 0.4rem;
+    width: 2.13333rem;
+    height: 2.13333rem;
+    border-radius: 50%;
+}
+.about-bg {
+    height: 100%;
+    background: url("/static/img/about-bg.png");
+    background-position: 0 bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 /*infinite loading*/
 .infinite-spinner {

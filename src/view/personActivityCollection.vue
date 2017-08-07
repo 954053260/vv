@@ -18,7 +18,7 @@
               <div>
                 <div>
                   <div class="fr pl5 c-ff9800 f16">
-                    <!--<span>#{{item.activityType.desc}}#</span>-->
+                    <span>#{{item.activityType.desc}}#</span>
                     <span :class="{'c-999': item.activityStatus.value != 103}">#{{item.activityStatus.desc}}#</span>
                   </div>
                   <p class="title font-hide">{{item.title}}</p>

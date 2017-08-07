@@ -303,6 +303,10 @@
           return this.$toast.info('参加人数不能为空！');
         }
 
+        if (this.limitCount == 0) {
+          return this.$toast.info('参加人数至少1人！');
+        }
+
         if (!this.fee) {
           return this.$toast.info('费用不能为空！');
         }

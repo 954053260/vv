@@ -17,9 +17,11 @@
           <input class="col" :class="{'c-999': !code, 'c-666': code}" type="number" placeholder="短信验证码" v-model="code">
         </div>
       </div>
-      <checkbox v-model="isAgree" name="login-check">
-        <span class="c-ff9800">我已阅读并同意签署《用户注册协议》</span>
-      </checkbox>
+      <router-link to="/app/userAgreement">
+        <checkbox v-model="isAgree" name="login-check">
+          <span class="c-ff9800">我已阅读并同意签署《用户注册协议》</span>
+        </checkbox>
+      </router-link>
       <a class="login-btn" @click="doLogin">登录</a>
     </div>
   </div>

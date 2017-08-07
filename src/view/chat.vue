@@ -5,7 +5,9 @@
         <div class="chat-list">
           <div v-for="item in chats" class="chat-item">
             <div v-if="item.fromUserNo == friendUserNo" class="row">
-              <img :src="host + item.fromAvatar">
+              <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
+                <img :src="host + item.fromAvatar">
+              </router-link>
               <div class="col">
                 <p class="name" :class="{'c-main': friendType == 2}">{{item.fromNickName}}　{{item.createTime | dateStyle}}</p>
                 <p class="text">{{item.content}}</p>
@@ -16,7 +18,9 @@
                 <p class="name tr" :class="{'c-main': user.user.userType && user.user.userType.value == 2}">{{item.createTime | dateStyle}}　{{item.fromNickName}}</p>
                 <p class="text">{{item.content}}</p>
               </div>
-              <img :src="host + item.fromAvatar">
+              <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
+                <img :src="host + item.fromAvatar">
+              </router-link>
             </div>
           </div>
         </div>
@@ -26,7 +30,7 @@
       <div>
         <label>
           <input type="text" name="test" style="display:none"/>
-          <input type="text" ref="input" @focus="scrollBottom" @click="inputScroll($event)" @keydown="keydown($event)" v-model="msg">
+          <input type="text" maxlength="200" ref="input" @focus="scrollBottom" @click="inputScroll($event)" @keydown="keydown($event)" v-model="msg">
         </label>
         <a @click="sendMsg()">发送</a>
       </div>

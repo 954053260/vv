@@ -20,6 +20,7 @@ import authentication from './view/authentication.vue'
 import apply from './view/apply.vue'
 import applyGroup from './view/applyGroup.vue'
 import hostInfo from './view/hostInfo.vue'
+import userAgreement from './view/userAgreement.vue'
 import about from './view/about.vue'
 Vue.use(VueRouter);
 
@@ -44,6 +45,7 @@ const router = new VueRouter({
                 { path: 'apply', component: apply, name: '群体用户申请'},
                 { path: 'applyGroup', component: applyGroup, name: '用户申请'},
                 { path: 'hostInfo', component: hostInfo, name: '主办方'},
+                { path: 'userAgreement', component: userAgreement, name: '用户协议'},
                 { path: 'about', component: about, name: '关于我们'}
             ]
         }

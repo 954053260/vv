@@ -8,6 +8,7 @@
               <swiper-slide v-for="slide in activity.images">
                 <div class="ad-slide row row-center"><img :src="host + slide"/></div>
               </swiper-slide>
+              <div v-if="activity.images.length > 1" class="swiper-pagination" slot="pagination"></div>
             </swiper>
           </header>
           <div class="ad-title">
@@ -84,14 +85,16 @@
               {{activity.partakeUsers.length}}人报名参与
             </div>
             <div v-if="index < 5 || isShowMoreUser" class="ad-item bt1-eee" v-for="(item, index) in activity.partakeUsers">
-              <img :src="host + item.avatar" class="brp50" style="width: 1.0666666666666667rem; height: 1.0666666666666667rem">
-              <span class="ml10">{{item.nickname}}</span>
-              <div v-if="item.gender && item.gender.value == 1" class="dp-ib ml10 bc-main" style="padding: 2px 12px 4px;border-radius: 11px;">
-                <img src="static/icon/icon-boy.png" style="width: 0.32rem; height: 0.32rem">
-              </div>
-              <div v-if="item.gender && item.gender.value == 2" class="dp-ib ml10 bc-E9B4FF" style="padding: 2px 12px 4px;border-radius: 11px;">
-                <img src="static/icon/icon-girl.png"  style="width: 0.32rem; height: 0.32rem">
-              </div>
+              <router-link :to="'/app/hostInfo?publisherUserNo='+ item.userNo">
+                <img :src="host + item.avatar" class="brp50" style="width: 1.0666666666666667rem; height: 1.0666666666666667rem">
+                <span class="ml10" :class="{'c-main': item.userType.value == 2, 'c-000': item.userType.value == 1}">{{item.nickname}}</span>
+                <div v-if="item.gender && item.gender.value == 1" class="dp-ib ml10 bc-main" style="padding: 2px 12px 4px;border-radius: 11px;">
+                  <img src="static/icon/icon-boy.png" style="width: 0.32rem; height: 0.32rem">
+                </div>
+                <div v-if="item.gender && item.gender.value == 2" class="dp-ib ml10 bc-E9B4FF" style="padding: 2px 12px 4px;border-radius: 11px;">
+                  <img src="static/icon/icon-girl.png"  style="width: 0.32rem; height: 0.32rem">
+                </div>
+              </router-link>
             </div>
             <p v-if="activity.partakeUsers.length > 5 && !isShowMoreUser" class="p10 tc f16 c-666">
               <a @click="isShowMoreUser = true">查看更多</a>

@@ -1,11 +1,14 @@
 <template>
   <div id="home">
     <header class="home-header clear-float">
-      <img src="static/icon/icon-search.png">
+      <div v-if="!keyword" class="tc c-b3b3b3">
+        <img src="static/icon/icon-search.png">
+        <span>请输入关键字搜索</span>
+      </div>
       <form>
         <label>
           <input type="text" name="test" style="display: none;"/>
-          <input type="search" :class="{'c-b3b3b3': !keyword, 'c-666': keyword}" v-model="keyword" placeholder="请输入关键字搜索"
+          <input type="search" class="c-666" v-model="keyword"
                  @change="changeKeyword">
         </label>
       </form>
