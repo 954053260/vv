@@ -6,7 +6,9 @@
           <header v-if="activity.images" class="ad-header">
             <swiper :options="swiperOption">
               <swiper-slide v-for="slide in activity.images">
-                <div class="ad-slide row row-center"><img :src="host + slide"/></div>
+                <div class="ad-slide row row-center">
+                  <img :src="host + slide"/>
+                </div>
               </swiper-slide>
               <div v-if="activity.images.length > 1" class="swiper-pagination" slot="pagination"></div>
             </swiper>
