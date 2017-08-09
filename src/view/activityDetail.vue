@@ -7,7 +7,7 @@
             <swiper :options="swiperOption">
               <swiper-slide v-for="slide in activity.images">
                 <div class="ad-slide row row-center">
-                  <img :src="host + slide"/>
+                  <img :src="host + slide" @click="previewImage(host + slide)"/>
                 </div>
               </swiper-slide>
               <div v-if="activity.images.length > 1" class="swiper-pagination" slot="pagination"></div>
@@ -301,6 +301,18 @@
         this.$router.push('/app/chat?friendUserNo=' + this.activity.publisherUserNo +
                 '&friendType=' + this.activity.activityOrganizationType.value +
                 '&linkMan=' + this.activity.publisherNickname);
+      },
+      previewImage: function (url) {
+        var urls = [];
+
+        this.activity.images.forEach((url) => {
+          urls.push(this.host + url);
+        });
+
+        wx.previewImage({
+          current: url,
+          urls: urls
+        });
       }
     }
   }
