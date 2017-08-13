@@ -28,6 +28,9 @@
               <img v-if="item.images" :src="host + item.images[0]"/>
               <img v-if="item.image" :src="host + item.image"/>
               <div>
+                <div class="fr pl5 c-ff9800 f16">
+                  <span>#{{item.activityType.desc}}#</span>
+                </div>
                 <p class="title font-hide">{{item.title}}</p>
                 <div class="text">
                   <p class="c-999">时间：{{item.beginTime | date('MM/dd HH:mm')}} - {{item.endTime | date('MM/dd HH:mm')}}</p>

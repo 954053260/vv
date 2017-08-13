@@ -107,7 +107,10 @@
           return;
         }
 
-        startTime = Number(this.chats[this.chats.length - 1].createTime) + 1;
+        if (this.chats[this.chats.length - 1]) {
+          startTime = Number(this.chats[this.chats.length - 1].createTime) + 1;
+        }
+
         this.isLoading = true;
         this.$http.get('/user/chat/message/recent/list', {data: {
           friendUserNo: this.friendUserNo,
@@ -130,7 +133,14 @@
         });
       },
       onRefresh: function (done) {
-        var endTime =  Number(this.chats[0].createTime) - 1;
+        var endTime;
+
+        if (this.chats[0]) {
+          endTime =  Number(this.chats[0].createTime) - 1
+        } else {
+          endTime = new Date().getTime();
+        }
+
         this.$http.get('/user/chat/message/history/list', {data: {
           friendUserNo: this.friendUserNo,
           token: this.token,

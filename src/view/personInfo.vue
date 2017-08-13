@@ -231,6 +231,7 @@
             param.signature && (this.$store.state.user.info.user.signature = param.signature);
             param.avatar && (this.$store.state.user.info.user.avatar = param.avatar);
             this.$store.state.user.info.user.hobbies = this.hobbies;
+            this.$router.back();
             this.$toast.info('保存信息成功');
           } else {
             this.$toast.info(data.msg);

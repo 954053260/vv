@@ -17,6 +17,7 @@ export default {
 
                 let input = document.createElement("input");
                 input.setAttribute('type', 'file');
+                input.setAttribute('multiple', 'multiple');
                 input.className = 'upload-image-20170608';
                 input.style.display = 'none';
 

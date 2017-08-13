@@ -1,10 +1,10 @@
-// import './css/ionicons.min.css'
 import './css/style.css'
 import './directive.js'
 import './filter.js'
 import './common/components'
 import Vue from 'vue'
 import map from './common/map'
+import wx from './common/wx'
 import file from './common/file'
 import checkbox from './common/checkbox.vue'
 import router from './router.js'
@@ -13,9 +13,9 @@ import app from './view/app.vue'
 import ajax from './ajax.js'
 import './common/vue-picker/style.css'
 import smoothPicker from './common/vue-picker/index.js'
-// https://github.com/wangdahoo/vue-scroller?utm_source=tuicool&utm_medium=referral
 import VueScroller from 'vue-scroller'
 Vue.component('checkbox', checkbox);
+Vue.use(wx);
 Vue.use(VueScroller);
 Vue.use(smoothPicker);
 Vue.use(file);
@@ -47,39 +47,6 @@ if (window.token || localStorage.getItem('token')) {
     localStorage.setItem('token', null);
   });
 }
-
-// 获取字符串字符长度
-String.prototype.getByteLength = function () {
-  var len = 0;
-  for (var i = 0; i < this.length; i++) {
-    var a = this.charAt(i);
-    if (a.match(/[^\x00-\xff]/ig) != null) {
-      len += 2;
-    } else {
-      len += 1;
-    }
-  }
-  return len;
-};
-// 按照字符截取长度
-String.prototype.substrByte = function (start, length) {
-  var len = 0;
-  for (var i = 0; i < this.length; i++) {
-    var a = this.charAt(i);
-
-    if (a.match(/[^\x00-\xff]/ig) != null) {
-      len += 2;
-    } else {
-      len += 1;
-    }
-
-    if (len > (length + start)) {
-      return this.substr(start, i);
-    }
-
-  }
-  return len;
-};
 
 new Vue({
   el: '#main',

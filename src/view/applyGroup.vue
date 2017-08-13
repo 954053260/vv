@@ -16,6 +16,19 @@
         <p class="ag-text">完成资料填写后我们会尽快完成审核</p>
         <ul class="ag-list bc-fff">
           <li class="ag-item row">
+            <span>{{type == 1 ? '企业' : '团体'}}名称</span>
+            <label v-if="!info.name" class="col">
+              <input class="c-999" type="text" placeholder="请输入" v-model="name">
+            </label>
+            <p v-else class="col tr c-999">{{info.name}}</p>
+          </li>
+          <li v-if="type == 1" class="ag-item row">
+            <span>营业执照号</span>
+            <label class="col pr">
+              <input class="c-999" type="number" placeholder="请输入" v-model="business"/>
+            </label>
+          </li>
+          <li class="ag-item row">
             <span>负责人姓名</span>
             <label v-if="!info.director" class="col">
               <input class="c-999" type="text" placeholder="请输入" v-model="realname">
@@ -23,24 +36,11 @@
             <p v-else class="col tr c-999">{{info.director}}</p>
           </li>
           <li class="ag-item row">
-            <span>{{type == 1 ? '企业' : '团体'}}名称</span>
-            <label v-if="!info.name" class="col">
-              <input class="c-999" type="text" placeholder="请输入" v-model="name">
-            </label>
-            <p v-else class="col tr c-999">{{info.name}}</p>
-          </li>
-          <li class="ag-item row">
             <span>联系电话</span>
             <label v-if="!info.linkPhone" class="col pr">
               <input class="c-999" type="number" placeholder="请输入" v-model="phone"/>
             </label>
             <p v-else class="col tr c-999">{{info.linkPhone}}</p>
-          </li>
-          <li v-if="type == 1" class="ag-item row">
-            <span>营业执照号</span>
-            <label class="col pr">
-              <input class="c-999" type="number" placeholder="请输入" v-model="business"/>
-            </label>
           </li>
         </ul>
         <p class="ag-text">{{type == 1 ? '请上传纸质版的营业执照复印件盖公章' : '请上传纸质版的盖章证明材料'}}</p>
@@ -82,8 +82,8 @@
       }}).then((data) => {
         this.$loading.hide();
         if (data.code == 0) {
-          this.info = data.datas.approveInfo;
-          this.swiperSlides = this.info.attachments;
+          this.info = data.datas.approveInfo || {};
+          this.swiperSlides = this.info.attachments || [];
         } else {
           this.$toast.info(data.msg);
         }

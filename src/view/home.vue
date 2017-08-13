@@ -91,12 +91,12 @@
             </router-link>
           </li>
           <li class="home-user-item">
-            <router-link to="/app/apply">
+            <a @click="toApply()">
               <img src="static/icon/icon-authenticate.png">
               <img src="static/icon/icon-right.png">
               <span>{{user.user.userType.value == 2 ? '已认证' :  '未认证'}}</span>
               <p>群体用户申请</p>
-            </router-link>
+            </a>
           </li>
           <li class="home-user-item">
             <router-link to="/app/about">
@@ -151,17 +151,15 @@
           }
         });
       });
+      this.$wx.share('VV活动', location.href, this.host + '/static/img/logo.jpg');
     },
     destroyed: function () {
       this.isFilter = false;
-      this.isUserMenu = false;
-      this.isChat = false;
     },
     components: {mSelect},
     data: function () {
       return {
         isFilter: false,
-        isUserMenu: false,
         isChat: false,
         hasMessage: false,
         friends: [],
@@ -170,6 +168,7 @@
     },
     computed: mapState({
       host: state => state.host,
+      isUserMenu: state => state.isUserMenu,
       user: state => state.user.info,
       activityOrganizationTypes: state => state.map.activityOrganizationTypes,
       activityTypes: state => state.map.activityTypes,
@@ -239,9 +238,9 @@
         if (this.user.token) {
 
           if (typeof bool === 'boolean') {
-            this.isUserMenu = bool;
+            this.$store.state.isUserMenu = bool;
           } else {
-            this.isUserMenu = !this.isUserMenu;
+            this.$store.state.isUserMenu = !this.$store.state.isUserMenu;
           }
 
         } else {
@@ -315,6 +314,13 @@
         this.$map.loadMap((map) => {
           map.getPositionPicker().start();
         });
+      },
+      toApply: function () {
+        if (this.user.user.idCardNo) {
+          this.$router.push('/app/apply');
+        } else {
+          this.$toast.info('群体认证之前，必须先实名认证！');
+        }
       }
     }
   }

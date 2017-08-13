@@ -8,8 +8,12 @@ import map from './map.js'
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
-        host: 'http://39.108.88.153:8080',
-        refreshText: '' // 刷新活动提示文字
+        host: 'http://www.vv-tl.com',
+        loginPhone: '',
+        loginCode: '',
+        refreshText: '',// 刷新活动提示文字
+        isUserMenu: false,
+        isChat: false
     },
     getters:{
 

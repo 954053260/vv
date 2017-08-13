@@ -8,7 +8,7 @@
               <a class="aa-delete-btn" @click="deleteImg(index)">
                 <img src="static/icon/icon-close.png">
               </a>
-              <img :src="host + slide"/>
+              <img :src="host + slide"  @click="previewImage(host + slide)"/>
             </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -17,7 +17,7 @@
           <a class="aa-delete-btn" @click="deleteImg(0)">
             <img src="static/icon/icon-close.png">
           </a>
-          <img :src="host + swiperSlides[0]"/>
+          <img :src="host + swiperSlides[0]" @click="previewImage(host + swiperSlides[0])"/>
         </div>
         <a v-show="swiperSlides.length < 6" class="aa-add-btn" :class="{'active': swiperSlides.length}" @click="addImg()">
           <img src="static/icon/icon-add.png">
@@ -354,6 +354,13 @@
             });
           });
         });
+      },
+      previewImage: function (url) {
+        var urls = [];
+        this.swiperSlides.forEach((url) => {
+          urls.push(this.host + url);
+        });
+        this.$wx.previewImage(url, urls);
       }
     },
     watch: {

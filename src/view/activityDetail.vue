@@ -152,6 +152,12 @@
         this.$loading.hide();
         if (data.code == 0) {
           this.activity = data.datas.activity;
+          this.$wx.share(
+                  this.activity.title,
+                  location.href,
+                  this.activity.images ? this.host + this.activity.images[0] : this.host + '/static/img/logo.jpg',
+                  this.activity.content
+          );
         } else {
           this.$toast.info(data.msg);
         }
@@ -304,15 +310,10 @@
       },
       previewImage: function (url) {
         var urls = [];
-
         this.activity.images.forEach((url) => {
           urls.push(this.host + url);
         });
-
-        wx.previewImage({
-          current: url,
-          urls: urls
-        });
+        this.$wx.previewImage(url, urls);
       }
     }
   }

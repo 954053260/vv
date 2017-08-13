@@ -8,7 +8,7 @@
         <ul class="app-list">
           <li class="app-item">
             <div class="row">
-              <p class="w60">举办者</p>
+              <p class="w60">举办方</p>
               <p class="col c-main" :class="{'c-666': info.activityOrganizationType.value == 1}">{{info.publisherNickname}}</p>
             </div>
           </li>
@@ -183,8 +183,6 @@
 
       },
       collectActivity: function () {
-        this.isInfo = false;
-        
         if (this.$store.state.user.info.token) {
           var isCollected = this.info.isCollected;
           var url = isCollected ? '/user/activity/collection/cancel' : '/user/activity/collect';
