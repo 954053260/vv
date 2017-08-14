@@ -27,8 +27,6 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  var hasPrePage;
-
   export default {
     name: 'login',
     created: function () {
@@ -36,11 +34,6 @@
       this.code = this.$store.state.loginCode;
     },
     beforeRouteEnter: function (to, from, next) {
-      if (String(from.path).indexOf('/app/') != 1) {
-        hasPrePage = true;
-      } else {
-        hasPrePage = false;
-      }
       next();
     },
     data: function () {
@@ -81,12 +74,7 @@
             localStorage.setItem('token', this.user.token);
             this.$store.dispatch('getUserInfo', this.user.token).then(() => {
               this.$loading.hide();
-              if (hasPrePage) {
-                hasPrePage = false;
-                this.$router.back();
-              } else {
-                this.$router.push('/app/home');
-              }
+              this.$router.push('/app/home');
             }, () => {
               this.$loading.hide();
               this.$toast.info('获取用户信息失败！')
@@ -141,9 +129,6 @@
         }
 
         return true;
-      },
-      back: function () {
-        this.$router.back();
       }
     },
     watch: {

@@ -57,7 +57,7 @@
           <img :src="host + user.user.avatar">
           <div class="c-fff">
             <p class="f16">{{user.user.nickname}}</p>
-            <p ng-if="user.user.signature" class="lh20 f13">“{{user.user.signature}}”</p>
+            <p v-if="user.user.signature" class="lh20 f13">“{{user.user.signature}}”</p>
           </div>
         </div>
         <ul class="home-user-list clear-float">

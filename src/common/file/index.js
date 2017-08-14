@@ -9,6 +9,7 @@ export default {
             upload: function (option) {
                 option = {
                     type: option.type || 'image',
+                    isSingle: option.isSingle,
                     max: option.max || 5,
                     size: option.size || 200 * 1024,
                     success: option.success || function () {},
@@ -17,9 +18,12 @@ export default {
 
                 let input = document.createElement("input");
                 input.setAttribute('type', 'file');
-                input.setAttribute('multiple', 'multiple');
                 input.className = 'upload-image-20170608';
                 input.style.display = 'none';
+
+                if (!option.isSingle) {
+                    input.setAttribute('multiple', 'multiple');
+                }
 
                 if (option.type == 'image') {
                     input.setAttribute('accept', 'image/*');

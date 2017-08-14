@@ -140,6 +140,7 @@
       },
       uploadAvatar: function () {
         this.$file.upload({
+          isSingle: true,
           success: (data) => {
             this.$loading.show('上传图片');
             this.$store.dispatch('fileUpload', data)

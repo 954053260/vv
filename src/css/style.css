@@ -709,7 +709,7 @@ html, body {
     position: absolute;
     font-size: 14px;
     width: 100%;
-    line-height: 30px;
+    line-height: 0.8555555555555555rem;
     z-index: 0;
 }
 .home-header > div img {
