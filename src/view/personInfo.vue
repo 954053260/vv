@@ -11,7 +11,7 @@
                 <span>昵称</span>
                 <span v-if="user.user.userType && user.user.userType.value == 2" class="col c-main tr">{{nickname}}</span>
                 <label v-else class="col pr">
-                    <input class="c-999" type="text" placeholder="请输入昵称" v-model="nickname"
+                    <input class="c-999" type="text" placeholder="请输入昵称" v-model="nickname" maxlength="10"
                            @focus="isNickname = true" @blur="validateNickname()">
                     <p v-show="!isNickname" class="pi-point">昵称长度2-20字符！</p>
                 </label>

@@ -216,7 +216,7 @@
       addImg: function () {
         if (this.swiperSlides.length < 6) {
           this.$file.upload({
-            success: (data, type) => {
+            success: (data) => {
               this.$loading.show('上传图片');
               this.$store.dispatch('fileUpload', data)
                       .then((data) => {

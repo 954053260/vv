@@ -98,7 +98,7 @@
         // 使用定时器是为了让输入框上滑时更加自然
         setTimeout(function(){
           target.scrollIntoView(true);
-        }, 150);
+        }, 400);
       },
       getMessages: function () {
         var startTime;

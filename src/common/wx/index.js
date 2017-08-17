@@ -23,7 +23,7 @@ export default {
                 timestamp: window.vvTimestamp, // 必填，生成签名的时间戳
                 nonceStr: window.vvNonceStr, // 必填，生成签名的随机串
                 signature: window.vvSignature,// 必填，签名，见附录1
-                jsApiList: ["previewImage", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                jsApiList: ["chooseImage", "uploadImage", "previewImage", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
         }
 
@@ -102,6 +102,20 @@ export default {
             } else {
                 fns.push(fn);
             }
+        };
+
+        Vue.wx.chooseImage = function (count, success) {
+            wx.chooseImage({
+                count: count, // 默认9
+                success: success
+            });
+        };
+
+        Vue.wx.uploadImage = function (localId, success) {
+            wx.uploadImage({
+                localId: localId,
+                success: success
+            });
         };
 
     }
