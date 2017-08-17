@@ -8,10 +8,7 @@ export default {
         Vue.file = Vue.prototype.$file = {
             upload: function (option) {
                 option = {
-                    type: option.type || 'image',
-                    isSingle: option.isSingle || false,
                     max: option.max || 5,
-                    size: option.size || 200 * 1024,
                     success: option.success || function () {},
                     fail: option.fail || function () {}
                 };

@@ -59,7 +59,7 @@
       </div>
       <div class="row row-center" v-for="(item, outIndex) in tags"
            :class="{'c-main': outIndex%1 == 0, 'c-ff9800': outIndex%2 == 0, 'c-green': outIndex%3 == 0, 'c-1e90ff': outIndex%4 == 0}">
-        <span class="w70 tc">{{item.tagTypeName}}</span>
+        <span class="w70 tc">{{item.tagCategoryName}}</span>
         <div class="col">
             <span v-for="(tag, index) in item.tags" class="pi-tag" @click="selectTag(outIndex, index)"
                   :class="{'bc-main  c-fff': tag.is && outIndex%1 == 0,
@@ -140,7 +140,7 @@
       },
       uploadAvatar: function () {
         this.$file.upload({
-          isSingle: true,
+          max: 1,
           success: (data) => {
             this.$loading.show('上传图片');
             this.$store.dispatch('fileUpload', data)
