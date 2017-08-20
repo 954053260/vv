@@ -1405,13 +1405,18 @@ html, body {
     border-top: 5px solid #fff;
 }
 .pi-tag {
-    display: inline-block;
+    float: left;
     vertical-align: middle;
-    margin: 0.26666rem;
-    padding: 0.13333rem 0.26666rem;
+    margin: 2%;
+    padding: 2%;
     border: 1px solid;
     border-radius: 0.3333333333333333rem;
     font-size: 14px;
+    width: 24.5555%;
+    text-align: center;
+}
+.pi-tag.type {
+    width: 16.5555%;
 }
 .pi-page-header {
     padding: 0.7333333333333333rem 0.26666666666666666rem 0.7333333333333333rem 0.5333333333333333rem;

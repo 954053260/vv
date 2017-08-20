@@ -57,15 +57,16 @@
         <p class="f18">你对什么感兴趣？</p>
         <p class="mt10 c-999">选择你想要看到的内容吧</p>
       </div>
-      <div class="row row-center" v-for="(item, outIndex) in tags"
+      <div v-for="(item, outIndex) in tags"
            :class="{'c-main': outIndex%1 == 0, 'c-ff9800': outIndex%2 == 0, 'c-green': outIndex%3 == 0, 'c-1e90ff': outIndex%4 == 0}">
-        <span class="w70 tc">{{item.tagCategoryName}}</span>
-        <div class="col">
+        <p class="p10 fb">{{item.tagCategoryName}}</p>
+        <div class="clear-float">
             <span v-for="(tag, index) in item.tags" class="pi-tag" @click="selectTag(outIndex, index)"
                   :class="{'bc-main  c-fff': tag.is && outIndex%1 == 0,
                   'bc-ff9800  c-fff': tag.is && outIndex%2 == 0,
                   'bc-green  c-fff': tag.is && outIndex%3 == 0,
-                  'bc-1e90ff  c-fff': tag.is && outIndex%4 == 0}">{{tag.tagName}}</span>
+                  'bc-1e90ff  c-fff': tag.is && outIndex%4 == 0,
+                  'type': item.tagCategoryName == '运动'}">{{tag.tagName}}</span>
         </div>
       </div>
       </div>
