@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{ height: height + 'px' }">
+  <div id="app" :style="{ height: height + 'px'}">
     <router-view></router-view>
     <div v-if="isInfo" class="mask-no z-999" @click="hideInfo()"></div>
     <transition name="slide-up">
@@ -54,12 +54,11 @@
 </template>
 <script type="text/ecmascript-6">
   import {mapState} from 'vuex'
-
   export default {
     name:'app',
     created: function () {
-      this.height = document.documentElement.clientHeight || document.body.clientHeight;
-
+      var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      this.height = clientHeight;
       this.$map.loadMap((map) => {
         map.doLocation();
         var markers = [];

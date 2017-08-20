@@ -1,44 +1,50 @@
 <template>
   <div id="chat" class="container bc-eee">
-    <div class="chat">
-      <scroller ref="scroller" :on-refresh="onRefresh">
-        <div class="chat-list">
-          <div v-for="item in chats" class="chat-item">
-            <div v-if="item.fromUserNo == friendUserNo" class="row">
-              <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
-                <img :src="host + item.fromAvatar">
-              </router-link>
-              <div class="col">
-                <p class="name" :class="{'c-main': friendType == 2}">{{item.fromNickName}}　{{item.createTime | dateStyle}}</p>
-                <p class="text">{{item.content}}</p>
+    <div class="container bc-eee" :style="{ bottom: bottom + 'px'}">
+      <div class="chat">
+        <scroller ref="scroller" :on-refresh="onRefresh">
+          <div class="chat-list">
+            <div v-for="item in chats" class="chat-item">
+              <div v-if="item.fromUserNo == friendUserNo" class="row">
+                <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
+                  <img :src="host + item.fromAvatar">
+                </router-link>
+                <div class="col">
+                  <p class="name" :class="{'c-main': friendType == 2}">{{item.fromNickName}}　{{item.createTime | dateStyle}}</p>
+                  <p class="text">{{item.content}}</p>
+                </div>
               </div>
-            </div>
-            <div v-else class="row item-type">
-              <div class="col">
-                <p class="name tr" :class="{'c-main': user.user.userType && user.user.userType.value == 2}">{{item.createTime | dateStyle}}　{{item.fromNickName}}</p>
-                <p class="text">{{item.content}}</p>
+              <div v-else class="row item-type">
+                <div class="col">
+                  <p class="name tr" :class="{'c-main': user.user.userType && user.user.userType.value == 2}">{{item.createTime | dateStyle}}　{{item.fromNickName}}</p>
+                  <p class="text">{{item.content}}</p>
+                </div>
+                <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
+                  <img :src="host + item.fromAvatar">
+                </router-link>
               </div>
-              <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
-                <img :src="host + item.fromAvatar">
-              </router-link>
             </div>
           </div>
-        </div>
-      </scroller>
-    </div>
-    <form class="chat-input" target="form-submit">
-      <div>
-        <label>
-          <input type="text" name="test" style="display:none"/>
-          <input type="text" maxlength="200" ref="input" @focus="scrollBottom" @click="inputScroll($event)" @keydown="keydown($event)" v-model="msg">
-        </label>
-        <a @click="sendMsg()">发送</a>
+        </scroller>
       </div>
-    </form>
+      <form class="chat-input" target="form-submit">
+        <div>
+          <label>
+            <input type="text" name="test" style="display:none"/>
+            <input type="text" maxlength="200" ref="input"
+                   @focus="chatFocus($event)"
+                   @blur="chatBlur()"
+                   @keydown="keydown($event)" v-model="msg">
+          </label>
+          <a @click="sendMsg()">发送</a>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
   import vuePullRefresh from 'vue-pull-refresh';
+
   export default {
     name: 'chat',
     created: function () {
@@ -75,6 +81,7 @@
     data: function () {
       return {
         isLoading: false,
+        bottom: 0,
         msg: '',
         chats: [],
         friendUserNo: '',
@@ -93,12 +100,15 @@
       }
     },
     methods: {
-      inputScroll: function (e) {
+      chatFocus: function (e) {
         var target = e.target;
-        // 使用定时器是为了让输入框上滑时更加自然
         setTimeout(function(){
           target.scrollIntoView(true);
         }, 400);
+        this.scrollBottom();
+      },
+      chatBlur: function () {
+        this.bottom = 0;
       },
       getMessages: function () {
         var startTime;

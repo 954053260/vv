@@ -150,7 +150,7 @@
                     }, () => {
                       this.$loading.hide();
                       this.$toast.info('上传失败');
-                    })
+                    });
           },
           fail: (err) => {
             this.$toast.info(err.msg);

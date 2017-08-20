@@ -185,7 +185,6 @@
         } else {
           this.isFee = false;
         }
-        console.log('this.isFee', this.isFee)
       },
       toTextEnd: function (e) {
         var input = e.target;
