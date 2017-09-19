@@ -145,13 +145,13 @@
         this.$refs.scroller.finishInfinite(false);
       },
       toDetail: function (activityNo) {
-        this.$router.push('/app/activityDetail?activityNo=' +  activityNo);
+        this.$router.push('/activityDetail?activityNo=' +  activityNo);
       },
       toEvaluate: function (item) {
-        this.$router.push('/app/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
+        this.$router.push('/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
       },
       toChat: function (publisherUserNo, linkMan) {
-        this.$router.push('/app/chat?friendUserNo=' + publisherUserNo + '&linkMan=' + linkMan);
+        this.$router.push('/chat?friendUserNo=' + publisherUserNo + '&linkMan=' + linkMan);
       }
     }
   }

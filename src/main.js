@@ -29,15 +29,15 @@ Vue.use(ajax, {
   root: store.state.host,
   timeout: 30000,
   success: (data) => {
-    if (data && data.code == '10010007') {
-      Vue.toast.info('登录失效，请重新登录！');
-      localStorage.setItem('token', null);
-      router.push('/app/login');
-    }
+    //if (data && data.code == '10010007') {
+    //  Vue.toast.info('登录失效，请重新登录！');
+    //  localStorage.setItem('token', null);
+    //  router.push('/login');
+    //}
   }
 });
 
-if (window.token || localStorage.getItem('token')) {
+if (!window.userInfo) {
   Vue.loading.show('自动登录中...');
   store.dispatch('getUserInfo', window.token || localStorage.getItem('token')).then(() => {
     Vue.loading.hide();
@@ -45,17 +45,12 @@ if (window.token || localStorage.getItem('token')) {
     Vue.loading.hide();
     Vue.toast.info('获取用户信息失败，请重新登录');
     localStorage.setItem('token', null);
+    router.push('/home');
   });
 }
 
 new Vue({
   el: '#main',
   router,
-  store,
-  created: function () {
-  
-  },
-  mounted: function () {
-
-  }
+  store
 });

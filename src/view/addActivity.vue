@@ -27,7 +27,7 @@
         <li class="aa-item row">
           <span>活动标题</span>
           <label class="col tr">
-            <input class="c-999" type="text" placeholder="请输入" v-model="aTitle" maxlength="15">
+            <input class="c-999" type="text" placeholder="请输入" v-model="aTitle" maxlength="21">
           </label>
         </li>
         <li class="aa-item row mt10">
@@ -84,7 +84,7 @@
         </li>
         <li class="aa-textarea pr">
           <textarea placeholder="填写详细活动介绍" v-model="content"></textarea>
-          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{content.length}}/200</span>
+          <span class="pa c-666" style="bottom: 0.2666666rem; right: 0.2666666rem;">{{content.length}}/800</span>
         </li>
       </ul>
       <a class="aa-submit-btn" @click="saveActivity()">发布</a>
@@ -213,7 +213,7 @@
         });
       },
       addImg: function () {
-        if (this.swiperSlides.length < 6) {
+        if (this.swiperSlides.length < 7) {
           this.$file.upload({
             success: (data) => {
               this.$loading.show('上传图片');
@@ -231,7 +231,7 @@
             }
           });
         } else {
-          this.$toast.info('最多上传5张');
+          this.$toast.info('最多上传6张');
         }
       },
       deleteImg: function (index) {
@@ -364,8 +364,8 @@
     },
     watch: {
       'content': function (val) {
-        if (val.length > 200) {
-          this.content = this.content.substr(0, 200);
+        if (val.length > 800) {
+          this.content = this.content.substr(0, 800);
         }
       }
     }

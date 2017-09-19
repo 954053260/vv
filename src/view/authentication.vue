@@ -88,10 +88,12 @@
           this.$loading.hide();
           if (data.code == 0) {
             this.$toast.info('认证成功');
-            this.$store.dispatch('getUserInfo', this.$store.state.user.info.token).then(() => {
-            }, () => {
-              this.$toast.info('获取用户信息失败！')
-            });
+            this.$store.state.user.info.user.realname = this.realname;
+            this.$store.state.user.info.user.idCardNo = this.idCardNo;
+//            this.$store.dispatch('getUserInfo', this.$store.state.user.info.token).then(() => {
+//            }, () => {
+//              this.$toast.info('获取用户信息失败！')
+//            });
             this.$router.back();
           } else {
             this.$toast.info(data.msg);

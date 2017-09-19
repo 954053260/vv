@@ -27,8 +27,8 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: 'hash',
     routes: [
-        { path: '/', redirect: '/app/home'},
-        { path: '/app/', component: app,
+        { path: '/', redirect: '/home'},
+        { path: '/', component: app,
             children: [
                 { path: 'login', component: login, name: '登录'},
                 { path: 'home', component: home, name: 'VV活动'},
@@ -56,17 +56,17 @@ router.beforeEach((to, from, next) => {
     Vue.wx.config();
     document.title = to.name;
     switch (to.path) {
-        case '/app/addActivity':
-        case '/app/activityDetail':
-        case '/app/personActivityJoin':
-        case '/app/personActivityAdd':
-        case '/app/personActivityCollection':
-        case '/app/personInfo':
-        case '/app/chat':
-        case '/app/evaluate':
-        case '/app/authentication':
+        case '/addActivity':
+        case '/activityDetail':
+        case '/personActivityJoin':
+        case '/personActivityAdd':
+        case '/personActivityCollection':
+        case '/personInfo':
+        case '/chat':
+        case '/evaluate':
+        case '/authentication':
             if (!store.state.user.info.token) {
-                router.push('/app/login');
+                router.push('/login');
             }
             break;
     }

@@ -3,10 +3,10 @@
     <transition name="fade">
       <div v-show="tab == 1">
         <header class="pi-header">
-          <img :src="host + avatar" @click="uploadAvatar">
+          <img :src="avatar" @click="uploadAvatar">
         </header>
         <div class="bc-fff">
-          <ul class="pi-list">
+          <ul class="pi-list ml10 mr10">
             <li class="pi-item row">
                 <span>昵称</span>
                 <span v-if="user.user.userType && user.user.userType.value == 2" class="col c-main tr">{{nickname}}</span>
@@ -22,7 +22,7 @@
             </li>
             <li class="pi-item row">
               <span>手机号</span>
-              <span class="col c-999 tr">{{mobile}}</span>
+              <span class="col c-999 tr" @click="showPhone()">{{mobile || '未绑定手机号'}}</span>
               <!--<label class="col pr" style='display: none'>-->
                 <!--<input class="c-999" type="number" placeholder="请输入手机号" v-model="mobile"-->
                        <!--@focus="isPhone = true" @blur="validatePhone()">-->
@@ -65,7 +65,8 @@
                   :class="{'bc-main  c-fff': tag.is && outIndex%1 == 0,
                   'bc-ff9800  c-fff': tag.is && outIndex%2 == 0,
                   'bc-green  c-fff': tag.is && outIndex%3 == 0,
-                  'bc-1e90ff  c-fff': tag.is && outIndex%4 == 0}">{{tag.tagName}}</span>
+                  'bc-1e90ff  c-fff': tag.is && outIndex%4 == 0,
+                  'type': item.tagCategoryName == '运动'}">{{tag.tagName}}</span>
         </div>
       </div>
       </div>
@@ -86,12 +87,45 @@
         </div>
       </div>
     </transition>
+    <transition name="fade">
+      <div v-show="tab == 4" class="bc-fff h f16">
+        <div class="pi-page-header">
+          <a class="fr" @click="bindPhone">
+            <span>完成</span>
+            <img src="static/icon/icon-complete.png">
+          </a>
+          <p class="f18">保障你的活动权益</p>
+          <p class="mt10 c-999">请进行手机号验证吧</p>
+        </div>
+        <div class="mt10">
+          <ul class="pi-list">
+            <li class="pi-item pl10">
+              <label>
+                <input class="tl c-999" type="text" placeholder="请输入手机号" v-model="bindingMobile"
+                       @focus="isPhone = true" @blur="validatePhone()">
+                <p v-show="!isPhone" class="pi-point">请输入正确的手机号！</p>
+              </label>
+            </li>
+            <li class="pi-item row"  style="padding: 0 0 0 0.266666rem; height: 1.322222222222rem; line-height: 1.322222222222rem;">
+              <label class="col">
+                <input class="tl c-999" type="text" placeholder="验证码" v-model="bindingCode">
+              </label>
+              <a class="dp-ib tc w100 c-fff bc-main" @click="getCode">{{codeText}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script type="text/ecmascript-6">
   export default {
     name: 'personInfo',
     created: function () {
+      if (this.$route.query.tab) {
+        this.tab = this.$route.query.tab;
+      }
+
       this.avatar = this.user.user.avatar || '';
       this.nickname = this.user.user.nickname || '';
       this.gender = this.user.user.gender || '';
@@ -111,7 +145,10 @@
         gender: '',
         mobile: '',
         signature: '',
-        hobbies: []
+        hobbies: [],
+        bindingMobile: '',
+        bindingCode: '',
+        codeText: '验证码'
       }
     },
     computed: {
@@ -132,7 +169,7 @@
         }
       },
       validatePhone: function () {
-        if (!/^1(3|4|5|7|8)\d{9}$/g.test(this.mobile)) {
+        if (!/^1(3|4|5|7|8)\d{9}$/g.test(this.bindingMobile)) {
           this.isPhone = false;
         } else {
           this.isPhone = true;
@@ -203,6 +240,9 @@
           this.hobbies.push(tag);
         }
       },
+      showPhone: function () {
+        this.tab = 4;
+      },
       showSignature: function () {
         this.tab = 3;
       },
@@ -242,6 +282,67 @@
           this.$loading.hide();
           this.$toast.info('保存信息失败');
         });
+      },
+      getCode: function () {
+        if (!this.bindingMobile) {
+          this.$toast.info('请输入手机号！');
+          return false;
+        }
+
+        if (!this.isPhone) {
+          this.$toast.info('手机号格式错误！');
+          return false;
+        }
+
+        this.codeText = 60;
+
+        var interval = setInterval(() => {
+          if (this.codeText) {
+            this.codeText--;
+          } else {
+            this.codeText = '重新获取';
+            clearInterval(interval);
+          }
+        }, 1000);
+
+        this.$http.post('/common/smsCode', {data: {mobile: this.bindingMobile}})
+                .then((data) => {
+                  if (data.code == 0) {
+
+                  } else {
+                    this.$toast.info(data.msg);
+                  }
+                }, () => {
+                  clearInterval(interval);
+                  this.codeText = '验证码';
+                  this.$toast.info('获取验证码失败！')
+                });
+      },
+      bindPhone: function () {
+        if (this.bindingMobile && this.bindingCode) {
+          this.$loading.show('绑定手机...');
+          this.$http.post('/user/bindMobile', {data: {
+            token: this.$store.state.user.info.token,
+            mobile: this.bindingMobile,
+            smsCode: this.bindingCode
+          }}).
+          then((data) => {
+            this.tab = 1;
+            this.$loading.hide();
+            if (data.code == 0) {
+              this.$store.state.user.info.user.mobile = this.mobile = this.bindingMobile;
+              this.$toast.info('绑定手机成功');
+            } else {
+              this.$toast.info(data.msg);
+            }
+          }, () => {
+            this.tab = 1;
+            this.$loading.hide();
+            this.$toast.info('绑定手机失败');
+          });
+        } else {
+          this.tab = 1;
+        }
       }
     },
     watch: {

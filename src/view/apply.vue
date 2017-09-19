@@ -1,10 +1,10 @@
 <template>
   <div id="apply" class="container bc-page">
     <div class="apply-bg">
-      <router-link class="apply-group-button" to="/app/applyGroup?type=1">
+      <router-link class="apply-group-button" to="/applyGroup?type=1">
         <img src="static/img/apply-group.png"/>
       </router-link>
-      <router-link class="apply-other-button" to="/app/applyGroup?type=2">
+      <router-link class="apply-other-button" to="/applyGroup?type=2">
         <img src="static/img/apply-other.png"/>
       </router-link>
     </div>

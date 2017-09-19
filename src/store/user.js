@@ -11,12 +11,15 @@ if (window.vvOpenid) {
     localStorage.setItem('vvOpenid', window.vvOpenid);
 }
 
+var userInfo = JSON.parse(window.userInfo || '{}');
+
 export default {
     state: {
         info: {
             token: localStorage.getItem('token') || '',
             openid: localStorage.getItem('vvOpenid'),
-            user: {}
+            isSubscribeVV: userInfo.isSubscribeVV || false,
+            user: userInfo
         }
     },
     getters: {},

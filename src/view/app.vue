@@ -8,7 +8,7 @@
         <ul class="app-list">
           <li class="app-item">
             <div class="row">
-              <p class="w60">举办方</p>
+              <p class="w60">主办方</p>
               <p class="col c-main" :class="{'c-666': info.activityOrganizationType.value == 1}">{{info.publisherNickname}}</p>
             </div>
           </li>
@@ -161,7 +161,8 @@
       dateRange:  state => state.map.dateRange,
       dateIndex:  state => state.map.dateIndex,
       typeIndex:  state => state.map.typeIndex,
-      organizationTypesIndex:  state => state.map.organizationTypesIndex
+      organizationTypesIndex:  state => state.map.organizationTypesIndex,
+
     }),
     methods: {
       showInfo: function (data) {
@@ -175,9 +176,9 @@
         this.isInfo = false;
 
         if (this.token) {
-          this.$router.push('/app/activityDetail?activityNo=' +  this.info.activityNo);
+          this.$router.push('/activityDetail?activityNo=' +  this.info.activityNo);
         } else {
-          this.$router.push('/app/login');
+          this.$router.push('/login');
         }
 
       },
@@ -207,7 +208,7 @@
             this.$loading.hide();
           });
         } else {
-          this.$router.push('/app/login');
+          this.$router.push('/login');
         }
       }
     }

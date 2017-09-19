@@ -8,7 +8,7 @@ export default {
         Vue.file = Vue.prototype.$file = {
             upload: function (option) {
                 option = {
-                    max: option.max || 5,
+                    max: option.max || 6,
                     success: option.success || function () {},
                     fail: option.fail || function () {}
                 };

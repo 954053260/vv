@@ -51,10 +51,10 @@
     <transition name="slide-left">
       <div v-if="isUserMenu" class="home-user-menu">
         <div class="home-user-menu-header">
-          <router-link to="/app/personInfo">
+          <router-link to="/personInfo">
             <img src="static/icon/icon-edit.png">
           </router-link>
-          <img :src="host + user.user.avatar">
+          <img :src="user.user.avatar">
           <div class="c-fff">
             <p class="f16">{{user.user.nickname}}</p>
             <p v-if="user.user.signature" class="lh20 f13">“{{user.user.signature}}”</p>
@@ -62,28 +62,28 @@
         </div>
         <ul class="home-user-list clear-float">
           <li class="home-user-item">
-            <router-link to="/app/personActivityJoin">
+            <router-link to="/personActivityJoin">
               <img src="static/icon/icon-flag.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">参与的活动</p>
             </router-link>
           </li>
           <li class="home-user-item">
-            <router-link to="/app/personActivityAdd">
+            <router-link to="/personActivityAdd">
               <img src="static/icon/icon-release.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">发布的活动</p>
             </router-link>
           </li>
           <li class="home-user-item">
-            <router-link to="/app/personActivityCollection">
+            <router-link to="/personActivityCollection">
               <img src="static/icon/icon-star.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">收藏的活动</p>
             </router-link>
           </li>
           <li class="home-user-item">
-            <router-link to="/app/authentication">
+            <router-link to="/authentication">
               <img src="static/icon/icon-card.png">
               <img src="static/icon/icon-right.png">
               <span>{{user.user.idCardNo ? '已认证' :  '未认证'}}</span>
@@ -99,7 +99,7 @@
             </a>
           </li>
           <li class="home-user-item">
-            <router-link to="/app/about">
+            <router-link to="/about">
               <img src="static/icon/icon-about.png">
               <img src="static/icon/icon-right.png">
               <p class="f16">关于我们</p>
@@ -114,8 +114,8 @@
         <ul>
           <li class="home-chat-item" v-for="(item, index) in friends">
             <router-link v-cell-swipe class="home-chat-item-content"
-                         :to="'/app/chat?friendUserNo=' + item.friendUserNo + '&linkMan=' + item.friendNickName + '&friendType=' + item.friendUserType.value">
-              <img :src="host + item.friendAvatar">
+                         :to="'/chat?friendUserNo=' + item.friendUserNo + '&linkMan=' + item.friendNickName + '&friendType=' + item.friendUserType.value">
+              <img :src="item.friendAvatar">
               <div class="home-chat-content">
                 <p class="name">
                   <span :class="{'c-main': item.friendUserType.value == 2}">{{item.friendNickName}}</span>
@@ -145,6 +145,7 @@
         map.getPositionPicker().start();
       });
       this.getFriend((data) => {
+        this.$store.state.friends = data.datas.friends;
         data.datas.friends.forEach((item) => {
           if (!item.isReaded) {
             this.hasMessage = true;
@@ -160,22 +161,22 @@
     data: function () {
       return {
         isFilter: false,
-        isChat: false,
         hasMessage: false,
-        friends: [],
         keyword: ''
       }
     },
     computed: mapState({
       host: state => state.host,
       isUserMenu: state => state.isUserMenu,
+      isChat: state => state.isChat,
+      friends: state => state.friends,
       user: state => state.user.info,
       activityOrganizationTypes: state => state.map.activityOrganizationTypes,
       activityTypes: state => state.map.activityTypes,
       dateRange: state => state.map.dateRange,
       dateIndex: state => state.map.dateIndex,
       typeIndex: state => state.map.typeIndex,
-      organizationTypesIndex: state => state.map.organizationTypesIndex,
+      organizationTypesIndex: state => state.map.organizationTypesIndex
     }),
     methods: {
       hideSelect: function (arr) {
@@ -204,7 +205,7 @@
         }}).then((data) => {
           this.$loading.hide();
           if (data.code == 0) {
-            this.friends.splice(index, 1);
+            this.$store.state.friends.splice(index, 1);
           } else {
             this.$toast.info(data.msg);
           }
@@ -244,13 +245,13 @@
           }
 
         } else {
-          this.$router.push('/app/login');
+          this.$router.push('/login');
         }
       },
       toggleChat: function (bool) {
         this.hideSelect(['organization', 'dateRange', 'types']);
         if (!this.user.token) {
-          return  this.$router.push('/app/login');
+          return  this.$router.push('/login');
         }
 
         if (typeof bool === 'boolean') {
@@ -258,29 +259,29 @@
             this.$loading.show('获取朋友列表');
             this.getFriend((data) => {
               this.$loading.hide();
-              this.friends = data.datas.friends;
-              this.isChat = true;
+              this.$store.state.friends = data.datas.friends;
+              this.$store.state.isChat = true;
             }, () => {
               this.$loading.hide();
               this.$toast.info('获取朋友列表失败');
             });
           } else {
-            this.isChat = false;
+            this.$store.state.isChat = false;
           }
         } else {
-          this.isChat = !this.isChat;
+          this.$store.state.isChat = !this.$store.state.isChat;
         }
       },
       addActivity: function () {
         this.hideSelect(['organization', 'dateRange', 'types']);
         if (this.user.token) {
           if (this.user.user.idCardNo) {
-            this.$router.push('/app/addActivity');
+            this.$router.push('/addActivity');
           } else {
             this.$toast.info('没有实名认证不能发布活动');
           }
         } else {
-          this.$router.push('/app/login');
+          this.$router.push('/login');
         }
       },
       changeTypes: function (value) {
@@ -317,7 +318,7 @@
       },
       toApply: function () {
         if (this.user.user.idCardNo) {
-          this.$router.push('/app/apply');
+          this.$router.push('/apply');
         } else {
           this.$toast.info('群体认证之前，必须先实名认证！');
         }

@@ -6,8 +6,8 @@
           <div class="chat-list">
             <div v-for="item in chats" class="chat-item">
               <div v-if="item.fromUserNo == friendUserNo" class="row">
-                <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
-                  <img :src="host + item.fromAvatar">
+                <router-link :to="'/hostInfo?publisherUserNo='+ item.fromUserNo">
+                  <img :src="item.fromAvatar">
                 </router-link>
                 <div class="col">
                   <p class="name" :class="{'c-main': friendType == 2}">{{item.fromNickName}}　{{item.createTime | dateStyle}}</p>
@@ -19,8 +19,8 @@
                   <p class="name tr" :class="{'c-main': user.user.userType && user.user.userType.value == 2}">{{item.createTime | dateStyle}}　{{item.fromNickName}}</p>
                   <p class="text">{{item.content}}</p>
                 </div>
-                <router-link :to="'/app/hostInfo?publisherUserNo='+ item.fromUserNo">
-                  <img :src="host + item.fromAvatar">
+                <router-link :to="'/hostInfo?publisherUserNo='+ item.fromUserNo">
+                  <img :src="item.fromAvatar">
                 </router-link>
               </div>
             </div>

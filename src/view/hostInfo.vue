@@ -3,7 +3,7 @@
     <div v-if="info" class="h">
       <scroller :on-infinite="getActivity" ref="scroller">
         <header class="hi-header">
-          <img :src="host + info.avatar">
+          <img :src="info.avatar">
           <p>{{info.nickname}}</p>
           <p v-if="info.signature">“{{info.signature}}”</p>
         </header>
@@ -128,7 +128,7 @@
         });
       },
       toDetail: function (activityNo) {
-        this.$router.push('/app/activityDetail?activityNo=' +  activityNo);
+        this.$router.push('/activityDetail?activityNo=' +  activityNo);
       }
     }
   }

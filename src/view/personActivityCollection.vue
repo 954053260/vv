@@ -97,10 +97,10 @@
         this.$refs.scroller.finishInfinite(false);
       },
       toDetail: function (activityNo) {
-        this.$router.push('/app/activityDetail?activityNo=' +  activityNo);
+        this.$router.push('/activityDetail?activityNo=' +  activityNo);
       },
       toEvaluate: function (item) {
-        this.$router.push('/app/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
+        this.$router.push('/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
       },
       cancelCollect: function (index, activityNo) {
         this.$loading.show('取消...');

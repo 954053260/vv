@@ -12,12 +12,14 @@
       </div>
       <div>
         <button class="login-code-btn" @click="getCode">{{codeText}}</button>
-        <div class="login-input row" style="overflow: hidden;">
-          <img src="static/icon/icon-pwd.png">
-          <input class="col" :class="{'c-999': !code, 'c-666': code}" type="number" placeholder="短信验证码" v-model="code">
+        <div class="login-input" style="overflow: hidden;">
+          <div class="row">
+            <img src="static/icon/icon-pwd.png">
+            <input class="col" :class="{'c-999': !code, 'c-666': code}" type="number" placeholder="短信验证码" v-model="code">
+          </div>
         </div>
       </div>
-      <router-link to="/app/userAgreement">
+      <router-link to="/userAgreement">
         <checkbox v-model="isAgree" name="login-check">
           <span class="c-ff9800">我已阅读并同意签署《用户注册协议》</span>
         </checkbox>
@@ -74,7 +76,7 @@
             localStorage.setItem('token', this.user.token);
             this.$store.dispatch('getUserInfo', this.user.token).then(() => {
               this.$loading.hide();
-              this.$router.push('/app/home');
+              this.$router.push('/home');
             }, () => {
               this.$loading.hide();
               this.$toast.info('获取用户信息失败！')

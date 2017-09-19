@@ -13,7 +13,8 @@ const store = new Vuex.Store({
         loginCode: '',
         refreshText: '',// 刷新活动提示文字
         isUserMenu: false,
-        isChat: false
+        isChat: false,
+        friends: []
     },
     getters:{
 

@@ -100,13 +100,13 @@
         this.$refs.scroller.finishInfinite(false);
       },
       toCancel: function (activityNo) {
-        this.$router.push('/app/cancelActivity?activityNo=' +  activityNo);
+        this.$router.push('/cancelActivity?activityNo=' +  activityNo);
       },
       toDetail: function (activityNo) {
-        this.$router.push('/app/activityDetail?activityNo=' +  activityNo);
+        this.$router.push('/activityDetail?activityNo=' +  activityNo);
       },
       toEvaluate: function (item) {
-        this.$router.push('/app/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
+        this.$router.push('/evaluate?title=' + item.title + '&activityPartakeId=' + item.activityPartakeId);
       }
     }
   }

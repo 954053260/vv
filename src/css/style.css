@@ -73,9 +73,6 @@ textarea::-moz-placeholder {
 html {
     font-size: 37.5px;
 }
-html, body {
-    overflow: hidden;
-}
 .container {
     position: absolute;
     top: 0;
@@ -622,13 +619,13 @@ html, body {
     border: 1px solid #f2f2f2;
     background: #fff;
 }
-.login-input > img {
+.login-input img {
     display: inline-block;
     padding: 0.1866666rem;
     height: 0.8rem;
     width: 0.8rem;
 }
-.login-input > input {
+.login-input input {
     float: left;
     font-size: 16px;
     border: none;
@@ -1295,8 +1292,6 @@ html, body {
     border-radius: 50%;
 }
 .pi-list {
-    margin-left: 0.32rem;
-    margin-right: 0.32rem;
     font-size: 16px;
 }
 .pi-item {
@@ -1322,6 +1317,9 @@ html, body {
     line-height: 0.8rem;
     text-align: right;
     border: none;
+}
+.pi-item input.tl {
+    text-align: left;
 }
 .pi-item textarea {
     width: 100%;
@@ -1407,26 +1405,32 @@ html, body {
 .pi-tag {
     display: inline-block;
     vertical-align: middle;
-    margin: 0.26666rem;
-    padding: 0.13333rem 0.26666rem;
+    margin: 2%;
+    padding: 2%;
     border: 1px solid;
     border-radius: 0.3333333333333333rem;
     font-size: 14px;
+    width: 24.5555%;
+    text-align: center;
+}
+.pi-tag.type {
+    width: 16.1%;
 }
 .pi-page-header {
     padding: 0.7333333333333333rem 0.26666666666666666rem 0.7333333333333333rem 0.5333333333333333rem;
 }
-.pi-page-header > .fr {
+.pi-page-header > a {
+    display: inline-block;
     padding: 11px 15px 13px;
     background: #2bd3b2;
     color: #fff;
     border-radius: 20px;
 }
-.pi-page-header > .fr span {
+.pi-page-header > a span {
     display: inline-block;
     vertical-align: middle;
 }
-.pi-page-header > .fr img {
+.pi-page-header > a img {
     display: inline-block;
     vertical-align: middle;
     width: 0.5466666666666666rem;
